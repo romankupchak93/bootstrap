@@ -1,5 +1,6 @@
 {{ define "body_override" }}<body{{ if (eq .Page.Params.toc true) }} data-bs-spy="scroll" data-bs-target="#TableOfContents"{{ end }}>{{ end }}
 {{ define "main" }}
+<div class="layout-wrapper">
   <div class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
     <aside class="bd-sidebar">
       <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebar" aria-labelledby="bdSidebarOffcanvasLabel">
@@ -63,6 +64,7 @@
       </div>
     </main>
   </div>
+</div>
 {{ end }}
 {{ define "footer" }}
   {{ range .Page.Params.extra_js -}}

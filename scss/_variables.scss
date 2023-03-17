@@ -101,6 +101,17 @@ $min-contrast-ratio:   4.5 !default;
 $color-contrast-dark:      $black !default;
 $color-contrast-light:     $white !default;
 
+$theme-hover-shade-amount:          15% !default;
+$theme-hover-tint-amount:           15% !default;
+$theme-active-shade-amount:         20% !default;
+$theme-active-tint-amount:          20% !default;
+$theme-subtle-tint-amount:          80% !default;
+$theme-subtle-hover-tint-amount:    65% !default;
+$theme-subtle-active-tint-amount:   60% !default;
+$theme-emphasis-shade-amount:       40% !default;
+$theme-emphasis-hover-shade-amount: 55% !default;
+$theme-border-subtle-tint-amount:   60% !default;
+
 // fusv-disable
 $blue-50:  #e8f0fe;
 $blue-100: #d2e3fc;
@@ -111,7 +122,7 @@ $blue-500: #4285f4;
 $blue-600: $blue;
 $blue-700: #1967d2;
 $blue-800: #185abc;
-$blue-900: #174ea6;
+$blue-900: #062e6f;
 
 $blues: (
   "blue-50":  $blue-50,
@@ -338,15 +349,16 @@ $dark:          $gray-900 !default;
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
-$primary-dark:       $blue-300 !default;
-$secondary-dark:     tint-color($secondary, 60%) !default;
-$success-dark:       tint-color($success, 60%) !default;
-$info-dark:          tint-color($info, 60%) !default;
-$warning-dark:       tint-color($warning, 60%) !default;
-$danger-dark:        tint-color($danger, 60%) !default;
-$light-dark:         tint-color($light, 60%) !default;
-$dark-dark:          tint-color($dark, 60%) !default;
-
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+) !default;
 // scss-docs-end theme-colors-map
 
 // scss-docs-start theme-text-variables
@@ -479,7 +491,7 @@ $body-emphasis-color:       $black !default;
 // Style anchor elements.
 
 $link-color:                              $blue-700 !default;
-$link-decoration:                         underline !default;
+$link-decoration:                         none !default;
 $link-shade-percentage:                   20% !default;
 $link-hover-color:                        shift-color($link-color, $link-shade-percentage) !default;
 $link-hover-decoration:                   null !default;
@@ -912,6 +924,7 @@ $btn-border-radius-sm:        $border-radius-sm !default;
 $btn-border-radius-lg:        $border-radius-sm !default;
 
 $btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+
 
 $btn-hover-bg-shade-amount:       15% !default;
 $btn-hover-bg-tint-amount:        15% !default;

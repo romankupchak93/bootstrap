@@ -7,6 +7,26 @@
 //
 
 // scss-docs-start sass-dark-mode-vars
+$theme-dark-tint-amount:                35% !default;
+$theme-dark-hover-shade-amount:         20% !default;
+$theme-dark-hover-tint-amount:          20% !default;
+$theme-dark-active-shade-amount:        30% !default;
+$theme-dark-active-tint-amount:         30% !default;
+$theme-dark-subtle-shade-amount:        60% !default;
+$theme-dark-subtle-hover-shade-amount:  55% !default;
+$theme-dark-subtle-active-shade-amount: 40% !default;
+$theme-dark-emphasis-tint-amount:       55% !default;
+$theme-dark-emphasis-hover-tint-amount: 50% !default;
+$theme-dark-border-subtle-shade-amount: 40% !default;
+
+$primary-color-dark:        tint-color($primary, 40%) !default;
+$secondary-color-dark:      tint-color($secondary, 40%) !default;
+$success-color-dark:        tint-color($success, 40%) !default;
+$info-color-dark:           tint-color($info, 40%) !default;
+$warning-color-dark:        tint-color($warning, 40%) !default;
+$danger-color-dark:         tint-color($danger, 40%) !default;
+$light-color-dark:          $gray-100 !default;
+$dark-color-dark:           $gray-300 !default;
 // scss-docs-start theme-text-dark-variables
 $primary-text-emphasis-dark:        tint-color($primary, 40%) !default;
 $secondary-text-emphasis-dark:      tint-color($secondary, 40%) !default;
@@ -19,12 +39,12 @@ $dark-text-emphasis-dark:           $gray-300 !default;
 // scss-docs-end theme-text-dark-variables
 
 // scss-docs-start theme-bg-subtle-dark-variables
-$primary-bg-subtle-dark:            shade-color($primary, 80%) !default;
-$secondary-bg-subtle-dark:          shade-color($secondary, 80%) !default;
-$success-bg-subtle-dark:            shade-color($success, 80%) !default;
-$info-bg-subtle-dark:               shade-color($info, 80%) !default;
-$warning-bg-subtle-dark:            shade-color($warning, 80%) !default;
-$danger-bg-subtle-dark:             shade-color($danger, 80%) !default;
+$primary-bg-subtle-dark:            shade-color($primary, 60%) !default;
+$secondary-bg-subtle-dark:          shade-color($secondary, 60%) !default;
+$success-bg-subtle-dark:            shade-color($success, 60%) !default;
+$info-bg-subtle-dark:               shade-color($info, 60%) !default;
+$warning-bg-subtle-dark:            shade-color($warning, 60%) !default;
+$danger-bg-subtle-dark:             shade-color($danger, 60%) !default;
 $light-bg-subtle-dark:              $gray-800 !default;
 $dark-bg-subtle-dark:               mix($gray-800, $black) !default;
 // scss-docs-end theme-bg-subtle-dark-variables

@@ -6,20 +6,29 @@
   //
   // Generate palettes for full colors, grays, and theme colors.
 
+  @each $color, $value in $grays {
+    --#{$prefix}gray-#{$color}: #{$value};
+  }
   @each $color, $value in $colors {
     --#{$prefix}#{$color}: #{$value};
   }
 
-  @each $color, $value in $grays {
-    --#{$prefix}gray-#{$color}: #{$value};
-  }
-
   @each $color, $value in $theme-colors {
     --#{$prefix}#{$color}: #{$value};
-    --#{$prefix}text-on-#{$color}: #{color-contrast($value)};
+    --#{$prefix}color-#{$color}: #{$value};
+    --#{$prefix}color-on-#{$color}: #{color-contrast($value)};
+    --#{$prefix}#{$color}-bg-subtle: #{$value};
+    --#{$prefix}#{$color}-hover: #{if(color-contrast($value) == $color-contrast-light, shade-color($value, $theme-hover-shade-amount), tint-color($value, $theme-hover-tint-amount))};
+    --#{$prefix}#{$color}-active: #{if(color-contrast($value) == $color-contrast-light, shade-color($value, $theme-active-shade-amount), tint-color($value, $theme-active-tint-amount))};
+    --#{$prefix}#{$color}-subtle: #{tint-color($value, $theme-subtle-tint-amount)};
+    --#{$prefix}#{$color}-subtle-hover: #{tint-color($value, $theme-subtle-hover-tint-amount)};
+    --#{$prefix}#{$color}-subtle-active: #{tint-color($value, $theme-subtle-active-tint-amount)};
+    --#{$prefix}#{$color}-emphasis: #{shade-color($value, $theme-emphasis-shade-amount)};
+    --#{$prefix}#{$color}-emphasis-hover: #{shade-color($value, $theme-emphasis-hover-shade-amount)};
+    --#{$prefix}#{$color}-border-subtle: #{tint-color($value, $theme-border-subtle-tint-amount)};
   }
 
-  @each $color, $value in $theme-colors-rgb {
+   @each $color, $value in $theme-colors-rgb {
     --#{$prefix}#{$color}-rgb: #{$value};
   }
 
@@ -101,6 +110,7 @@
   --#{$prefix}border-style: #{$border-style};
   --#{$prefix}border-color: #{$border-color};
   --#{$prefix}border-color-translucent: #{$border-color-translucent};
+  --#{$prefix}input-border-color: #{$input-border-color};
 
   --#{$prefix}border-radius: #{$border-radius};
   --#{$prefix}border-radius-sm: #{$border-radius-sm};
@@ -111,17 +121,10 @@
   --#{$prefix}border-radius-pill: #{$border-radius-pill};
   // scss-docs-end root-border-var
 
-
   --#{$prefix}box-shadow: #{$box-shadow};
   --#{$prefix}box-shadow-sm: #{$box-shadow-sm};
   --#{$prefix}box-shadow-lg: #{$box-shadow-lg};
   --#{$prefix}box-shadow-inset: #{$box-shadow-inset};
-
-  @each $name, $value in $shadows {
-    --#{$prefix}shadow-#{$name}: #{$value};
-  }
-
-  --#{$prefix}offcanvas-bg: #{$body-bg};
 
   // Focus styles
   // scss-docs-start root-focus-variables
@@ -130,26 +133,43 @@
   --#{$prefix}focus-ring-color: #{$focus-ring-color};
   // scss-docs-end root-focus-variables
 
-  --#{$prefix}input-border-color: #{$input-border-color};
+  --#{$prefix}offcanvas-bg: #{$body-bg};
+
   // scss-docs-start root-form-validation-variables
   --#{$prefix}form-valid-color: #{$form-valid-color};
   --#{$prefix}form-valid-border-color: #{$form-valid-border-color};
   --#{$prefix}form-invalid-color: #{$form-invalid-color};
   --#{$prefix}form-invalid-border-color: #{$form-invalid-border-color};
   // scss-docs-end root-form-validation-variables
+  @each $name, $value in $shadows {
+    --#{$prefix}shadow-#{$name}: #{$value};
+  }
 }
 
 @if $enable-dark-mode {
   @include color-mode(dark, true) {
     color-scheme: dark;
 
-    // scss-docs-start root-dark-mode-vars
-    @each $color, $value in $theme-colors-dark {
-      --#{$prefix}#{$color}: #{$value};
-      --#{$prefix}text-on-#{$color}: #{color-contrast($value)};
-      --#{$prefix}#{$color}-rgb: #{to-rgb($value)};
+    @each $color, $value in $theme-colors {
+      $theme: tint-color($value, $theme-dark-tint-amount);
+
+      --#{$prefix}#{$color}: #{$theme};
+      --#{$prefix}#{$color}-rgb: #{to-rgb($theme)};
+      --#{$prefix}#{$color}-hover: #{if(color-contrast($theme) == $color-contrast-light, shade-color($theme, $theme-dark-hover-shade-amount), tint-color($theme, $theme-dark-hover-tint-amount))};
+      --#{$prefix}#{$color}-active: #{if(color-contrast($theme) == $color-contrast-light, shade-color($theme, $theme-dark-active-shade-amount), tint-color($theme, $theme-dark-active-tint-amount))};
+      --#{$prefix}#{$color}-subtle: #{shade-color($value, $theme-dark-subtle-shade-amount)};
+      --#{$prefix}#{$color}-subtle-hover: #{shade-color($value, $theme-dark-subtle-hover-shade-amount)};
+      --#{$prefix}#{$color}-subtle-active: #{shade-color($value, $theme-dark-subtle-active-shade-amount)};
+      --#{$prefix}#{$color}-emphasis: #{tint-color($value, $theme-dark-emphasis-tint-amount)};
+      --#{$prefix}#{$color}-emphasis-hover: #{tint-color($value, $theme-dark-emphasis-hover-tint-amount)};
+      --#{$prefix}color-on-#{$color}: #{color-contrast($theme)};
+      --#{$prefix}#{$color}-border-subtle: #{shade-color($value, $theme-dark-border-subtle-shade-amount)};
     }
 
+    @each $color, $value in $theme-colors-dark {
+      --#{$prefix}color-#{$color}: #{$value};
+    }
+    // scss-docs-start root-dark-mode-vars
     --#{$prefix}body-color: #{$body-color-dark};
     --#{$prefix}body-color-rgb: #{to-rgb($body-color-dark)};
     --#{$prefix}body-bg: #{$body-bg-dark};
@@ -193,8 +213,10 @@
 
     --#{$prefix}border-color: #{$border-color-dark};
     --#{$prefix}border-color-translucent: #{$border-color-translucent-dark};
-
     --#{$prefix}input-border-color: #{$border-color-dark};
+
+    --#{$prefix}offcanvas-bg: #{$offcanvas-bg-color-dark};
+
     --#{$prefix}form-valid-color: #{$form-valid-color-dark};
     --#{$prefix}form-valid-border-color: #{$form-valid-border-color-dark};
     --#{$prefix}form-invalid-color: #{$form-invalid-color-dark};
