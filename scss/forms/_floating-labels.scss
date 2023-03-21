@@ -47,6 +47,7 @@
 
     &:focus,
     &:not(:placeholder-shown) {
+
       padding-top: $form-floating-input-padding-t;
       padding-bottom: $form-floating-input-padding-b;
     }
@@ -235,6 +236,11 @@ $transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 @mixin label-above-input {
   + label {
     @include label-common();
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
     //left: $input-padding-x-sm;
     //left: 0;
     //padding: 0;
@@ -284,50 +290,53 @@ $transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 
   > .form-control,
   > .form-select {
+
     ~ label {
       display: flex;
       user-select: none;
       width: 100%;
 
-      &::before {
-        min-width: .75rem;
-      }
-
-      &::after {
-        flex-grow: 1;
-      }
-
-      &::before,
-      &::after {
+      &::before, &::after {
         content: "";
         display: block;
         box-sizing: border-box;
         margin-top: .5rem;
         border-top: 1px solid transparent;
         pointer-events: none;
-        box-shadow: inset 1px 0 transparent, inset -1px 0 transparent, inset 0 -1px transparent;
         height: .125rem;
+        min-width: .75rem;
+        @include border-radius($input-border-radius);
       }
-
     }
   }
+
 
   > .form-control,
   > .form-select {
     &:focus {
       border-top: transparent;
+      border-width: 1px;
       box-shadow: inset 1px 0 $primary, inset -1px 0 $primary, inset 0 -1px $primary;
 
       &:not(:placeholder-shown) {
         box-shadow: inset 1px 0 $primary, inset -1px 0 $primary, inset 0 -1px $primary;
       }
-
-      & label {
-        &::before {
-          border-top-color: $input-focus-border-color;
-          box-shadow: inset 0 1px $primary;
+      ~ label {
+        &::after {
+          flex-grow: 1;
+          margin-left: 4px;
+          border-right: solid 1px transparent;
+          border-radius: 0 4px;
+          //flex-grow: 1;
+          //box-shadow: inset 1px 0 $primary, inset -1px 0 $primary, inset 0 -1px $primary;
         }
-
+        &:before {
+          margin-right: 4px;
+          border-left: solid 1px transparent;
+          border-radius: 4px 0;
+          //box-shadow: inset 1px 0 $primary, inset -1px 0 $primary, inset 0 -1px $primary;
+          //min-width: .75rem;
+        }
       }
     }
   }

@@ -1830,3 +1830,49 @@ $kbd-bg:                            var(--#{$prefix}body-color) !default;
 $nested-kbd-font-weight:            null !default; // Deprecated in v5.2.0, removing in v6
 
 $pre-color:                         null !default;
+
+$sidenav-transform: translateX(-100%) !default;
+$sidenav-background-color: $white !default;
+$sidenav-width: 240px !default;
+$sidenav-height: 100vh !default;
+$sidenav-box-shadow: var(--#{$prefix}shadow-8dp) !default;//0 4px 12px 0 rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05) !default;
+
+$sidenav-data-hidden-false-transform: translateX(0%) !default;
+$sidenav-data-color-light-color:  $gray-100 !default;//rgba(255, 255, 255, 0.6) !default;
+$sidenav-data-right-true-transform: translateX(100%) !default;
+$sidenav-data-slim-collapsed-true-width: 77px !default;
+
+$sidenav-menu-padding: 0.2rem !default;
+
+$sidenav-collapse-sidenav-link-font-size: $font-size-sm !default;
+$sidenav-collapse-sidenav-link-height: $line-height-base !default;
+$sidenav-collapse-sidenav-link-padding-left: 3rem !default;
+
+$sidenav-link-font-size: 0.89rem !default !default;
+$sidenav-link-padding-y: 1rem !default;
+$sidenav-link-padding-x: 1.5rem !default;
+$sidenav-link-height: 3rem !default;
+$sidenav-link-border-radius: 5px !default;
+$sidenav-link-transition: all 0.3s linear !default;
+
+$sidenav-link-hover-color: $primary !default;
+$sidenav-link-hover-background-color: #f6f9fc !default;
+
+$sidenav-link-active-focus-color: $sidenav-link-hover-color !default;
+$sidenav-link-active-focus-background-color: $sidenav-link-hover-background-color !default;
+$sidenav-link-active-color: $sidenav-link-hover-color !default;
+
+$sidenav-rotate-icon-margin-right: 0.8rem !default;
+$sidenav-rotate-icon-transition: transform 0.3s !default;
+
+$sidenav-backdrop-background-color: rgba(0, 0, 0, 0.1) !default;
+
+$sidenav-light-color: $sidenav-data-color-light-color !default;
+
+$sidenav-subheading-font-size: 0.6rem !default;
+$sidenav-subheading-padding-y: 1rem !default;
+$sidenav-subheading-padding-x: 1.5rem !default;
+$sidenav-subheading-fw: 700 !default;
+
+$sidenav-sm-link-pt: 0.4rem !default;
+$sidenav-sm-link-pb: $sidenav-sm-link-pt !default;

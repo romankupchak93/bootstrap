@@ -1,8 +1,4 @@
 .floating-label {
-  //--matter-helper-theme:rgb(var(--matter-theme-rgb, var(--matter-primary-rgb, 33, 150, 243)));
-  //--matter-helper-safari1:rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.38);
-  //--matter-helper-safari2:rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.6);
-  //--matter-helper-safari3:rgba(var(--matter-onsurface-rgb, 0, 0, 0), 0.87);
   position: relative;
   display: inline-flex;
   width: 100%;
@@ -10,7 +6,6 @@
   font-family: var(--matter-font-family, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
   font-size: 16px;
   line-height: $line-height-base;
-
   > {
     input, textarea {
       box-sizing: border-box;

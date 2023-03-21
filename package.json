@@ -107,7 +107,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
-    "@babel/core": "^7.21.0",
+    "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
     "@material/ripple": "^14.0.0",
     "@popperjs/core": "^2.11.6",
@@ -128,7 +128,7 @@
     "find-unused-sass-variables": "^4.0.5",
     "globby": "^11.1.0",
     "hammer-simulator": "0.0.1",
-    "hugo-bin": "^0.99.3",
+    "hugo-bin": "^0.101.2",
     "ip": "^2.0.0",
     "jasmine": "^4.5.0",
     "jquery": "^3.6.4",
@@ -149,7 +149,7 @@
     "rollup": "^3.19.1",
     "rollup-plugin-istanbul": "^4.0.0",
     "rtlcss": "^4.0.0",
-    "sass": "^1.59.2",
+    "sass": "^1.59.3",
     "sass-true": "^7.0.0",
     "shelljs": "^0.8.5",
     "stylelint": "^14.16.1",
@@ -179,6 +179,10 @@
           "@popperjs/core"
         ]
       }
+    },
+    "dependencies": {},
+    "peerDependencies": {
+      "@popperjs/core": "^2.11.6"
     }
   }
 }
