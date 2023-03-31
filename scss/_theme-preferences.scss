@@ -1,0 +1,80 @@
+//$bs-theme-light-background: #ffffff;
+//$bs-theme-light-on-background: #4f4f4f;
+//$bs-theme-light-surface: #ffffff;
+//$bs-theme-light-on-surface: #262626;
+//$bs-theme-light-on-primary: #ffffff;
+//$bs-theme-light-on-secondary: #ffffff;
+//$bs-theme-light-on-surface-variant: rgba(255, 255, 255, 0.75);
+//$bs-theme-light-on-surface-hover: #464646;
+//$bs-theme-light-error: #f93154;
+//$bs-theme-light-on-error: #00b74a;
+//$bs-theme-light-success: #ffffff;
+//$bs-theme-light-on-success: #ffffff;
+//$bs-theme-light-surface-hover: #ddd;
+//$bs-theme-light-surface-highlight: #eee;
+//$bs-theme-light-on-hover: #f5f5f5;
+//
+//$bs-theme-dark-primary: #8ab4f8;
+//$bs-theme-dark-on-primary: #185abc;
+//$bs-theme-dark-primary-container: #8ab4f8;
+//$bs-theme-dark-background: #303030;
+//$bs-theme-dark-on-background: #ffffff;
+//$bs-theme-dark-surface: #424242;
+//$bs-theme-dark-on-surface: #ffffff;
+//$bs-theme-dark-surface-hover: rgba(255, 255, 255, 0.15);
+//$bs-theme-dark-on-surface-hover: #d3d3d3;
+//$bs-theme-dark-surface-highlight: rgba(255, 255, 255, 0.3);
+//$bs-theme-dark-on-surface-variant: rgba(0, 0, 0, 0.65);
+//$bs-theme-dark-on-secondary: #ffffff;
+//$bs-theme-dark-error: #f93154;
+//$bs-theme-dark-on-error: #00b74a;
+//$bs-theme-dark-success: #ffffff;
+//$bs-theme-dark-on-success: #ffffff;
+//
+//@function bs-light-theme($primary, $secondary) {
+//  @return (
+//          primary: $primary,
+//          secondary: $secondary,
+//
+//          surface: $bs-theme-light-surface,
+//          onSurface: $bs-theme-light-on-surface,
+//          onSurfaceVariant: $bs-theme-light-on-surface-variant,
+//          surfaceHighlight: $bs-theme-light-surface-highlight,
+//
+//          background: $bs-theme-light-background,
+//          onBackground: $bs-theme-light-on-background,
+//
+//          onPrimary: $bs-theme-light-on-primary,
+//          onSecondary: $bs-theme-light-on-secondary,
+//
+//          error: $bs-theme-light-error,
+//          onError: $bs-theme-light-on-error,
+//
+//          success: $bs-theme-light-success,
+//          onSuccess: $bs-theme-light-on-success,
+//  );
+//}
+//@function bs-dark-theme($primary, $secondary) {
+//  @return (
+//          primary: $primary,
+//          secondary: $secondary,
+//
+//          onPrimary: $bs-theme-dark-on-primary,
+//          onSecondary: $bs-theme-dark-on-secondary,
+//
+//          background: $bs-theme-dark-background,
+//          onBackground: $bs-theme-dark-on-background,
+//
+//          surface: $bs-theme-dark-surface,
+//          onSurface: $bs-theme-dark-on-surface,
+//
+//          onSurfaceVariant: $bs-theme-dark-on-surface-variant,
+//          surfaceHighlight: $bs-theme-dark-surface-highlight,
+//
+//          error: $bs-theme-dark-error,
+//          onError: $bs-theme-dark-on-error,
+//
+//          success: $bs-theme-dark-success,
+//          onSuccess: $bs-theme-dark-on-success,
+//  )
+//}

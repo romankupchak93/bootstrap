@@ -1,0 +1,30 @@
+  //// Визначення кольорів для світлої теми
+  //$on-primary-content-light: #fff;
+  //$on-primary-content-opacity-light: 1;
+  //$on-primary-content-disabled-light: rgba($mdc-grey-1000, 0.38);
+  //
+  //// Визначення кольорів для темної теми
+  //$on-primary-content-dark: $mdc-grey-800;
+  //$on-primary-content-opacity-dark: 0.87;
+  //$on-primary-content-disabled-dark: rgba($mdc-grey-1000, 0.38);
+  //
+  //// Міксин on-primary-content
+  //@mixin on-primary-content($color-mode: light) {
+  //  // Світла тема
+  //  @if $color-mode == light {
+  //    color: $on-primary-content-light;
+  //    opacity: $on-primary-content-opacity-light;
+  //    &[disabled] {
+  //      color: $on-primary-content-disabled-light;
+  //    }
+  //  }
+  //
+  //    // Темна тема
+  //  @else {
+  //    color: $on-primary-content-dark;
+  //    opacity: $on-primary-content-opacity-dark;
+  //    &[disabled] {
+  //      color: $on-primary-content-disabled-dark;
+  //    }
+  //  }
+  //}

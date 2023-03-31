@@ -1,0 +1,156 @@
+:root {
+  --bs-color-primary: #006e2f;
+  --bs-color-on-primary: #ffffff;
+
+  --bs-color-primary-container: #85fb9c;
+  --bs-color-on-primary-container: #002109;
+
+  --bs-color-secondary: #006a65;
+  --bs-color-on-secondary: #ffffff;
+
+  --bs-color-secondary-container: #70f7ee;
+  --bs-color-on-secondary-container: #00201e;
+
+  --bs-color-tertiary: #00696f;
+  --bs-color-on-tertiary: #ffffff;
+
+  --bs-color-tertiary-container: #6ff6ff;
+  --bs-color-on-tertiary-container: #002022;
+
+  --bs-color-error: #ba1a1a;
+  --bs-color-error-container: #ffdad6;
+
+  --bs-color-on-error: #ffffff;
+  --bs-color-on-error-container: #410002;
+
+  --bs-color-background: #fcfdf7;
+  --bs-color-on-background: #1a1c19;
+
+  --bs-color-surface: #fcfdf7;
+  --bs-color-on-surface: #1a1c19;
+
+  --bs-color-surface-variant: #dde5da;
+  --bs-color-on-surface-variant: #414941;
+
+  --bs-color-outline: #727970;
+  --bs-color-inverse-on-surface: #f0f1ec;
+
+  --bs-color-inverse-surface: #2e312e;
+  --bs-color-inverse-primary: #69de82;
+
+  --bs-color-shadow: #000000;
+  --bs-color-surface-tint: #006e2f;
+  --bs-color-surface-tint-color: #006e2f;
+
+  --bs-color-tip: #006d44;
+  --bs-color-on-tip: #ffffff;
+  --bs-color-tip-container: #75fbb6;
+  --bs-color-on-tip-container: #002111;
+
+  --bs-color-info: #006875;
+  --bs-color-on-info: #ffffff;
+  --bs-color-info-container: #9bf0ff;
+  --bs-color-on-info-container: #001f24;
+
+  --bs-color-warning: #7d5700;
+  --bs-color-on-warning: #ffffff;
+  --bs-color-warning-container: #ffdeaa;
+  --bs-color-on-warning-container: #271900;
+
+  --bs-color-danger: #bf0800;
+  --bs-color-on-danger: #ffffff;
+  --bs-color-danger-container: #ffdad4;
+  --bs-color-on-danger-container: #400100;
+
+  --bs-elevation-level1: linear-gradient(0deg, rgba(103, 80, 164, 0.05), rgba(103, 80, 164, 0.05)), var(--bs-color-surface);
+  --bs-elevation-level2: linear-gradient(0deg, rgba(103, 80, 164, 0.08), rgba(103, 80, 164, 0.08)), var(--bs-color-surface);
+  --bs-elevation-level3: linear-gradient(0deg, rgba(103, 80, 164, 0.11), rgba(103, 80, 164, 0.11)), var(--bs-color-surface);
+  --bs-elevation-level4: linear-gradient(0deg, rgba(103, 80, 164, 0.12), rgba(103, 80, 164, 0.12)), var(--bs-color-surface);
+  --bs-elevation-level5: linear-gradient(0deg, rgba(103, 80, 164, 0.14), rgba(103, 80, 164, 0.14)), var(--bs-color-surface);
+
+  --bs-color-on-surface-variant-2: linear-gradient(0deg,rgba(68,71,70,.15),rgba(68,71,70,.15)), var(--bs-color-surface);
+  --bs-color-on-surface-variant-4: linear-gradient(0deg,rgba(68,71,70,.18),rgba(68,71,70,.18)), var(--bs-color-surface);
+
+  //@import "highlight-light.scss";
+}
+
+body.dark {
+  --bs-color-primary: #69de82;
+  --bs-color-on-primary: #003915;
+
+  --bs-color-primary-container: #005322;
+  --bs-color-on-primary-container: #85fb9c;
+
+  --bs-color-secondary: #4fdad2;
+  --bs-color-on-secondary: #003734;
+
+  --bs-color-secondary-container: #00504c;
+  --bs-color-on-secondary-container: #70f7ee;
+
+  --bs-color-tertiary: #4cd9e2;
+  --bs-color-on-tertiary: #00373a;
+
+  --bs-color-tertiary-container: #004f53;
+  --bs-color-on-tertiary-container: #6ff6ff;
+
+  --bs-color-error: #ffb4ab;
+  --bs-color-error-container: #93000a;
+
+  --bs-color-on-error: #690005;
+  --bs-color-on-error-container: #ffdad6;
+
+  --bs-color-background: #1a1c19;
+  --bs-color-on-background: #e2e3dd;
+
+  --bs-color-surface: #1a1c19;
+  --bs-color-on-surface: #e2e3dd;
+
+  --bs-color-surface-variant: #414941;
+  --bs-color-on-surface-variant: #c1c9be;
+
+  --bs-color-outline: #8b9389;
+  --bs-color-inverse-on-surface: #1a1c19;
+
+  --bs-color-inverse-surface: #e2e3dd;
+  --bs-color-inverse-primary: #006e2f;
+
+  --bs-color-shadow: #000000;
+  --bs-color-surface-tint: #69de82;
+
+  --bs-color-surface-tint-color: #69de82;
+
+  --bs-color-tip: #55de9b;
+  --bs-color-on-tip: #003921;
+  --bs-color-tip-container: #005232;
+  --bs-color-on-tip-container: #75fbb6;
+
+  --bs-color-info: #50d8ec;
+  --bs-color-on-info: #00363d;
+  --bs-color-info-container: #004f58;
+  --bs-color-on-info-container: #9bf0ff;
+
+  --bs-color-warning: #ffba2c;
+  --bs-color-on-warning: #422c00;
+  --bs-color-warning-container: #5f4100;
+  --bs-color-on-warning-container: #ffdeaa;
+
+  --bs-color-danger: #ffb4a7;
+  --bs-color-on-danger: #680200;
+  --bs-color-danger-container: #920500;
+  --bs-color-on-danger-container: #ffdad4;
+
+  --bs-elevation-level1: linear-gradient(0deg, rgba(103, 80, 164, 0.05), rgba(103, 80, 164, 0.05)), var(--bs-color-surface);
+  --bs-elevation-level2: linear-gradient(0deg, rgba(103, 80, 164, 0.08), rgba(103, 80, 164, 0.08)), var(--bs-color-surface);
+  --bs-elevation-level3: linear-gradient(0deg, rgba(103, 80, 164, 0.11), rgba(103, 80, 164, 0.11)), var(--bs-color-surface);
+  --bs-elevation-level4: linear-gradient(0deg, rgba(103, 80, 164, 0.12), rgba(103, 80, 164, 0.12)), var(--bs-color-surface);
+  --bs-elevation-level5: linear-gradient(0deg, rgba(103, 80, 164, 0.14), rgba(103, 80, 164, 0.14)), var(--bs-color-surface);
+
+  --bs-color-on-surface-variant-2: linear-gradient(0deg,rgba(68,71,70,.15),rgba(68,71,70,.15));
+  --bs-color-on-surface-variant-4: linear-gradient(0deg,rgba(68,71,70,.18),rgba(68,71,70,.18));
+
+  //@import "highlight-dark.scss";
+}
+$md-sys-color-on-surface-2: linear-gradient(0deg,hsla(0, 0%, 89%, 0.08),hsla(0,0%,89%,.08)), var(--bs-color-secondary-container);
+$md-sys-color-on-surface-4: linear-gradient(0deg,hsla(0,0%,89%,.12),hsla(0,0%,89%,.12)), var(--bs-color-secondary-container);
+
+//@import "custom/styles_variables"

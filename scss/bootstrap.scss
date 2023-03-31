@@ -5,11 +5,13 @@
 // scss-docs-start import-stack
 // Configuration
 @import "functions";
+//@import "theme-preferences";
 @import "variables";
 @import "variables-dark";
 @import "maps";
 @import "mixins";
 @import "utilities";
+@import "core";
 
 // Layout & components
 @import "root";
@@ -42,10 +44,13 @@
 @import "carousel";
 @import "spinners";
 @import "offcanvas";
+@import "sidenav";
 @import "placeholders";
 
 // Helpers
 @import "helpers";
+
+//properties
 
 // Utilities
 @import "utilities/api";

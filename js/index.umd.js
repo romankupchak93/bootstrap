@@ -14,6 +14,9 @@ import Modal from './src/modal.js'
 import Offcanvas from './src/offcanvas.js'
 import Popover from './src/popover.js'
 import ScrollSpy from './src/scrollspy.js'
+import Input from './src/input.js'
+// import TextField from './src/text-field.js'
+// import SelectField from './src/select-field.js'
 import Tab from './src/tab.js'
 import Toast from './src/toast.js'
 import Tooltip from './src/tooltip.js'
@@ -29,6 +32,9 @@ export default {
   Popover,
   ScrollSpy,
   Tab,
+  Input,
+  // TextField,
+  // SelectField,
   Toast,
   Tooltip
 }

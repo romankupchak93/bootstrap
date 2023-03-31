@@ -1,0 +1,15 @@
+Material Design 3 Token
+	On Primary
+    On Secondary
+    On Surface
+    On Background
+    On Error
+
+
+Bootstrap 5 Token
+    Primary	primary
+    Secondary	secondary
+    Surface	light
+    Background	dark
+    Error	danger
+

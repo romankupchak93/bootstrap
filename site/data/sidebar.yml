@@ -68,6 +68,13 @@
     - title: Layout
     - title: Validation
 
+- title: Customize components
+  icon: menu-button-wide-fill
+  icon_color: cyan
+  pages:
+    - title: Floating labels
+    - title: Buttons
+
 - title: Components
   icon: menu-button-wide-fill
   icon_color: cyan

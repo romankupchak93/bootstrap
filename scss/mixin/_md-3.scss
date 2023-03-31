@@ -1,0 +1,29 @@
+@mixin on-primary($color-mode: light) {
+  // Light mode
+  @if $color-mode == light {
+    background-color: $primary;
+    color: $on-primary-light;
+  }
+
+    // Dark mode
+  @else {
+    background-color: $primary;
+    color: $on-primary-dark;
+  }
+}
+@mixin on-primary-content($color-mode: light) {
+  // Світла тема
+  @if $color-mode == light {
+    color: $on-primary-content-light;
+  }
+
+    // Темна тема
+  @else {
+    color: $on-primary-content-dark;
+  }
+}
+
+//.btn-primary {
+//  @include on-primary($color-mode);
+//  @include on-primary-content($color-mode);
+//}

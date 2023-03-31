@@ -255,8 +255,12 @@
     }
     return list[Math.max(0, Math.min(index, listLength - 1))];
   };
+  const element = tag => {
+    return document.createElement(tag);
+  };
 
   exports.defineJQueryPlugin = defineJQueryPlugin;
+  exports.element = element;
   exports.execute = execute;
   exports.executeAfterTransition = executeAfterTransition;
   exports.findShadowRoot = findShadowRoot;

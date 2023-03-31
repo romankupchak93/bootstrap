@@ -282,7 +282,9 @@ const getNextActiveElement = (list, activeElement, shouldGetNext, isCycleAllowed
 
   return list[Math.max(0, Math.min(index, listLength - 1))]
 }
-
+const element = (tag) => {
+  return document.createElement(tag);
+};
 export {
   defineJQueryPlugin,
   execute,
@@ -302,5 +304,6 @@ export {
   parseSelector,
   reflow,
   triggerTransitionEnd,
-  toType
+  toType,
+  element
 }

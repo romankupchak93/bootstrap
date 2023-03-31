@@ -146,7 +146,49 @@
       modalBodyInput.value = recipient
     })
   }
+  document.querySelectorAll('button.list-group-item, .btn:not(input,.theme-toggle), a.list-group-item')
+    .forEach(button => {
+      window.addEventListener('load', () => {
+        const rippleElement = document.createElement('span')
+        rippleElement.className = 'ripple-surface'
+        button.append(rippleElement)
+        return new mdc.ripple.MDCRipple(rippleElement)
+      })
+    })
 
+  function initComponents() {
+    const textFieldList = Array.prototype.slice.call(
+      document.querySelectorAll('.form-control')
+    )
+    textFieldList.map((textField) => {
+      return new bootstrap.TextField(textField)
+    })
+    // const selectList = Array.prototype.slice.call(
+    //   document.querySelectorAll(".form-select")
+    // );
+    // selectList.map((select) => {
+    //   return new bootstrap.SelectField(select);
+    // });
+    const elemModal = document.querySelector('.modal')
+    if (elemModal) {
+      elemModal.addEventListener('shown.bs.modal', function () {
+        const textFields = this.querySelectorAll('.form-control')
+        for (const [, value] of Object.entries(textFields)) {
+          const textFieldInstance =
+            bootstrap.TextField.getOrCreateInstance(value)
+          textFieldInstance.redraw()
+        }
+        // const selectFields = document.querySelectorAll(".form-select");
+        // for (const [, value] of Object.entries(selectFields)) {
+        //   const selectFieldInstance =
+        //     bootstrap.SelectField.getOrCreateInstance(value);
+        //   selectFieldInstance.redraw();
+        // }
+      })
+    }
+  }
+
+  initComponents()
   // -------------------------------
   // Offcanvas
   // -------------------------------
