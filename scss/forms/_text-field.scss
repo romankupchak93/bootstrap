@@ -8,6 +8,7 @@ $floating-label-focus-shadow: inset 1px 0 $focus-fields-active, inset -1px 0 $fo
 
 @mixin label-active {
   + span {
+    z-index: 5;
     &::before,
     &::after {
       border-top-width: 1px;

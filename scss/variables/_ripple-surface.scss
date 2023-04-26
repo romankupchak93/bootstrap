@@ -15,5 +15,7 @@
   z-index: 0;
   box-sizing: content-box;
   overflow: hidden;
-  @include border-radius(inherit);
+}
+[class^="btn"] {
+  @include ripple.states-opacities((hover: .1, focus: .15, press: .2));
 }

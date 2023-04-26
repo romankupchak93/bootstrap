@@ -12,6 +12,7 @@
     > .form-select {
       position: relative;
     }
+
     > .form-control:focus,
     > .form-select:focus {
       z-index: 3;
@@ -27,11 +28,22 @@
       //  }
       //}
     }
+
     ///
 
     &:not(:first-child) {
       > .form-control,
       > .form-select {
+        + span {
+          &::before {
+            border-radius: 0;
+          }
+
+          &::after {
+            //
+          }
+        }
+
         // https://github.com/twbs/bootstrap/blob/v5.0.0-beta3/scss/forms/_input-group.scss#L119
         @include border-start-radius(0);
       }
@@ -40,6 +52,15 @@
     &:not(:last-child) {
       > .form-control,
       > .form-select {
+        + span {
+          &::before {
+          //
+          }
+          &::after {
+            border-radius: 0;
+          }
+        }
+
         // https://github.com/twbs/bootstrap/blob/v5.0.0-beta3/scss/forms/_input-group.scss#L101
         @include border-end-radius(0);
       }

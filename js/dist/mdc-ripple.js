@@ -4,11 +4,12 @@
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@material/ripple')) :
-  typeof define === 'function' && define.amd ? define(['@material/ripple'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.MdcRipple = factory(global["@material/ripple"]));
-})(this, (function (ripple) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@material/ripple'), require('./util/index.js')) :
+  typeof define === 'function' && define.amd ? define(['@material/ripple', './util/index'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.MdcRipple = factory(global["@material/ripple"], global.Index));
+})(this, (function (ripple, index_js) { 'use strict';
 
+  const NAME = 'mdc.ripple';
   class MDCRippled {
     constructor(element) {
       this.root = element;
@@ -39,22 +40,55 @@
       });
       this.ripple = new ripple.MDCRipple(this.root, foundation);
     }
+    static get NAME() {
+      return NAME;
+    }
   }
   function isSpace(evt) {
     return evt.key === ' ' || evt.keyCode === 32;
   }
-  function addRippleToElements(selector, classToAdd) {
-    const elements = document.querySelectorAll(selector);
+  index_js.onDOMContentLoaded(() => {
+    const $ = index_js.getjQuery();
+    if ($) {
+      const JQUERY_NO_CONFLICT = $.fn[NAME];
+      $.fn[NAME] = MDCRippled.jQueryInterface;
+      $.fn[NAME].Constructor = MDCRippled;
+      $.fn[NAME].noConflict = () => {
+        $.fn[NAME] = JQUERY_NO_CONFLICT;
+        return MDCRippled.jQueryInterface;
+      };
+    }
+  });
+  function addClassToElementsWithClassText(classText, classToAdd, options = {
+    targetClass: '',
+    excludeClasses: []
+  }) {
+    const {
+      targetClass,
+      excludeClasses
+    } = options;
+    const excludeSelectors = excludeClasses.map(excludeClass => {
+      return `:not([class^="${excludeClass}-"][class$="-"], [class*=" ${excludeClass} "]:not([class*=" ${excludeClass}-"]), [class$="${excludeClass}"]:not([class*="-"])`;
+    });
+    const elements = document.querySelectorAll(`[class*="${classText}"]${excludeSelectors.join('')}`);
     for (const element of elements) {
-      window.addEventListener('load', () => {
-        element.unbounded = true;
+      if (targetClass && element.classList.contains(targetClass)) {
+        if (excludeClasses.some(excludeClass => element.classList.contains(excludeClass))) {
+          const newElement = document.createElement('div');
+          newElement.classList.add('ripple-surface');
+          element.append(newElement);
+        } else {
+          element.classList.add(classToAdd);
+        }
+      } else {
         element.classList.add(classToAdd);
-        return new ripple.MDCRipple(element);
-      });
+      }
     }
   }
-  addRippleToElements('.btn-close, .btn-icon', 'mdc-icon-button');
-  addRippleToElements('.btn', 'mdc-button');
+  addClassToElementsWithClassText('btn', 'mdc-ripple-surface', {
+    targetClass: '',
+    excludeClasses: ['btn-toolbar', 'dropdown-toggle', 'btn-group']
+  });
 
   return MDCRippled;
 
