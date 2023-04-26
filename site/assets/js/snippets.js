@@ -167,4 +167,18 @@
       }, false)
     })
   }
+  // -------------------------------
+  // TextField
+  // -------------------------------
+  const elFields = document.querySelectorAll('.floating-label')
+
+  elFields.forEach(field => {
+    const input = field.querySelector('input, select, textarea')
+    const label = field.querySelector('label')
+    const span = document.createElement('span')
+    if (label) {
+      span.appendChild(label)
+      input.insertAdjacentElement('afterend', span)
+    }
+  })
 })()

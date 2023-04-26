@@ -5,7 +5,7 @@
 .form-control {
   display: block;
   width: 100%;
-  padding: $input-padding-y $input-padding-x;
+  padding: $input-padding-y $input-padding-x-lg;
   font-family: $input-font-family;
   @include font-size($input-font-size);
   font-weight: $input-font-weight;
@@ -17,7 +17,7 @@
   appearance: none; // Fix appearance for date inputs in Safari
 
   // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
-  @include border-radius($input-border-radius, 0);
+  @include border-radius($input-border-radius-sm, 0);
 
   @include box-shadow($input-box-shadow);
   @include transition($input-transition);
@@ -34,14 +34,15 @@
   &:focus {
     color: $input-focus-color;
     background-color: $input-focus-bg;
-    border-color: $input-focus-border-color;
+    border-color: $focus-fields-active;
     outline: 0;
-    @if $enable-shadows {
-      @include box-shadow($input-box-shadow, $input-focus-box-shadow);
-    } @else {
-      // Avoid using mixin so we can pass custom focus shadow properly
-      box-shadow: $input-focus-box-shadow;
-    }
+    box-shadow: $focus-fields-box-shadow;
+    //@if $enable-shadows {
+    //  @include box-shadow($input-box-shadow, $input-focus-box-shadow);
+    //} @else {
+    //  // Avoid using mixin so we can pass custom focus shadow properly
+    //  box-shadow: $focus-fields-box-shadow;
+    //}
   }
 
   &::-webkit-date-and-time-value {
@@ -163,7 +164,7 @@
   min-height: $input-height-lg;
   padding: $input-padding-y-lg $input-padding-x-lg;
   @include font-size($input-font-size-lg);
-  @include border-radius($input-border-radius-lg);
+  @include border-radius($input-border-radius-sm);
 
   &::file-selector-button {
     padding: $input-padding-y-lg $input-padding-x-lg;
@@ -201,12 +202,12 @@ textarea {
 
   &::-moz-color-swatch {
     border: 0 !important; // stylelint-disable-line declaration-no-important
-    @include border-radius($input-border-radius);
+    @include border-radius($input-border-radius-sm);
   }
 
   &::-webkit-color-swatch {
     border: 0 !important; // stylelint-disable-line declaration-no-important
-    @include border-radius($input-border-radius);
+    @include border-radius($input-border-radius-sm);
   }
 
   &.form-control-sm { height: $input-height-sm; }

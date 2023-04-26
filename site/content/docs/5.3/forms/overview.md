@@ -34,6 +34,35 @@ Here's a quick example to demonstrate Bootstrap's form styles. Keep reading for 
 
 {{< example >}}
 <form>
+    <div class="floating-label mb-3">
+      <input id="textfield1" type="text" class="form-control" placeholder="textfield1" required>
+      <label for="textfield1" class="label">First name</label>
+    </div>
+    <div class="floating-label mb-3">
+    <input type="email" id="email-placeholder" class="form-control" placeholder="Lorem ipsum dolor sit amet"/>
+    <label for="email-placeholder">input email placeholder</label>
+  </div>
+      <div class="mb-3 floating-label">
+        <select id="selectfield1" class="form-select" placeholder="">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <label for="selectfield1">select</label>
+      </div>
+      <div class="mb-3 floating-label">
+        <select class="form-select" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+          <option selected disabled value="">Choose...</option>
+          <option>...</option>
+        </select>
+        <label for="validationServer04">Select</label>
+      </div>
+  <div class="mb-3 floating-label">
+    <textarea id="textarea-value" class="form-control" placeholder=" ">Lorem ipsum dolor sit amet</textarea>
+    <label for="textarea-value">textarea value</label>
+  </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">

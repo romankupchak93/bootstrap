@@ -78,7 +78,7 @@ const parseSelector = selector => {
 };
 
 // Shout-out Angus Croll (https://goo.gl/pxwQGp)
-const toType = object => {
+const toType$1 = object => {
   if (object === null || object === undefined) {
     return `${object}`;
   }
@@ -121,7 +121,7 @@ const getTransitionDurationFromElement = element => {
 const triggerTransitionEnd = element => {
   element.dispatchEvent(new Event(TRANSITION_END));
 };
-const isElement = object => {
+const isElement$1 = object => {
   if (!object || typeof object !== 'object') {
     return false;
   }
@@ -132,7 +132,7 @@ const isElement = object => {
 };
 const getElement = object => {
   // it's a jQuery object or a node element
-  if (isElement(object)) {
+  if (isElement$1(object)) {
     return object.jquery ? object[0] : object;
   }
   if (typeof object === 'string' && object.length > 0) {
@@ -141,7 +141,7 @@ const getElement = object => {
   return null;
 };
 const isVisible = element => {
-  if (!isElement(element) || element.getClientRects().length === 0) {
+  if (!isElement$1(element) || element.getClientRects().length === 0) {
     return false;
   }
   const elementIsVisible = getComputedStyle(element).getPropertyValue('visibility') === 'visible';
@@ -207,14 +207,14 @@ const reflow = element => {
   element.offsetHeight; // eslint-disable-line no-unused-expressions
 };
 
-const getjQuery = () => {
+const getjQuery$1 = () => {
   if (window.jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
     return window.jQuery;
   }
   return null;
 };
 const DOMContentLoadedCallbacks = [];
-const onDOMContentLoaded = callback => {
+const onDOMContentLoaded$1 = callback => {
   if (document.readyState === 'loading') {
     // add listener on the first call when the document is in loading state
     if (!DOMContentLoadedCallbacks.length) {
@@ -231,8 +231,8 @@ const onDOMContentLoaded = callback => {
 };
 const isRTL = () => document.documentElement.dir === 'rtl';
 const defineJQueryPlugin = plugin => {
-  onDOMContentLoaded(() => {
-    const $ = getjQuery();
+  onDOMContentLoaded$1(() => {
+    const $ = getjQuery$1();
     /* istanbul ignore if */
     if ($) {
       const name = plugin.NAME;
@@ -311,31 +311,31 @@ const getNextActiveElement = (list, activeElement, shouldGetNext, isCycleAllowed
  * Constants
  */
 
-const namespaceRegex = /[^.]*(?=\..*)\.|.*/;
-const stripNameRegex = /\..*/;
-const stripUidRegex = /::\d+$/;
-const eventRegistry = {}; // Events storage
-let uidEvent = 1;
-const customEvents = {
+const namespaceRegex$1 = /[^.]*(?=\..*)\.|.*/;
+const stripNameRegex$1 = /\..*/;
+const stripUidRegex$1 = /::\d+$/;
+const eventRegistry$1 = {}; // Events storage
+let uidEvent$1 = 1;
+const customEvents$1 = {
   mouseenter: 'mouseover',
   mouseleave: 'mouseout'
 };
-const nativeEvents = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
+const nativeEvents$1 = new Set(['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll']);
 
 /**
  * Private methods
  */
 
 function makeEventUid(element, uid) {
-  return uid && `${uid}::${uidEvent++}` || element.uidEvent || uidEvent++;
+  return uid && `${uid}::${uidEvent$1++}` || element.uidEvent || uidEvent$1++;
 }
 function getElementEvents(element) {
   const uid = makeEventUid(element);
   element.uidEvent = uid;
-  eventRegistry[uid] = eventRegistry[uid] || {};
-  return eventRegistry[uid];
+  eventRegistry$1[uid] = eventRegistry$1[uid] || {};
+  return eventRegistry$1[uid];
 }
-function bootstrapHandler(element, fn) {
+function bootstrapHandler$1(element, fn) {
   return function handler(event) {
     hydrateObj(event, {
       delegateTarget: element
@@ -346,7 +346,7 @@ function bootstrapHandler(element, fn) {
     return fn.apply(element, [event]);
   };
 }
-function bootstrapDelegationHandler(element, selector, fn) {
+function bootstrapDelegationHandler$1(element, selector, fn) {
   return function handler(event) {
     const domElements = element.querySelectorAll(selector);
     for (let {
@@ -367,7 +367,7 @@ function bootstrapDelegationHandler(element, selector, fn) {
     }
   };
 }
-function findHandler(events, callable, delegationSelector = null) {
+function findHandler$1(events, callable, delegationSelector = null) {
   return Object.values(events).find(event => event.callable === callable && event.delegationSelector === delegationSelector);
 }
 function normalizeParameters(originalTypeEvent, handler, delegationFunction) {
@@ -375,12 +375,12 @@ function normalizeParameters(originalTypeEvent, handler, delegationFunction) {
   // TODO: tooltip passes `false` instead of selector, so we need to check
   const callable = isDelegated ? delegationFunction : handler || delegationFunction;
   let typeEvent = getTypeEvent(originalTypeEvent);
-  if (!nativeEvents.has(typeEvent)) {
+  if (!nativeEvents$1.has(typeEvent)) {
     typeEvent = originalTypeEvent;
   }
   return [isDelegated, callable, typeEvent];
 }
-function addHandler(element, originalTypeEvent, handler, delegationFunction, oneOff) {
+function addHandler$1(element, originalTypeEvent, handler, delegationFunction, oneOff) {
   if (typeof originalTypeEvent !== 'string' || !element) {
     return;
   }
@@ -388,7 +388,7 @@ function addHandler(element, originalTypeEvent, handler, delegationFunction, one
 
   // in case of mouseenter or mouseleave wrap the handler within a function that checks for its DOM position
   // this prevents the handler from being dispatched the same way as mouseover or mouseout does
-  if (originalTypeEvent in customEvents) {
+  if (originalTypeEvent in customEvents$1) {
     const wrapFunction = fn => {
       return function (event) {
         if (!event.relatedTarget || event.relatedTarget !== event.delegateTarget && !event.delegateTarget.contains(event.relatedTarget)) {
@@ -400,13 +400,13 @@ function addHandler(element, originalTypeEvent, handler, delegationFunction, one
   }
   const events = getElementEvents(element);
   const handlers = events[typeEvent] || (events[typeEvent] = {});
-  const previousFunction = findHandler(handlers, callable, isDelegated ? handler : null);
+  const previousFunction = findHandler$1(handlers, callable, isDelegated ? handler : null);
   if (previousFunction) {
     previousFunction.oneOff = previousFunction.oneOff && oneOff;
     return;
   }
-  const uid = makeEventUid(callable, originalTypeEvent.replace(namespaceRegex, ''));
-  const fn = isDelegated ? bootstrapDelegationHandler(element, handler, callable) : bootstrapHandler(element, callable);
+  const uid = makeEventUid(callable, originalTypeEvent.replace(namespaceRegex$1, ''));
+  const fn = isDelegated ? bootstrapDelegationHandler$1(element, handler, callable) : bootstrapHandler$1(element, callable);
   fn.delegationSelector = isDelegated ? handler : null;
   fn.callable = callable;
   fn.oneOff = oneOff;
@@ -414,33 +414,33 @@ function addHandler(element, originalTypeEvent, handler, delegationFunction, one
   handlers[uid] = fn;
   element.addEventListener(typeEvent, fn, isDelegated);
 }
-function removeHandler(element, events, typeEvent, handler, delegationSelector) {
-  const fn = findHandler(events[typeEvent], handler, delegationSelector);
+function removeHandler$1(element, events, typeEvent, handler, delegationSelector) {
+  const fn = findHandler$1(events[typeEvent], handler, delegationSelector);
   if (!fn) {
     return;
   }
   element.removeEventListener(typeEvent, fn, Boolean(delegationSelector));
   delete events[typeEvent][fn.uidEvent];
 }
-function removeNamespacedHandlers(element, events, typeEvent, namespace) {
+function removeNamespacedHandlers$1(element, events, typeEvent, namespace) {
   const storeElementEvent = events[typeEvent] || {};
   for (const [handlerKey, event] of Object.entries(storeElementEvent)) {
     if (handlerKey.includes(namespace)) {
-      removeHandler(element, events, typeEvent, event.callable, event.delegationSelector);
+      removeHandler$1(element, events, typeEvent, event.callable, event.delegationSelector);
     }
   }
 }
 function getTypeEvent(event) {
   // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
-  event = event.replace(stripNameRegex, '');
-  return customEvents[event] || event;
+  event = event.replace(stripNameRegex$1, '');
+  return customEvents$1[event] || event;
 }
 const EventHandler = {
   on(element, event, handler, delegationFunction) {
-    addHandler(element, event, handler, delegationFunction, false);
+    addHandler$1(element, event, handler, delegationFunction, false);
   },
   one(element, event, handler, delegationFunction) {
-    addHandler(element, event, handler, delegationFunction, true);
+    addHandler$1(element, event, handler, delegationFunction, true);
   },
   off(element, originalTypeEvent, handler, delegationFunction) {
     if (typeof originalTypeEvent !== 'string' || !element) {
@@ -456,18 +456,18 @@ const EventHandler = {
       if (!Object.keys(storeElementEvent).length) {
         return;
       }
-      removeHandler(element, events, typeEvent, callable, isDelegated ? handler : null);
+      removeHandler$1(element, events, typeEvent, callable, isDelegated ? handler : null);
       return;
     }
     if (isNamespace) {
       for (const elementEvent of Object.keys(events)) {
-        removeNamespacedHandlers(element, events, elementEvent, originalTypeEvent.slice(1));
+        removeNamespacedHandlers$1(element, events, elementEvent, originalTypeEvent.slice(1));
       }
     }
     for (const [keyHandlers, event] of Object.entries(storeElementEvent)) {
-      const handlerKey = keyHandlers.replace(stripUidRegex, '');
+      const handlerKey = keyHandlers.replace(stripUidRegex$1, '');
       if (!inNamespace || originalTypeEvent.includes(handlerKey)) {
-        removeHandler(element, events, typeEvent, event.callable, event.delegationSelector);
+        removeHandler$1(element, events, typeEvent, event.callable, event.delegationSelector);
       }
     }
   },
@@ -475,7 +475,7 @@ const EventHandler = {
     if (typeof event !== 'string' || !element) {
       return null;
     }
-    const $ = getjQuery();
+    const $ = getjQuery$1();
     const typeEvent = getTypeEvent(event);
     const inNamespace = event !== typeEvent;
     let jQueryEvent = null;
@@ -528,7 +528,7 @@ function hydrateObj(obj, meta = {}) {
  * --------------------------------------------------------------------------
  */
 
-function normalizeData(value) {
+function normalizeData$1(value) {
   if (value === 'true') {
     return true;
   }
@@ -550,15 +550,15 @@ function normalizeData(value) {
     return value;
   }
 }
-function normalizeDataKey(key) {
+function normalizeDataKey$1(key) {
   return key.replace(/[A-Z]/g, chr => `-${chr.toLowerCase()}`);
 }
 const Manipulator = {
   setDataAttribute(element, key, value) {
-    element.setAttribute(`data-bs-${normalizeDataKey(key)}`, value);
+    element.setAttribute(`data-bs-${normalizeDataKey$1(key)}`, value);
   },
   removeDataAttribute(element, key) {
-    element.removeAttribute(`data-bs-${normalizeDataKey(key)}`);
+    element.removeAttribute(`data-bs-${normalizeDataKey$1(key)}`);
   },
   getDataAttributes(element) {
     if (!element) {
@@ -569,12 +569,12 @@ const Manipulator = {
     for (const key of bsKeys) {
       let pureKey = key.replace(/^bs/, '');
       pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length);
-      attributes[pureKey] = normalizeData(element.dataset[key]);
+      attributes[pureKey] = normalizeData$1(element.dataset[key]);
     }
     return attributes;
   },
   getDataAttribute(element, key) {
-    return normalizeData(element.getAttribute(`data-bs-${normalizeDataKey(key)}`));
+    return normalizeData$1(element.getAttribute(`data-bs-${normalizeDataKey$1(key)}`));
   }
 };
 
@@ -610,19 +610,19 @@ class Config {
     return config;
   }
   _mergeConfigObj(config, element) {
-    const jsonConfig = isElement(element) ? Manipulator.getDataAttribute(element, 'config') : {}; // try to parse
+    const jsonConfig = isElement$1(element) ? Manipulator.getDataAttribute(element, 'config') : {}; // try to parse
 
     return {
       ...this.constructor.Default,
       ...(typeof jsonConfig === 'object' ? jsonConfig : {}),
-      ...(isElement(element) ? Manipulator.getDataAttributes(element) : {}),
+      ...(isElement$1(element) ? Manipulator.getDataAttributes(element) : {}),
       ...(typeof config === 'object' ? config : {})
     };
   }
   _typeCheckConfig(config, configTypes = this.constructor.DefaultType) {
     for (const [property, expectedTypes] of Object.entries(configTypes)) {
       const value = config[property];
-      const valueType = isElement(value) ? 'element' : toType(value);
+      const valueType = isElement$1(value) ? 'element' : toType$1(value);
       if (!new RegExp(expectedTypes).test(valueType)) {
         throw new TypeError(`${this.constructor.NAME.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`);
       }
@@ -821,9 +821,9 @@ const enableDismissTrigger = (component, method = 'hide') => {
  * Constants
  */
 
-const NAME$f = 'alert';
-const DATA_KEY$a = 'bs.alert';
-const EVENT_KEY$b = `.${DATA_KEY$a}`;
+const NAME$g = 'alert';
+const DATA_KEY$b = 'bs.alert';
+const EVENT_KEY$b = `.${DATA_KEY$b}`;
 const EVENT_CLOSE = `close${EVENT_KEY$b}`;
 const EVENT_CLOSED = `closed${EVENT_KEY$b}`;
 const CLASS_NAME_FADE$5 = 'fade';
@@ -836,7 +836,7 @@ const CLASS_NAME_SHOW$8 = 'show';
 class Alert extends BaseComponent {
   // Getters
   static get NAME() {
-    return NAME$f;
+    return NAME$g;
   }
 
   // Public
@@ -895,9 +895,9 @@ defineJQueryPlugin(Alert);
  * Constants
  */
 
-const NAME$e = 'button';
-const DATA_KEY$9 = 'bs.button';
-const EVENT_KEY$a = `.${DATA_KEY$9}`;
+const NAME$f = 'button';
+const DATA_KEY$a = 'bs.button';
+const EVENT_KEY$a = `.${DATA_KEY$a}`;
 const DATA_API_KEY$6 = '.data-api';
 const CLASS_NAME_ACTIVE$3 = 'active';
 const SELECTOR_DATA_TOGGLE$5 = '[data-bs-toggle="button"]';
@@ -910,7 +910,7 @@ const EVENT_CLICK_DATA_API$6 = `click${EVENT_KEY$a}${DATA_API_KEY$6}`;
 class Button extends BaseComponent {
   // Getters
   static get NAME() {
-    return NAME$e;
+    return NAME$f;
   }
 
   // Public
@@ -958,7 +958,7 @@ defineJQueryPlugin(Button);
  * Constants
  */
 
-const NAME$d = 'swipe';
+const NAME$e = 'swipe';
 const EVENT_KEY$9 = '.bs.swipe';
 const EVENT_TOUCHSTART = `touchstart${EVENT_KEY$9}`;
 const EVENT_TOUCHMOVE = `touchmove${EVENT_KEY$9}`;
@@ -969,12 +969,12 @@ const POINTER_TYPE_TOUCH = 'touch';
 const POINTER_TYPE_PEN = 'pen';
 const CLASS_NAME_POINTER_EVENT = 'pointer-event';
 const SWIPE_THRESHOLD = 40;
-const Default$c = {
+const Default$d = {
   endCallback: null,
   leftCallback: null,
   rightCallback: null
 };
-const DefaultType$c = {
+const DefaultType$d = {
   endCallback: '(function|null)',
   leftCallback: '(function|null)',
   rightCallback: '(function|null)'
@@ -999,13 +999,13 @@ class Swipe extends Config {
 
   // Getters
   static get Default() {
-    return Default$c;
+    return Default$d;
   }
   static get DefaultType() {
-    return DefaultType$c;
+    return DefaultType$d;
   }
   static get NAME() {
-    return NAME$d;
+    return NAME$e;
   }
 
   // Public
@@ -1077,9 +1077,9 @@ class Swipe extends Config {
  * Constants
  */
 
-const NAME$c = 'carousel';
-const DATA_KEY$8 = 'bs.carousel';
-const EVENT_KEY$8 = `.${DATA_KEY$8}`;
+const NAME$d = 'carousel';
+const DATA_KEY$9 = 'bs.carousel';
+const EVENT_KEY$8 = `.${DATA_KEY$9}`;
 const DATA_API_KEY$5 = '.data-api';
 const ARROW_LEFT_KEY$1 = 'ArrowLeft';
 const ARROW_RIGHT_KEY$1 = 'ArrowRight';
@@ -1115,7 +1115,7 @@ const KEY_TO_DIRECTION = {
   [ARROW_LEFT_KEY$1]: DIRECTION_RIGHT,
   [ARROW_RIGHT_KEY$1]: DIRECTION_LEFT
 };
-const Default$b = {
+const Default$c = {
   interval: 5000,
   keyboard: true,
   pause: 'hover',
@@ -1123,7 +1123,7 @@ const Default$b = {
   touch: true,
   wrap: true
 };
-const DefaultType$b = {
+const DefaultType$c = {
   interval: '(number|boolean)',
   // TODO:v6 remove boolean support
   keyboard: 'boolean',
@@ -1154,13 +1154,13 @@ class Carousel extends BaseComponent {
 
   // Getters
   static get Default() {
-    return Default$b;
+    return Default$c;
   }
   static get DefaultType() {
-    return DefaultType$b;
+    return DefaultType$c;
   }
   static get NAME() {
-    return NAME$c;
+    return NAME$d;
   }
 
   // Public
@@ -1449,9 +1449,9 @@ defineJQueryPlugin(Carousel);
  * Constants
  */
 
-const NAME$b = 'collapse';
-const DATA_KEY$7 = 'bs.collapse';
-const EVENT_KEY$7 = `.${DATA_KEY$7}`;
+const NAME$c = 'collapse';
+const DATA_KEY$8 = 'bs.collapse';
+const EVENT_KEY$7 = `.${DATA_KEY$8}`;
 const DATA_API_KEY$4 = '.data-api';
 const EVENT_SHOW$6 = `show${EVENT_KEY$7}`;
 const EVENT_SHOWN$6 = `shown${EVENT_KEY$7}`;
@@ -1468,11 +1468,11 @@ const WIDTH = 'width';
 const HEIGHT = 'height';
 const SELECTOR_ACTIVES = '.collapse.show, .collapse.collapsing';
 const SELECTOR_DATA_TOGGLE$4 = '[data-bs-toggle="collapse"]';
-const Default$a = {
+const Default$b = {
   parent: null,
   toggle: true
 };
-const DefaultType$a = {
+const DefaultType$b = {
   parent: '(null|element)',
   toggle: 'boolean'
 };
@@ -1505,13 +1505,13 @@ class Collapse extends BaseComponent {
 
   // Getters
   static get Default() {
-    return Default$a;
+    return Default$b;
   }
   static get DefaultType() {
-    return DefaultType$a;
+    return DefaultType$b;
   }
   static get NAME() {
-    return NAME$b;
+    return NAME$c;
   }
 
   // Public
@@ -1682,9 +1682,9 @@ defineJQueryPlugin(Collapse);
  * Constants
  */
 
-const NAME$a = 'dropdown';
-const DATA_KEY$6 = 'bs.dropdown';
-const EVENT_KEY$6 = `.${DATA_KEY$6}`;
+const NAME$b = 'dropdown';
+const DATA_KEY$7 = 'bs.dropdown';
+const EVENT_KEY$6 = `.${DATA_KEY$7}`;
 const DATA_API_KEY$3 = '.data-api';
 const ESCAPE_KEY$2 = 'Escape';
 const TAB_KEY$1 = 'Tab';
@@ -1719,7 +1719,7 @@ const PLACEMENT_RIGHT = isRTL() ? 'left-start' : 'right-start';
 const PLACEMENT_LEFT = isRTL() ? 'right-start' : 'left-start';
 const PLACEMENT_TOPCENTER = 'top';
 const PLACEMENT_BOTTOMCENTER = 'bottom';
-const Default$9 = {
+const Default$a = {
   autoClose: true,
   boundary: 'clippingParents',
   display: 'dynamic',
@@ -1727,7 +1727,7 @@ const Default$9 = {
   popperConfig: null,
   reference: 'toggle'
 };
-const DefaultType$9 = {
+const DefaultType$a = {
   autoClose: '(boolean|string)',
   boundary: '(string|element)',
   display: 'string',
@@ -1752,13 +1752,13 @@ class Dropdown extends BaseComponent {
 
   // Getters
   static get Default() {
-    return Default$9;
+    return Default$a;
   }
   static get DefaultType() {
-    return DefaultType$9;
+    return DefaultType$a;
   }
   static get NAME() {
-    return NAME$a;
+    return NAME$b;
   }
 
   // Public
@@ -1840,9 +1840,9 @@ class Dropdown extends BaseComponent {
   }
   _getConfig(config) {
     config = super._getConfig(config);
-    if (typeof config.reference === 'object' && !isElement(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
+    if (typeof config.reference === 'object' && !isElement$1(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
       // Popper virtual elements require a getBoundingClientRect method
-      throw new TypeError(`${NAME$a.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
+      throw new TypeError(`${NAME$b.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
     }
     return config;
   }
@@ -1853,7 +1853,7 @@ class Dropdown extends BaseComponent {
     let referenceElement = this._element;
     if (this._config.reference === 'parent') {
       referenceElement = this._parent;
-    } else if (isElement(this._config.reference)) {
+    } else if (isElement$1(this._config.reference)) {
       referenceElement = getElement(this._config.reference);
     } else if (typeof this._config.reference === 'object') {
       referenceElement = this._config.reference;
@@ -2049,11 +2049,11 @@ defineJQueryPlugin(Dropdown);
  * Constants
  */
 
-const NAME$9 = 'backdrop';
+const NAME$a = 'backdrop';
 const CLASS_NAME_FADE$4 = 'fade';
 const CLASS_NAME_SHOW$5 = 'show';
-const EVENT_MOUSEDOWN = `mousedown.bs.${NAME$9}`;
-const Default$8 = {
+const EVENT_MOUSEDOWN = `mousedown.bs.${NAME$a}`;
+const Default$9 = {
   className: 'modal-backdrop',
   clickCallback: null,
   isAnimated: false,
@@ -2062,7 +2062,7 @@ const Default$8 = {
   rootElement: 'body' // give the choice to place backdrop under different elements
 };
 
-const DefaultType$8 = {
+const DefaultType$9 = {
   className: 'string',
   clickCallback: '(function|null)',
   isAnimated: 'boolean',
@@ -2084,13 +2084,13 @@ class Backdrop extends Config {
 
   // Getters
   static get Default() {
-    return Default$8;
+    return Default$9;
   }
   static get DefaultType() {
-    return DefaultType$8;
+    return DefaultType$9;
   }
   static get NAME() {
-    return NAME$9;
+    return NAME$a;
   }
 
   // Public
@@ -2173,20 +2173,20 @@ class Backdrop extends Config {
  * Constants
  */
 
-const NAME$8 = 'focustrap';
-const DATA_KEY$5 = 'bs.focustrap';
-const EVENT_KEY$5 = `.${DATA_KEY$5}`;
+const NAME$9 = 'focustrap';
+const DATA_KEY$6 = 'bs.focustrap';
+const EVENT_KEY$5 = `.${DATA_KEY$6}`;
 const EVENT_FOCUSIN$2 = `focusin${EVENT_KEY$5}`;
 const EVENT_KEYDOWN_TAB = `keydown.tab${EVENT_KEY$5}`;
 const TAB_KEY = 'Tab';
 const TAB_NAV_FORWARD = 'forward';
 const TAB_NAV_BACKWARD = 'backward';
-const Default$7 = {
+const Default$8 = {
   autofocus: true,
   trapElement: null // The element to trap focus inside of
 };
 
-const DefaultType$7 = {
+const DefaultType$8 = {
   autofocus: 'boolean',
   trapElement: 'element'
 };
@@ -2205,13 +2205,13 @@ class FocusTrap extends Config {
 
   // Getters
   static get Default() {
-    return Default$7;
+    return Default$8;
   }
   static get DefaultType() {
-    return DefaultType$7;
+    return DefaultType$8;
   }
   static get NAME() {
-    return NAME$8;
+    return NAME$9;
   }
 
   // Public
@@ -2347,7 +2347,7 @@ class ScrollBarHelper {
     this._applyManipulationCallback(selector, manipulationCallBack);
   }
   _applyManipulationCallback(selector, callBack) {
-    if (isElement(selector)) {
+    if (isElement$1(selector)) {
       callBack(selector);
       return;
     }
@@ -2368,9 +2368,9 @@ class ScrollBarHelper {
  * Constants
  */
 
-const NAME$7 = 'modal';
-const DATA_KEY$4 = 'bs.modal';
-const EVENT_KEY$4 = `.${DATA_KEY$4}`;
+const NAME$8 = 'modal';
+const DATA_KEY$5 = 'bs.modal';
+const EVENT_KEY$4 = `.${DATA_KEY$5}`;
 const DATA_API_KEY$2 = '.data-api';
 const ESCAPE_KEY$1 = 'Escape';
 const EVENT_HIDE$4 = `hide${EVENT_KEY$4}`;
@@ -2391,12 +2391,12 @@ const OPEN_SELECTOR$1 = '.modal.show';
 const SELECTOR_DIALOG = '.modal-dialog';
 const SELECTOR_MODAL_BODY = '.modal-body';
 const SELECTOR_DATA_TOGGLE$2 = '[data-bs-toggle="modal"]';
-const Default$6 = {
+const Default$7 = {
   backdrop: true,
   focus: true,
   keyboard: true
 };
-const DefaultType$6 = {
+const DefaultType$7 = {
   backdrop: '(boolean|string)',
   focus: 'boolean',
   keyboard: 'boolean'
@@ -2420,13 +2420,13 @@ class Modal extends BaseComponent {
 
   // Getters
   static get Default() {
-    return Default$6;
+    return Default$7;
   }
   static get DefaultType() {
-    return DefaultType$6;
+    return DefaultType$7;
   }
   static get NAME() {
-    return NAME$7;
+    return NAME$8;
   }
 
   // Public
@@ -2664,7 +2664,7 @@ defineJQueryPlugin(Modal);
 /**
  * --------------------------------------------------------------------------
  * Bootstrap offcanvas.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LI`CENSE)
  * --------------------------------------------------------------------------
  */
 
@@ -2672,9 +2672,9 @@ defineJQueryPlugin(Modal);
  * Constants
  */
 
-const NAME$6 = 'offcanvas';
-const DATA_KEY$3 = 'bs.offcanvas';
-const EVENT_KEY$3 = `.${DATA_KEY$3}`;
+const NAME$7 = 'offcanvas';
+const DATA_KEY$4 = 'bs.offcanvas';
+const EVENT_KEY$3 = `.${DATA_KEY$4}`;
 const DATA_API_KEY$1 = '.data-api';
 const EVENT_LOAD_DATA_API$2 = `load${EVENT_KEY$3}${DATA_API_KEY$1}`;
 const ESCAPE_KEY = 'Escape';
@@ -2692,12 +2692,12 @@ const EVENT_RESIZE = `resize${EVENT_KEY$3}`;
 const EVENT_CLICK_DATA_API$1 = `click${EVENT_KEY$3}${DATA_API_KEY$1}`;
 const EVENT_KEYDOWN_DISMISS = `keydown.dismiss${EVENT_KEY$3}`;
 const SELECTOR_DATA_TOGGLE$1 = '[data-bs-toggle="offcanvas"]';
-const Default$5 = {
+const Default$6 = {
   backdrop: true,
   keyboard: true,
   scroll: false
 };
-const DefaultType$5 = {
+const DefaultType$6 = {
   backdrop: '(boolean|string)',
   keyboard: 'boolean',
   scroll: 'boolean'
@@ -2718,13 +2718,13 @@ class Offcanvas extends BaseComponent {
 
   // Getters
   static get Default() {
-    return Default$5;
+    return Default$6;
   }
   static get DefaultType() {
-    return DefaultType$5;
+    return DefaultType$6;
   }
   static get NAME() {
-    return NAME$6;
+    return NAME$7;
   }
 
   // Public
@@ -3001,8 +3001,8 @@ function sanitizeHtml(unsafeHtml, allowList, sanitizeFunction) {
  * Constants
  */
 
-const NAME$5 = 'TemplateFactory';
-const Default$4 = {
+const NAME$6 = 'TemplateFactory';
+const Default$5 = {
   allowList: DefaultAllowlist,
   content: {},
   // { selector : text ,  selector2 : text2 , }
@@ -3012,7 +3012,7 @@ const Default$4 = {
   sanitizeFn: null,
   template: '<div></div>'
 };
-const DefaultType$4 = {
+const DefaultType$5 = {
   allowList: 'object',
   content: 'object',
   extraClass: '(string|function)',
@@ -3038,13 +3038,13 @@ class TemplateFactory extends Config {
 
   // Getters
   static get Default() {
-    return Default$4;
+    return Default$5;
   }
   static get DefaultType() {
-    return DefaultType$4;
+    return DefaultType$5;
   }
   static get NAME() {
-    return NAME$5;
+    return NAME$6;
   }
 
   // Public
@@ -3099,7 +3099,7 @@ class TemplateFactory extends Config {
       templateElement.remove();
       return;
     }
-    if (isElement(content)) {
+    if (isElement$1(content)) {
       this._putElementInTemplate(getElement(content), templateElement);
       return;
     }
@@ -3136,7 +3136,7 @@ class TemplateFactory extends Config {
  * Constants
  */
 
-const NAME$4 = 'tooltip';
+const NAME$5 = 'tooltip';
 const DISALLOWED_ATTRIBUTES = new Set(['sanitize', 'allowList', 'sanitizeFn']);
 const CLASS_NAME_FADE$2 = 'fade';
 const CLASS_NAME_MODAL = 'modal';
@@ -3165,7 +3165,7 @@ const AttachmentMap = {
   BOTTOM: 'bottom',
   LEFT: isRTL() ? 'right' : 'left'
 };
-const Default$3 = {
+const Default$4 = {
   allowList: DefaultAllowlist,
   animation: true,
   boundary: 'clippingParents',
@@ -3184,7 +3184,7 @@ const Default$3 = {
   title: '',
   trigger: 'hover focus'
 };
-const DefaultType$3 = {
+const DefaultType$4 = {
   allowList: 'object',
   animation: 'boolean',
   boundary: '(string|element)',
@@ -3234,13 +3234,13 @@ class Tooltip extends BaseComponent {
 
   // Getters
   static get Default() {
-    return Default$3;
+    return Default$4;
   }
   static get DefaultType() {
-    return DefaultType$3;
+    return DefaultType$4;
   }
   static get NAME() {
-    return NAME$4;
+    return NAME$5;
   }
 
   // Public
@@ -3647,10 +3647,10 @@ defineJQueryPlugin(Tooltip);
  * Constants
  */
 
-const NAME$3 = 'popover';
+const NAME$4 = 'popover';
 const SELECTOR_TITLE = '.popover-header';
 const SELECTOR_CONTENT = '.popover-body';
-const Default$2 = {
+const Default$3 = {
   ...Tooltip.Default,
   content: '',
   offset: [0, 8],
@@ -3658,7 +3658,7 @@ const Default$2 = {
   template: '<div class="popover" role="tooltip">' + '<div class="popover-arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div>' + '</div>',
   trigger: 'click'
 };
-const DefaultType$2 = {
+const DefaultType$3 = {
   ...Tooltip.DefaultType,
   content: '(null|string|element|function)'
 };
@@ -3670,13 +3670,13 @@ const DefaultType$2 = {
 class Popover extends Tooltip {
   // Getters
   static get Default() {
-    return Default$2;
+    return Default$3;
   }
   static get DefaultType() {
-    return DefaultType$2;
+    return DefaultType$3;
   }
   static get NAME() {
-    return NAME$3;
+    return NAME$4;
   }
 
   // Overrides
@@ -3727,9 +3727,9 @@ defineJQueryPlugin(Popover);
  * Constants
  */
 
-const NAME$2 = 'scrollspy';
-const DATA_KEY$2 = 'bs.scrollspy';
-const EVENT_KEY$2 = `.${DATA_KEY$2}`;
+const NAME$3 = 'scrollspy';
+const DATA_KEY$3 = 'bs.scrollspy';
+const EVENT_KEY$2 = `.${DATA_KEY$3}`;
 const DATA_API_KEY = '.data-api';
 const EVENT_ACTIVATE = `activate${EVENT_KEY$2}`;
 const EVENT_CLICK = `click${EVENT_KEY$2}`;
@@ -3745,7 +3745,7 @@ const SELECTOR_LIST_ITEMS = '.list-group-item';
 const SELECTOR_LINK_ITEMS = `${SELECTOR_NAV_LINKS}, ${SELECTOR_NAV_ITEMS} > ${SELECTOR_NAV_LINKS}, ${SELECTOR_LIST_ITEMS}`;
 const SELECTOR_DROPDOWN = '.dropdown';
 const SELECTOR_DROPDOWN_TOGGLE$1 = '.dropdown-toggle';
-const Default$1 = {
+const Default$2 = {
   offset: null,
   // TODO: v6 @deprecated, keep it for backwards compatibility reasons
   rootMargin: '0px 0px -25%',
@@ -3753,7 +3753,7 @@ const Default$1 = {
   target: null,
   threshold: [0.1, 0.5, 1]
 };
-const DefaultType$1 = {
+const DefaultType$2 = {
   offset: '(number|null)',
   // TODO v6 @deprecated, keep it for backwards compatibility reasons
   rootMargin: 'string',
@@ -3785,13 +3785,13 @@ class ScrollSpy extends BaseComponent {
 
   // Getters
   static get Default() {
-    return Default$1;
+    return Default$2;
   }
   static get DefaultType() {
-    return DefaultType$1;
+    return DefaultType$2;
   }
   static get NAME() {
-    return NAME$2;
+    return NAME$3;
   }
 
   // Public
@@ -3986,9 +3986,9 @@ defineJQueryPlugin(ScrollSpy);
  * Constants
  */
 
-const NAME$1 = 'tab';
-const DATA_KEY$1 = 'bs.tab';
-const EVENT_KEY$1 = `.${DATA_KEY$1}`;
+const NAME$2 = 'tab';
+const DATA_KEY$2 = 'bs.tab';
+const EVENT_KEY$1 = `.${DATA_KEY$2}`;
 const EVENT_HIDE$1 = `hide${EVENT_KEY$1}`;
 const EVENT_HIDDEN$1 = `hidden${EVENT_KEY$1}`;
 const EVENT_SHOW$1 = `show${EVENT_KEY$1}`;
@@ -4035,7 +4035,7 @@ class Tab extends BaseComponent {
 
   // Getters
   static get NAME() {
-    return NAME$1;
+    return NAME$2;
   }
 
   // Public
@@ -4247,9 +4247,9 @@ defineJQueryPlugin(Tab);
  * Constants
  */
 
-const NAME = 'toast';
-const DATA_KEY = 'bs.toast';
-const EVENT_KEY = `.${DATA_KEY}`;
+const NAME$1 = 'toast';
+const DATA_KEY$1 = 'bs.toast';
+const EVENT_KEY = `.${DATA_KEY$1}`;
 const EVENT_MOUSEOVER = `mouseover${EVENT_KEY}`;
 const EVENT_MOUSEOUT = `mouseout${EVENT_KEY}`;
 const EVENT_FOCUSIN = `focusin${EVENT_KEY}`;
@@ -4262,12 +4262,12 @@ const CLASS_NAME_FADE = 'fade';
 const CLASS_NAME_HIDE = 'hide'; // @deprecated - kept here only for backwards compatibility
 const CLASS_NAME_SHOW = 'show';
 const CLASS_NAME_SHOWING = 'showing';
-const DefaultType = {
+const DefaultType$1 = {
   animation: 'boolean',
   autohide: 'boolean',
   delay: 'number'
 };
-const Default = {
+const Default$1 = {
   animation: true,
   autohide: true,
   delay: 5000
@@ -4288,13 +4288,13 @@ class Toast extends BaseComponent {
 
   // Getters
   static get Default() {
-    return Default;
+    return Default$1;
   }
   static get DefaultType() {
-    return DefaultType;
+    return DefaultType$1;
   }
   static get NAME() {
-    return NAME;
+    return NAME$1;
   }
 
   // Public
@@ -4419,5 +4419,914 @@ enableDismissTrigger(Toast);
 
 defineJQueryPlugin(Toast);
 
-export { Alert, Button, Carousel, Collapse, Dropdown, Modal, Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip };
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap (v5.0.0-beta2): util/index.js
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+// Shoutout AngusCroll (https://goo.gl/pxwQGp)
+const toType = obj => {
+  if (obj === null || obj === undefined) {
+    return `${obj}`;
+  }
+  return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase();
+};
+const isElement = obj => (obj[0] || obj).nodeType;
+const typeCheckConfig = (componentName, config, configTypes) => {
+  Object.keys(configTypes).forEach(property => {
+    const expectedTypes = configTypes[property];
+    const value = config[property];
+    const valueType = value && isElement(value) ? 'element' : toType(value);
+    if (!new RegExp(expectedTypes).test(valueType)) {
+      throw new Error(`${componentName.toUpperCase()}: ` + `Option "${property}" provided type "${valueType}" ` + `but expected type "${expectedTypes}".`);
+    }
+  });
+};
+const getjQuery = () => {
+  const {
+    jQuery
+  } = window;
+  if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
+    return jQuery;
+  }
+  return null;
+};
+const onDOMContentLoaded = callback => {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', callback);
+  } else {
+    callback();
+  }
+};
+document.documentElement.dir === 'rtl';
+const element = tag => {
+  return document.createElement(tag);
+};
+
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap (v5.0.0-beta2): dom/data.js
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * ------------------------------------------------------------------------
+ * Constants
+ * ------------------------------------------------------------------------
+ */
+
+const mapData = (() => {
+  const storeData = {};
+  let id = 1;
+  return {
+    set(element, key, data) {
+      if (typeof element[key] === 'undefined') {
+        element[key] = {
+          key,
+          id
+        };
+        id++;
+      }
+      storeData[element[key].id] = data;
+    },
+    get(element, key) {
+      if (!element || typeof element[key] === 'undefined') {
+        return null;
+      }
+      const keyProperties = element[key];
+      if (keyProperties.key === key) {
+        return storeData[keyProperties.id];
+      }
+      return null;
+    },
+    delete(element, key) {
+      if (typeof element[key] === 'undefined') {
+        return;
+      }
+      const keyProperties = element[key];
+      if (keyProperties.key === key) {
+        delete storeData[keyProperties.id];
+        delete element[key];
+      }
+    }
+  };
+})();
+const MdData = {
+  setData(instance, key, data) {
+    mapData.set(instance, key, data);
+  },
+  getData(instance, key) {
+    return mapData.get(instance, key);
+  },
+  removeData(instance, key) {
+    mapData.delete(instance, key);
+  }
+};
+
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap (v5.0.0-beta2): dom/event-handler.js
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * ------------------------------------------------------------------------
+ * Constants
+ * ------------------------------------------------------------------------
+ */
+
+const $ = getjQuery();
+const namespaceRegex = /[^.]*(?=\..*)\.|.*/;
+const stripNameRegex = /\..*/;
+const stripUidRegex = /::\d+$/;
+const eventRegistry = {}; // Events storage
+let uidEvent = 1;
+const customEvents = {
+  mouseenter: 'mouseover',
+  mouseleave: 'mouseout'
+};
+const nativeEvents = ['click', 'dblclick', 'mouseup', 'mousedown', 'contextmenu', 'mousewheel', 'DOMMouseScroll', 'mouseover', 'mouseout', 'mousemove', 'selectstart', 'selectend', 'keydown', 'keypress', 'keyup', 'orientationchange', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'pointerdown', 'pointermove', 'pointerup', 'pointerleave', 'pointercancel', 'gesturestart', 'gesturechange', 'gestureend', 'focus', 'blur', 'change', 'reset', 'select', 'submit', 'focusin', 'focusout', 'load', 'unload', 'beforeunload', 'resize', 'move', 'DOMContentLoaded', 'readystatechange', 'error', 'abort', 'scroll'];
+
+/**
+ * ------------------------------------------------------------------------
+ * Private methods
+ * ------------------------------------------------------------------------
+ */
+
+function getUidEvent(element, uid) {
+  return uid && `${uid}::${uidEvent++}` || element.uidEvent || uidEvent++;
+}
+function getEvent(element) {
+  const uid = getUidEvent(element);
+  element.uidEvent = uid;
+  eventRegistry[uid] = eventRegistry[uid] || {};
+  return eventRegistry[uid];
+}
+function bootstrapHandler(element, fn) {
+  return function handler(event) {
+    event.delegateTarget = element;
+    if (handler.oneOff) {
+      MdEventHandler.off(element, event.type, fn);
+    }
+    return fn.apply(element, [event]);
+  };
+}
+function bootstrapDelegationHandler(element, selector, fn) {
+  return function handler(event) {
+    const domElements = element.querySelectorAll(selector);
+    for (let {
+      target
+    } = event; target && target !== this; target = target.parentNode) {
+      for (let i = domElements.length; i--; '') {
+        if (domElements[i] === target) {
+          event.delegateTarget = target;
+          if (handler.oneOff) {
+            MdEventHandler.off(element, event.type, fn);
+          }
+          return fn.apply(target, [event]);
+        }
+      }
+    }
+
+    // To please ESLint
+    return null;
+  };
+}
+function findHandler(events, handler, delegationSelector = null) {
+  const uidEventList = Object.keys(events);
+  for (let i = 0, len = uidEventList.length; i < len; i++) {
+    const event = events[uidEventList[i]];
+    if (event.originalHandler === handler && event.delegationSelector === delegationSelector) {
+      return event;
+    }
+  }
+  return null;
+}
+function normalizeParams(originalTypeEvent, handler, delegationFn) {
+  const delegation = typeof handler === 'string';
+  const originalHandler = delegation ? delegationFn : handler;
+
+  // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
+  let typeEvent = originalTypeEvent.replace(stripNameRegex, '');
+  const custom = customEvents[typeEvent];
+  if (custom) {
+    typeEvent = custom;
+  }
+  const isNative = nativeEvents.indexOf(typeEvent) > -1;
+  if (!isNative) {
+    typeEvent = originalTypeEvent;
+  }
+  return [delegation, originalHandler, typeEvent];
+}
+function addHandler(element, originalTypeEvent, handler, delegationFn, oneOff) {
+  if (typeof originalTypeEvent !== 'string' || !element) {
+    return;
+  }
+  if (!handler) {
+    handler = delegationFn;
+    delegationFn = null;
+  }
+  const [delegation, originalHandler, typeEvent] = normalizeParams(originalTypeEvent, handler, delegationFn);
+  const events = getEvent(element);
+  const handlers = events[typeEvent] || (events[typeEvent] = {});
+  const previousFn = findHandler(handlers, originalHandler, delegation ? handler : null);
+  if (previousFn) {
+    previousFn.oneOff = previousFn.oneOff && oneOff;
+    return;
+  }
+  const uid = getUidEvent(originalHandler, originalTypeEvent.replace(namespaceRegex, ''));
+  const fn = delegation ? bootstrapDelegationHandler(element, handler, delegationFn) : bootstrapHandler(element, handler);
+  fn.delegationSelector = delegation ? handler : null;
+  fn.originalHandler = originalHandler;
+  fn.oneOff = oneOff;
+  fn.uidEvent = uid;
+  handlers[uid] = fn;
+  element.addEventListener(typeEvent, fn, delegation);
+}
+function removeHandler(element, events, typeEvent, handler, delegationSelector) {
+  const fn = findHandler(events[typeEvent], handler, delegationSelector);
+  if (!fn) {
+    return;
+  }
+  element.removeEventListener(typeEvent, fn, Boolean(delegationSelector));
+  delete events[typeEvent][fn.uidEvent];
+}
+function removeNamespacedHandlers(element, events, typeEvent, namespace) {
+  const storeElementEvent = events[typeEvent] || {};
+  Object.keys(storeElementEvent).forEach(handlerKey => {
+    if (handlerKey.indexOf(namespace) > -1) {
+      const event = storeElementEvent[handlerKey];
+      removeHandler(element, events, typeEvent, event.originalHandler, event.delegationSelector);
+    }
+  });
+}
+const MdEventHandler = {
+  on(element, event, handler, delegationFn) {
+    addHandler(element, event, handler, delegationFn, false);
+  },
+  one(element, event, handler, delegationFn) {
+    addHandler(element, event, handler, delegationFn, true);
+  },
+  off(element, originalTypeEvent, handler, delegationFn) {
+    if (typeof originalTypeEvent !== 'string' || !element) {
+      return;
+    }
+    const [delegation, originalHandler, typeEvent] = normalizeParams(originalTypeEvent, handler, delegationFn);
+    const inNamespace = typeEvent !== originalTypeEvent;
+    const events = getEvent(element);
+    const isNamespace = originalTypeEvent.charAt(0) === '.';
+    if (typeof originalHandler !== 'undefined') {
+      // Simplest case: handler is passed, remove that listener ONLY.
+      if (!events || !events[typeEvent]) {
+        return;
+      }
+      removeHandler(element, events, typeEvent, originalHandler, delegation ? handler : null);
+      return;
+    }
+    if (isNamespace) {
+      Object.keys(events).forEach(elementEvent => {
+        removeNamespacedHandlers(element, events, elementEvent, originalTypeEvent.slice(1));
+      });
+    }
+    const storeElementEvent = events[typeEvent] || {};
+    Object.keys(storeElementEvent).forEach(keyHandlers => {
+      const handlerKey = keyHandlers.replace(stripUidRegex, '');
+      if (!inNamespace || originalTypeEvent.indexOf(handlerKey) > -1) {
+        const event = storeElementEvent[keyHandlers];
+        removeHandler(element, events, typeEvent, event.originalHandler, event.delegationSelector);
+      }
+    });
+  },
+  trigger(element, event, args) {
+    if (typeof event !== 'string' || !element) {
+      return null;
+    }
+    const typeEvent = event.replace(stripNameRegex, '');
+    const inNamespace = event !== typeEvent;
+    const isNative = nativeEvents.indexOf(typeEvent) > -1;
+    let jQueryEvent;
+    let bubbles = true;
+    let nativeDispatch = true;
+    let defaultPrevented = false;
+    let evt = null;
+    if (inNamespace && $) {
+      jQueryEvent = $.Event(event, args);
+      $(element).trigger(jQueryEvent);
+      bubbles = !jQueryEvent.isPropagationStopped();
+      nativeDispatch = !jQueryEvent.isImmediatePropagationStopped();
+      defaultPrevented = jQueryEvent.isDefaultPrevented();
+    }
+    if (isNative) {
+      evt = document.createEvent('HTMLEvents');
+      evt.initEvent(typeEvent, bubbles, true);
+    } else {
+      evt = new CustomEvent(event, {
+        bubbles,
+        cancelable: true
+      });
+    }
+
+    // merge custom informations in our event
+    if (typeof args !== 'undefined') {
+      Object.keys(args).forEach(key => {
+        Object.defineProperty(evt, key, {
+          get() {
+            return args[key];
+          }
+        });
+      });
+    }
+    if (defaultPrevented) {
+      evt.preventDefault();
+    }
+    if (nativeDispatch) {
+      element.dispatchEvent(evt);
+    }
+    if (evt.defaultPrevented && typeof jQueryEvent !== 'undefined') {
+      jQueryEvent.preventDefault();
+    }
+    return evt;
+  }
+};
+
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap (v5.0.0-beta2): dom/MdManipulator.js
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+function normalizeData(val) {
+  if (val === 'true') {
+    return true;
+  }
+  if (val === 'false') {
+    return false;
+  }
+  if (val === Number(val).toString()) {
+    return Number(val);
+  }
+  if (val === '' || val === 'null') {
+    return null;
+  }
+  return val;
+}
+function normalizeDataKey(key) {
+  return key.replace(/[A-Z]/g, chr => `-${chr.toLowerCase()}`);
+}
+const MdManipulator = {
+  setDataAttribute(element, key, value) {
+    element.setAttribute(`data-mdb-${normalizeDataKey(key)}`, value);
+  },
+  removeDataAttribute(element, key) {
+    element.removeAttribute(`data-mdb-${normalizeDataKey(key)}`);
+  },
+  getDataAttributes(element) {
+    if (!element) {
+      return {};
+    }
+    const attributes = {
+      ...element.dataset
+    };
+    Object.keys(attributes).filter(key => key.startsWith('mdb')).forEach(key => {
+      let pureKey = key.replace(/^mdb/, '');
+      pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length);
+      attributes[pureKey] = normalizeData(attributes[key]);
+    });
+    return attributes;
+  },
+  getDataAttribute(element, key) {
+    return normalizeData(element.getAttribute(`data-mdb-${normalizeDataKey(key)}`));
+  },
+  offset(element) {
+    const rect = element.getBoundingClientRect();
+    return {
+      top: rect.top + document.body.scrollTop,
+      left: rect.left + document.body.scrollLeft
+    };
+  },
+  position(element) {
+    return {
+      top: element.offsetTop,
+      left: element.offsetLeft
+    };
+  },
+  style(element, style) {
+    Object.assign(element.style, style);
+  },
+  toggleClass(element, className) {
+    if (!element) {
+      return;
+    }
+    if (element.classList.contains(className)) {
+      element.classList.remove(className);
+    } else {
+      element.classList.add(className);
+    }
+  },
+  addClass(element, className) {
+    if (element.classList.contains(className)) return;
+    element.classList.add(className);
+  },
+  addStyle(element, style) {
+    Object.keys(style).forEach(property => {
+      element.style[property] = style[property];
+    });
+  },
+  removeClass(element, className) {
+    if (!element.classList.contains(className)) return;
+    element.classList.remove(className);
+  },
+  hasClass(element, className) {
+    return element.classList.contains(className);
+  }
+};
+
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap (v5.0.0-beta2): dom/selector-engine.js
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * ------------------------------------------------------------------------
+ * Constants
+ * ------------------------------------------------------------------------
+ */
+
+const NODE_TEXT = 3;
+const MdSelectorEngine = {
+  closest(element, selector) {
+    return element.closest(selector);
+  },
+  matches(element, selector) {
+    return element.matches(selector);
+  },
+  find(selector, element = document.documentElement) {
+    return [].concat(...Element.prototype.querySelectorAll.call(element, selector));
+  },
+  findOne(selector, element = document.documentElement) {
+    return Element.prototype.querySelector.call(element, selector);
+  },
+  children(element, selector) {
+    const children = [].concat(...element.children);
+    return children.filter(child => child.matches(selector));
+  },
+  parents(element, selector) {
+    const parents = [];
+    let ancestor = element.parentNode;
+    while (ancestor && ancestor.nodeType === Node.ELEMENT_NODE && ancestor.nodeType !== NODE_TEXT) {
+      if (this.matches(ancestor, selector)) {
+        parents.push(ancestor);
+      }
+      ancestor = ancestor.parentNode;
+    }
+    return parents;
+  },
+  prev(element, selector) {
+    let previous = element.previousElementSibling;
+    while (previous) {
+      if (previous.matches(selector)) {
+        return [previous];
+      }
+      previous = previous.previousElementSibling;
+    }
+    return [];
+  },
+  next(element, selector) {
+    let next = element.nextElementSibling;
+    while (next) {
+      if (this.matches(next, selector)) {
+        return [next];
+      }
+      next = next.nextElementSibling;
+    }
+    return [];
+  }
+};
+
+/**
+ * ------------------------------------------------------------------------
+ * Constants
+ * ------------------------------------------------------------------------
+ */
+
+const NAME = 'ripple';
+const DATA_KEY = 'bs.ripple';
+const CLASSNAME_RIPPLE = 'ripple-surface';
+const CLASSNAME_RIPPLE_WAVE = 'ripple-wave';
+const CLASSNAME_RIPPLE_WRAPPER = 'input-wrapper';
+const SELECTOR_COMPONENT = ['.btn', '.ripple'];
+const CLASSNAME_UNBOUND = 'ripple-surface-unbound';
+const GRADIENT = 'rgba({{color}}, 0.2) 0, rgba({{color}}, 0.3) 40%, rgba({{color}}, 0.4) 50%, rgba({{color}}, 0.5) 60%, rgba({{color}}, 0) 70%';
+const DEFAULT_RIPPLE_COLOR = [0, 0, 0];
+const BOOTSTRAP_COLORS = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+
+// Sets value when run opacity transition
+// Hide element after 50% (0.5) time of animation and finish on 100%
+const TRANSITION_BREAK_OPACITY = 0.5;
+const Default = {
+  rippleCentered: false,
+  rippleColor: '',
+  rippleDuration: '500ms',
+  rippleRadius: 0,
+  rippleUnbound: false
+};
+const DefaultType = {
+  rippleCentered: 'boolean',
+  rippleColor: 'string',
+  rippleDuration: 'string',
+  rippleRadius: 'number',
+  rippleUnbound: 'boolean'
+};
+
+/**
+ * ------------------------------------------------------------------------
+ * Class Definition
+ * ------------------------------------------------------------------------
+ */
+
+class Ripple {
+  constructor(element, options) {
+    this._element = element;
+    this._options = this._getConfig(options);
+    if (this._element) {
+      MdData.setData(element, DATA_KEY, this);
+      MdManipulator.addClass(this._element, CLASSNAME_RIPPLE);
+    }
+    this._clickHandler = this._createRipple.bind(this);
+    this._rippleTimer = null;
+    this._isMinWidthSet = false;
+    this._rippleInSpan = false;
+    this.init();
+  }
+
+  // Getters
+
+  static get NAME() {
+    return NAME;
+  }
+
+  // Public
+
+  init() {
+    this._addClickEvent(this._element);
+  }
+  dispose() {
+    MdData.removeData(this._element, DATA_KEY);
+    MdEventHandler.off(this._element, 'click', this._clickHandler);
+    this._element = null;
+    this._options = null;
+  }
+
+  // Private
+
+  _autoInit(event) {
+    for (const selector of SELECTOR_COMPONENT) {
+      const target = MdSelectorEngine.closest(event.target, selector);
+      if (target) {
+        this._element = MdSelectorEngine.closest(event.target, selector);
+      }
+    }
+    this._options = this._getConfig();
+
+    // if (this._element.tagName.toLowerCase() === 'input') {
+    //   const parent = this._element.parentNode
+    //
+    //   this._rippleInSpan = true
+    //
+    //   if (parent.tagName.toLowerCase() === 'span' && parent.classList.contains(CLASSNAME_RIPPLE)) {
+    //     this._element = parent
+    //   } else {
+    //     const shadow = getComputedStyle(this._element).boxShadow
+    //     const btn = this._element
+    //     const wrapper = document.createElement('span')
+    //
+    //     if (btn.classList.contains('btn-block')) {
+    //       wrapper.style.display = 'block'
+    //     }
+    //
+    //     MdEventHandler.one(wrapper, 'mouseup', e => {
+    //       // prevent submit on click other than LMB, ripple still triggered, but submit is blocked
+    //       if (e.button === 0) {
+    //         btn.click()
+    //       }
+    //     })
+    //
+    //     wrapper.classList.add(CLASSNAME_RIPPLE, CLASSNAME_RIPPLE_WRAPPER)
+    //
+    //     MdManipulator.addStyle(wrapper, {
+    //       border: 0,
+    //       'box-shadow': shadow
+    //     })
+    //
+    //     // Put element as child
+    //     parent.replaceChild(wrapper, this._element)
+    //     wrapper.append(this._element)
+    //     this._element = wrapper
+    //   }
+    //
+    //   this._element.focus()
+    // }
+
+    if (!this._element.style.minWidth) {
+      MdManipulator.style(this._element, {
+        'min-width': `${getComputedStyle(this._element).width}`
+      });
+      this._isMinWidthSet = true;
+    }
+    MdManipulator.addClass(this._element, CLASSNAME_RIPPLE);
+    this._createRipple(event);
+  }
+  _addClickEvent(target) {
+    MdEventHandler.on(target, 'mousedown', this._clickHandler);
+  }
+  _getEventLayer(event) {
+    const x = Math.round(event.clientX - event.target.getBoundingClientRect().x);
+    const y = Math.round(event.clientY - event.target.getBoundingClientRect().y);
+    return {
+      layerX: x,
+      layerY: y
+    };
+  }
+  _createRipple(event) {
+    if (!MdManipulator.hasClass(this._element, CLASSNAME_RIPPLE)) {
+      MdManipulator.addClass(this._element, CLASSNAME_RIPPLE);
+    }
+    const {
+      layerX,
+      layerY
+    } = this._getEventLayer(event);
+    const offsetX = layerX;
+    const offsetY = layerY;
+    const height = this._element.offsetHeight;
+    const width = this._element.offsetWidth;
+    const duration = this._durationToMsNumber(this._options.rippleDuration);
+    const diameterOptions = {
+      offsetX: this._options.rippleCentered ? height / 2 : offsetX,
+      offsetY: this._options.rippleCentered ? width / 2 : offsetY,
+      height,
+      width
+    };
+    const diameter = this._getDiameter(diameterOptions);
+    const radiusValue = this._options.rippleRadius || diameter / 2;
+    const opacity = {
+      delay: duration * TRANSITION_BREAK_OPACITY,
+      duration: duration - duration * TRANSITION_BREAK_OPACITY
+    };
+    const styles = {
+      left: this._options.rippleCentered ? `${width / 2 - radiusValue}px` : `${offsetX - radiusValue}px`,
+      top: this._options.rippleCentered ? `${height / 2 - radiusValue}px` : `${offsetY - radiusValue}px`,
+      height: `${this._options.rippleRadius * 2 || diameter}px`,
+      width: `${this._options.rippleRadius * 2 || diameter}px`,
+      transitionDelay: `0s, ${opacity.delay}ms`,
+      transitionDuration: `${duration}ms, ${opacity.duration}ms`
+    };
+    const rippleHTML = element('div');
+    this._createHTMLRipple({
+      wrapper: this._element,
+      ripple: rippleHTML,
+      styles
+    });
+    this._removeHTMLRipple({
+      ripple: rippleHTML,
+      duration
+    });
+  }
+  _createHTMLRipple({
+    wrapper,
+    ripple,
+    styles
+  }) {
+    for (const property of Object.keys(styles)) {
+      ripple.style[property] = styles[property];
+    }
+    ripple.classList.add(CLASSNAME_RIPPLE_WAVE);
+    if (this._options.rippleColor !== '') {
+      this._removeOldColorClasses(wrapper);
+      this._addColor(ripple, wrapper);
+    }
+    this._toggleUnbound(wrapper);
+    this._appendRipple(ripple, wrapper);
+  }
+  _removeHTMLRipple({
+    ripple,
+    duration
+  }) {
+    if (this._rippleTimer) {
+      clearTimeout(this._rippleTimer);
+      this._rippleTimer = null;
+    }
+    this._rippleTimer = setTimeout(() => {
+      if (ripple) {
+        ripple.remove();
+        if (this._element) {
+          for (const rippleEl of MdSelectorEngine.find(`.${CLASSNAME_RIPPLE_WAVE}`, this._element)) {
+            rippleEl.remove();
+          }
+          if (this._isMinWidthSet) {
+            MdManipulator.style(this._element, {
+              'min-width': ''
+            });
+            this._isMinWidthSet = false;
+          }
+          if (this._rippleInSpan && this._element.classList.contains(CLASSNAME_RIPPLE_WRAPPER)) {
+            this._removeWrapperSpan();
+          } else {
+            MdManipulator.removeClass(this._element, CLASSNAME_RIPPLE);
+          }
+        }
+      }
+    }, duration);
+  }
+  _removeWrapperSpan() {
+    const child = this._element.firstChild;
+    this._element.replaceWith(child);
+    this._element = child;
+    this._element.focus();
+    this._rippleInSpan = false;
+  }
+  _durationToMsNumber(time) {
+    return Number(time.replace('ms', '').replace('s', '000'));
+  }
+  _getConfig(config = {}) {
+    const dataAttributes = MdManipulator.getDataAttributes(this._element);
+    config = {
+      ...Default,
+      ...dataAttributes,
+      ...config
+    };
+    typeCheckConfig(NAME, config, DefaultType);
+    return config;
+  }
+  _getDiameter({
+    offsetX,
+    offsetY,
+    height,
+    width
+  }) {
+    const top = offsetY <= height / 2;
+    const left = offsetX <= width / 2;
+    const pythagorean = (sideA, sideB) => Math.sqrt(sideA ** 2 + sideB ** 2);
+    const positionCenter = offsetY === height / 2 && offsetX === width / 2;
+    // mouse position on the quadrants of the coordinate system
+    const quadrant = {
+      first: top === true && left === false,
+      second: top === true && left === true,
+      third: top === false && left === true,
+      fourth: top === false && left === false
+    };
+    const getCorner = {
+      topLeft: pythagorean(offsetX, offsetY),
+      topRight: pythagorean(width - offsetX, offsetY),
+      bottomLeft: pythagorean(offsetX, height - offsetY),
+      bottomRight: pythagorean(width - offsetX, height - offsetY)
+    };
+    let diameter = 0;
+    if (positionCenter || quadrant.fourth) {
+      diameter = getCorner.topLeft;
+    } else if (quadrant.third) {
+      diameter = getCorner.topRight;
+    } else if (quadrant.second) {
+      diameter = getCorner.bottomRight;
+    } else if (quadrant.first) {
+      diameter = getCorner.bottomLeft;
+    }
+    return diameter * 2;
+  }
+  _appendRipple(target, parent) {
+    const FIX_ADD_RIPPLE_EFFECT = 50; // delay for active animations
+    parent.append(target);
+    setTimeout(() => {
+      MdManipulator.addClass(target, 'active');
+    }, FIX_ADD_RIPPLE_EFFECT);
+  }
+  _toggleUnbound(target) {
+    if (this._options.rippleUnbound === true) {
+      MdManipulator.addClass(target, CLASSNAME_UNBOUND);
+    } else {
+      target.classList.remove(CLASSNAME_UNBOUND);
+    }
+  }
+  _addColor(target, parent) {
+    const IS_BOOTSTRAP_COLOR = BOOTSTRAP_COLORS.find(color => color === this._options.rippleColor.toLowerCase());
+    if (IS_BOOTSTRAP_COLOR) {
+      MdManipulator.addClass(parent, `${CLASSNAME_RIPPLE}-${this._options.rippleColor.toLowerCase()}`);
+    } else {
+      const rgbValue = this._colorToRGB(this._options.rippleColor).join(',');
+      const gradientImage = GRADIENT.split('{{color}}').join(`${rgbValue}`);
+      target.style.backgroundImage = `radial-gradient(circle, ${gradientImage})`;
+    }
+  }
+  _removeOldColorClasses(target) {
+    const REGEXP_CLASS_COLOR = new RegExp(`${CLASSNAME_RIPPLE}-[a-z]+`, 'gi');
+    const PARENT_CLASSS_COLOR = target.classList.value.match(REGEXP_CLASS_COLOR) || [];
+    for (const className of PARENT_CLASSS_COLOR) {
+      target.classList.remove(className);
+    }
+  }
+  _colorToRGB(color) {
+    function hexToRgb(color) {
+      const HEX_COLOR_LENGTH = 7;
+      const IS_SHORT_HEX = color.length < HEX_COLOR_LENGTH;
+      if (IS_SHORT_HEX) {
+        color = `#${color[1]}${color[1]}${color[2]}${color[2]}${color[3]}${color[3]}`;
+      }
+      return [Number.parseInt(color.slice(1, 3), 16), Number.parseInt(color.slice(3, 5), 16), Number.parseInt(color.slice(5, 7), 16)];
+    }
+    function namedColorsToRgba(color) {
+      const tempElem = document.body.appendChild(document.createElement('fictum'));
+      const flag = 'rgb(1, 2, 3)';
+      tempElem.style.color = flag;
+      if (tempElem.style.color !== flag) {
+        return DEFAULT_RIPPLE_COLOR;
+      }
+      tempElem.style.color = color;
+      if (tempElem.style.color === flag || tempElem.style.color === '') {
+        return DEFAULT_RIPPLE_COLOR;
+      } // color parse failed
+
+      color = getComputedStyle(tempElem).color;
+      tempElem.remove();
+      return color;
+    }
+    function rgbaToRgb(color) {
+      color = color.match(/[\d.]+/g).map(a => +Number(a));
+      color.length = 3;
+      return color;
+    }
+    if (color.toLowerCase() === 'transparent') {
+      return DEFAULT_RIPPLE_COLOR;
+    }
+    if (color[0] === '#') {
+      return hexToRgb(color);
+    }
+    if (!color.includes('rgb')) {
+      color = namedColorsToRgba(color);
+    }
+    if (color.indexOf('rgb') === 0) {
+      return rgbaToRgb(color);
+    }
+    return DEFAULT_RIPPLE_COLOR;
+  }
+
+  // Static
+  static autoInitial(instance) {
+    return function (event) {
+      instance._autoInit(event);
+    };
+  }
+  static jQueryInterface(options) {
+    return this.each(function () {
+      const data = MdData.getData(this, DATA_KEY);
+      if (!data) {
+        return new Ripple(this, options);
+      }
+      return null;
+    });
+  }
+  static getInstance(element) {
+    return MdData.getData(element, DATA_KEY);
+  }
+  static getOrCreateInstance(element, config = {}) {
+    return this.getInstance(element) || new this(element, typeof config === 'object' ? config : null);
+  }
+}
+
+/**
+ * ------------------------------------------------------------------------
+ * Data Api implementation - auto initialization
+ * ------------------------------------------------------------------------
+ */
+
+for (const selector of SELECTOR_COMPONENT) {
+  MdEventHandler.one(document, 'mousedown', selector, Ripple.autoInitial(new Ripple()));
+}
+
+/**
+ * ------------------------------------------------------------------------
+ * jQuery
+ * ------------------------------------------------------------------------
+ * add .ripple to jQuery only if jQuery is present
+ */
+
+onDOMContentLoaded(() => {
+  const $ = getjQuery();
+  if ($) {
+    const JQUERY_NO_CONFLICT = $.fn[NAME];
+    $.fn[NAME] = Ripple.jQueryInterface;
+    $.fn[NAME].Constructor = Ripple;
+    $.fn[NAME].noConflict = () => {
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return Ripple.jQueryInterface;
+    };
+  }
+});
+
+export { Alert, Button, Carousel, Collapse, Dropdown, Modal, Offcanvas, Popover, Ripple, ScrollSpy, Tab, Toast, Tooltip };
 //# sourceMappingURL=bootstrap.esm.js.map

@@ -1,0 +1,219 @@
+$label-height-sm: $font-size-sm * $line-height-sm;
+$label-top-position-sm: $label-height-sm * 0.6;
+$label-height-md: $font-size-base * $line-height-sm;
+$label-top-position-md: $label-height-md * 0.6;
+$label-height-lg: $font-size-lg * $line-height-sm;
+$label-top-position-lg: $label-height-lg * 0.6;
+$floating-label-focus-shadow: inset 1px 0 $focus-fields-active, inset -1px 0 $focus-fields-active, inset 0 -1px $focus-fields-active;
+
+@mixin label-active {
+  + span {
+    &::before,
+    &::after {
+      border-top-width: 1px;
+      border-color: $focus-fields-active !important;
+      box-shadow: $focus-fields-active 0 1px inset;
+    }
+
+    > label {
+      color: $focus-fields-active;
+    }
+  }
+}
+
+@mixin label-has-value {
+  + span {
+    &::before,
+    &::after {
+      border-top-color: $border-color;
+    }
+  }
+}
+
+@mixin label-common {
+  z-index: 3;
+  max-width: calc(100% - #{$border-width * 2});
+  @include text-truncate();
+  user-select: none;
+}
+
+[dir='rtl'] {
+  %label-inside-input-rtl {
+    right: 0;
+    left: auto !important;
+  }
+
+  %label-above-input-rtl {
+    right: $input-padding-x-sm;
+    left: auto !important;
+  }
+}
+
+@mixin label-inside-input() {
+  + span {
+    > label {
+      @include label-common();
+
+      @include font-size($input-font-size);
+      padding: $input-padding-y 0;
+
+      color: $input-placeholder-color;
+      pointer-events: none;
+
+      transition: all $transition-fast;
+
+      @extend %label-inside-input-rtl;
+    }
+  }
+
+  &.form-control-sm + label {
+    @include font-size($input-font-size-sm);
+    padding: $input-padding-y-sm 0;
+  }
+  &.form-control-lg + label {
+    @include font-size($input-font-size-lg);
+    padding: $input-padding-y-lg 0;
+  }
+}
+
+$transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+@mixin label-above-input {
+  + span {
+    > label {
+      @include label-common();
+      left: 0;
+      padding: 0;  // 0 0.3rem
+      line-height: $line-height-sm;
+      background-color: transparent;
+      @extend %label-above-input-rtl;
+    }
+
+    > label,
+    + label.label-sm {
+      transform: translateY(-10px);
+      font-size: $font-size-sm;
+    }
+
+    + label.label-md {
+      top: -$label-top-position-md;
+      font-size: $font-size-base;
+    }
+
+    + label.label-lg {
+      top: -$label-top-position-lg;
+      font-size: $font-size-lg;
+    }
+  }
+}
+
+.floating-label {
+  position: relative;
+  //display: inline-flex;
+  //flex-direction: column;
+  width: 100%;
+
+  & select {
+    @include label-above-input();
+  }
+
+  & input,
+  & textarea {
+    @include label-inside-input();
+  }
+
+  & input::placeholder,
+  & textarea::placeholder {
+    color: transparent;
+    transition: color $transition-fast;
+  }
+
+  & span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    text-align: left;
+    pointer-events: none;
+    background: 0 0;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      box-sizing: border-box;
+      margin-top: 10px;
+      border-top-width: 1px;
+      border-top-style: solid;
+      min-width: .75rem;
+      height: 8px;
+      pointer-events: none;
+      box-shadow: transparent 0 1px inset;
+      transition: border-color 0.2s ease 0s, box-shadow 0.2s ease 0s;
+      transform: translateY(-10px);
+    }
+
+    &::before {
+      border-top-color: transparent;
+      margin-right: 5px;
+      border-left: 1px solid transparent;
+      border-radius: 4px 0;
+    }
+
+    &::after {
+      flex-grow: 1;
+      border-top-color: transparent;
+      margin-left: 5px;
+      border-right: 1px solid transparent;
+      border-radius: 0 4px;
+    }
+
+    & label + input::placeholder,
+    & label + textarea::placeholder {
+      color: $input-placeholder-color;
+    }
+  }
+}
+
+.floating-label {
+  > input:focus,
+  > select:focus,
+  > textarea:focus {
+    border-color: $focus-fields-active;
+    border-width: 1px;
+    box-shadow: $floating-label-focus-shadow;
+    border-top-color: transparent;
+    @include label-active();
+    @include label-above-input();
+  }
+
+
+  & select[placeholder]:not(:placeholder-shown),
+  & input[placeholder]:not(:placeholder-shown),
+  & textarea[placeholder]:not(:placeholder-shown) {
+    border-top-color: transparent;
+    @include label-above-input();
+    @include label-has-value();
+  }
+
+  & select:not([placeholder]):not([value]),
+  & input:not([placeholder]):not([value]),
+  & textarea:not([placeholder]):empty {
+    border-top-color: transparent;
+    @include label-above-input();
+    @include label-has-value();
+  }
+
+  & select:-webkit-autofill,
+  & input:-webkit-autofill,
+  & textarea:-webkit-autofill {
+    border-top-color: transparent;
+    @include label-above-input();
+    @include label-has-value();
+  }
+}

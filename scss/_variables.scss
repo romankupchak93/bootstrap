@@ -1,10 +1,10 @@
 // Variables
-//
+@import "variables/theme-amount";
+@import "variables/elevation-shadow";
 // Variables should follow the `$component-state-property-size` formula for
 // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 
 // Color system
-
 // scss-docs-start gray-color-variables
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
@@ -14,8 +14,8 @@ $gray-400: #ced4da !default;
 $gray-500: #adb5bd !default;
 $gray-600: #6c757d !default;
 $gray-700: #495057 !default;
-$gray-800: #343a40 !default;
-$gray-900: #212529 !default;
+$gray-800: #303134 !default;
+$gray-900: #202124 !default;
 $black:    #000 !default;
 // scss-docs-end gray-color-variables
 
@@ -36,8 +36,8 @@ $grays: (
 // fusv-enable
 
 // scss-docs-start color-variables
-$blue:    #0d6efd !default;
-$indigo:  #6610f2 !default;
+$blue:    #1a73e8 !default;
+$indigo:  #3f51b5 !default;
 $purple:  #6f42c1 !default;
 $pink:    #d63384 !default;
 $red:     #dc3545 !default;
@@ -45,7 +45,7 @@ $orange:  #fd7e14 !default;
 $yellow:  #ffc107 !default;
 $green:   #198754 !default;
 $teal:    #20c997 !default;
-$cyan:    #0dcaf0 !default;
+$cyan:    #1ab7ea !default;
 // scss-docs-end color-variables
 
 // scss-docs-start colors-map
@@ -354,6 +354,45 @@ $light-border-subtle:     $gray-200 !default;
 $dark-border-subtle:      $gray-500 !default;
 // scss-docs-end theme-border-subtle-variables
 
+$dark-ink-opacities: (
+  hover: 0.04,
+  focus: 0.12,
+  press: 0.12,
+  selected: 0.08,
+  activated: 0.12,
+) !default;
+
+$light-ink-opacities: (
+  hover: 0.08,
+  focus: 0.24,
+  press: 0.24,
+  selected: 0.16,
+  activated: 0.24,
+) !default;
+
+
+// Ripple
+// scss-docs-start ripple-variables
+$ripple-wave-cubicBezier: cubic-bezier(0, 0, 0.15, 1) !default;
+$ripple-wave-border-radius: 50% !default;
+$ripple-wave-opacity: 0.5 !default;
+$ripple-wave-transform: scale(0) !default;
+$ripple-wave-z-index: 999 !default;
+$ripple-wave-active-transform: scale(1) !default;
+// scss-docs-end ripple-variables
+
+// scss-docs-start ripple-colors-map
+$ripple: (
+  'primary': $primary,
+  'secondary': #e3ebf7,
+  'success': $success,
+  'danger': $danger,
+  'warning': $warning,
+  'info': $info,
+  'light': $light,
+  'dark': $dark,
+) !default;
+// scss-docs-end ripple-colors-map
 // Characters which are escaped by the escape-svg function
 $escaped-characters: (
   ("<", "%3c"),
@@ -451,7 +490,7 @@ $body-emphasis-color:       $black !default;
 // Style anchor elements.
 
 $link-color:                              $primary !default;
-$link-decoration:                         underline !default;
+$link-decoration:                         none !default;
 $link-shade-percentage:                   20% !default;
 $link-hover-color:                        shift-color($link-color, $link-shade-percentage) !default;
 $link-hover-decoration:                   null !default;
@@ -539,7 +578,8 @@ $border-widths: (
   5: 5px
 ) !default;
 $border-style:                solid !default;
-$border-color:                $gray-300 !default;
+$border-color-modify:         rgba($gray-900, .40) !default;
+$border-color:                $border-color-modify !default;
 $border-color-translucent:    rgba($black, .175) !default;
 // scss-docs-end border-variables
 
@@ -556,9 +596,9 @@ $border-radius-2xl:           $border-radius-xxl !default; // Deprecated in v5.3
 // fusv-enable
 
 // scss-docs-start box-shadow-variables
-$box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
-$box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
-$box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
+$box-shadow:                  map-get($shadows, 6) !default;
+$box-shadow-sm:               map-get($shadows, 4) !default;
+$box-shadow-lg:               map-get($shadows, 12) !default;
 $box-shadow-inset:            inset 0 1px 2px rgba($black, .075) !default;
 // scss-docs-end box-shadow-variables
 
@@ -571,6 +611,14 @@ $focus-ring-opacity:    .25 !default;
 $focus-ring-color:      rgba($primary, $focus-ring-opacity) !default;
 $focus-ring-blur:       0 !default;
 $focus-ring-box-shadow: 0 0 $focus-ring-blur $focus-ring-width $focus-ring-color !default;
+
+$focus-fields-width:    1px !default;
+$focus-fields-opacity:  1 !default;
+$focus-fields-active:    rgba($primary, $focus-fields-opacity) !default;
+$focus-fields-blur:         0 !default;
+$focus-fields-box-shadow:   inset 0 0 $focus-fields-blur $focus-fields-width $focus-fields-active !default;
+$focus-floating-box-shadow: inset 1px 0 $focus-fields-active, inset -1px 0 $focus-fields-active, inset 0 -1px $focus-fields-active;
+
 // scss-docs-end focus-ring-variables
 
 // scss-docs-start caret-variables
@@ -578,7 +626,7 @@ $caret-width:                 .3em !default;
 $caret-vertical-align:        $caret-width * .85 !default;
 $caret-spacing:               $caret-width * .85 !default;
 // scss-docs-end caret-variables
-
+$transition-time:             .3s !default;
 $transition-base:             all .2s ease-in-out !default;
 $transition-fade:             opacity .15s linear !default;
 // scss-docs-start collapse-transition
@@ -648,7 +696,9 @@ $font-sizes: (
   6: $h6-font-size
 ) !default;
 // scss-docs-end font-sizes
-
+$font-size-icon: 1.8rem !default;
+$font-size-icon-sm: 1.5rem !default;
+$font-size-icon-lg: 2.5rem !default;
 // scss-docs-start headings-variables
 $headings-margin-bottom:      $spacer * .5 !default;
 $headings-font-family:        null !default;
@@ -832,6 +882,11 @@ $btn-font-weight:             $font-weight-normal !default;
 $btn-box-shadow:              inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
 $btn-focus-width:             $input-btn-focus-width !default;
 $btn-focus-box-shadow:        $input-btn-focus-box-shadow !default;
+
+$btn-elevation-shadow:        map-get($elevation-shadows, 2) !default;
+$btn-elevation-shadow-hover:  map-get($elevation-shadows, 4) !default;
+$btn-elevation-shadow-active: map-get($elevation-shadows, 8) !default;
+
 $btn-disabled-opacity:        .65 !default;
 $btn-active-box-shadow:       inset 0 3px 5px rgba($black, .125) !default;
 
@@ -846,14 +901,22 @@ $btn-border-radius-lg:        var(--#{$prefix}border-radius-lg) !default;
 
 $btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
-$btn-hover-bg-shade-amount:       15% !default;
-$btn-hover-bg-tint-amount:        15% !default;
+$btn-hover-bg-shade-amount:       20% !default;
+$btn-hover-bg-tint-amount:        20% !default;
 $btn-hover-border-shade-amount:   20% !default;
 $btn-hover-border-tint-amount:    10% !default;
-$btn-active-bg-shade-amount:      20% !default;
-$btn-active-bg-tint-amount:       20% !default;
+$btn-active-bg-shade-amount:      25% !default;
+$btn-active-bg-tint-amount:       25% !default;
 $btn-active-border-shade-amount:  25% !default;
-$btn-active-border-tint-amount:   10% !default;
+$btn-active-border-tint-amount:   15% !default;
+
+$btn-icon-width: 3rem !default;
+$btn-icon-height: $btn-icon-width !default;
+$btn-icon-width-sm:  2.5rem !default;
+$btn-icon-height-sm: $btn-icon-width-sm !default;
+$btn-icon-width-xs: 1.5rem !default;
+$btn-icon-height-xs: $btn-icon-width-xs !default;
+
 // scss-docs-end btn-variables
 
 
@@ -900,6 +963,7 @@ $input-color:                           var(--#{$prefix}body-color) !default;
 $input-border-color:                    var(--#{$prefix}border-color) !default;
 $input-border-width:                    $input-btn-border-width !default;
 $input-box-shadow:                      $box-shadow-inset !default;
+$input-box-shadow-modify:               inset 1px 0 var(--#{$prefix}primary), inset -1px 0 var(--#{$prefix}primary), inset 0 -1px var(--#{$prefix}primary);
 
 $input-border-radius:                   var(--#{$prefix}border-radius) !default;
 $input-border-radius-sm:                var(--#{$prefix}border-radius-sm) !default;
@@ -941,20 +1005,22 @@ $form-check-transition:                   null !default;
 $form-check-input-active-filter:          brightness(90%) !default;
 
 $form-check-input-bg:                     $input-bg !default;
-$form-check-input-border:                 var(--#{$prefix}border-width) solid var(--#{$prefix}border-color) !default;
-$form-check-input-border-radius:          .25em !default;
+$form-check-input-border:                 2px solid var(--#{$prefix}border-color) !default;
+$form-check-input-border-radius:          2px !default;
 $form-check-radio-border-radius:          50% !default;
 $form-check-input-focus-border:           $input-focus-border-color !default;
 $form-check-input-focus-box-shadow:       $focus-ring-box-shadow !default;
 
 $form-check-input-checked-color:          $component-active-color !default;
-$form-check-input-checked-bg-color:       $component-active-bg !default;
+$form-check-input-checked-bg-color:       var(--#{$prefix}primary) !default;
 $form-check-input-checked-border-color:   $form-check-input-checked-bg-color !default;
-$form-check-input-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-checked-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/></svg>") !default;
-$form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$form-check-input-checked-color}'/></svg>") !default;
+$form-check-radio-checked-bg-color:       $form-check-input-checked-bg-color !default;
+
+$form-check-input-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='none' stroke='#fff' stroke-width='3.5' d='M1.73,12.91 8.1,19.28 22.79,4.59'/></svg>") !default;
+$form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='none' stroke='#{$body-bg}' stroke-width='1.5'/></svg>") !default;
 
 $form-check-input-indeterminate-color:          $component-active-color !default;
-$form-check-input-indeterminate-bg-color:       $component-active-bg !default;
+$form-check-input-indeterminate-bg-color:       var(--#{$prefix}primary) !default;
 $form-check-input-indeterminate-border-color:   $form-check-input-indeterminate-bg-color !default;
 $form-check-input-indeterminate-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-indeterminate-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/></svg>") !default;
 
@@ -1019,7 +1085,7 @@ $form-select-box-shadow:          $box-shadow-inset !default;
 
 $form-select-focus-border-color:  $input-focus-border-color !default;
 $form-select-focus-width:         $input-focus-width !default;
-$form-select-focus-box-shadow:    0 0 0 $form-select-focus-width $input-btn-focus-color !default;
+$form-select-focus-box-shadow:    0 0 0 $focus-fields-width $focus-fields-active !default;
 
 $form-select-padding-y-sm:        $input-padding-y-sm !default;
 $form-select-padding-x-sm:        $input-padding-x-sm !default;
@@ -1196,7 +1262,7 @@ $navbar-brand-margin-end:           1rem !default;
 $navbar-toggler-padding-y:          .25rem !default;
 $navbar-toggler-padding-x:          .75rem !default;
 $navbar-toggler-font-size:          $font-size-lg !default;
-$navbar-toggler-border-radius:      $btn-border-radius !default;
+$navbar-toggler-border-radius:      50% !default;
 $navbar-toggler-focus-width:        $btn-focus-width !default;
 $navbar-toggler-transition:         box-shadow .15s ease-in-out !default;
 
@@ -1727,6 +1793,35 @@ $offcanvas-box-shadow:              $modal-content-box-shadow-xs !default;
 $offcanvas-backdrop-bg:             $modal-backdrop-bg !default;
 $offcanvas-backdrop-opacity:        $modal-backdrop-opacity !default;
 // scss-docs-end offcanvas-variables
+
+// scss-docs-start drawer-variables
+$navdrawer-backdrop-bg:             $modal-backdrop-bg !default;
+$navdrawer-border-color:            $border-color !default;
+$navdrawer-border-width:            $border-width !default;
+$navdrawer-content-bg:              var(--#{$prefix}body-bg) !default;
+$navdrawer-divider-bg:              $border-color !default;
+$navdrawer-elevation-shadow:        map-get($elevation-shadows, 16) !default;
+$navdrawer-gutter-width:            3.5rem !default;
+$navdrawer-header-bg:               $modal-content-border-color !default;
+$navdrawer-header-border-color:     $border-color !default;
+$navdrawer-header-border-width:     $border-width !default;
+$navdrawer-inner-spacer-x:          $spacer  !default;
+$navdrawer-inner-spacer-y:          $spacer !default;
+$navdrawer-nav-icon-color:          $gray-900 !default;
+$navdrawer-nav-icon-width:          3.5rem !default;
+$navdrawer-nav-link-bg-hover:       $gray-200 !default;
+$navdrawer-nav-link-color:          $primary !default;
+$navdrawer-nav-link-color-active:   $primary !default;
+$navdrawer-nav-link-color-disabled: $navbar-light-disabled-color !default;
+$navdrawer-nav-link-font-size:      0.875rem !default;
+$navdrawer-nav-link-font-weight:    $font-weight-medium !default;
+$navdrawer-nav-link-height:         2.5rem !default;
+$navdrawer-subheader-color:         $body-color !default;
+$navdrawer-subheader-font-size:     0.875rem !default;
+$navdrawer-subheader-font-weight:   $font-weight-medium !default;
+$navdrawer-subheader-height:        3rem !default;
+$navdrawer-width:                   16rem !default;
+// scss-docs-end drawer-variables
 
 // Code
 

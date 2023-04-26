@@ -144,3 +144,29 @@
   padding: var(--#{$prefix}offcanvas-padding-y) var(--#{$prefix}offcanvas-padding-x);
   overflow-y: auto;
 }
+
+body.wrapper-layout {
+  &.offcanvas-open {
+    .offcanvas-start & {
+      transform: translateX(#{$offcanvas-horizontal-width});
+    }
+
+    .offcanvas-end & {
+      transform: translateX(-#{$offcanvas-horizontal-width});
+    }
+
+    transition: transform 0.3s ease;
+    backdrop-filter: blur(4px);
+
+    &::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      backdrop-filter: blur(4px);
+    }
+  }
+}

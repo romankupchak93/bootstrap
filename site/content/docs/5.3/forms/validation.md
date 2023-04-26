@@ -50,6 +50,7 @@ Custom feedback styles apply custom colors, borders, focus styles, and backgroun
       Looks good!
     </div>
   </div>
+
   <div class="col-md-4">
     <label for="validationCustomUsername" class="form-label">Username</label>
     <div class="input-group has-validation">
@@ -170,37 +171,47 @@ To fix [issues with border radius](https://github.com/twbs/bootstrap/issues/2511
 {{< example >}}
 <form class="row g-3">
   <div class="col-md-4">
-    <label for="validationServer01" class="form-label">First name</label>
+  <div class="floating-label">
     <input type="text" class="form-control is-valid" id="validationServer01" value="Mark" required>
+    <label for="validationServer01" class="form-label">First name</label>
     <div class="valid-feedback">
       Looks good!
     </div>
+    </div>
   </div>
   <div class="col-md-4">
+    <div class="floating-label">
     <label for="validationServer02" class="form-label">Last name</label>
     <input type="text" class="form-control is-valid" id="validationServer02" value="Otto" required>
     <div class="valid-feedback">
       Looks good!
+  </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <label for="validationServerUsername" class="form-label">Username</label>
-    <div class="input-group has-validation">
-      <span class="input-group-text" id="inputGroupPrepend3">@</span>
-      <input type="text" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
-      <div id="validationServerUsernameFeedback" class="invalid-feedback">
-        Please choose a username.
-      </div>
-    </div>
+ <div class="col-md-4">
+        <div class="input-group">
+          <div class="floating-label">
+          <input id="input-group-append-is-valid" class="form-control is-valid" placeholder=" " />
+          <label for="input-group-append-is-valid">input-group append</label>
+        </div>
+          <span class="input-group-text">append</span>
+        </div>
+        <div class="valid-feedback">valid-feedback</div>
   </div>
   <div class="col-md-6">
-    <label for="validationServer03" class="form-label">City</label>
-    <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
-    <div id="validationServer03Feedback" class="invalid-feedback">
-      Please provide a valid city.
+    <div class="input-group">
+      <div class="floating-label">
+        <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+        <label for="validationServer03" class="form-label">City</label>
+      </div>
+      <span class="input-group-text">append</span>
     </div>
+     <div id="validationServer03Feedback" class="invalid-feedback">
+        Please provide a valid city.
+      </div>
   </div>
   <div class="col-md-3">
+          <div class="floating-label">
     <label for="validationServer04" class="form-label">State</label>
     <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
       <option selected disabled value="">Choose...</option>
@@ -209,13 +220,16 @@ To fix [issues with border radius](https://github.com/twbs/bootstrap/issues/2511
     <div id="validationServer04Feedback" class="invalid-feedback">
       Please select a valid state.
     </div>
+</div>
   </div>
   <div class="col-md-3">
+          <div class="floating-label">
     <label for="validationServer05" class="form-label">Zip</label>
     <input type="text" class="form-control is-invalid" id="validationServer05" aria-describedby="validationServer05Feedback" required>
     <div id="validationServer05Feedback" class="invalid-feedback">
       Please provide a valid zip.
     </div>
+</div>
   </div>
   <div class="col-12">
     <div class="form-check">

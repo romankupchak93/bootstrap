@@ -17,3 +17,6 @@ export { default as ScrollSpy } from './src/scrollspy.js'
 export { default as Tab } from './src/tab.js'
 export { default as Toast } from './src/toast.js'
 export { default as Tooltip } from './src/tooltip.js'
+export { default as Ripple } from './src/ripple.js'
+// export { default as MDCRippled } from './src/mdc-ripple.js'
+

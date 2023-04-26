@@ -113,6 +113,37 @@
     }
   }
 
+  .floating-label {
+    > .form-control,
+    > .form-select {
+      @include form-validation-state-selector($state) {
+        border-top-color: transparent;
+        + span {
+          &::before,
+          &::after {
+            border-color: $color !important;
+          }
+          > label {
+            font-size: $font-size-sm;
+            color: $color;
+            transform: translateY(-10px);
+            padding: 0;
+          }
+
+        }
+        &:focus {
+          box-shadow: inset 1px 0 $color, inset -1px 0 $color, inset 0 -1px $color;
+          + span {
+            &::before,
+            &::after {
+              border-color: $color !important;
+              box-shadow: $color 0 1px inset;
+            }
+          }
+        }
+      }
+    }
+  }
   .form-check-input {
     @include form-validation-state-selector($state) {
       border-color: $border-color;
@@ -150,4 +181,5 @@
     }
   }
 }
+
 // scss-docs-end form-validation-mixins

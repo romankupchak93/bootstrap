@@ -13,11 +13,16 @@ Place one add-on or button on either side of an input. You may also place one on
 {{< example >}}
 <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">@</span>
-  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+<div class="floating-label">
+  <input id="Username11" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+  <label for="Username11">Username</label>
 </div>
-
+</div>
 <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+<div class="floating-label">
+  <input id="Recipient11" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <label for="Recipient11">Recipient</label>
+</div>
   <span class="input-group-text" id="basic-addon2">@example.com</span>
 </div>
 

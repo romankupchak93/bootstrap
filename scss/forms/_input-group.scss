@@ -99,6 +99,7 @@
 .input-group {
   &:not(.has-validation) {
     > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
+    > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.floating-label),
     > .dropdown-toggle:nth-last-child(n + 3),
     > .form-floating:not(:last-child) > .form-control,
     > .form-floating:not(:last-child) > .form-select {

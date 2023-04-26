@@ -1,0 +1,111 @@
+//
+// Base styles
+//
+
+
+.btn-icon, .navbar-toggler {
+  box-shadow: none;
+  color: var(--#{$prefix}body-color);
+  min-width: 0;
+  padding: 0;
+  transition: background-color 15ms linear;
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  fill: currentColor;
+  width: #{$btn-icon-width-sm};
+  height: #{$btn-icon-height-sm};
+  //@include btn-icon($btn-icon-height, $btn-icon-width, $font-size-icon);
+
+  &::before {
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    content: "";
+    pointer-events: none;
+  }
+
+  &:hover,
+  &:focus,
+  &.focus {
+    background-image: linear-gradient(to bottom, rgba(var(--#{$prefix}body-color-rgb), $overlay-focus-colored-opacity), rgba(var(--#{$prefix}body-color-rgb), $overlay-focus-colored-opacity));
+    border: none;
+  }
+
+  &:active {
+    background-image: linear-gradient(to bottom, rgba(var(--#{$prefix}body-color-rgb), $overlay-pressed-colored-opacity), rgba(var(--#{$prefix}body-color-rgb), $overlay-pressed-colored-opacity));
+    color: initial;
+  }
+
+  & span,
+  & i,
+  & svg {
+    font-size: $font-size-icon;
+  }
+}
+//
+//.btn-icon, .btn-close, .navbar-toggler {
+//  border-radius: 50%;
+//  box-shadow: none;
+//  color: initial;
+//  fill: currentColor;
+//  font-size: 1.5rem;
+//  height: $btn-icon-width;
+//  min-width: 0;
+//  padding: 0;
+//  transition: background-color 15ms linear;
+//  width: $btn-icon-width;
+//
+//  @include hover-focus {
+//    box-shadow: map-get($btn-elevation-shadow-hover, shadow);
+//    outline: 0;
+//    text-decoration: none;
+//  }
+//
+//  &:hover,
+//  &.hover {
+//    background-image: linear-gradient(to bottom, rgba($black, $overlay-hover-white-opacity), rgba($black, $overlay-hover-white-opacity));
+//    color: inherit;
+//  }
+//
+//  &:focus,
+//  &.focus {
+//    background-image: linear-gradient(to bottom, rgba($black, $overlay-focus-white-opacity), rgba($black, $overlay-focus-white-opacity));
+//  }
+//
+//  &:active,
+//  &.active {
+//    box-shadow: map-get($btn-elevation-shadow-active, shadow);
+//  }
+//
+//  &.btn-sm {
+//    height: $btn-icon-width-sm;
+//    width: $btn-icon-width-sm;
+//  }
+//
+//  &.btn-xs {
+//    height: $btn-icon-width-xs;
+//    width: $btn-icon-width-xs;
+//  }
+//
+//  &:hover,
+//  &:focus,
+//  &:active {
+//    box-shadow: none;
+//    color: initial;
+//  }
+//
+//  & span,
+//  & i,
+//  & svg {
+//    font-size: $font-size-icon;
+//  }
+//}

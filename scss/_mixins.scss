@@ -10,6 +10,7 @@
 
 // Helpers
 @import "mixins/breakpoints";
+@import "mixins/hover";
 @import "mixins/color-mode";
 @import "mixins/color-scheme";
 @import "mixins/image";
@@ -17,7 +18,6 @@
 @import "mixins/visually-hidden";
 @import "mixins/reset-text";
 @import "mixins/text-truncate";
-
 // Utilities
 @import "mixins/utilities";
 
@@ -35,6 +35,7 @@
 @import "mixins/box-shadow";
 @import "mixins/gradients";
 @import "mixins/transition";
+@import "mixins/ripple";
 
 // Layout
 @import "mixins/clearfix";

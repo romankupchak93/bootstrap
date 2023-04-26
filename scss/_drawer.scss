@@ -1,0 +1,144 @@
+.navdrawer {
+  display: none;
+  outline: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: map-get($navdrawer-elevation-shadow, elevation);
+}
+.navdrawer-backdrop {
+  @include transition-standard-complex(opacity);
+
+  background-color: $navdrawer-backdrop-bg;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: (map-get($navdrawer-elevation-shadow, elevation) - 1);
+
+  &.show {
+    opacity: 1;
+    display: block;
+
+  }
+}
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $next: breakpoint-next($breakpoint);
+  $infix: breakpoint-infix($next);
+
+  @include media-breakpoint-up($next) {
+    .navdrawer-backdrop-permanent#{$infix} {
+      display: none;
+      transition: none;
+    }
+
+    .navdrawer-backdrop-persistent#{$infix} {
+      display: none;
+      transition: none;
+    }
+
+    .navdrawer-backdrop-temporary#{$infix} {
+      display: none;
+      transition: none;
+    }
+
+    .navdrawer-permanent#{$infix} {
+      border-right: $navdrawer-border-width solid $navdrawer-border-color;
+      display: block !important; // stylelint-disable-line declaration-no-important
+      right: auto;
+      width: $navdrawer-width;
+      z-index: auto;
+
+      &.navdrawer-permanent-clipped,
+      &.navdrawer-permanent-float {
+        top:  3.5rem;
+      }
+
+      &.navdrawer-permanent-float {
+        border-right: 0;
+
+        &.navdrawer-right {
+          border-left: 0;
+        }
+
+        .navdrawer-content {
+          background-color: transparent;
+        }
+      }
+
+      &.navdrawer-right {
+        border-right: 0;
+        border-left: $navdrawer-border-width solid $navdrawer-border-color;
+        right: 0;
+        left: auto;
+      }
+
+      &.show .navdrawer-content {
+        box-shadow: none;
+      }
+
+      .navdrawer-content {
+        max-width: none;
+        position: absolute;
+        transform: translate3d(0, 0, 0);
+        width: 100%;
+      }
+    }
+
+    .navdrawer-persistent#{$infix} {
+      right: auto;
+      width: $navdrawer-width;
+      z-index: auto;
+
+      &.navdrawer-persistent-clipped {
+        border-top: $navdrawer-border-width solid $navdrawer-border-color;
+        margin-top: ($navdrawer-border-width * -1);
+        top:  3.5rem;
+        z-index: (map-get($elevation-shadows, elevation) - 1);
+      }
+
+      &.navdrawer-right {
+        right: 0;
+        left: auto;
+
+        .navdrawer-content {
+          border-right: 0;
+          border-left: $navdrawer-border-width solid $navdrawer-border-color;
+        }
+      }
+
+      &.show .navdrawer-content {
+        box-shadow: none;
+      }
+
+      .navdrawer-content {
+        border-right: $navdrawer-border-width solid $navdrawer-border-color;
+        max-width: none;
+        position: absolute;
+        width: 100%;
+      }
+    }
+
+    .navdrawer-temporary#{$infix} {
+      overflow: visible;
+      right: auto;
+      width: $navdrawer-width;
+
+      &.navdrawer-right {
+        right: 0;
+        left: auto;
+      }
+
+      .navdrawer-content {
+        max-width: none;
+        position: absolute;
+        width: 100%;
+      }
+    }
+  }
+}
