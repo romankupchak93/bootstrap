@@ -1,6 +1,5 @@
 import { MDCRipple, MDCRippleFoundation } from '@material/ripple'
 
-const NAME = 'bs.ripple'
 class MDCRippled {
   constructor(element) {
     this.root = element
@@ -41,9 +40,6 @@ class MDCRippled {
     //   ...MDCRipple.createAdapter(this), isSurfaceActive: () => this.active
     // })
     // this.ripple = new MDCRipple(this.root, foundation)
-  }
-  static get NAME() {
-    return NAME
   }
 }
 

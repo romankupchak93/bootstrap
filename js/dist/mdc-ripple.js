@@ -4,10 +4,10 @@
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@material/ripple')) :
-  typeof define === 'function' && define.amd ? define(['@material/ripple'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.MdcRipple = factory(global["@material/ripple"]));
-})(this, (function (ripple) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@material/ripple'), require('./util/index.js')) :
+  typeof define === 'function' && define.amd ? define(['@material/ripple', './util/index'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.MdcRipple = factory(global["@material/ripple"], global.Index));
+})(this, (function (ripple, index_js) { 'use strict';
 
   const NAME = 'bs.ripple';
   class MDCRippled {
@@ -98,6 +98,7 @@
     targetClass: ['btn-close', 'btn-icon', 'btn-edit', 'btn-clipboard', 'navbar-toggler'],
     excludeClasses: ['dropdown-toggle']
   });
+  index_js.defineJQueryPlugin(MDCRippled);
 
   return MDCRippled;
 

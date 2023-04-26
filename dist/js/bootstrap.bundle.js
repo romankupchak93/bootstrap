@@ -7424,6 +7424,7 @@
     targetClass: ['btn-close', 'btn-icon', 'btn-edit', 'btn-clipboard', 'navbar-toggler'],
     excludeClasses: ['dropdown-toggle']
   });
+  defineJQueryPlugin(MDCRippled);
 
   /**
    * --------------------------------------------------------------------------

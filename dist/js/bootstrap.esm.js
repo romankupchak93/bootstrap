@@ -4509,6 +4509,7 @@ addClassToElementsWithClassText('btn', 'mdc-ripple-surface', {
   targetClass: ['btn-close', 'btn-icon', 'btn-edit', 'btn-clipboard', 'navbar-toggler'],
   excludeClasses: ['dropdown-toggle']
 });
+defineJQueryPlugin(MDCRippled);
 
 export { Alert, Button, Carousel, Collapse, Dropdown, MDCRippled, Modal, Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip };
 //# sourceMappingURL=bootstrap.esm.js.map
