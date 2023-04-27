@@ -4420,7 +4420,7 @@ enableDismissTrigger(Toast);
 
 defineJQueryPlugin(Toast);
 
-const NAME = 'mdc.ripple';
+const NAME = 'bs.ripple';
 class MDCRippled {
   constructor(element) {
     this.root = element;
@@ -4445,12 +4445,25 @@ class MDCRippled {
         this.active = false;
       }
     });
+    if (this.root.MDCRippled instanceof MDCRippled) {
+      // An instance of this class already exists for this element
+      return this.root.MDCRippled;
+    }
+
+    // Create a new instance of this class for this element
     const foundation = new MDCRippleFoundation({
       ...MDCRipple.createAdapter(this),
       isSurfaceActive: () => this.active
     });
     this.ripple = new MDCRipple(this.root, foundation);
+    this.root.MDCRippled = this;
+
+    // const foundation = new MDCRippleFoundation({
+    //   ...MDCRipple.createAdapter(this), isSurfaceActive: () => this.active
+    // })
+    // this.ripple = new MDCRipple(this.root, foundation)
   }
+
   static get NAME() {
     return NAME;
   }
@@ -4458,20 +4471,8 @@ class MDCRippled {
 function isSpace(evt) {
   return evt.key === ' ' || evt.keyCode === 32;
 }
-onDOMContentLoaded(() => {
-  const $ = getjQuery();
-  if ($) {
-    const JQUERY_NO_CONFLICT = $.fn[NAME];
-    $.fn[NAME] = MDCRippled.jQueryInterface;
-    $.fn[NAME].Constructor = MDCRippled;
-    $.fn[NAME].noConflict = () => {
-      $.fn[NAME] = JQUERY_NO_CONFLICT;
-      return MDCRippled.jQueryInterface;
-    };
-  }
-});
 function addClassToElementsWithClassText(classText, classToAdd, options = {
-  targetClass: '',
+  targetClass: [],
   excludeClasses: []
 }) {
   const {
@@ -4479,26 +4480,34 @@ function addClassToElementsWithClassText(classText, classToAdd, options = {
     excludeClasses
   } = options;
   const excludeSelectors = excludeClasses.map(excludeClass => {
-    return `:not([class^="${excludeClass}-"][class$="-"], [class*=" ${excludeClass} "]:not([class*=" ${excludeClass}-"]), [class$="${excludeClass}"]:not([class*="-"])`;
+    return `:not(.${excludeClass}), :not(div[class*="${classText}-"])`;
   });
-  const elements = document.querySelectorAll(`[class*="${classText}"]${excludeSelectors.join('')}`);
-  for (const element of elements) {
-    if (targetClass && element.classList.contains(targetClass)) {
-      if (excludeClasses.some(excludeClass => element.classList.contains(excludeClass))) {
-        const newElement = document.createElement('div');
-        newElement.classList.add('ripple-surface');
-        element.append(newElement);
-      } else {
-        element.classList.add(classToAdd);
+  const primarySelector = document.querySelectorAll(`[class*="${classText}"]${excludeSelectors.join('')}`);
+  const excludeElements = document.querySelectorAll(`.${excludeClasses.join('.')}`);
+  for (const elementSelector of primarySelector) {
+    window.addEventListener('load', () => {
+      if ((elementSelector.classList.contains(classText) || targetClass.some(cls => elementSelector.classList.contains(cls))) && !excludeClasses.some(cls => elementSelector.classList.contains(cls))) {
+        elementSelector.classList.add(classToAdd);
+        elementSelector.unbounded = true;
+        return new MDCRippled(elementSelector);
       }
-    } else {
-      element.classList.add(classToAdd);
+    });
+  }
+  for (const excludeElement of excludeElements) {
+    const childElementExclude = document.createElement('div');
+    childElementExclude.classList.add('ripple-surface');
+    excludeElement.append(childElementExclude);
+  }
+  for (const classNameTarget of targetClass) {
+    const elementsWithClassTarget = document.querySelectorAll(`.${classNameTarget}`);
+    for (const elementClassTarget of elementsWithClassTarget) {
+      elementClassTarget.style.borderRadius = '50%';
     }
   }
 }
 addClassToElementsWithClassText('btn', 'mdc-ripple-surface', {
-  targetClass: '',
-  excludeClasses: ['btn-toolbar', 'dropdown-toggle', 'btn-group']
+  targetClass: ['btn-close', 'btn-icon', 'btn-edit', 'btn-clipboard', 'navbar-toggler'],
+  excludeClasses: ['dropdown-toggle']
 });
 
 export { Alert, Button, Carousel, Collapse, Dropdown, MDCRippled, Modal, Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip };

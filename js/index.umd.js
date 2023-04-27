@@ -34,5 +34,4 @@ export default {
   Toast,
   Tooltip,
   MDCRippled
-  // Ripple
 }
