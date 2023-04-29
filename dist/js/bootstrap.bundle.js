@@ -4,10 +4,10 @@
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.bootstrap = factory());
-})(this, (function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@material/dom/classlist')) :
+  typeof define === 'function' && define.amd ? define(['@material/dom/classlist'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.bootstrap = factory(global.classlist));
+})(this, (function (classlist) { 'use strict';
 
   /**
    * --------------------------------------------------------------------------
@@ -825,7 +825,7 @@
    * Constants
    */
 
-  const NAME$g = 'alert';
+  const NAME$f = 'alert';
   const DATA_KEY$a = 'bs.alert';
   const EVENT_KEY$b = `.${DATA_KEY$a}`;
   const EVENT_CLOSE = `close${EVENT_KEY$b}`;
@@ -840,7 +840,7 @@
   class Alert extends BaseComponent {
     // Getters
     static get NAME() {
-      return NAME$g;
+      return NAME$f;
     }
 
     // Public
@@ -899,7 +899,7 @@
    * Constants
    */
 
-  const NAME$f = 'button';
+  const NAME$e = 'button';
   const DATA_KEY$9 = 'bs.button';
   const EVENT_KEY$a = `.${DATA_KEY$9}`;
   const DATA_API_KEY$6 = '.data-api';
@@ -914,7 +914,7 @@
   class Button extends BaseComponent {
     // Getters
     static get NAME() {
-      return NAME$f;
+      return NAME$e;
     }
 
     // Public
@@ -962,7 +962,7 @@
    * Constants
    */
 
-  const NAME$e = 'swipe';
+  const NAME$d = 'swipe';
   const EVENT_KEY$9 = '.bs.swipe';
   const EVENT_TOUCHSTART = `touchstart${EVENT_KEY$9}`;
   const EVENT_TOUCHMOVE = `touchmove${EVENT_KEY$9}`;
@@ -1009,7 +1009,7 @@
       return DefaultType$c;
     }
     static get NAME() {
-      return NAME$e;
+      return NAME$d;
     }
 
     // Public
@@ -1081,7 +1081,7 @@
    * Constants
    */
 
-  const NAME$d = 'carousel';
+  const NAME$c = 'carousel';
   const DATA_KEY$8 = 'bs.carousel';
   const EVENT_KEY$8 = `.${DATA_KEY$8}`;
   const DATA_API_KEY$5 = '.data-api';
@@ -1164,7 +1164,7 @@
       return DefaultType$b;
     }
     static get NAME() {
-      return NAME$d;
+      return NAME$c;
     }
 
     // Public
@@ -1453,7 +1453,7 @@
    * Constants
    */
 
-  const NAME$c = 'collapse';
+  const NAME$b = 'collapse';
   const DATA_KEY$7 = 'bs.collapse';
   const EVENT_KEY$7 = `.${DATA_KEY$7}`;
   const DATA_API_KEY$4 = '.data-api';
@@ -1515,7 +1515,7 @@
       return DefaultType$a;
     }
     static get NAME() {
-      return NAME$c;
+      return NAME$b;
     }
 
     // Public
@@ -3531,7 +3531,7 @@
    * Constants
    */
 
-  const NAME$b = 'dropdown';
+  const NAME$a = 'dropdown';
   const DATA_KEY$6 = 'bs.dropdown';
   const EVENT_KEY$6 = `.${DATA_KEY$6}`;
   const DATA_API_KEY$3 = '.data-api';
@@ -3607,7 +3607,7 @@
       return DefaultType$9;
     }
     static get NAME() {
-      return NAME$b;
+      return NAME$a;
     }
 
     // Public
@@ -3691,7 +3691,7 @@
       config = super._getConfig(config);
       if (typeof config.reference === 'object' && !isElement$1(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
         // Popper virtual elements require a getBoundingClientRect method
-        throw new TypeError(`${NAME$b.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
+        throw new TypeError(`${NAME$a.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
       }
       return config;
     }
@@ -3898,10 +3898,10 @@
    * Constants
    */
 
-  const NAME$a = 'backdrop';
+  const NAME$9 = 'backdrop';
   const CLASS_NAME_FADE$4 = 'fade';
   const CLASS_NAME_SHOW$5 = 'show';
-  const EVENT_MOUSEDOWN = `mousedown.bs.${NAME$a}`;
+  const EVENT_MOUSEDOWN = `mousedown.bs.${NAME$9}`;
   const Default$8 = {
     className: 'modal-backdrop',
     clickCallback: null,
@@ -3939,7 +3939,7 @@
       return DefaultType$8;
     }
     static get NAME() {
-      return NAME$a;
+      return NAME$9;
     }
 
     // Public
@@ -4022,7 +4022,7 @@
    * Constants
    */
 
-  const NAME$9 = 'focustrap';
+  const NAME$8 = 'focustrap';
   const DATA_KEY$5 = 'bs.focustrap';
   const EVENT_KEY$5 = `.${DATA_KEY$5}`;
   const EVENT_FOCUSIN$2 = `focusin${EVENT_KEY$5}`;
@@ -4060,7 +4060,7 @@
       return DefaultType$7;
     }
     static get NAME() {
-      return NAME$9;
+      return NAME$8;
     }
 
     // Public
@@ -4217,7 +4217,7 @@
    * Constants
    */
 
-  const NAME$8 = 'modal';
+  const NAME$7 = 'modal';
   const DATA_KEY$4 = 'bs.modal';
   const EVENT_KEY$4 = `.${DATA_KEY$4}`;
   const DATA_API_KEY$2 = '.data-api';
@@ -4275,7 +4275,7 @@
       return DefaultType$6;
     }
     static get NAME() {
-      return NAME$8;
+      return NAME$7;
     }
 
     // Public
@@ -4521,7 +4521,7 @@
    * Constants
    */
 
-  const NAME$7 = 'offcanvas';
+  const NAME$6 = 'offcanvas';
   const DATA_KEY$3 = 'bs.offcanvas';
   const EVENT_KEY$3 = `.${DATA_KEY$3}`;
   const DATA_API_KEY$1 = '.data-api';
@@ -4573,7 +4573,7 @@
       return DefaultType$5;
     }
     static get NAME() {
-      return NAME$7;
+      return NAME$6;
     }
 
     // Public
@@ -4850,7 +4850,7 @@
    * Constants
    */
 
-  const NAME$6 = 'TemplateFactory';
+  const NAME$5 = 'TemplateFactory';
   const Default$4 = {
     allowList: DefaultAllowlist,
     content: {},
@@ -4893,7 +4893,7 @@
       return DefaultType$4;
     }
     static get NAME() {
-      return NAME$6;
+      return NAME$5;
     }
 
     // Public
@@ -4985,7 +4985,7 @@
    * Constants
    */
 
-  const NAME$5 = 'tooltip';
+  const NAME$4 = 'tooltip';
   const DISALLOWED_ATTRIBUTES = new Set(['sanitize', 'allowList', 'sanitizeFn']);
   const CLASS_NAME_FADE$2 = 'fade';
   const CLASS_NAME_MODAL = 'modal';
@@ -5089,7 +5089,7 @@
       return DefaultType$3;
     }
     static get NAME() {
-      return NAME$5;
+      return NAME$4;
     }
 
     // Public
@@ -5496,7 +5496,7 @@
    * Constants
    */
 
-  const NAME$4 = 'popover';
+  const NAME$3 = 'popover';
   const SELECTOR_TITLE = '.popover-header';
   const SELECTOR_CONTENT = '.popover-body';
   const Default$2 = {
@@ -5525,7 +5525,7 @@
       return DefaultType$2;
     }
     static get NAME() {
-      return NAME$4;
+      return NAME$3;
     }
 
     // Overrides
@@ -5576,7 +5576,7 @@
    * Constants
    */
 
-  const NAME$3 = 'scrollspy';
+  const NAME$2 = 'scrollspy';
   const DATA_KEY$2 = 'bs.scrollspy';
   const EVENT_KEY$2 = `.${DATA_KEY$2}`;
   const DATA_API_KEY = '.data-api';
@@ -5640,7 +5640,7 @@
       return DefaultType$1;
     }
     static get NAME() {
-      return NAME$3;
+      return NAME$2;
     }
 
     // Public
@@ -5835,7 +5835,7 @@
    * Constants
    */
 
-  const NAME$2 = 'tab';
+  const NAME$1 = 'tab';
   const DATA_KEY$1 = 'bs.tab';
   const EVENT_KEY$1 = `.${DATA_KEY$1}`;
   const EVENT_HIDE$1 = `hide${EVENT_KEY$1}`;
@@ -5884,7 +5884,7 @@
 
     // Getters
     static get NAME() {
-      return NAME$2;
+      return NAME$1;
     }
 
     // Public
@@ -6096,7 +6096,7 @@
    * Constants
    */
 
-  const NAME$1 = 'toast';
+  const NAME = 'toast';
   const DATA_KEY = 'bs.toast';
   const EVENT_KEY = `.${DATA_KEY}`;
   const EVENT_MOUSEOVER = `mouseover${EVENT_KEY}`;
@@ -6143,7 +6143,7 @@
       return DefaultType;
     }
     static get NAME() {
-      return NAME$1;
+      return NAME;
     }
 
     // Public
@@ -6272,30 +6272,6 @@
    * Stores result from supportsCssVariables to avoid redundant processing to
    * detect CSS custom variable support.
    */
-  var supportsCssVariables_;
-  function supportsCssVariables(windowObj, forceRefresh) {
-      if (forceRefresh === void 0) { forceRefresh = false; }
-      var CSS = windowObj.CSS;
-      var supportsCssVars = supportsCssVariables_;
-      if (typeof supportsCssVariables_ === 'boolean' && !forceRefresh) {
-          return supportsCssVariables_;
-      }
-      var supportsFunctionPresent = CSS && typeof CSS.supports === 'function';
-      if (!supportsFunctionPresent) {
-          return false;
-      }
-      var explicitlySupportsCssVars = CSS.supports('--css-vars', 'yes');
-      // See: https://bugs.webkit.org/show_bug.cgi?id=154669
-      // See: README section on Safari
-      var weAreFeatureDetectingSafari10plus = (CSS.supports('(--css-vars: yes)') &&
-          CSS.supports('color', '#00000000'));
-      supportsCssVars =
-          explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
-      if (!forceRefresh) {
-          supportsCssVariables_ = supportsCssVars;
-      }
-      return supportsCssVars;
-  }
   function getNormalizedEventCoords(evt, pageOffset, clientRect) {
       if (!evt) {
           return { x: 0, y: 0 };
@@ -6373,33 +6349,6 @@
       throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
   }
 
-  function __read(o, n) {
-      var m = typeof Symbol === "function" && o[Symbol.iterator];
-      if (!m) return o;
-      var i = m.call(o), r, ar = [], e;
-      try {
-          while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-      }
-      catch (error) { e = { error: error }; }
-      finally {
-          try {
-              if (r && !r.done && (m = i["return"])) m.call(i);
-          }
-          finally { if (e) throw e.error; }
-      }
-      return ar;
-  }
-
-  function __spreadArray(to, from, pack) {
-      if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-          if (ar || !(i in from)) {
-              if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-              ar[i] = from[i];
-          }
-      }
-      return to.concat(ar || Array.prototype.slice.call(from));
-  }
-
   /**
    * @license
    * Copyright 2016 Google Inc.
@@ -6475,101 +6424,6 @@
 
   /**
    * @license
-   * Copyright 2016 Google Inc.
-   *
-   * Permission is hereby granted, free of charge, to any person obtaining a copy
-   * of this software and associated documentation files (the "Software"), to deal
-   * in the Software without restriction, including without limitation the rights
-   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-   * copies of the Software, and to permit persons to whom the Software is
-   * furnished to do so, subject to the following conditions:
-   *
-   * The above copyright notice and this permission notice shall be included in
-   * all copies or substantial portions of the Software.
-   *
-   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-   * THE SOFTWARE.
-   */
-  var MDCComponent = /** @class */ (function () {
-      function MDCComponent(root, foundation) {
-          var args = [];
-          for (var _i = 2; _i < arguments.length; _i++) {
-              args[_i - 2] = arguments[_i];
-          }
-          this.root = root;
-          this.initialize.apply(this, __spreadArray([], __read(args)));
-          // Note that we initialize foundation here and not within the constructor's
-          // default param so that this.root is defined and can be used within the
-          // foundation class.
-          this.foundation =
-              foundation === undefined ? this.getDefaultFoundation() : foundation;
-          this.foundation.init();
-          this.initialSyncWithDOM();
-      }
-      MDCComponent.attachTo = function (root) {
-          // Subclasses which extend MDCBase should provide an attachTo() method that takes a root element and
-          // returns an instantiated component with its root set to that element. Also note that in the cases of
-          // subclasses, an explicit foundation class will not have to be passed in; it will simply be initialized
-          // from getDefaultFoundation().
-          return new MDCComponent(root, new MDCFoundation({}));
-      };
-      /* istanbul ignore next: method param only exists for typing purposes; it does not need to be unit tested */
-      MDCComponent.prototype.initialize = function () {
-          // Subclasses can override this to do any additional setup work that would be considered part of a
-          // "constructor". Essentially, it is a hook into the parent constructor before the foundation is
-          // initialized. Any additional arguments besides root and foundation will be passed in here.
-      };
-      MDCComponent.prototype.getDefaultFoundation = function () {
-          // Subclasses must override this method to return a properly configured foundation class for the
-          // component.
-          throw new Error('Subclasses must override getDefaultFoundation to return a properly configured ' +
-              'foundation class');
-      };
-      MDCComponent.prototype.initialSyncWithDOM = function () {
-          // Subclasses should override this method if they need to perform work to synchronize with a host DOM
-          // object. An example of this would be a form control wrapper that needs to synchronize its internal state
-          // to some property or attribute of the host DOM. Please note: this is *not* the place to perform DOM
-          // reads/writes that would cause layout / paint, as this is called synchronously from within the constructor.
-      };
-      MDCComponent.prototype.destroy = function () {
-          // Subclasses may implement this method to release any resources / deregister any listeners they have
-          // attached. An example of this might be deregistering a resize event from the window object.
-          this.foundation.destroy();
-      };
-      MDCComponent.prototype.listen = function (evtType, handler, options) {
-          this.root.addEventListener(evtType, handler, options);
-      };
-      MDCComponent.prototype.unlisten = function (evtType, handler, options) {
-          this.root.removeEventListener(evtType, handler, options);
-      };
-      /**
-       * Fires a cross-browser-compatible custom event from the component root of the given type, with the given data.
-       */
-      MDCComponent.prototype.emit = function (evtType, evtData, shouldBubble) {
-          if (shouldBubble === void 0) { shouldBubble = false; }
-          var evt;
-          if (typeof CustomEvent === 'function') {
-              evt = new CustomEvent(evtType, {
-                  bubbles: shouldBubble,
-                  detail: evtData,
-              });
-          }
-          else {
-              evt = document.createEvent('CustomEvent');
-              evt.initCustomEvent(evtType, shouldBubble, false, evtData);
-          }
-          this.root.dispatchEvent(evt);
-      };
-      return MDCComponent;
-  }());
-
-  /**
-   * @license
    * Copyright 2019 Google Inc.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -6622,35 +6476,6 @@
           passiveSupported = false;
       }
       return passiveSupported;
-  }
-
-  /**
-   * @license
-   * Copyright 2018 Google Inc.
-   *
-   * Permission is hereby granted, free of charge, to any person obtaining a copy
-   * of this software and associated documentation files (the "Software"), to deal
-   * in the Software without restriction, including without limitation the rights
-   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-   * copies of the Software, and to permit persons to whom the Software is
-   * furnished to do so, subject to the following conditions:
-   *
-   * The above copyright notice and this permission notice shall be included in
-   * all copies or substantial portions of the Software.
-   *
-   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-   * THE SOFTWARE.
-   */
-  function matches(element, selector) {
-      var nativeMatches = element.matches
-          || element.webkitMatchesSelector
-          || element.msMatchesSelector;
-      return nativeMatches.call(element, selector);
   }
 
   /**
@@ -7218,213 +7043,55 @@
       return MDCRippleFoundation;
   }(MDCFoundation));
 
-  /**
-   * @license
-   * Copyright 2016 Google Inc.
-   *
-   * Permission is hereby granted, free of charge, to any person obtaining a copy
-   * of this software and associated documentation files (the "Software"), to deal
-   * in the Software without restriction, including without limitation the rights
-   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-   * copies of the Software, and to permit persons to whom the Software is
-   * furnished to do so, subject to the following conditions:
-   *
-   * The above copyright notice and this permission notice shall be included in
-   * all copies or substantial portions of the Software.
-   *
-   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-   * THE SOFTWARE.
-   */
-  var MDCRipple = /** @class */ (function (_super) {
-      __extends(MDCRipple, _super);
-      function MDCRipple() {
-          var _this = _super !== null && _super.apply(this, arguments) || this;
-          _this.disabled = false;
-          return _this;
-      }
-      MDCRipple.attachTo = function (root, opts) {
-          if (opts === void 0) { opts = {
-              isUnbounded: undefined
-          }; }
-          var ripple = new MDCRipple(root);
-          // Only override unbounded behavior if option is explicitly specified
-          if (opts.isUnbounded !== undefined) {
-              ripple.unbounded = opts.isUnbounded;
-          }
-          return ripple;
-      };
-      MDCRipple.createAdapter = function (instance) {
-          return {
-              addClass: function (className) { return instance.root.classList.add(className); },
-              browserSupportsCssVars: function () { return supportsCssVariables(window); },
-              computeBoundingRect: function () { return instance.root.getBoundingClientRect(); },
-              containsEventTarget: function (target) { return instance.root.contains(target); },
-              deregisterDocumentInteractionHandler: function (evtType, handler) {
-                  return document.documentElement.removeEventListener(evtType, handler, applyPassive());
-              },
-              deregisterInteractionHandler: function (evtType, handler) {
-                  return instance.root
-                      .removeEventListener(evtType, handler, applyPassive());
-              },
-              deregisterResizeHandler: function (handler) {
-                  return window.removeEventListener('resize', handler);
-              },
-              getWindowPageOffset: function () {
-                  return ({ x: window.pageXOffset, y: window.pageYOffset });
-              },
-              isSurfaceActive: function () { return matches(instance.root, ':active'); },
-              isSurfaceDisabled: function () { return Boolean(instance.disabled); },
-              isUnbounded: function () { return Boolean(instance.unbounded); },
-              registerDocumentInteractionHandler: function (evtType, handler) {
-                  return document.documentElement.addEventListener(evtType, handler, applyPassive());
-              },
-              registerInteractionHandler: function (evtType, handler) {
-                  return instance.root
-                      .addEventListener(evtType, handler, applyPassive());
-              },
-              registerResizeHandler: function (handler) {
-                  return window.addEventListener('resize', handler);
-              },
-              removeClass: function (className) { return instance.root.classList.remove(className); },
-              updateCssVariable: function (varName, value) {
-                  return instance.root.style.setProperty(varName, value);
-              },
-          };
-      };
-      Object.defineProperty(MDCRipple.prototype, "unbounded", {
-          get: function () {
-              return Boolean(this.isUnbounded);
-          },
-          set: function (unbounded) {
-              this.isUnbounded = Boolean(unbounded);
-              this.setUnbounded();
-          },
-          enumerable: false,
-          configurable: true
-      });
-      MDCRipple.prototype.activate = function () {
-          this.foundation.activate();
-      };
-      MDCRipple.prototype.deactivate = function () {
-          this.foundation.deactivate();
-      };
-      MDCRipple.prototype.layout = function () {
-          this.foundation.layout();
-      };
-      MDCRipple.prototype.getDefaultFoundation = function () {
-          return new MDCRippleFoundation(MDCRipple.createAdapter(this));
-      };
-      MDCRipple.prototype.initialSyncWithDOM = function () {
-          var root = this.root;
-          this.isUnbounded = 'mdcRippleIsUnbounded' in root.dataset;
-      };
-      /**
-       * Closure Compiler throws an access control error when directly accessing a
-       * protected or private property inside a getter/setter, like unbounded above.
-       * By accessing the protected property inside a method, we solve that problem.
-       * That's why this function exists.
-       */
-      MDCRipple.prototype.setUnbounded = function () {
-          this.foundation.setUnbounded(Boolean(this.isUnbounded));
-      };
-      return MDCRipple;
-  }(MDCComponent));
-
-  const NAME = 'bs.ripple';
-  class MDCRippled {
+  class BSMDCRipple {
     constructor(element) {
-      this.root = element;
-      this.active = false;
-      this.root.addEventListener('keydown', evt => {
-        if (isSpace(evt)) {
-          this.active = true;
-        }
-      });
-      this.root.addEventListener('keyup', evt => {
-        if (isSpace(evt)) {
-          this.active = false;
-        }
-      });
-      this.root.addEventListener('mouseenter', evt => {
-        if (isSpace(evt)) {
-          this.active = false;
-        }
-      });
-      this.root.addEventListener('mouseleave', evt => {
-        if (isSpace(evt)) {
-          this.active = false;
-        }
-      });
-      if (this.root.MDCRippled instanceof MDCRippled) {
-        // An instance of this class already exists for this element
-        return this.root.MDCRippled;
-      }
+      this.element = element;
+      this.disabled = false;
 
-      // Create a new instance of this class for this element
-      const foundation = new MDCRippleFoundation({
-        ...MDCRipple.createAdapter(this),
-        isSurfaceActive: () => this.active
+      // Initialize MDCFoundation
+      this.foundation = new MDCRippleFoundation({
+        addClass: className => classlist.addClass(this.element, className),
+        browserSupportsCssVars() {
+          return window.CSS && CSS.supports && CSS.supports('box-shadow', 'var(--mdc-ripple-left) var(--mdc-ripple-top) 0 0 var(--mdc-ripple-color)');
+        },
+        computeBoundingRect: () => {
+          return this.element.getBoundingClientRect();
+        },
+        containsEventTarget: target => this.element.contains(target),
+        deregisterDocumentInteractionHandler: (evtType, handler) => document.documentElement.removeEventListener(evtType, handler, applyPassive()),
+        deregisterInteractionHandler: (evtType, handler) => this.element.removeEventListener(evtType, handler, applyPassive()),
+        deregisterResizeHandler: handler => window.removeEventListener('resize', handler),
+        getWindowPageOffset: () => ({
+          x: window.pageXOffset,
+          y: window.pageYOffset
+        }),
+        isSurfaceActive: () => this.element[FIRST_CHAR_LOWERCASED_METHOD_NAMES.mousedown] || this.element[FIRST_CHAR_LOWERCASED_METHOD_NAMES.touchstart],
+        isSurfaceDisabled: () => this.disabled,
+        registerDocumentInteractionHandler: (evtType, handler) => document.documentElement.addEventListener(evtType, handler, applyPassive()),
+        registerInteractionHandler: (evtType, handler) => this.element.addEventListener(evtType, handler, applyPassive()),
+        registerResizeHandler: handler => window.addEventListener('resize', handler),
+        removeClass: className => classlist.removeClass(this.element, className),
+        updateCssVariable: (varName, value) => this.element.style.setProperty(varName, value)
       });
-      this.ripple = new MDCRipple(this.root, foundation);
-      this.root.MDCRippled = this;
-
-      // const foundation = new MDCRippleFoundation({
-      //   ...MDCRipple.createAdapter(this), isSurfaceActive: () => this.active
-      // })
-      // this.ripple = new MDCRipple(this.root, foundation)
+      this.foundation.init();
     }
-
-    static get NAME() {
-      return NAME;
+    destroy() {
+      // Destroy MDCFoundation
+      this.foundation.destroy();
+      // Remove ripple classes from element
+      classlist.removeClass(this.element, 'mdc-ripple-upgraded', 'mdc-ripple');
+      // Remove ripple attributes from element
+      this.element.removeAttribute('data-mdc-ripple-is-unbounded');
+      this.element.removeAttribute('data-mdc-ripple-fg-size');
+      this.element.removeAttribute('data-mdc-ripple-fg-scale');
+      this.element.removeAttribute('data-mdc-ripple-fg-translate');
+      this.element.removeAttribute('data-mdc-ripple-left');
+      this.element.removeAttribute('data-mdc-ripple-top');
+    }
+    static attachTo(root) {
+      return new BSMDCRipple(root);
     }
   }
-  function isSpace(evt) {
-    return evt.key === ' ' || evt.keyCode === 32;
-  }
-  function addClassToElementsWithClassText(classText, classToAdd, options = {
-    targetClass: [],
-    excludeClasses: []
-  }) {
-    const {
-      targetClass,
-      excludeClasses
-    } = options;
-    const excludeSelectors = excludeClasses.map(excludeClass => {
-      return `:not(.${excludeClass}), :not(div[class*="${classText}-"])`;
-    });
-    const primarySelector = document.querySelectorAll(`[class*="${classText}"]${excludeSelectors.join('')}`);
-    const excludeElements = document.querySelectorAll(`.${excludeClasses.join('.')}`);
-    for (const elementSelector of primarySelector) {
-      window.addEventListener('load', () => {
-        if ((elementSelector.classList.contains(classText) || targetClass.some(cls => elementSelector.classList.contains(cls))) && !excludeClasses.some(cls => elementSelector.classList.contains(cls))) {
-          elementSelector.classList.add(classToAdd);
-          elementSelector.unbounded = true;
-          return new MDCRippled(elementSelector);
-        }
-      });
-    }
-    for (const excludeElement of excludeElements) {
-      const childElementExclude = document.createElement('div');
-      childElementExclude.classList.add('ripple-surface');
-      excludeElement.append(childElementExclude);
-    }
-    for (const classNameTarget of targetClass) {
-      const elementsWithClassTarget = document.querySelectorAll(`.${classNameTarget}`);
-      for (const elementClassTarget of elementsWithClassTarget) {
-        elementClassTarget.style.borderRadius = '50%';
-      }
-    }
-  }
-  addClassToElementsWithClassText('btn', 'mdc-ripple-surface', {
-    targetClass: ['btn-close', 'btn-icon', 'btn-edit', 'btn-clipboard', 'navbar-toggler'],
-    excludeClasses: ['dropdown-toggle']
-  });
-  defineJQueryPlugin(MDCRippled);
 
   /**
    * --------------------------------------------------------------------------
@@ -7432,7 +7099,7 @@
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
-  // import Ripple from './src/ripple.js'
+  // import MDCRippled from './src/mdc-ripple.js'
 
   const index_umd = {
     Alert,
@@ -7447,7 +7114,8 @@
     Tab,
     Toast,
     Tooltip,
-    MDCRippled
+    BSMDCRipple
+    // MDCRippled
   };
 
   return index_umd;

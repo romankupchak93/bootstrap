@@ -17,8 +17,8 @@ import ScrollSpy from './src/scrollspy.js'
 import Tab from './src/tab.js'
 import Toast from './src/toast.js'
 import Tooltip from './src/tooltip.js'
-import MDCRippled from './src/mdc-ripple.js'
-// import Ripple from './src/ripple.js'
+import BSMDCRipple from './src/mdc.js'
+// import MDCRippled from './src/mdc-ripple.js'
 
 export default {
   Alert,
@@ -33,5 +33,6 @@ export default {
   Tab,
   Toast,
   Tooltip,
-  MDCRippled
+  BSMDCRipple
+  // MDCRippled
 }

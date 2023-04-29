@@ -4,10 +4,10 @@
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@popperjs/core'), require('@material/ripple')) :
-  typeof define === 'function' && define.amd ? define(['@popperjs/core', '@material/ripple'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.bootstrap = factory(global.Popper, global.ripple));
-})(this, (function (Popper, ripple) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@popperjs/core'), require('@material/ripple'), require('@material/dom/events'), require('@material/dom/classlist')) :
+  typeof define === 'function' && define.amd ? define(['@popperjs/core', '@material/ripple', '@material/dom/events', '@material/dom/classlist'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.bootstrap = factory(global.Popper, global.ripple, global.events, global.classlist));
+})(this, (function (Popper, ripple, events, classlist) { 'use strict';
 
   function _interopNamespaceDefault(e) {
     const n = Object.create(null, { [Symbol.toStringTag]: { value: 'Module' } });
@@ -844,7 +844,7 @@
    * Constants
    */
 
-  const NAME$g = 'alert';
+  const NAME$f = 'alert';
   const DATA_KEY$a = 'bs.alert';
   const EVENT_KEY$b = `.${DATA_KEY$a}`;
   const EVENT_CLOSE = `close${EVENT_KEY$b}`;
@@ -859,7 +859,7 @@
   class Alert extends BaseComponent {
     // Getters
     static get NAME() {
-      return NAME$g;
+      return NAME$f;
     }
 
     // Public
@@ -918,7 +918,7 @@
    * Constants
    */
 
-  const NAME$f = 'button';
+  const NAME$e = 'button';
   const DATA_KEY$9 = 'bs.button';
   const EVENT_KEY$a = `.${DATA_KEY$9}`;
   const DATA_API_KEY$6 = '.data-api';
@@ -933,7 +933,7 @@
   class Button extends BaseComponent {
     // Getters
     static get NAME() {
-      return NAME$f;
+      return NAME$e;
     }
 
     // Public
@@ -981,7 +981,7 @@
    * Constants
    */
 
-  const NAME$e = 'swipe';
+  const NAME$d = 'swipe';
   const EVENT_KEY$9 = '.bs.swipe';
   const EVENT_TOUCHSTART = `touchstart${EVENT_KEY$9}`;
   const EVENT_TOUCHMOVE = `touchmove${EVENT_KEY$9}`;
@@ -1028,7 +1028,7 @@
       return DefaultType$c;
     }
     static get NAME() {
-      return NAME$e;
+      return NAME$d;
     }
 
     // Public
@@ -1100,7 +1100,7 @@
    * Constants
    */
 
-  const NAME$d = 'carousel';
+  const NAME$c = 'carousel';
   const DATA_KEY$8 = 'bs.carousel';
   const EVENT_KEY$8 = `.${DATA_KEY$8}`;
   const DATA_API_KEY$5 = '.data-api';
@@ -1183,7 +1183,7 @@
       return DefaultType$b;
     }
     static get NAME() {
-      return NAME$d;
+      return NAME$c;
     }
 
     // Public
@@ -1472,7 +1472,7 @@
    * Constants
    */
 
-  const NAME$c = 'collapse';
+  const NAME$b = 'collapse';
   const DATA_KEY$7 = 'bs.collapse';
   const EVENT_KEY$7 = `.${DATA_KEY$7}`;
   const DATA_API_KEY$4 = '.data-api';
@@ -1534,7 +1534,7 @@
       return DefaultType$a;
     }
     static get NAME() {
-      return NAME$c;
+      return NAME$b;
     }
 
     // Public
@@ -1705,7 +1705,7 @@
    * Constants
    */
 
-  const NAME$b = 'dropdown';
+  const NAME$a = 'dropdown';
   const DATA_KEY$6 = 'bs.dropdown';
   const EVENT_KEY$6 = `.${DATA_KEY$6}`;
   const DATA_API_KEY$3 = '.data-api';
@@ -1781,7 +1781,7 @@
       return DefaultType$9;
     }
     static get NAME() {
-      return NAME$b;
+      return NAME$a;
     }
 
     // Public
@@ -1865,7 +1865,7 @@
       config = super._getConfig(config);
       if (typeof config.reference === 'object' && !isElement(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
         // Popper virtual elements require a getBoundingClientRect method
-        throw new TypeError(`${NAME$b.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
+        throw new TypeError(`${NAME$a.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
       }
       return config;
     }
@@ -2072,10 +2072,10 @@
    * Constants
    */
 
-  const NAME$a = 'backdrop';
+  const NAME$9 = 'backdrop';
   const CLASS_NAME_FADE$4 = 'fade';
   const CLASS_NAME_SHOW$5 = 'show';
-  const EVENT_MOUSEDOWN = `mousedown.bs.${NAME$a}`;
+  const EVENT_MOUSEDOWN = `mousedown.bs.${NAME$9}`;
   const Default$8 = {
     className: 'modal-backdrop',
     clickCallback: null,
@@ -2113,7 +2113,7 @@
       return DefaultType$8;
     }
     static get NAME() {
-      return NAME$a;
+      return NAME$9;
     }
 
     // Public
@@ -2196,7 +2196,7 @@
    * Constants
    */
 
-  const NAME$9 = 'focustrap';
+  const NAME$8 = 'focustrap';
   const DATA_KEY$5 = 'bs.focustrap';
   const EVENT_KEY$5 = `.${DATA_KEY$5}`;
   const EVENT_FOCUSIN$2 = `focusin${EVENT_KEY$5}`;
@@ -2234,7 +2234,7 @@
       return DefaultType$7;
     }
     static get NAME() {
-      return NAME$9;
+      return NAME$8;
     }
 
     // Public
@@ -2391,7 +2391,7 @@
    * Constants
    */
 
-  const NAME$8 = 'modal';
+  const NAME$7 = 'modal';
   const DATA_KEY$4 = 'bs.modal';
   const EVENT_KEY$4 = `.${DATA_KEY$4}`;
   const DATA_API_KEY$2 = '.data-api';
@@ -2449,7 +2449,7 @@
       return DefaultType$6;
     }
     static get NAME() {
-      return NAME$8;
+      return NAME$7;
     }
 
     // Public
@@ -2695,7 +2695,7 @@
    * Constants
    */
 
-  const NAME$7 = 'offcanvas';
+  const NAME$6 = 'offcanvas';
   const DATA_KEY$3 = 'bs.offcanvas';
   const EVENT_KEY$3 = `.${DATA_KEY$3}`;
   const DATA_API_KEY$1 = '.data-api';
@@ -2747,7 +2747,7 @@
       return DefaultType$5;
     }
     static get NAME() {
-      return NAME$7;
+      return NAME$6;
     }
 
     // Public
@@ -3024,7 +3024,7 @@
    * Constants
    */
 
-  const NAME$6 = 'TemplateFactory';
+  const NAME$5 = 'TemplateFactory';
   const Default$4 = {
     allowList: DefaultAllowlist,
     content: {},
@@ -3067,7 +3067,7 @@
       return DefaultType$4;
     }
     static get NAME() {
-      return NAME$6;
+      return NAME$5;
     }
 
     // Public
@@ -3159,7 +3159,7 @@
    * Constants
    */
 
-  const NAME$5 = 'tooltip';
+  const NAME$4 = 'tooltip';
   const DISALLOWED_ATTRIBUTES = new Set(['sanitize', 'allowList', 'sanitizeFn']);
   const CLASS_NAME_FADE$2 = 'fade';
   const CLASS_NAME_MODAL = 'modal';
@@ -3263,7 +3263,7 @@
       return DefaultType$3;
     }
     static get NAME() {
-      return NAME$5;
+      return NAME$4;
     }
 
     // Public
@@ -3670,7 +3670,7 @@
    * Constants
    */
 
-  const NAME$4 = 'popover';
+  const NAME$3 = 'popover';
   const SELECTOR_TITLE = '.popover-header';
   const SELECTOR_CONTENT = '.popover-body';
   const Default$2 = {
@@ -3699,7 +3699,7 @@
       return DefaultType$2;
     }
     static get NAME() {
-      return NAME$4;
+      return NAME$3;
     }
 
     // Overrides
@@ -3750,7 +3750,7 @@
    * Constants
    */
 
-  const NAME$3 = 'scrollspy';
+  const NAME$2 = 'scrollspy';
   const DATA_KEY$2 = 'bs.scrollspy';
   const EVENT_KEY$2 = `.${DATA_KEY$2}`;
   const DATA_API_KEY = '.data-api';
@@ -3814,7 +3814,7 @@
       return DefaultType$1;
     }
     static get NAME() {
-      return NAME$3;
+      return NAME$2;
     }
 
     // Public
@@ -4009,7 +4009,7 @@
    * Constants
    */
 
-  const NAME$2 = 'tab';
+  const NAME$1 = 'tab';
   const DATA_KEY$1 = 'bs.tab';
   const EVENT_KEY$1 = `.${DATA_KEY$1}`;
   const EVENT_HIDE$1 = `hide${EVENT_KEY$1}`;
@@ -4058,7 +4058,7 @@
 
     // Getters
     static get NAME() {
-      return NAME$2;
+      return NAME$1;
     }
 
     // Public
@@ -4270,7 +4270,7 @@
    * Constants
    */
 
-  const NAME$1 = 'toast';
+  const NAME = 'toast';
   const DATA_KEY = 'bs.toast';
   const EVENT_KEY = `.${DATA_KEY}`;
   const EVENT_MOUSEOVER = `mouseover${EVENT_KEY}`;
@@ -4317,7 +4317,7 @@
       return DefaultType;
     }
     static get NAME() {
-      return NAME$1;
+      return NAME;
     }
 
     // Public
@@ -4442,96 +4442,55 @@
 
   defineJQueryPlugin(Toast);
 
-  const NAME = 'bs.ripple';
-  class MDCRippled {
+  class BSMDCRipple {
     constructor(element) {
-      this.root = element;
-      this.active = false;
-      this.root.addEventListener('keydown', evt => {
-        if (isSpace(evt)) {
-          this.active = true;
-        }
-      });
-      this.root.addEventListener('keyup', evt => {
-        if (isSpace(evt)) {
-          this.active = false;
-        }
-      });
-      this.root.addEventListener('mouseenter', evt => {
-        if (isSpace(evt)) {
-          this.active = false;
-        }
-      });
-      this.root.addEventListener('mouseleave', evt => {
-        if (isSpace(evt)) {
-          this.active = false;
-        }
-      });
-      if (this.root.MDCRippled instanceof MDCRippled) {
-        // An instance of this class already exists for this element
-        return this.root.MDCRippled;
-      }
+      this.element = element;
+      this.disabled = false;
 
-      // Create a new instance of this class for this element
-      const foundation = new ripple.MDCRippleFoundation({
-        ...ripple.MDCRipple.createAdapter(this),
-        isSurfaceActive: () => this.active
+      // Initialize MDCFoundation
+      this.foundation = new ripple.MDCRippleFoundation({
+        addClass: className => classlist.addClass(this.element, className),
+        browserSupportsCssVars() {
+          return window.CSS && CSS.supports && CSS.supports('box-shadow', 'var(--mdc-ripple-left) var(--mdc-ripple-top) 0 0 var(--mdc-ripple-color)');
+        },
+        computeBoundingRect: () => {
+          return this.element.getBoundingClientRect();
+        },
+        containsEventTarget: target => this.element.contains(target),
+        deregisterDocumentInteractionHandler: (evtType, handler) => document.documentElement.removeEventListener(evtType, handler, events.applyPassive()),
+        deregisterInteractionHandler: (evtType, handler) => this.element.removeEventListener(evtType, handler, events.applyPassive()),
+        deregisterResizeHandler: handler => window.removeEventListener('resize', handler),
+        getWindowPageOffset: () => ({
+          x: window.pageXOffset,
+          y: window.pageYOffset
+        }),
+        isSurfaceActive: () => this.element[FIRST_CHAR_LOWERCASED_METHOD_NAMES.mousedown] || this.element[FIRST_CHAR_LOWERCASED_METHOD_NAMES.touchstart],
+        isSurfaceDisabled: () => this.disabled,
+        registerDocumentInteractionHandler: (evtType, handler) => document.documentElement.addEventListener(evtType, handler, events.applyPassive()),
+        registerInteractionHandler: (evtType, handler) => this.element.addEventListener(evtType, handler, events.applyPassive()),
+        registerResizeHandler: handler => window.addEventListener('resize', handler),
+        removeClass: className => classlist.removeClass(this.element, className),
+        updateCssVariable: (varName, value) => this.element.style.setProperty(varName, value)
       });
-      this.ripple = new ripple.MDCRipple(this.root, foundation);
-      this.root.MDCRippled = this;
-
-      // const foundation = new MDCRippleFoundation({
-      //   ...MDCRipple.createAdapter(this), isSurfaceActive: () => this.active
-      // })
-      // this.ripple = new MDCRipple(this.root, foundation)
+      this.foundation.init();
     }
-
-    static get NAME() {
-      return NAME;
+    destroy() {
+      // Destroy MDCFoundation
+      this.foundation.destroy();
+      // Remove ripple classes from element
+      classlist.removeClass(this.element, 'mdc-ripple-upgraded', 'mdc-ripple');
+      // Remove ripple attributes from element
+      this.element.removeAttribute('data-mdc-ripple-is-unbounded');
+      this.element.removeAttribute('data-mdc-ripple-fg-size');
+      this.element.removeAttribute('data-mdc-ripple-fg-scale');
+      this.element.removeAttribute('data-mdc-ripple-fg-translate');
+      this.element.removeAttribute('data-mdc-ripple-left');
+      this.element.removeAttribute('data-mdc-ripple-top');
+    }
+    static attachTo(root) {
+      return new BSMDCRipple(root);
     }
   }
-  function isSpace(evt) {
-    return evt.key === ' ' || evt.keyCode === 32;
-  }
-  function addClassToElementsWithClassText(classText, classToAdd, options = {
-    targetClass: [],
-    excludeClasses: []
-  }) {
-    const {
-      targetClass,
-      excludeClasses
-    } = options;
-    const excludeSelectors = excludeClasses.map(excludeClass => {
-      return `:not(.${excludeClass}), :not(div[class*="${classText}-"])`;
-    });
-    const primarySelector = document.querySelectorAll(`[class*="${classText}"]${excludeSelectors.join('')}`);
-    const excludeElements = document.querySelectorAll(`.${excludeClasses.join('.')}`);
-    for (const elementSelector of primarySelector) {
-      window.addEventListener('load', () => {
-        if ((elementSelector.classList.contains(classText) || targetClass.some(cls => elementSelector.classList.contains(cls))) && !excludeClasses.some(cls => elementSelector.classList.contains(cls))) {
-          elementSelector.classList.add(classToAdd);
-          elementSelector.unbounded = true;
-          return new MDCRippled(elementSelector);
-        }
-      });
-    }
-    for (const excludeElement of excludeElements) {
-      const childElementExclude = document.createElement('div');
-      childElementExclude.classList.add('ripple-surface');
-      excludeElement.append(childElementExclude);
-    }
-    for (const classNameTarget of targetClass) {
-      const elementsWithClassTarget = document.querySelectorAll(`.${classNameTarget}`);
-      for (const elementClassTarget of elementsWithClassTarget) {
-        elementClassTarget.style.borderRadius = '50%';
-      }
-    }
-  }
-  addClassToElementsWithClassText('btn', 'mdc-ripple-surface', {
-    targetClass: ['btn-close', 'btn-icon', 'btn-edit', 'btn-clipboard', 'navbar-toggler'],
-    excludeClasses: ['dropdown-toggle']
-  });
-  defineJQueryPlugin(MDCRippled);
 
   /**
    * --------------------------------------------------------------------------
@@ -4539,7 +4498,7 @@
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
-  // import Ripple from './src/ripple.js'
+  // import MDCRippled from './src/mdc-ripple.js'
 
   const index_umd = {
     Alert,
@@ -4554,7 +4513,8 @@
     Tab,
     Toast,
     Tooltip,
-    MDCRippled
+    BSMDCRipple
+    // MDCRippled
   };
 
   return index_umd;
