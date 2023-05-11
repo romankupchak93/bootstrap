@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { MDCRipple, MDCRippleFoundation } from '@material/ripple'
 
 class MDCRippled {
@@ -87,5 +88,70 @@ function addClassToElementsWithClassText(classText, classToAdd, options = {
 addClassToElementsWithClassText('btn', 'mdc-ripple-surface', {
   targetClass: ['btn-close', 'btn-icon', 'btn-edit', 'btn-clipboard', 'navbar-toggler'],
   excludeClasses: ['dropdown-toggle']
+=======
+import { MDCRipple } from '@material/ripple'
+import { MDCRippleFoundation } from '@material/ripple/foundation'
+import { onDOMContentLoaded } from './util/index.js'
+
+class MDCRippled extends MDCRipple {
+  constructor(element) {
+    super(element, new MDCRippleFoundation({ adapter: {} }))
+  }
+}
+
+onDOMContentLoaded(() => {
+  const classText = 'btn'
+  const btnIconClassList = ['btn-close', 'btn-icon', 'btn-edit', 'btn-clipboard', 'navbar-toggler']
+
+  const lineClassList = ['list-group-item', 'accordion-button']
+  const dropClassList = ['dropdown-toggle']
+
+  const primarySelector = document.querySelectorAll(`[class*="${classText}-"]:not(.${dropClassList.join(', .')}), .${classText}`)
+  // const lineClassSelector = document.querySelectorAll(`.${lineClassList.join(',')}`)
+
+  for (const elementSelector of primarySelector) {
+    if (elementSelector.classList.contains(classText) &&
+      !btnIconClassList.some(cls => elementSelector.classList.contains(cls)) &&
+      !dropClassList.some(cls => elementSelector.classList.contains(cls))) {
+      elementSelector.classList.add('mdc-ripple-surface')
+      MDCRipple.attachTo(elementSelector)
+    } else if ((elementSelector.classList.contains(classText) && dropClassList.some(cls => elementSelector.classList.contains(cls))) ||
+      dropClassList.some(cls => elementSelector.classList.contains(cls))) {
+      const childElementDrop = document.createElement('span')
+      childElementDrop.classList.add('mdc-ripple-surface')
+      elementSelector.append(childElementDrop)
+      elementSelector.unbounded = true
+      MDCRipple.attachTo(childElementDrop)
+    }
+  }
+
+  for (const btnIconClassName of btnIconClassList) {
+    const btnIconElements = document.querySelectorAll(`.${btnIconClassName}`)
+    for (const btnIconEl of btnIconElements) {
+      btnIconEl.style.borderRadius = '50%'
+      btnIconEl.unbounded = true
+      btnIconEl.classList.add('mdc-button-icon', 'mdc-ripple-surface')
+      MDCRipple.attachTo(btnIconEl)
+    }
+  }
+
+  for (const lineElementsClassName of lineClassList) {
+    const lineClassElements = document.querySelectorAll(`.${lineElementsClassName}`)
+    for (const lineElement of lineClassElements) {
+      lineElement.unbounded = true
+      lineElement.classList.add('mdc-ripple-surface')
+      MDCRipple.attachTo(lineElement)
+    }
+  }
+  // for (const lineElement of lineClassSelector) {
+  //   const lineClassElements = document.querySelectorAll(`.${btnIconClassName}`)
+  //   if (lineClassList.some(cls => lineElement.classList.contains(cls))) {
+  //     MDCRipple.attachTo(lineElement)
+  //     const childElementDrop = document.createElement('span')
+  //     childElementDrop.classList.add('mdc-ripple-surface')
+  //     lineElement.append(childElementDrop)
+  //   }
+  // }
+>>>>>>> Stashed changes
 })
 export default MDCRippled

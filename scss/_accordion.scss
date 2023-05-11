@@ -30,6 +30,7 @@
 }
 
 .accordion-button {
+  --mdc-ripple-color: var(--#{$prefix}accordion-btn-focus-border-color); //var(--#{$prefix}#{$state});
   position: relative;
   display: flex;
   align-items: center;

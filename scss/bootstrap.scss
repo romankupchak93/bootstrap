@@ -6,13 +6,17 @@
 // scss-docs-start import-stack
 // Configuration
 @import "functions";
+@import "theme-amount";
 @import "variables";
 @import "variables-dark";
 @import "maps";
 @import "mixins";
 @import "utilities";
+<<<<<<< Updated upstream
 @import "variables/theme-amount";
 @import "variables/transition";
+=======
+>>>>>>> Stashed changes
 // Layout & components
 @import "root";
 @import "reboot";
@@ -49,7 +53,9 @@
 @import "variables/elevation-shadow";
 @import "variables/ripple-surface";
 @import "placeholders";
-
+// Material
+@import "@material/ripple";
+@import "@material/ripple/mdc-ripple";
 // Helpers
 @import "helpers";
 

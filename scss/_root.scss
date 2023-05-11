@@ -27,6 +27,23 @@
     --#{$prefix}gray-#{$color}: #{$value};
   }
 
+<<<<<<< Updated upstream
+=======
+  @each $color, $value in $theme-colors {
+    --#{$prefix}#{$color}: #{$value};
+    --#{$prefix}#{$color}-rgb: #{to-rgb($value)};
+    --#{$prefix}text-on-#{$color}: #{color-contrast($value)};
+    --#{$prefix}#{$color}-subtle: #{tint-color($value, $theme-subtle-tint-amount)};
+    --#{$prefix}#{$color}-emphasis: #{shade-color($value, $theme-emphasis-shade-amount)};
+    --#{$prefix}#{$color}-hover: #{if(color-contrast($value) == $color-contrast-light, shade-color($value, $theme-hover-shade-amount), tint-color($value, $theme-hover-tint-amount))};
+    --#{$prefix}#{$color}-active: #{if(color-contrast($value) == $color-contrast-light, shade-color($value, $theme-active-shade-amount), tint-color($value, $theme-active-tint-amount))};
+    --#{$prefix}#{$color}-subtle-hover: #{tint-color($value, $theme-subtle-hover-tint-amount)};
+    --#{$prefix}#{$color}-subtle-active: #{tint-color($value, $theme-subtle-active-tint-amount)};
+    --#{$prefix}#{$color}-emphasis-hover: #{shade-color($value, $theme-emphasis-hover-shade-amount)};
+    --#{$prefix}#{$color}-border-subtle: #{tint-color($value, $theme-border-subtle-tint-amount)};
+  }
+
+>>>>>>> Stashed changes
   @each $color, $value in $theme-colors-rgb {
     --#{$prefix}#{$color}-rgb: #{$value};
   }
@@ -107,6 +124,7 @@
   --#{$prefix}border-style: #{$border-style};
   --#{$prefix}border-color: #{$border-color};
   --#{$prefix}border-color-translucent: #{$border-color-translucent};
+  --#{$prefix}input-border-color: #{$gray-500};
 
   --#{$prefix}border-radius: #{$border-radius};
   --#{$prefix}border-radius-sm: #{$border-radius-sm};
@@ -200,6 +218,7 @@
 
     --#{$prefix}border-color: #{$border-color-dark};
     --#{$prefix}border-color-translucent: #{$border-color-translucent-dark};
+    --#{$prefix}input-border-color: #{$border-color-dark};
 
     --#{$prefix}form-valid-color: #{$form-valid-color-dark};
     --#{$prefix}form-valid-border-color: #{$form-valid-border-color-dark};

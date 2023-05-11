@@ -23,6 +23,7 @@
   --#{$prefix}btn-active-box-shadow: #{$btn-active-box-shadow};
   --#{$prefix}btn-disabled-opacity: #{$btn-disabled-opacity};
   // scss-docs-end btn-css-vars
+<<<<<<< Updated upstream
 
   @for $i from 1 through 10 {
     &.elevated-#{$i} {
@@ -36,6 +37,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+=======
+  position: relative;
+  display: inline-block;
+>>>>>>> Stashed changes
   padding: var(--#{$prefix}btn-padding-y) var(--#{$prefix}btn-padding-x);
   font-family: var(--#{$prefix}btn-font-family);
   @include font-size(var(--#{$prefix}btn-font-size));
@@ -101,7 +106,7 @@
     background-color: var(--#{$prefix}btn-active-bg);
     // Remove CSS gradients if they're enabled
     background-image: if($enable-gradients, none, null);
-    border-color: var(--#{$prefix}btn-active-border-color);
+    border-color: var(--#{$prefix}btn-active-border-color); //transparent;
     @include box-shadow(var(--#{$prefix}btn-active-shadow));
 
     &:focus-visible {
@@ -135,6 +140,7 @@
 // scss-docs-start btn-variant-loops
 @each $state in map-keys($theme-colors) {
   .btn-#{$state} {
+<<<<<<< Updated upstream
     --mdc-ripple-color: var(--#{$prefix}text-on-#{$state});
     --#{$prefix}btn-color: var(--#{$prefix}text-on-#{$state});
     --#{$prefix}btn-bg: var(--#{$prefix}#{$state});
@@ -153,6 +159,19 @@
       --#{$prefix}btn-active-color: var(--#{$prefix}#{$state}-subtle);
       --#{$prefix}btn-disabled-color: var(--#{$prefix}#{$state}-subtle);
     }
+=======
+    --#{$prefix}btn-color: var(--#{$prefix}text-on-#{$state});
+    --#{$prefix}btn-bg: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-border-color: transparent;
+    --#{$prefix}btn-hover-color: var(--#{$prefix}text-on-#{$state});
+    --#{$prefix}btn-hover-bg: var(--#{$prefix}#{$state}-hover);
+    --#{$prefix}btn-hover-border-color: transparent;
+    --#{$prefix}btn-active-color: var(--#{$prefix}text-on-#{$state});
+    --#{$prefix}btn-active-bg: var(--#{$prefix}#{$state}-active);
+    --#{$prefix}btn-active-border-color: transparent;
+    --#{$prefix}btn-disabled-color: var(--#{$prefix}text-on-#{$state});
+    --#{$prefix}btn-disabled-bg: var(--#{$prefix}#{$state});
+>>>>>>> Stashed changes
   }
 }
 
@@ -172,6 +191,28 @@
     --#{$prefix}btn-disabled-border-color: var(--#{$prefix}#{$state});
   }
 }
+<<<<<<< Updated upstream
+=======
+
+@each $state in map-keys($theme-colors) {
+  .btn-text-#{$state} {
+    --mdc-ripple-color: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-color: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-border-color: transparent;
+    --#{$prefix}btn-hover-color: var(--#{$prefix}#{$state}-emphasis);
+    --#{$prefix}btn-hover-bg: var(--#{$prefix}#{$state}-subtle);
+    --#{$prefix}btn-hover-border-color: transparent;
+    --#{$prefix}btn-active-color: var(--#{$prefix}#{$state}-emphasis-hover);
+    --#{$prefix}btn-active-bg: var(--#{$prefix}#{$state}-subtle-hover);
+    --#{$prefix}btn-active-border-color: transparent;
+    --#{$prefix}btn-disabled-color: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-disabled-bg: transparent;
+    --#{$prefix}btn-disabled-border-color: var(--#{$prefix}#{$state});
+  }
+}
+
+// scss-docs-end btn-variant-loops
+>>>>>>> Stashed changes
 
 // scss-docs-end btn-variant-loops
 [class*="btn-outline-"] {

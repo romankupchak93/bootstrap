@@ -36,6 +36,7 @@
     background-color: $input-focus-bg;
     border-color: $focus-fields-active;
     outline: 0;
+<<<<<<< Updated upstream
     box-shadow: $focus-fields-box-shadow;
     //@if $enable-shadows {
     //  @include box-shadow($input-box-shadow, $input-focus-box-shadow);
@@ -43,6 +44,9 @@
     //  // Avoid using mixin so we can pass custom focus shadow properly
     //  box-shadow: $focus-fields-box-shadow;
     //}
+=======
+    box-shadow: $input-focus-box-shadow-primary;
+>>>>>>> Stashed changes
   }
 
   &::-webkit-date-and-time-value {

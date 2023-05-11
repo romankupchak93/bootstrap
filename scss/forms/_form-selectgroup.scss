@@ -4,6 +4,10 @@ Select group
 .form-selectgroup {
   display: inline-flex;
   margin: 0 -.5rem -.5rem 0;
+<<<<<<< Updated upstream
+=======
+  padding: .5rem 0 .5rem .5rem;
+>>>>>>> Stashed changes
   flex-wrap: wrap;
 
   .form-selectgroup-item {
@@ -34,8 +38,13 @@ Select group
   min-width: $input-height;
   margin: 0;
   padding: $input-btn-padding-y $input-btn-padding-x;
+<<<<<<< Updated upstream
   font-size: $input-btn-font-size;
   line-height: $input-line-height;
+=======
+  font-size: $input-btn-font-size-sm;
+  line-height: $line-height-sm;
+>>>>>>> Stashed changes
   color: var(--#{$prefix}muted);
   background: $form-check-input-bg;
   text-align: center;
@@ -73,7 +82,11 @@ Select group
     background-color: $form-check-input-checked-bg-color;
     background-repeat: repeat;
     background-position: center;
+<<<<<<< Updated upstream
     background-size: 1rem;
+=======
+    background-size: $form-check-input-checked-bg-size;
+>>>>>>> Stashed changes
     border-color: $form-check-input-checked-border-color;
   }
 
@@ -94,9 +107,15 @@ Select group
 
 .form-selectgroup-input:checked + .form-selectgroup-label {
   z-index: 1;
+<<<<<<< Updated upstream
   color: #{$form-check-input-checked-color};
   background: #{$form-check-input-checked-bg-color};
   border-color: #{$form-check-input-checked-bg-color};
+=======
+  color: #{$component-active-bg};
+  background: #{$component-active-bg};
+  border-color: #{$component-active-bg};
+>>>>>>> Stashed changes
 }
 
 .form-selectgroup-input:focus + .form-selectgroup-label {

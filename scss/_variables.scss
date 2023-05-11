@@ -37,7 +37,11 @@ $grays: (
 
 // scss-docs-start color-variables
 $blue:    #1a73e8 !default;
+<<<<<<< Updated upstream
 $indigo:  #3f51b5 !default;
+=======
+$indigo:  #6610f2 !default;
+>>>>>>> Stashed changes
 $purple:  #6f42c1 !default;
 $pink:    #d63384 !default;
 $red:     #dc3545 !default;
@@ -637,8 +641,13 @@ $caret-width:                 .3em !default;
 $caret-vertical-align:        $caret-width * .85 !default;
 $caret-spacing:               $caret-width * .85 !default;
 // scss-docs-end caret-variables
+<<<<<<< Updated upstream
 $transition-time:             .3s !default;
 $transition-base:             all .2s ease-in-out !default;
+=======
+$transition-time:             .2s !default;
+$transition-base:             all $transition-time ease-in-out !default;
+>>>>>>> Stashed changes
 $transition-fade:             opacity .15s linear !default;
 // scss-docs-start collapse-transition
 $transition-collapse:         height .35s ease !default;
@@ -965,7 +974,7 @@ $input-disabled-bg:                     var(--#{$prefix}secondary-bg) !default;
 $input-disabled-border-color:           null !default;
 
 $input-color:                           var(--#{$prefix}body-color) !default;
-$input-border-color:                    var(--#{$prefix}border-color) !default;
+$input-border-color:                    var(--#{$prefix}input-border-color) !default;
 $input-border-width:                    $input-btn-border-width !default;
 $input-box-shadow:                      $box-shadow-inset !default;
 $input-box-shadow-modify:               inset 1px 0 var(--#{$prefix}primary), inset -1px 0 var(--#{$prefix}primary), inset 0 -1px var(--#{$prefix}primary);
@@ -975,10 +984,12 @@ $input-border-radius-sm:                var(--#{$prefix}border-radius-sm) !defau
 $input-border-radius-lg:                var(--#{$prefix}border-radius-lg) !default;
 
 $input-focus-bg:                        $input-bg !default;
-$input-focus-border-color:              tint-color($component-active-bg, 50%) !default;
+$input-focus-border-color:              $component-active-bg !default;
 $input-focus-color:                     $input-color !default;
 $input-focus-width:                     $input-btn-focus-width !default;
-$input-focus-box-shadow:                $input-btn-focus-box-shadow !default;
+$input-focus-box-shadow:                inset 0 0 $input-btn-focus-blur 1px  !default;
+$input-focus-box-shadow-primary:        inset 0 0 $input-btn-focus-blur 1px rgba(var(--#{$prefix}primary-rgb), 1) !default;
+$input-range-focus-box-shadow:          $input-btn-focus-box-shadow !default;
 
 $input-placeholder-color:               var(--#{$prefix}secondary-color) !default;
 $input-plaintext-color:                 var(--#{$prefix}body-color) !default;
@@ -999,7 +1010,7 @@ $form-color-width:                      3rem !default;
 // scss-docs-end form-input-variables
 
 // scss-docs-start form-check-variables
-$form-check-input-width:                  1em !default;
+$form-check-input-width:                  1.125em !default;
 $form-check-min-height:                   $font-size-base * $line-height-base !default;
 $form-check-padding-start:                $form-check-input-width + .5em !default;
 $form-check-margin-bottom:                .125rem !default;
@@ -1010,19 +1021,36 @@ $form-check-transition:                   null !default;
 $form-check-input-active-filter:          brightness(90%) !default;
 
 $form-check-input-bg:                     $input-bg !default;
+<<<<<<< Updated upstream
 $form-check-input-border:                 2px solid var(--#{$prefix}border-color) !default;
 $form-check-input-border-radius:          2px !default;
+=======
+$form-check-input-border:                 2px solid var(--#{$prefix}input-border-color) !default;
+$form-check-input-border-radius:          .125em !default;
+>>>>>>> Stashed changes
 $form-check-radio-border-radius:          50% !default;
 $form-check-input-focus-border:           $input-focus-border-color !default;
 $form-check-input-focus-box-shadow:       $focus-ring-box-shadow !default;
 
 $form-check-input-checked-color:          $component-active-color !default;
+<<<<<<< Updated upstream
 $form-check-input-checked-bg-color:       var(--#{$prefix}primary) !default;
 $form-check-input-checked-border-color:   $form-check-input-checked-bg-color !default;
 $form-check-radio-checked-bg-color:       $form-check-input-checked-bg-color !default;
 
 $form-check-input-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='none' stroke='#fff' stroke-width='3.5' d='M1.73,12.91 8.1,19.28 22.79,4.59'/></svg>") !default;
 $form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='none' stroke='#{$body-bg}' stroke-width='1.5'/></svg>") !default;
+=======
+$form-check-input-checked-bg-color:       $component-active-bg !default;
+$form-check-input-checked-bg-size:        1em !default;
+$form-check-input-checked-border-color:   $form-check-input-checked-bg-color !default;
+$form-check-radio-checked-bg-color:       $component-active-bg !default;
+$form-check-input-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='none' stroke='#{$body-bg}' stroke-width='3.5' d='M1.73,12.91 8.1,19.28 22.79,4.59'/></svg>") !default;
+$form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='none' stroke='#{$body-bg}' stroke-width='1.5'/></svg>") !default;
+
+//$form-check-input-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-checked-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/></svg>") !default;
+//$form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$form-check-input-checked-color}'/></svg>") !default;
+>>>>>>> Stashed changes
 
 $form-check-input-indeterminate-color:          $component-active-color !default;
 $form-check-input-indeterminate-bg-color:       var(--#{$prefix}primary) !default;
@@ -1090,7 +1118,11 @@ $form-select-box-shadow:          $box-shadow-inset !default;
 
 $form-select-focus-border-color:  $focus-fields-active !default;
 $form-select-focus-width:         $input-focus-width !default;
+<<<<<<< Updated upstream
 $form-select-focus-box-shadow:    0 0 0 $focus-fields-width $focus-fields-active !default;
+=======
+$form-select-focus-box-shadow:    $input-focus-box-shadow-primary !default; //0 0 0 $form-select-focus-width $input-btn-focus-color !default;
+>>>>>>> Stashed changes
 
 $form-select-padding-y-sm:        $input-padding-y-sm !default;
 $form-select-padding-x-sm:        $input-padding-x-sm !default;
@@ -1119,7 +1151,7 @@ $form-range-thumb-bg:                      $component-active-bg !default;
 $form-range-thumb-border:                  0 !default;
 $form-range-thumb-border-radius:           1rem !default;
 $form-range-thumb-box-shadow:              0 .1rem .25rem rgba($black, .1) !default;
-$form-range-thumb-focus-box-shadow:        0 0 0 1px $body-bg, $input-focus-box-shadow !default;
+$form-range-thumb-focus-box-shadow:        0 0 0 1px $body-bg, $input-range-focus-box-shadow !default;
 $form-range-thumb-focus-box-shadow-width:  $input-focus-width !default; // For focus box shadow issue in Edge
 $form-range-thumb-active-bg:               tint-color($component-active-bg, 70%) !default;
 $form-range-thumb-disabled-bg:             var(--#{$prefix}secondary-color) !default;

@@ -1,0 +1,147 @@
+$label-height-sm: $font-size-sm * $line-height-sm; // 17.4px
+$label-top-position-sm: $label-height-sm * 0.6; // 17.4px * 0.6 = 10.44px
+$label-height-md: $font-size-base * $line-height-sm; // 20px
+$label-top-position-md: $label-height-md * 0.6; // 25px
+$label-height-lg: $font-size-lg * $line-height-sm; // 25px
+$label-top-position-lg: $label-height-lg * 0.6; // 25px * 0.6 = 15px
+
+@mixin label-common {
+  position: absolute;
+  z-index: 5;
+
+  max-width: calc(100% - $input-border-width * 2);
+  @include text-truncate();
+}
+
+// stylelint-disable declaration-no-important
+// Support for "right to left" languages
+[dir='rtl'] {
+  %label-inside-input-rtl {
+    right: 0;
+    left: auto !important;
+  }
+
+  %label-above-input-rtl {
+    right: $input-padding-x-sm;
+    left: auto !important;
+  }
+}
+
+@mixin label-inside-input() {
+  + label {
+    @include label-common();
+
+    top: $input-border-width;
+    left: $input-border-width;
+
+    @include font-size($input-font-size);
+    padding: $input-padding-y $input-padding-x;
+
+    color: $input-placeholder-color;
+
+    pointer-events: none;
+
+    transition: all $transition-fast;
+
+    @extend %label-inside-input-rtl;
+  }
+
+  &.form-control-sm + label {
+    @include font-size($input-font-size-sm);
+    padding: $input-padding-y-sm $input-padding-x-sm;
+  }
+  &.form-control-lg + label {
+    @include font-size($input-font-size-lg);
+    padding: $input-padding-y-lg $input-padding-x-lg;
+  }
+}
+
+$transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+@mixin label-above-input {
+  + label {
+    @include label-common();
+
+    left: $input-padding-x-sm;
+
+    padding: 0 0.3rem;
+    line-height: $line-height-sm;
+
+    background-color: $input-bg;
+    border-radius: $border-radius;
+
+    @extend %label-above-input-rtl;
+  }
+
+  + label,
+  + label.label-sm {
+    top: -$label-top-position-sm;
+    font-size: $font-size-sm;
+  }
+  + label.label-md {
+    top: -$label-top-position-md;
+    font-size: $font-size-base;
+  }
+  + label.label-lg {
+    top: -$label-top-position-lg;
+    font-size: $font-size-lg;
+  }
+}
+
+.floating-label {
+  position: relative;
+
+  > select {
+    @include label-above-input();
+  }
+
+  > input,
+  > textarea {
+    @include label-inside-input();
+  }
+
+  > input::placeholder,
+  > select::placeholder,
+  > textarea::placeholder {
+    color: transparent;
+
+    transition: color $transition-fast;
+  }
+
+  > label + .form-control::placeholder,
+  > label + .form-select::placeholder {
+    color: $input-placeholder-color;
+  }
+
+  > input:focus,
+  > select:focus,
+  > textarea:focus {
+    &::placeholder {
+      color: $input-placeholder-color;
+    }
+
+    ~ label {
+      color: $input-focus-border-color;
+    }
+
+    @include label-above-input();
+  }
+
+  > input[placeholder]:not(:placeholder-shown),
+  > select[placeholder]:not(:placeholder-shown),
+  > textarea[placeholder]:not(:placeholder-shown) {
+    @include label-above-input();
+  }
+
+  > input:not([placeholder]):not([value]),
+  > select:not([placeholder]):not([value]),
+  > textarea:not([placeholder]):empty {
+    @include label-above-input();
+  }
+
+  > input:-webkit-autofill,
+  > select:-webkit-autofill,
+  > textarea:-webkit-autofill {
+    @include label-above-input();
+  }
+}

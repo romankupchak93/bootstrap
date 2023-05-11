@@ -101,6 +101,8 @@
   list-style: none;
 
   .nav-link {
+    color: var(--#{$prefix}navbar-color);
+
     &.active,
     &.show {
       color: var(--#{$prefix}navbar-active-color);
@@ -124,7 +126,7 @@
 
   a,
   a:hover,
-  a:focus  {
+  a:focus {
     color: var(--#{$prefix}navbar-active-color);
   }
 }
@@ -256,6 +258,7 @@
     }
   }
 }
+
 // scss-docs-end navbar-expand-loop
 
 // Navbar themes

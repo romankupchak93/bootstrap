@@ -244,5 +244,24 @@
         }
       }
     }
+    .form-check-input {
+      &:checked {
+        &[type="checkbox"] {
+          @if $enable-gradients {
+            --#{$prefix}form-check-bg-image: #{escape-svg($form-check-input-checked-bg-image-dark)}, var(--#{$prefix}gradient);
+          } @else {
+            --#{$prefix}form-check-bg-image: #{escape-svg($form-check-input-checked-bg-image-dark)};
+          }
+        }
+
+        &[type="radio"] {
+          @if $enable-gradients {
+            --#{$prefix}form-check-bg-image: #{escape-svg($form-check-radio-checked-bg-image-dark)}, var(--#{$prefix}gradient);
+          } @else {
+            --#{$prefix}form-check-bg-image: #{escape-svg($form-check-radio-checked-bg-image-dark)};
+          }
+        }
+      }
+    }
   }
 }

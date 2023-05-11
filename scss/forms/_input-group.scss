@@ -23,6 +23,11 @@
   > .form-select:focus,
   > .form-floating:focus-within {
     z-index: 5;
+
+   //~ .input-group-text {
+   //   border-color: $input-focus-border-color;
+   //  box-shadow: 0 1px inset rgba(var(--#{$prefix}primary-rgb), 1);
+   // }
   }
 
   // Ensure buttons are always above inputs for more visually pleasing borders.

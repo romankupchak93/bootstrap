@@ -35,6 +35,7 @@ Here's a quick example to demonstrate Bootstrap's form styles. Keep reading for 
 {{< example >}}
 <form>
     <div class="floating-label mb-3">
+<<<<<<< Updated upstream
       <input id="textfield1" type="text" class="form-control" placeholder="textfield1" required>
       <label for="textfield1" class="label">First name</label>
     </div>
@@ -44,12 +45,25 @@ Here's a quick example to demonstrate Bootstrap's form styles. Keep reading for 
   </div>
       <div class="mb-3 floating-label">
         <select id="selectfield1" class="form-select" placeholder="">
+=======
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" ">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="floating-label mb-3">
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder=" ">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+    </div>
+      <div class="mb-3 floating-label">
+        <select class="form-control" id="selectExample1">
+>>>>>>> Stashed changes
           <option>1</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
           <option>5</option>
         </select>
+<<<<<<< Updated upstream
         <label for="selectfield1">select</label>
       </div>
       <div class="mb-3 floating-label">
@@ -76,6 +90,21 @@ Here's a quick example to demonstrate Bootstrap's form styles. Keep reading for 
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div>
+=======
+        <label for="selectExample1">Choose</label>
+      </div>
+      <div class="mb-3">
+        <div class="input-group floating-label">
+          <input id="input-group-append" class="form-control" placeholder=" " />
+          <label for="input-group-append">input-group append</label>
+          <span class="input-group-text">append</span>
+        </div>
+      </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+   </div>
+>>>>>>> Stashed changes
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {{< /example >}}

@@ -100,12 +100,19 @@
     "watch-js-docs": "nodemon --watch site/assets/js/ --ext js --exec \"npm run js-lint\""
   },
   "peerDependencies": {
+    "@material/ripple": "^14.0.0",
     "@popperjs/core": "^2.11.7"
   },
   "devDependencies": {
+<<<<<<< Updated upstream
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
+=======
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.21.5",
+    "@babel/preset-env": "^7.21.5",
+>>>>>>> Stashed changes
     "@material/ripple": "^14.0.0",
     "@popperjs/core": "^2.11.7",
     "@rollup/plugin-babel": "^6.0.3",
@@ -173,6 +180,7 @@
     "shim": {
       "js/bootstrap": {
         "deps": [
+          "@material/ripple",
           "@popperjs/core"
         ]
       }
@@ -181,6 +189,7 @@
       "@material/ripple": "^14.0.0"
     },
     "peerDependencies": {
+      "@material/ripple": "^14.0.0",
       "@popperjs/core": "^2.11.7"
     }
   }
