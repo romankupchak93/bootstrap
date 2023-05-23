@@ -1,0 +1,21 @@
+.app-clip {
+  position: fixed !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  contain: size style !important;
+  overflow: clip !important;
+}
+
+.app-transition {
+  --clip-size: 0;
+  --clip-pos: 0 0;
+  clip-path: circle(var(--clip-size) at var(--clip-pos));
+  transition: clip-path 75ms ease-out;
+}
+//[class=mdc-button-icon] {
+//  border-radius: 100%;
+//  &:before,
+//  &:after {
+//    background-color: var(--#{$prefix}body-color);
+//  }
+//}

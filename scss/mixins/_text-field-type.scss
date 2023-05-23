@@ -1,0 +1,85 @@
+@mixin textfield-style($mode: $textfield-type, $state: '', $element: '') {
+  @if $mode == outlined {
+    @if $element == 'input, select, textarea' {
+      @if $state == 'default' {
+        border: 1px solid;
+        border-color: $input-border-color;
+        border-top-color: transparent;
+        box-shadow: inset 0 1px transparent;
+        @include border-radius($border-radius-sm, 0);
+      } @else if $state == 'focus' {
+        border-color: $input-focus-border-color;
+        border-top-color: transparent;
+        box-shadow: $input-focus-box-shadow-floating;
+      }
+    } @else if $element == 'label:before' {
+      @if $state == 'default' {
+        margin-right: 4px;
+        border-left: solid 1px transparent;
+        border-radius: 4px 0;
+        border-top: solid 1px;
+        border-top-color: $input-border-color;
+        box-shadow: inset 0 1px transparent;
+      } @else if $state == 'focus' {
+        border-top-color: $input-focus-border-color;
+        box-shadow: inset 0 1px $input-focus-border-color;
+      }
+    } @else if $element == 'label:after' {
+      @if $state == 'default' {
+        flex-grow: 1;
+        margin-left: 4px;
+        border-right: solid 1px transparent;
+        border-radius: 0 4px;
+        border-top: solid 1px;
+        border-top-color: $input-border-color;
+        box-shadow: inset 0 1px transparent;
+      } @else if $state == 'focus' {
+        border-top-color: $input-focus-border-color;
+        box-shadow: inset 0 1px $input-focus-border-color;
+      }
+    }
+  } @else if $mode == filled {
+    @if $element == 'input, select, textarea' {
+      @if $state == 'default' {
+        border: none;
+        border-color: transparent;
+        border-bottom: 1px solid;
+        border-bottom-color: $input-border-color;
+        box-shadow: inset 0 1px transparent;
+        @include border-radius(0);
+      } @else if $state == 'focus' {
+        border: none;
+        border-top-color: transparent;
+        border-bottom: solid 1px rgba(var(--#{$prefix}primary-rgb), .6);
+      }
+    } @else if $element == 'label' {
+      @if $state == 'default' {
+        left: 0;
+        display: block;
+      }
+    } @else if $element == 'label:before' {
+      @if $state == 'default' {
+        border: none;
+        border-color: transparent;
+        content: none;
+      }
+    } @else if $element == 'label:after' {
+      @if $state == 'default' {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        display: block;
+        width: 100%;
+        height: 2px;
+        border: none;
+        border-color: transparent;
+      } @else if $state == 'focus' {
+        background-color: rgba(var(--#{$prefix}primary-rgb), 1);
+        transform-origin: bottom center;
+        transform: scaleX(0);
+        transition: transform 0.2s;
+      }
+    }
+  }
+}

@@ -58,6 +58,37 @@
 }
 
 
+.navbar.bg-transparent {
+  position: absolute;
+
+  & .nav-link {
+    color: rgba($white, .75);
+
+    &.active,
+    &.show {
+      color: rgba($white, .85);
+    }
+  }
+
+  & svg {
+    fill: rgba($white, .75);
+    stroke: rgba($white, .75);
+  }
+}
+
+//& .nav-link,
+//& span {
+//  color: rgba($white, .75);
+//
+//  &:active,
+//  &:hover,
+//  & span {
+//    color: rgba($white, .85);
+//  }
+//}
+//}
+
+
 // Navbar brand
 //
 // Used for brand, project, or site names.
@@ -101,9 +132,20 @@
   list-style: none;
 
   .nav-link {
+    color: var(--#{$prefix}navbar-color);
+
+    & .vr {
+      align-self: center;
+      min-height: 1.5em;
+    }
+
     &.active,
     &.show {
       color: var(--#{$prefix}navbar-active-color);
+    }
+
+    & span {
+      font-weight: 500;
     }
   }
 
@@ -124,11 +166,10 @@
 
   a,
   a:hover,
-  a:focus  {
+  a:focus {
     color: var(--#{$prefix}navbar-active-color);
   }
 }
-
 
 // Responsive navbar
 //
@@ -148,12 +189,12 @@
 
 // Button for toggling the navbar when in its collapsed state
 .navbar-toggler {
-  padding: var(--#{$prefix}navbar-toggler-padding-y) var(--#{$prefix}navbar-toggler-padding-x);
+  //padding: var(--#{$prefix}navbar-toggler-padding-y) var(--#{$prefix}navbar-toggler-padding-x);
   @include font-size(var(--#{$prefix}navbar-toggler-font-size));
   line-height: 1;
   color: var(--#{$prefix}navbar-color);
   background-color: transparent; // remove default button style
-  border: var(--#{$prefix}border-width) solid var(--#{$prefix}navbar-toggler-border-color); // remove default button style
+  border: none; //var(--#{$prefix}border-width) solid var(--#{$prefix}navbar-toggler-border-color); // remove default button style
   @include border-radius(var(--#{$prefix}navbar-toggler-border-radius));
   @include transition(var(--#{$prefix}navbar-toggler-transition));
 
@@ -256,6 +297,7 @@
     }
   }
 }
+
 // scss-docs-end navbar-expand-loop
 
 // Navbar themes
@@ -266,7 +308,8 @@
   @include deprecate("`.navbar-light`", "v5.2.0", "v6.0.0", true);
 }
 
-.navbar-dark {
+.navbar-dark,
+.navbar[data-bs-theme="dark"] {
   // scss-docs-start navbar-dark-css-vars
   --#{$prefix}navbar-color: #{$navbar-dark-color};
   --#{$prefix}navbar-hover-color: #{$navbar-dark-hover-color};

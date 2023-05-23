@@ -82,7 +82,7 @@
       }
 
       &.showing,
-      &.show:not(.hiding) {
+      &.show:not(.hiding):not([data-bs-mode=push]) {
         transform: none;
       }
 
@@ -115,7 +115,17 @@
     }
   }
 }
-
+.offcanvas-open {
+  transform: translateX(-#{$offcanvas-horizontal-width});
+  padding-right: 0;
+}
+.offcanvas[data-bs-mode=push] {
+  &.offcanvas-end,
+  &.showing,
+  &.show:not(.hiding) {
+    transform: translateX(#{$offcanvas-horizontal-width});
+  }
+}
 .offcanvas-backdrop {
   @include overlay-backdrop($zindex-offcanvas-backdrop, $offcanvas-backdrop-bg, $offcanvas-backdrop-opacity);
 }

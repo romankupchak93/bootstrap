@@ -9,7 +9,9 @@
     z-index: -1;
     display: block;
     content: "";
-    background-image: linear-gradient(rgba(var(--bd-violet-rgb), 1), rgba(var(--bd-violet-rgb), .95));
+    background-image: linear-gradient(rgba(var(--bs-surface-bg-rgb), 1), rgba(var(--bs-surface-bg-rgb), .95));
+
+    //background-image: linear-gradient(rgba(var(--bd-violet-rgb), 1), rgba(var(--bd-violet-rgb), .95));
   }
 
   .bd-navbar-toggle {
@@ -38,7 +40,7 @@
   }
 
   .navbar-brand {
-    color: $white;
+    color: $navbar-light-color;
     @include transition(transform .2s ease-in-out);
 
     &:hover {
@@ -50,16 +52,16 @@
   .nav-link {
     padding-right: $spacer * .25;
     padding-left: $spacer * .25;
-    color: rgba($white, .85);
+    color: $navbar-light-color;
 
     &:hover,
     &:focus {
-      color: $white;
+      color: $navbar-light-color;
     }
 
     &.active {
       font-weight: 600;
-      color: $white;
+      color: $navbar-light-color;
     }
   }
 
@@ -71,7 +73,9 @@
   .offcanvas-lg {
     background-color: var(--bd-violet-bg);
     border-left: 0;
-
+    .nav-link {
+      color: $navbar-light-color;
+    }
     @include media-breakpoint-down(lg) {
       box-shadow: $box-shadow-lg;
     }
@@ -123,6 +127,10 @@
 }
 
 @include color-mode(dark) {
+  //.navbar-brand {
+  //  color: rgba($white, .85);
+  //
+  //}
   .bd-navbar {
     box-shadow: 0 .5rem 1rem rgba($black, .15), inset 0 -1px 0 rgba($white, .15);
   }

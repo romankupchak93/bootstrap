@@ -25,7 +25,7 @@
   color: var(--bs-body-color);
   background-color: var(--bd-pre-bg);
   border: 0;
-  @include border-radius(.25rem);
+  @include border-radius(100%);
 
   &:hover {
     color: var(--bs-link-hover-color);

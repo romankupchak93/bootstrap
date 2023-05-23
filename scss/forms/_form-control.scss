@@ -1,6 +1,16 @@
 //
 // General form controls (plus a few specific high-level interventions)
 //
+:not(.floating-label) {
+  > .form-control,
+  > .form-select {
+    border: $input-border-width solid $input-border-color;
+    &:focus {
+      //border-top-color: ;
+      box-shadow: $input-focus-box-shadow $component-active-bg;
+    }
+  }
+}
 
 .form-control {
   display: block;
@@ -13,11 +23,10 @@
   color: $input-color;
   background-color: $input-bg;
   background-clip: padding-box;
-  border: $input-border-width solid $input-border-color;
   appearance: none; // Fix appearance for date inputs in Safari
 
   // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
-  @include border-radius($input-border-radius, 0);
+  @include border-radius($border-radius-sm, 0);
 
   @include box-shadow($input-box-shadow);
   @include transition($input-transition);
@@ -36,12 +45,7 @@
     background-color: $input-focus-bg;
     border-color: $input-focus-border-color;
     outline: 0;
-    @if $enable-shadows {
-      @include box-shadow($input-box-shadow, $input-focus-box-shadow);
-    } @else {
-      // Avoid using mixin so we can pass custom focus shadow properly
-      box-shadow: $input-focus-box-shadow;
-    }
+    box-shadow: $input-focus-box-shadow $component-active-bg;
   }
 
   &::-webkit-date-and-time-value {
@@ -89,6 +93,7 @@
     border-color: $input-disabled-border-color;
     // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
     opacity: 1;
+    cursor: not-allowed;
   }
 
   // File input buttons theming
@@ -188,6 +193,7 @@ textarea {
     min-height: $input-height-lg;
   }
 }
+
 // stylelint-enable selector-no-qualifying-type
 
 .form-control-color {
@@ -209,6 +215,11 @@ textarea {
     @include border-radius($input-border-radius);
   }
 
-  &.form-control-sm { height: $input-height-sm; }
-  &.form-control-lg { height: $input-height-lg; }
+  &.form-control-sm {
+    height: $input-height-sm;
+  }
+
+  &.form-control-lg {
+    height: $input-height-lg;
+  }
 }

@@ -1,0 +1,90 @@
+//
+// Base styles
+//
+
+.btn-icon,
+.btn-close,
+.navbar-toggler {
+  // MDC Ripple variables
+  --mdc-ripple-hover-opacity: .12;
+  --mdc-ripple-focus-opacity: .24;
+  --mdc-ripple-press-opacity: .24;
+  --mdc-ripple-color: var(--#{$prefix}body-color);
+  // scss-docs-start btn-css-vars
+  --#{$prefix}btn-padding: #{$btn-padding-y-sm};
+  --#{$prefix}btn-font-family: #{$btn-font-family};
+  @include rfs($btn-font-size, --#{$prefix}btn-font-size);
+  --#{$prefix}btn-color: #{$btn-color};
+  --#{$prefix}btn-bg: transparent;
+  --#{$prefix}btn-border-width: 0;
+  --#{$prefix}btn-border-color: transparent;
+  --#{$prefix}btn-hover-border-color: transparent;
+  --#{$prefix}btn-box-shadow: #{$btn-box-shadow};
+  --#{$prefix}btn-disabled-opacity: #{$btn-disabled-opacity};
+  --#{$prefix}btn-focus-box-shadow: 0 0 0 #{$btn-focus-width} rgba(var(--#{$prefix}btn-focus-shadow-rgb), .5);
+  // scss-docs-end btn-css-vars
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  fill: currentColor;
+  color: inherit;
+  text-decoration: none;
+  user-select: none;
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: #{$btn-padding-y-sm};
+  @include font-size(var(--#{$prefix}btn-font-size));
+  font-weight: var(--#{$prefix}btn-font-weight);
+  line-height: var(--#{$prefix}btn-line-height);
+  text-align: center;
+  text-decoration: if($link-decoration == none, null, none);
+  white-space: $btn-white-space;
+  vertical-align: middle;
+  cursor: if($enable-button-pointers, pointer, null);
+  @include border-radius(100%);
+
+  > svg,
+  > span,
+  > i {
+    color: var(--#{$prefix}body-color);
+    fill: var(--#{$prefix}body-color);
+  }
+  //&:before, &:after {
+  //  background-color: var(--#{$prefix}body-color);
+  //}
+}
+
+.navbar-toggler > svg {
+  > g line {
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    stroke-dasharray: 40px, 10px;
+    stroke-dashoffset: 0;
+    stroke-width: 2;
+    transition: all 0.2s ease-in-out 0s;
+
+    &:nth-child(1) {
+      animation-name: line1;
+    }
+
+    &:nth-child(2) {
+      animation-name: line2;
+    }
+
+    &:nth-child(3) {
+      animation-name: line3;
+    }
+  }
+}
+
+.navbar-toggler:hover > svg {
+  > g line {
+    animation-direction: reverse;
+  }
+}
