@@ -1,5 +1,5 @@
 /*!
-  * Bootstrap v5.3.0-alpha3 (https://getbootstrap.com/)
+  * Bootstrap v5.3.0 (https://getbootstrap.com/)
   * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -307,6 +307,7 @@ const getNextActiveElement = (list, activeElement, shouldGetNext, isCycleAllowed
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
@@ -585,6 +586,7 @@ const Manipulator = {
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Class definition
  */
@@ -637,11 +639,12 @@ class Config {
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const VERSION$1 = '5.3.0-alpha2';
+const VERSION = '5.3.0';
 
 /**
  * Class definition
@@ -685,7 +688,7 @@ class BaseComponent extends Config {
     return this.getInstance(element) || new this(element, typeof config === 'object' ? config : null);
   }
   static get VERSION() {
-    return VERSION$1;
+    return VERSION;
   }
   static get DATA_KEY() {
     return `bs.${this.NAME}`;
@@ -704,6 +707,7 @@ class BaseComponent extends Config {
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
+
 const getSelector = element => {
   let selector = element.getAttribute('data-bs-target');
   if (!selector || selector === '#') {
@@ -792,6 +796,7 @@ const SelectorEngine = {
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
+
 const enableDismissTrigger = (component, method = 'hide') => {
   const clickEvent = `click.dismiss${component.EVENT_KEY}`;
   const name = component.NAME;
@@ -817,11 +822,12 @@ const enableDismissTrigger = (component, method = 'hide') => {
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$g = 'alert';
+const NAME$f = 'alert';
 const DATA_KEY$a = 'bs.alert';
 const EVENT_KEY$b = `.${DATA_KEY$a}`;
 const EVENT_CLOSE = `close${EVENT_KEY$b}`;
@@ -836,7 +842,7 @@ const CLASS_NAME_SHOW$8 = 'show';
 class Alert extends BaseComponent {
   // Getters
   static get NAME() {
-    return NAME$g;
+    return NAME$f;
   }
 
   // Public
@@ -891,11 +897,12 @@ defineJQueryPlugin(Alert);
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$f = 'button';
+const NAME$e = 'button';
 const DATA_KEY$9 = 'bs.button';
 const EVENT_KEY$a = `.${DATA_KEY$9}`;
 const DATA_API_KEY$6 = '.data-api';
@@ -910,7 +917,7 @@ const EVENT_CLICK_DATA_API$6 = `click${EVENT_KEY$a}${DATA_API_KEY$6}`;
 class Button extends BaseComponent {
   // Getters
   static get NAME() {
-    return NAME$f;
+    return NAME$e;
   }
 
   // Public
@@ -954,11 +961,12 @@ defineJQueryPlugin(Button);
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$e = 'swipe';
+const NAME$d = 'swipe';
 const EVENT_KEY$9 = '.bs.swipe';
 const EVENT_TOUCHSTART = `touchstart${EVENT_KEY$9}`;
 const EVENT_TOUCHMOVE = `touchmove${EVENT_KEY$9}`;
@@ -1005,7 +1013,7 @@ class Swipe extends Config {
     return DefaultType$c;
   }
   static get NAME() {
-    return NAME$e;
+    return NAME$d;
   }
 
   // Public
@@ -1073,11 +1081,12 @@ class Swipe extends Config {
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$d = 'carousel';
+const NAME$c = 'carousel';
 const DATA_KEY$8 = 'bs.carousel';
 const EVENT_KEY$8 = `.${DATA_KEY$8}`;
 const DATA_API_KEY$5 = '.data-api';
@@ -1160,7 +1169,7 @@ class Carousel extends BaseComponent {
     return DefaultType$b;
   }
   static get NAME() {
-    return NAME$d;
+    return NAME$c;
   }
 
   // Public
@@ -1445,11 +1454,12 @@ defineJQueryPlugin(Carousel);
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$c = 'collapse';
+const NAME$b = 'collapse';
 const DATA_KEY$7 = 'bs.collapse';
 const EVENT_KEY$7 = `.${DATA_KEY$7}`;
 const DATA_API_KEY$4 = '.data-api';
@@ -1511,7 +1521,7 @@ class Collapse extends BaseComponent {
     return DefaultType$a;
   }
   static get NAME() {
-    return NAME$c;
+    return NAME$b;
   }
 
   // Public
@@ -1678,11 +1688,12 @@ defineJQueryPlugin(Collapse);
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$b = 'dropdown';
+const NAME$a = 'dropdown';
 const DATA_KEY$6 = 'bs.dropdown';
 const EVENT_KEY$6 = `.${DATA_KEY$6}`;
 const DATA_API_KEY$3 = '.data-api';
@@ -1758,7 +1769,7 @@ class Dropdown extends BaseComponent {
     return DefaultType$9;
   }
   static get NAME() {
-    return NAME$b;
+    return NAME$a;
   }
 
   // Public
@@ -1842,7 +1853,7 @@ class Dropdown extends BaseComponent {
     config = super._getConfig(config);
     if (typeof config.reference === 'object' && !isElement(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
       // Popper virtual elements require a getBoundingClientRect method
-      throw new TypeError(`${NAME$b.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
+      throw new TypeError(`${NAME$a.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
     }
     return config;
   }
@@ -2045,14 +2056,15 @@ defineJQueryPlugin(Dropdown);
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$a = 'backdrop';
+const NAME$9 = 'backdrop';
 const CLASS_NAME_FADE$4 = 'fade';
 const CLASS_NAME_SHOW$5 = 'show';
-const EVENT_MOUSEDOWN = `mousedown.bs.${NAME$a}`;
+const EVENT_MOUSEDOWN = `mousedown.bs.${NAME$9}`;
 const Default$8 = {
   className: 'modal-backdrop',
   clickCallback: null,
@@ -2090,7 +2102,7 @@ class Backdrop extends Config {
     return DefaultType$8;
   }
   static get NAME() {
-    return NAME$a;
+    return NAME$9;
   }
 
   // Public
@@ -2169,11 +2181,12 @@ class Backdrop extends Config {
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$9 = 'focustrap';
+const NAME$8 = 'focustrap';
 const DATA_KEY$5 = 'bs.focustrap';
 const EVENT_KEY$5 = `.${DATA_KEY$5}`;
 const EVENT_FOCUSIN$2 = `focusin${EVENT_KEY$5}`;
@@ -2211,7 +2224,7 @@ class FocusTrap extends Config {
     return DefaultType$7;
   }
   static get NAME() {
-    return NAME$9;
+    return NAME$8;
   }
 
   // Public
@@ -2266,6 +2279,7 @@ class FocusTrap extends Config {
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
+
 
 /**
  * Constants
@@ -2364,11 +2378,12 @@ class ScrollBarHelper {
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$8 = 'modal';
+const NAME$7 = 'modal';
 const DATA_KEY$4 = 'bs.modal';
 const EVENT_KEY$4 = `.${DATA_KEY$4}`;
 const DATA_API_KEY$2 = '.data-api';
@@ -2426,7 +2441,7 @@ class Modal extends BaseComponent {
     return DefaultType$6;
   }
   static get NAME() {
-    return NAME$8;
+    return NAME$7;
   }
 
   // Public
@@ -2668,11 +2683,12 @@ defineJQueryPlugin(Modal);
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$7 = 'offcanvas';
+const NAME$6 = 'offcanvas';
 const DATA_KEY$3 = 'bs.offcanvas';
 const EVENT_KEY$3 = `.${DATA_KEY$3}`;
 const DATA_API_KEY$1 = '.data-api';
@@ -2724,7 +2740,7 @@ class Offcanvas extends BaseComponent {
     return DefaultType$5;
   }
   static get NAME() {
-    return NAME$7;
+    return NAME$6;
   }
 
   // Public
@@ -2898,34 +2914,6 @@ defineJQueryPlugin(Offcanvas);
  * --------------------------------------------------------------------------
  */
 
-const uriAttributes = new Set(['background', 'cite', 'href', 'itemtype', 'longdesc', 'poster', 'src', 'xlink:href']);
-
-/**
- * A pattern that recognizes a commonly useful subset of URLs that are safe.
- *
- * Shout-out to Angular https://github.com/angular/angular/blob/12.2.x/packages/core/src/sanitization/url_sanitizer.ts
- */
-const SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file|sms):|[^#&/:?]*(?:[#/?]|$))/i;
-
-/**
- * A pattern that matches safe data URLs. Only matches image, video and audio types.
- *
- * Shout-out to Angular https://github.com/angular/angular/blob/12.2.x/packages/core/src/sanitization/url_sanitizer.ts
- */
-const DATA_URL_PATTERN = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[\d+/a-z]+=*$/i;
-const allowedAttribute = (attribute, allowedAttributeList) => {
-  const attributeName = attribute.nodeName.toLowerCase();
-  if (allowedAttributeList.includes(attributeName)) {
-    if (uriAttributes.has(attributeName)) {
-      return Boolean(SAFE_URL_PATTERN.test(attribute.nodeValue) || DATA_URL_PATTERN.test(attribute.nodeValue));
-    }
-    return true;
-  }
-
-  // Check if a regular expression validates the attribute.
-  return allowedAttributeList.filter(attributeRegex => attributeRegex instanceof RegExp).some(regex => regex.test(attributeName));
-};
-
 // js-docs-start allow-list
 const ARIA_ATTRIBUTE_PATTERN = /^aria-[\w-]*$/i;
 const DefaultAllowlist = {
@@ -2963,6 +2951,28 @@ const DefaultAllowlist = {
 };
 // js-docs-end allow-list
 
+const uriAttributes = new Set(['background', 'cite', 'href', 'itemtype', 'longdesc', 'poster', 'src', 'xlink:href']);
+
+/**
+ * A pattern that recognizes URLs that are safe wrt. XSS in URL navigation
+ * contexts.
+ *
+ * Shout-out to Angular https://github.com/angular/angular/blob/15.2.8/packages/core/src/sanitization/url_sanitizer.ts#L38
+ */
+// eslint-disable-next-line unicorn/better-regex
+const SAFE_URL_PATTERN = /^(?!javascript:)(?:[a-z0-9+.-]+:|[^&:/?#]*(?:[/?#]|$))/i;
+const allowedAttribute = (attribute, allowedAttributeList) => {
+  const attributeName = attribute.nodeName.toLowerCase();
+  if (allowedAttributeList.includes(attributeName)) {
+    if (uriAttributes.has(attributeName)) {
+      return Boolean(SAFE_URL_PATTERN.test(attribute.nodeValue));
+    }
+    return true;
+  }
+
+  // Check if a regular expression validates the attribute.
+  return allowedAttributeList.filter(attributeRegex => attributeRegex instanceof RegExp).some(regex => regex.test(attributeName));
+};
 function sanitizeHtml(unsafeHtml, allowList, sanitizeFunction) {
   if (!unsafeHtml.length) {
     return unsafeHtml;
@@ -2997,11 +3007,12 @@ function sanitizeHtml(unsafeHtml, allowList, sanitizeFunction) {
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$6 = 'TemplateFactory';
+const NAME$5 = 'TemplateFactory';
 const Default$4 = {
   allowList: DefaultAllowlist,
   content: {},
@@ -3044,7 +3055,7 @@ class TemplateFactory extends Config {
     return DefaultType$4;
   }
   static get NAME() {
-    return NAME$6;
+    return NAME$5;
   }
 
   // Public
@@ -3132,11 +3143,12 @@ class TemplateFactory extends Config {
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$5 = 'tooltip';
+const NAME$4 = 'tooltip';
 const DISALLOWED_ATTRIBUTES = new Set(['sanitize', 'allowList', 'sanitizeFn']);
 const CLASS_NAME_FADE$2 = 'fade';
 const CLASS_NAME_MODAL = 'modal';
@@ -3240,7 +3252,7 @@ class Tooltip extends BaseComponent {
     return DefaultType$3;
   }
   static get NAME() {
-    return NAME$5;
+    return NAME$4;
   }
 
   // Public
@@ -3643,11 +3655,12 @@ defineJQueryPlugin(Tooltip);
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$4 = 'popover';
+const NAME$3 = 'popover';
 const SELECTOR_TITLE = '.popover-header';
 const SELECTOR_CONTENT = '.popover-body';
 const Default$2 = {
@@ -3676,7 +3689,7 @@ class Popover extends Tooltip {
     return DefaultType$2;
   }
   static get NAME() {
-    return NAME$4;
+    return NAME$3;
   }
 
   // Overrides
@@ -3723,11 +3736,12 @@ defineJQueryPlugin(Popover);
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$3 = 'scrollspy';
+const NAME$2 = 'scrollspy';
 const DATA_KEY$2 = 'bs.scrollspy';
 const EVENT_KEY$2 = `.${DATA_KEY$2}`;
 const DATA_API_KEY = '.data-api';
@@ -3791,7 +3805,7 @@ class ScrollSpy extends BaseComponent {
     return DefaultType$1;
   }
   static get NAME() {
-    return NAME$3;
+    return NAME$2;
   }
 
   // Public
@@ -3901,11 +3915,11 @@ class ScrollSpy extends BaseComponent {
       if (!anchor.hash || isDisabled(anchor)) {
         continue;
       }
-      const observableSection = SelectorEngine.findOne(anchor.hash, this._element);
+      const observableSection = SelectorEngine.findOne(decodeURI(anchor.hash), this._element);
 
       // ensure that the observableSection exists & is visible
       if (isVisible(observableSection)) {
-        this._targetLinks.set(anchor.hash, anchor);
+        this._targetLinks.set(decodeURI(anchor.hash), anchor);
         this._observableSections.set(anchor.hash, observableSection);
       }
     }
@@ -3982,11 +3996,12 @@ defineJQueryPlugin(ScrollSpy);
  * --------------------------------------------------------------------------
  */
 
+
 /**
  * Constants
  */
 
-const NAME$2 = 'tab';
+const NAME$1 = 'tab';
 const DATA_KEY$1 = 'bs.tab';
 const EVENT_KEY$1 = `.${DATA_KEY$1}`;
 const EVENT_HIDE$1 = `hide${EVENT_KEY$1}`;
@@ -4035,7 +4050,7 @@ class Tab extends BaseComponent {
 
   // Getters
   static get NAME() {
-    return NAME$2;
+    return NAME$1;
   }
 
   // Public
@@ -4238,189 +4253,11 @@ defineJQueryPlugin(Tab);
 
 /**
  * --------------------------------------------------------------------------
- * Material Style (v3.0.0): color.js
- * Licensed under MIT (https://github.com/materialstyle/materialstyle/blob/master/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-const getColor = color => {
-  const label = document.createElement('label');
-  label.className = `text-${color}`;
-  label.style.display = 'none';
-  document.querySelector('body').append(label);
-  const style = getComputedStyle(label);
-  color = style.color;
-  label.remove();
-  return color;
-};
-const getBaseColor = element => {
-  let base = element.className.match(/base-\S+/);
-  let baseColor;
-  if (base) {
-    base = base[0].replace('base-', '');
-    baseColor = getColor(base);
-  }
-  return baseColor;
-};
-const getPrimaryColor = element => {
-  let primary = element.className.match(/primary-\S+/);
-  let primaryColor;
-  if (primary) {
-    primary = primary[0].replace('primary-', '');
-    primaryColor = getColor(primary);
-  }
-  return primaryColor;
-};
-
-/**
- * ------------------------------------------------------------------------
- * Constants
- * ------------------------------------------------------------------------
- */
-const NAME$1 = 'textfield';
-const VERSION = '3.0';
-const CLASS_NAME_FLOATING = 'floating-label';
-const CLASS_NAME_FLOATING_LINE = 'floating-label-line';
-const LABEL_SCALE = 0.85;
-class TextField extends BaseComponent {
-  constructor(element) {
-    super(element);
-    this._textField = element;
-    this._formFloating = element.closest(`[class*="${CLASS_NAME_FLOATING}"]`);
-    if (this._textField && this._formFloating) {
-      this.initTextFields();
-      this.addFontsReadyEvent();
-    }
-  }
-  static get NAME() {
-    return NAME$1;
-  }
-  static get VERSION() {
-    return VERSION;
-  }
-  static jQueryInterface(config) {
-    return this.each(function () {
-      const data = TextField.getOrCreateInstance(this);
-      if (typeof config === 'string') {
-        if (typeof data[config] === 'undefined') {
-          throw new TypeError(`No method named "${config}"`);
-        }
-        data[config](this);
-      }
-    });
-  }
-  initTextFields() {
-    const baseColor = getBaseColor(this._formFloating);
-    const primaryColor = getPrimaryColor(this._formFloating);
-    if (baseColor) {
-      this._formFloating.style.setProperty('--bs-input-border-color', baseColor);
-    }
-    if (primaryColor) {
-      this._formFloating.style.setProperty('--bs-focus-border-color', primaryColor);
-    }
-    this._label = this._formFloating.querySelector('label');
-    this._inputGroup = this._formFloating.closest('.input-group');
-    if (this._inputGroup) {
-      if (this._formFloating.className.includes(CLASS_NAME_FLOATING_LINE)) {
-        this._inputGroup.classList.add('has-floating-label-line');
-      } else {
-        this._inputGroup.classList.add('has-floating-label');
-      }
-    }
-    this._formFloatingWithIcon = this._formFloating.closest('.with-icon');
-    if (this._formFloatingWithIcon) {
-      this._prepend = this._formFloatingWithIcon.querySelector('.prepend');
-      this._append = this._formFloatingWithIcon.querySelector('.append');
-    }
-    if (this._prepend) {
-      this._label.style.paddingLeft = 0;
-    }
-    if (this._formFloating.className.includes(CLASS_NAME_FLOATING_LINE)) {
-      this.addRipple();
-    } else {
-      this.addNotch();
-    }
-  }
-  redraw() {
-    if (this._label) {
-      this._formFloating.style.setProperty('--label-floating-margin-right', `-${this._label.offsetWidth - this._label.offsetWidth * LABEL_SCALE}px`);
-    }
-    this.addFontsReadyEvent();
-  }
-  addRipple() {
-    const ripple = document.createElement('div');
-    ripple.className = 'm-line-ripple';
-    this._ripple = ripple;
-    this._textField.after(ripple);
-  }
-  addNotch() {
-    const notch = document.createElement('div');
-    notch.className = 'm-notch';
-    const notchBefore = document.createElement('div');
-    notchBefore.className = 'm-notch-before';
-    const notchBetween = document.createElement('div');
-    notchBetween.className = 'm-notch-between';
-    const notchAfter = document.createElement('div');
-    notchAfter.className = 'm-notch-after';
-    notch.append(notchBefore);
-    notch.append(notchBetween);
-    notch.append(notchAfter);
-    this._textField.after(notch);
-    this._notch = notch;
-    if (this._label) {
-      notchBetween.append(this._label);
-      this._formFloating.style.setProperty('--label-floating-margin-right', `-${this._label.offsetWidth - this._label.offsetWidth * LABEL_SCALE}px`);
-    }
-  }
-  addFontsReadyEvent() {
-    document.fonts.ready.then(() => {
-      if (this._formFloatingWithIcon) {
-        if (this._prepend) {
-          this._prepend.style.height = `${this._textField.offsetHeight}px`;
-          this._formFloating.style.setProperty('--prepend-width', `${this._prepend.offsetWidth}px`);
-        }
-        if (this._append) {
-          this._append.style.height = `${this._textField.offsetHeight}px`;
-          this._formFloating.style.setProperty('--append-width', `${this._append.offsetWidth}px`);
-        }
-      }
-    });
-  }
-}
-const textFieldList = Array.prototype.slice.call(document.querySelectorAll('.form-control, .form-select'));
-textFieldList.map(textField => new TextField(textField));
-
-// function initField() {
-//   const textFieldList = Array.prototype.slice.call(
-//     document.querySelectorAll('.form-control, .form-select')
-//   )
-//   textFieldList.map(textField => {
-//     return new TextField(textField)
-//   })
-//   const elModals = document.querySelector('.modal')
-//   if (elModals) {
-//     elModals.addEventListener('shown.bs.modal', function () {
-//       const textFields = this.querySelectorAll('.form-control')
-//       for (const [, value] of Object.entries(textFields)) {
-//         const textFieldInstance = TextField.getOrCreateInstance(value)
-//         textFieldInstance.redraw()
-//       }
-//     })
-//   }
-// }
-//
-// initField()
-/**
- * jQuery
- */
-defineJQueryPlugin(TextField);
-
-/**
- * --------------------------------------------------------------------------
  * Bootstrap toast.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
+
 
 /**
  * Constants
@@ -4598,5 +4435,5 @@ enableDismissTrigger(Toast);
 
 defineJQueryPlugin(Toast);
 
-export { Alert, Button, Carousel, Collapse, Dropdown, Modal, Offcanvas, Popover, ScrollSpy, Tab, TextField, Toast, Tooltip };
+export { Alert, Button, Carousel, Collapse, Dropdown, Modal, Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip };
 //# sourceMappingURL=bootstrap.esm.js.map
