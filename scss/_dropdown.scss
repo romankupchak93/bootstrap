@@ -16,6 +16,13 @@
 }
 
 // The dropdown menu
+.dropdown-current-fm {
+  min-width: 295px;
+  > .dropdown-header {
+    background-color: --#{$prefix}color-surface-2;
+  }
+}
+
 .dropdown-menu {
   // scss-docs-start dropdown-css-vars
   --#{$prefix}dropdown-zindex: #{$zindex-dropdown};
@@ -26,9 +33,7 @@
   @include rfs($dropdown-font-size, --#{$prefix}dropdown-font-size);
   --#{$prefix}dropdown-color: #{$dropdown-color};
   --#{$prefix}dropdown-bg: #{$dropdown-bg};
-  --#{$prefix}dropdown-border-color: #{$dropdown-border-color};
   --#{$prefix}dropdown-border-radius: #{$dropdown-border-radius};
-  --#{$prefix}dropdown-border-width: #{$dropdown-border-width};
   --#{$prefix}dropdown-inner-border-radius: #{$dropdown-inner-border-radius};
   --#{$prefix}dropdown-divider-bg: #{$dropdown-divider-bg};
   --#{$prefix}dropdown-divider-margin-y: #{$dropdown-divider-margin-y};
@@ -80,7 +85,12 @@
 
   }
 }
-
+@include media-breakpoint-up(md) {
+  .dropdown-menu {
+    --#{$prefix}dropdown-border-color: #{$dropdown-border-color};
+    --#{$prefix}dropdown-border-width: #{$dropdown-border-width};
+  }
+}
 // scss-docs-start responsive-breakpoints
 // We deliberately hardcode the `bs-` prefix because we check
 // this custom property in JS to determine Popper's positioning

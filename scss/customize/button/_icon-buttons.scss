@@ -1,0 +1,35 @@
+// Icon button
+
+.btn-icon {
+  $btn-icon-size: ($btn-font-size * $btn-line-height) + ($btn-padding-y * 2);
+  $btn-icon-size-lg: ($btn-font-size-lg * $line-height-lg) + ($btn-padding-y-lg * 2);
+  $btn-icon-size-sm: ($btn-font-size-sm * $line-height-sm) + ($btn-padding-y-sm * 2);
+  $borders-width: calc(#{$btn-border-width} * 2);
+  --#{$prefix}btn-active-border-color: transparent;
+
+  padding: 0;
+  width: calc(#{$btn-icon-size} + #{$borders-width});
+  height: calc(#{$btn-icon-size} + #{$borders-width});
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+
+  &.btn-fab {
+    width: calc(#{$btn-icon-size-lg} - #{$borders-width});
+    height: calc(#{$btn-icon-size-lg} - #{$borders-width});
+  }
+
+  &.btn-lg {
+    width: calc(#{$btn-icon-size-lg} + #{$borders-width});
+    height: calc(#{$btn-icon-size-lg} + #{$borders-width});
+    font-size: $btn-font-size-lg;
+  }
+
+  &.btn-sm {
+    width: calc(#{$btn-icon-size-sm} + #{$borders-width});
+    height: calc(#{$btn-icon-size-sm} + #{$borders-width});
+    font-size: $btn-font-size-sm;
+  }
+}

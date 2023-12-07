@@ -1,5 +1,5 @@
 /*!
-  * Bootstrap v5.3.2 (https://getbootstrap.com/)
+  * Bootstrap v5.3.0-alpha1 (https://getbootstrap.com/)
   * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -11,55 +11,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap dom/data.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-
-  /**
-   * Constants
-   */
-
-  const elementMap = new Map();
-  const Data = {
-    set(element, key, instance) {
-      if (!elementMap.has(element)) {
-        elementMap.set(element, new Map());
-      }
-      const instanceMap = elementMap.get(element);
-
-      // make it clear we only want one instance per element
-      // can be removed later when multiple key/instances are fine to be used
-      if (!instanceMap.has(key) && instanceMap.size !== 0) {
-        // eslint-disable-next-line no-console
-        console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
-        return;
-      }
-      instanceMap.set(key, instance);
-    },
-    get(element, key) {
-      if (elementMap.has(element)) {
-        return elementMap.get(element).get(key) || null;
-      }
-      return null;
-    },
-    remove(element, key) {
-      if (!elementMap.has(element)) {
-        return;
-      }
-      const instanceMap = elementMap.get(element);
-      instanceMap.delete(key);
-
-      // free up element references if there are no instances left for an element
-      if (instanceMap.size === 0) {
-        elementMap.delete(element);
-      }
-    }
-  };
-
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap util/index.js
+   * Bootstrap (v5.3.0-alpha1): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -210,7 +162,6 @@
   const reflow = element => {
     element.offsetHeight; // eslint-disable-line no-unused-expressions
   };
-
   const getjQuery = () => {
     if (window.jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
       return window.jQuery;
@@ -306,7 +257,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap dom/event-handler.js
+   * Bootstrap (v5.3.0-alpha1): dom/event-handler.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -377,7 +328,7 @@
   }
   function normalizeParameters(originalTypeEvent, handler, delegationFunction) {
     const isDelegated = typeof handler === 'string';
-    // TODO: tooltip passes `false` instead of selector, so we need to check
+    // todo: tooltip passes `false` instead of selector, so we need to check
     const callable = isDelegated ? delegationFunction : handler || delegationFunction;
     let typeEvent = getTypeEvent(originalTypeEvent);
     if (!nativeEvents.has(typeEvent)) {
@@ -494,10 +445,11 @@
         nativeDispatch = !jQueryEvent.isImmediatePropagationStopped();
         defaultPrevented = jQueryEvent.isDefaultPrevented();
       }
-      const evt = hydrateObj(new Event(event, {
+      let evt = new Event(event, {
         bubbles,
         cancelable: true
-      }), args);
+      });
+      evt = hydrateObj(evt, args);
       if (defaultPrevented) {
         evt.preventDefault();
       }
@@ -528,7 +480,55 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap dom/manipulator.js
+   * Bootstrap (v5.3.0-alpha1): dom/data.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+  /**
+   * Constants
+   */
+
+  const elementMap = new Map();
+  const Data = {
+    set(element, key, instance) {
+      if (!elementMap.has(element)) {
+        elementMap.set(element, new Map());
+      }
+      const instanceMap = elementMap.get(element);
+
+      // make it clear we only want one instance per element
+      // can be removed later when multiple key/instances are fine to be used
+      if (!instanceMap.has(key) && instanceMap.size !== 0) {
+        // eslint-disable-next-line no-console
+        console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
+        return;
+      }
+      instanceMap.set(key, instance);
+    },
+    get(element, key) {
+      if (elementMap.has(element)) {
+        return elementMap.get(element).get(key) || null;
+      }
+      return null;
+    },
+    remove(element, key) {
+      if (!elementMap.has(element)) {
+        return;
+      }
+      const instanceMap = elementMap.get(element);
+      instanceMap.delete(key);
+
+      // free up element references if there are no instances left for an element
+      if (instanceMap.size === 0) {
+        elementMap.delete(element);
+      }
+    }
+  };
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.3.0-alpha1): dom/manipulator.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -578,6 +578,20 @@
       }
       return attributes;
     },
+    getDataClassAttributes(element) {
+      if (!element) {
+        return {};
+      }
+      const attributes = {
+        ...element.dataset
+      };
+      Object.keys(attributes).filter(key => key.startsWith('bs')).forEach(key => {
+        let pureKey = key.replace(/^bs/, '');
+        pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length);
+        attributes[pureKey] = normalizeData(attributes[key]);
+      });
+      return attributes;
+    },
     getDataAttribute(element, key) {
       return normalizeData(element.getAttribute(`data-bs-${normalizeDataKey(key)}`));
     }
@@ -585,7 +599,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap util/config.js
+   * Bootstrap (v5.3.0-alpha1): util/config.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -638,7 +652,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap base-component.js
+   * Bootstrap (v5.3.0-alpha1): base-component.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -648,7 +662,7 @@
    * Constants
    */
 
-  const VERSION = '5.3.2';
+  const VERSION = '5.3.0-alpha1';
 
   /**
    * Class definition
@@ -707,7 +721,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap dom/selector-engine.js
+   * Bootstrap (v5.3.0-alpha1): dom/selector-engine.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -729,9 +743,9 @@
       if (hrefAttribute.includes('#') && !hrefAttribute.startsWith('#')) {
         hrefAttribute = `#${hrefAttribute.split('#')[1]}`;
       }
-      selector = hrefAttribute && hrefAttribute !== '#' ? parseSelector(hrefAttribute.trim()) : null;
+      selector = hrefAttribute && hrefAttribute !== '#' ? hrefAttribute.trim() : null;
     }
-    return selector;
+    return parseSelector(selector);
   };
   const SelectorEngine = {
     find(selector, element = document.documentElement) {
@@ -796,7 +810,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap util/component-functions.js
+   * Bootstrap (v5.3.0-alpha1): util/component-functions.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -821,7 +835,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap alert.js
+   * Bootstrap (v5.3.0-alpha1): alert.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -831,11 +845,11 @@
    * Constants
    */
 
-  const NAME$f = 'alert';
-  const DATA_KEY$a = 'bs.alert';
-  const EVENT_KEY$b = `.${DATA_KEY$a}`;
-  const EVENT_CLOSE = `close${EVENT_KEY$b}`;
-  const EVENT_CLOSED = `closed${EVENT_KEY$b}`;
+  const NAME$g = 'alert';
+  const DATA_KEY$b = 'bs.alert';
+  const EVENT_KEY$c = `.${DATA_KEY$b}`;
+  const EVENT_CLOSE = `close${EVENT_KEY$c}`;
+  const EVENT_CLOSED = `closed${EVENT_KEY$c}`;
   const CLASS_NAME_FADE$5 = 'fade';
   const CLASS_NAME_SHOW$8 = 'show';
 
@@ -846,7 +860,7 @@
   class Alert extends BaseComponent {
     // Getters
     static get NAME() {
-      return NAME$f;
+      return NAME$g;
     }
 
     // Public
@@ -896,7 +910,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap button.js
+   * Bootstrap (v5.3.0-alpha1): button.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -906,13 +920,13 @@
    * Constants
    */
 
-  const NAME$e = 'button';
-  const DATA_KEY$9 = 'bs.button';
-  const EVENT_KEY$a = `.${DATA_KEY$9}`;
-  const DATA_API_KEY$6 = '.data-api';
+  const NAME$f = 'button';
+  const DATA_KEY$a = 'bs.button';
+  const EVENT_KEY$b = `.${DATA_KEY$a}`;
+  const DATA_API_KEY$7 = '.data-api';
   const CLASS_NAME_ACTIVE$3 = 'active';
-  const SELECTOR_DATA_TOGGLE$5 = '[data-bs-toggle="button"]';
-  const EVENT_CLICK_DATA_API$6 = `click${EVENT_KEY$a}${DATA_API_KEY$6}`;
+  const SELECTOR_DATA_TOGGLE$6 = '[data-bs-toggle="button"]';
+  const EVENT_CLICK_DATA_API$6 = `click${EVENT_KEY$b}${DATA_API_KEY$7}`;
 
   /**
    * Class definition
@@ -921,7 +935,7 @@
   class Button extends BaseComponent {
     // Getters
     static get NAME() {
-      return NAME$e;
+      return NAME$f;
     }
 
     // Public
@@ -944,13 +958,21 @@
   /**
    * Data API implementation
    */
-
-  EventHandler.on(document, EVENT_CLICK_DATA_API$6, SELECTOR_DATA_TOGGLE$5, event => {
+  EventHandler.on(document, EVENT_CLICK_DATA_API$6, SELECTOR_DATA_TOGGLE$6, event => {
     event.preventDefault();
-    const button = event.target.closest(SELECTOR_DATA_TOGGLE$5);
+    const button = event.target.closest(SELECTOR_DATA_TOGGLE$6);
     const data = Button.getOrCreateInstance(button);
     data.toggle();
   });
+
+  // EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, event => {
+  //   event.preventDefault()
+  //
+  //   const button = event.target.closest(SELECTOR_DATA_TOGGLE)
+  //   const data = Button.getOrCreateInstance(button)
+  //
+  //   data.toggle()
+  // })
 
   /**
    * jQuery
@@ -960,7 +982,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap util/swipe.js
+   * Bootstrap (v5.3.0-alpha1): util/swipe.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -970,13 +992,13 @@
    * Constants
    */
 
-  const NAME$d = 'swipe';
-  const EVENT_KEY$9 = '.bs.swipe';
-  const EVENT_TOUCHSTART = `touchstart${EVENT_KEY$9}`;
-  const EVENT_TOUCHMOVE = `touchmove${EVENT_KEY$9}`;
-  const EVENT_TOUCHEND = `touchend${EVENT_KEY$9}`;
-  const EVENT_POINTERDOWN = `pointerdown${EVENT_KEY$9}`;
-  const EVENT_POINTERUP = `pointerup${EVENT_KEY$9}`;
+  const NAME$e = 'swipe';
+  const EVENT_KEY$a = '.bs.swipe';
+  const EVENT_TOUCHSTART = `touchstart${EVENT_KEY$a}`;
+  const EVENT_TOUCHMOVE = `touchmove${EVENT_KEY$a}`;
+  const EVENT_TOUCHEND = `touchend${EVENT_KEY$a}`;
+  const EVENT_POINTERDOWN = `pointerdown${EVENT_KEY$a}`;
+  const EVENT_POINTERUP = `pointerup${EVENT_KEY$a}`;
   const POINTER_TYPE_TOUCH = 'touch';
   const POINTER_TYPE_PEN = 'pen';
   const CLASS_NAME_POINTER_EVENT = 'pointer-event';
@@ -1017,12 +1039,12 @@
       return DefaultType$c;
     }
     static get NAME() {
-      return NAME$d;
+      return NAME$e;
     }
 
     // Public
     dispose() {
-      EventHandler.off(this._element, EVENT_KEY$9);
+      EventHandler.off(this._element, EVENT_KEY$a);
     }
 
     // Private
@@ -1080,7 +1102,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap carousel.js
+   * Bootstrap (v5.3.0-alpha1): carousel.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -1090,10 +1112,10 @@
    * Constants
    */
 
-  const NAME$c = 'carousel';
-  const DATA_KEY$8 = 'bs.carousel';
-  const EVENT_KEY$8 = `.${DATA_KEY$8}`;
-  const DATA_API_KEY$5 = '.data-api';
+  const NAME$d = 'carousel';
+  const DATA_KEY$9 = 'bs.carousel';
+  const EVENT_KEY$9 = `.${DATA_KEY$9}`;
+  const DATA_API_KEY$6 = '.data-api';
   const ARROW_LEFT_KEY$1 = 'ArrowLeft';
   const ARROW_RIGHT_KEY$1 = 'ArrowRight';
   const TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat events to fire after touch
@@ -1102,14 +1124,14 @@
   const ORDER_PREV = 'prev';
   const DIRECTION_LEFT = 'left';
   const DIRECTION_RIGHT = 'right';
-  const EVENT_SLIDE = `slide${EVENT_KEY$8}`;
-  const EVENT_SLID = `slid${EVENT_KEY$8}`;
-  const EVENT_KEYDOWN$1 = `keydown${EVENT_KEY$8}`;
-  const EVENT_MOUSEENTER$1 = `mouseenter${EVENT_KEY$8}`;
-  const EVENT_MOUSELEAVE$1 = `mouseleave${EVENT_KEY$8}`;
-  const EVENT_DRAG_START = `dragstart${EVENT_KEY$8}`;
-  const EVENT_LOAD_DATA_API$3 = `load${EVENT_KEY$8}${DATA_API_KEY$5}`;
-  const EVENT_CLICK_DATA_API$5 = `click${EVENT_KEY$8}${DATA_API_KEY$5}`;
+  const EVENT_SLIDE = `slide${EVENT_KEY$9}`;
+  const EVENT_SLID = `slid${EVENT_KEY$9}`;
+  const EVENT_KEYDOWN$1 = `keydown${EVENT_KEY$9}`;
+  const EVENT_MOUSEENTER$1 = `mouseenter${EVENT_KEY$9}`;
+  const EVENT_MOUSELEAVE$1 = `mouseleave${EVENT_KEY$9}`;
+  const EVENT_DRAG_START = `dragstart${EVENT_KEY$9}`;
+  const EVENT_LOAD_DATA_API$4 = `load${EVENT_KEY$9}${DATA_API_KEY$6}`;
+  const EVENT_CLICK_DATA_API$5 = `click${EVENT_KEY$9}${DATA_API_KEY$6}`;
   const CLASS_NAME_CAROUSEL = 'carousel';
   const CLASS_NAME_ACTIVE$2 = 'active';
   const CLASS_NAME_SLIDE = 'slide';
@@ -1173,7 +1195,7 @@
       return DefaultType$b;
     }
     static get NAME() {
-      return NAME$c;
+      return NAME$d;
     }
 
     // Public
@@ -1341,7 +1363,7 @@
       }
       if (!activeElement || !nextElement) {
         // Some weirdness is happening, so we bail
-        // TODO: change tests that use empty divs to avoid this check
+        // todo: change tests that use empty divs to avoid this check
         return;
       }
       const isCycling = Boolean(this._interval);
@@ -1438,7 +1460,7 @@
     carousel.prev();
     carousel._maybeEnableCycle();
   });
-  EventHandler.on(window, EVENT_LOAD_DATA_API$3, () => {
+  EventHandler.on(window, EVENT_LOAD_DATA_API$4, () => {
     const carousels = SelectorEngine.find(SELECTOR_DATA_RIDE);
     for (const carousel of carousels) {
       Carousel.getOrCreateInstance(carousel);
@@ -1453,7 +1475,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap collapse.js
+   * Bootstrap (v5.3.0-alpha1): collapse.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -1463,15 +1485,15 @@
    * Constants
    */
 
-  const NAME$b = 'collapse';
-  const DATA_KEY$7 = 'bs.collapse';
-  const EVENT_KEY$7 = `.${DATA_KEY$7}`;
-  const DATA_API_KEY$4 = '.data-api';
-  const EVENT_SHOW$6 = `show${EVENT_KEY$7}`;
-  const EVENT_SHOWN$6 = `shown${EVENT_KEY$7}`;
-  const EVENT_HIDE$6 = `hide${EVENT_KEY$7}`;
-  const EVENT_HIDDEN$6 = `hidden${EVENT_KEY$7}`;
-  const EVENT_CLICK_DATA_API$4 = `click${EVENT_KEY$7}${DATA_API_KEY$4}`;
+  const NAME$c = 'collapse';
+  const DATA_KEY$8 = 'bs.collapse';
+  const EVENT_KEY$8 = `.${DATA_KEY$8}`;
+  const DATA_API_KEY$5 = '.data-api';
+  const EVENT_SHOW$6 = `show${EVENT_KEY$8}`;
+  const EVENT_SHOWN$6 = `shown${EVENT_KEY$8}`;
+  const EVENT_HIDE$6 = `hide${EVENT_KEY$8}`;
+  const EVENT_HIDDEN$6 = `hidden${EVENT_KEY$8}`;
+  const EVENT_CLICK_DATA_API$4 = `click${EVENT_KEY$8}${DATA_API_KEY$5}`;
   const CLASS_NAME_SHOW$7 = 'show';
   const CLASS_NAME_COLLAPSE = 'collapse';
   const CLASS_NAME_COLLAPSING = 'collapsing';
@@ -1481,7 +1503,7 @@
   const WIDTH = 'width';
   const HEIGHT = 'height';
   const SELECTOR_ACTIVES = '.collapse.show, .collapse.collapsing';
-  const SELECTOR_DATA_TOGGLE$4 = '[data-bs-toggle="collapse"]';
+  const SELECTOR_DATA_TOGGLE$5 = '[data-bs-toggle="collapse"]';
   const Default$a = {
     parent: null,
     toggle: true
@@ -1500,7 +1522,7 @@
       super(element, config);
       this._isTransitioning = false;
       this._triggerArray = [];
-      const toggleList = SelectorEngine.find(SELECTOR_DATA_TOGGLE$4);
+      const toggleList = SelectorEngine.find(SELECTOR_DATA_TOGGLE$5);
       for (const elem of toggleList) {
         const selector = SelectorEngine.getSelectorFromElement(elem);
         const filterElement = SelectorEngine.find(selector).filter(foundElement => foundElement === this._element);
@@ -1525,7 +1547,7 @@
       return DefaultType$a;
     }
     static get NAME() {
-      return NAME$b;
+      return NAME$c;
     }
 
     // Public
@@ -1622,7 +1644,7 @@
       if (!this._config.parent) {
         return;
       }
-      const children = this._getFirstLevelChildren(SELECTOR_DATA_TOGGLE$4);
+      const children = this._getFirstLevelChildren(SELECTOR_DATA_TOGGLE$5);
       for (const element of children) {
         const selected = SelectorEngine.getElementFromSelector(element);
         if (selected) {
@@ -1667,7 +1689,7 @@
    * Data API implementation
    */
 
-  EventHandler.on(document, EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$4, function (event) {
+  EventHandler.on(document, EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$5, function (event) {
     // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
     if (event.target.tagName === 'A' || event.delegateTarget && event.delegateTarget.tagName === 'A') {
       event.preventDefault();
@@ -3526,7 +3548,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap dropdown.js
+   * Bootstrap (v5.3.0-alpha1): dropdown.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -3536,31 +3558,31 @@
    * Constants
    */
 
-  const NAME$a = 'dropdown';
-  const DATA_KEY$6 = 'bs.dropdown';
-  const EVENT_KEY$6 = `.${DATA_KEY$6}`;
-  const DATA_API_KEY$3 = '.data-api';
+  const NAME$b = 'dropdown';
+  const DATA_KEY$7 = 'bs.dropdown';
+  const EVENT_KEY$7 = `.${DATA_KEY$7}`;
+  const DATA_API_KEY$4 = '.data-api';
   const ESCAPE_KEY$2 = 'Escape';
   const TAB_KEY$1 = 'Tab';
   const ARROW_UP_KEY$1 = 'ArrowUp';
   const ARROW_DOWN_KEY$1 = 'ArrowDown';
   const RIGHT_MOUSE_BUTTON = 2; // MouseEvent.button value for the secondary button, usually the right button
 
-  const EVENT_HIDE$5 = `hide${EVENT_KEY$6}`;
-  const EVENT_HIDDEN$5 = `hidden${EVENT_KEY$6}`;
-  const EVENT_SHOW$5 = `show${EVENT_KEY$6}`;
-  const EVENT_SHOWN$5 = `shown${EVENT_KEY$6}`;
-  const EVENT_CLICK_DATA_API$3 = `click${EVENT_KEY$6}${DATA_API_KEY$3}`;
-  const EVENT_KEYDOWN_DATA_API = `keydown${EVENT_KEY$6}${DATA_API_KEY$3}`;
-  const EVENT_KEYUP_DATA_API = `keyup${EVENT_KEY$6}${DATA_API_KEY$3}`;
+  const EVENT_HIDE$5 = `hide${EVENT_KEY$7}`;
+  const EVENT_HIDDEN$5 = `hidden${EVENT_KEY$7}`;
+  const EVENT_SHOW$5 = `show${EVENT_KEY$7}`;
+  const EVENT_SHOWN$5 = `shown${EVENT_KEY$7}`;
+  const EVENT_CLICK_DATA_API$3 = `click${EVENT_KEY$7}${DATA_API_KEY$4}`;
+  const EVENT_KEYDOWN_DATA_API = `keydown${EVENT_KEY$7}${DATA_API_KEY$4}`;
+  const EVENT_KEYUP_DATA_API = `keyup${EVENT_KEY$7}${DATA_API_KEY$4}`;
   const CLASS_NAME_SHOW$6 = 'show';
   const CLASS_NAME_DROPUP = 'dropup';
   const CLASS_NAME_DROPEND = 'dropend';
   const CLASS_NAME_DROPSTART = 'dropstart';
   const CLASS_NAME_DROPUP_CENTER = 'dropup-center';
   const CLASS_NAME_DROPDOWN_CENTER = 'dropdown-center';
-  const SELECTOR_DATA_TOGGLE$3 = '[data-bs-toggle="dropdown"]:not(.disabled):not(:disabled)';
-  const SELECTOR_DATA_TOGGLE_SHOWN = `${SELECTOR_DATA_TOGGLE$3}.${CLASS_NAME_SHOW$6}`;
+  const SELECTOR_DATA_TOGGLE$4 = '[data-bs-toggle="dropdown"]:not(.disabled):not(:disabled)';
+  const SELECTOR_DATA_TOGGLE_SHOWN = `${SELECTOR_DATA_TOGGLE$4}.${CLASS_NAME_SHOW$6}`;
   const SELECTOR_MENU = '.dropdown-menu';
   const SELECTOR_NAVBAR = '.navbar';
   const SELECTOR_NAVBAR_NAV = '.navbar-nav';
@@ -3599,7 +3621,7 @@
       super(element, config);
       this._popper = null;
       this._parent = this._element.parentNode; // dropdown wrapper
-      // TODO: v6 revert #37011 & change markup https://getbootstrap.com/docs/5.3/forms/input-group/
+      // todo: v6 revert #37011 & change markup https://getbootstrap.com/docs/5.3/forms/input-group/
       this._menu = SelectorEngine.next(this._element, SELECTOR_MENU)[0] || SelectorEngine.prev(this._element, SELECTOR_MENU)[0] || SelectorEngine.findOne(SELECTOR_MENU, this._parent);
       this._inNavbar = this._detectNavbar();
     }
@@ -3612,7 +3634,7 @@
       return DefaultType$9;
     }
     static get NAME() {
-      return NAME$a;
+      return NAME$b;
     }
 
     // Public
@@ -3696,7 +3718,7 @@
       config = super._getConfig(config);
       if (typeof config.reference === 'object' && !isElement$1(config.reference) && typeof config.reference.getBoundingClientRect !== 'function') {
         // Popper virtual elements require a getBoundingClientRect method
-        throw new TypeError(`${NAME$a.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
+        throw new TypeError(`${NAME$b.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);
       }
       return config;
     }
@@ -3773,7 +3795,7 @@
 
       // Disable Popper if we have a static display or Dropdown is in Navbar
       if (this._inNavbar || this._config.display === 'static') {
-        Manipulator.setDataAttribute(this._menu, 'popper', 'static'); // TODO: v6 remove
+        Manipulator.setDataAttribute(this._menu, 'popper', 'static'); // todo:v6 remove
         defaultBsPopperConfig.modifiers = [{
           name: 'applyStyles',
           enabled: false
@@ -3855,8 +3877,8 @@
       }
       event.preventDefault();
 
-      // TODO: v6 revert #37011 & change markup https://getbootstrap.com/docs/5.3/forms/input-group/
-      const getToggleButton = this.matches(SELECTOR_DATA_TOGGLE$3) ? this : SelectorEngine.prev(this, SELECTOR_DATA_TOGGLE$3)[0] || SelectorEngine.next(this, SELECTOR_DATA_TOGGLE$3)[0] || SelectorEngine.findOne(SELECTOR_DATA_TOGGLE$3, event.delegateTarget.parentNode);
+      // todo: v6 revert #37011 & change markup https://getbootstrap.com/docs/5.3/forms/input-group/
+      const getToggleButton = this.matches(SELECTOR_DATA_TOGGLE$4) ? this : SelectorEngine.prev(this, SELECTOR_DATA_TOGGLE$4)[0] || SelectorEngine.next(this, SELECTOR_DATA_TOGGLE$4)[0] || SelectorEngine.findOne(SELECTOR_DATA_TOGGLE$4, event.delegateTarget.parentNode);
       const instance = Dropdown.getOrCreateInstance(getToggleButton);
       if (isUpOrDownEvent) {
         event.stopPropagation();
@@ -3877,11 +3899,11 @@
    * Data API implementation
    */
 
-  EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$3, Dropdown.dataApiKeydownHandler);
+  EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$4, Dropdown.dataApiKeydownHandler);
   EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Dropdown.dataApiKeydownHandler);
   EventHandler.on(document, EVENT_CLICK_DATA_API$3, Dropdown.clearMenus);
   EventHandler.on(document, EVENT_KEYUP_DATA_API, Dropdown.clearMenus);
-  EventHandler.on(document, EVENT_CLICK_DATA_API$3, SELECTOR_DATA_TOGGLE$3, function (event) {
+  EventHandler.on(document, EVENT_CLICK_DATA_API$3, SELECTOR_DATA_TOGGLE$4, function (event) {
     event.preventDefault();
     Dropdown.getOrCreateInstance(this).toggle();
   });
@@ -3893,8 +3915,1355 @@
   defineJQueryPlugin(Dropdown);
 
   /**
+   * Stores result from supportsCssVariables to avoid redundant processing to
+   * detect CSS custom variable support.
+   */
+  var supportsCssVariables_;
+  function supportsCssVariables(windowObj, forceRefresh) {
+      if (forceRefresh === void 0) { forceRefresh = false; }
+      var CSS = windowObj.CSS;
+      var supportsCssVars = supportsCssVariables_;
+      if (typeof supportsCssVariables_ === 'boolean' && !forceRefresh) {
+          return supportsCssVariables_;
+      }
+      var supportsFunctionPresent = CSS && typeof CSS.supports === 'function';
+      if (!supportsFunctionPresent) {
+          return false;
+      }
+      var explicitlySupportsCssVars = CSS.supports('--css-vars', 'yes');
+      // See: https://bugs.webkit.org/show_bug.cgi?id=154669
+      // See: README section on Safari
+      var weAreFeatureDetectingSafari10plus = (CSS.supports('(--css-vars: yes)') &&
+          CSS.supports('color', '#00000000'));
+      supportsCssVars =
+          explicitlySupportsCssVars || weAreFeatureDetectingSafari10plus;
+      if (!forceRefresh) {
+          supportsCssVariables_ = supportsCssVars;
+      }
+      return supportsCssVars;
+  }
+  function getNormalizedEventCoords(evt, pageOffset, clientRect) {
+      if (!evt) {
+          return { x: 0, y: 0 };
+      }
+      var x = pageOffset.x, y = pageOffset.y;
+      var documentX = x + clientRect.left;
+      var documentY = y + clientRect.top;
+      var normalizedX;
+      var normalizedY;
+      // Determine touch point relative to the ripple container.
+      if (evt.type === 'touchstart') {
+          var touchEvent = evt;
+          normalizedX = touchEvent.changedTouches[0].pageX - documentX;
+          normalizedY = touchEvent.changedTouches[0].pageY - documentY;
+      }
+      else {
+          var mouseEvent = evt;
+          normalizedX = mouseEvent.pageX - documentX;
+          normalizedY = mouseEvent.pageY - documentY;
+      }
+      return { x: normalizedX, y: normalizedY };
+  }
+
+  /******************************************************************************
+  Copyright (c) Microsoft Corporation.
+
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted.
+
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+  PERFORMANCE OF THIS SOFTWARE.
+  ***************************************************************************** */
+  /* global Reflect, Promise, SuppressedError, Symbol */
+
+  var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return extendStatics(d, b);
+  };
+
+  function __extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  }
+
+  var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+  };
+
+  function __values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+  }
+
+  function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+  }
+
+  function __spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+  }
+
+  typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+    var e = new Error(message);
+    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+  };
+
+  /**
+   * @license
+   * Copyright 2016 Google Inc.
+   *
+   * Permission is hereby granted, free of charge, to any person obtaining a copy
+   * of this software and associated documentation files (the "Software"), to deal
+   * in the Software without restriction, including without limitation the rights
+   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   * copies of the Software, and to permit persons to whom the Software is
+   * furnished to do so, subject to the following conditions:
+   *
+   * The above copyright notice and this permission notice shall be included in
+   * all copies or substantial portions of the Software.
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+   * THE SOFTWARE.
+   */
+  var MDCFoundation = /** @class */ (function () {
+      function MDCFoundation(adapter) {
+          if (adapter === void 0) { adapter = {}; }
+          this.adapter = adapter;
+      }
+      Object.defineProperty(MDCFoundation, "cssClasses", {
+          get: function () {
+              // Classes extending MDCFoundation should implement this method to return an object which exports every
+              // CSS class the foundation class needs as a property. e.g. {ACTIVE: 'mdc-component--active'}
+              return {};
+          },
+          enumerable: false,
+          configurable: true
+      });
+      Object.defineProperty(MDCFoundation, "strings", {
+          get: function () {
+              // Classes extending MDCFoundation should implement this method to return an object which exports all
+              // semantic strings as constants. e.g. {ARIA_ROLE: 'tablist'}
+              return {};
+          },
+          enumerable: false,
+          configurable: true
+      });
+      Object.defineProperty(MDCFoundation, "numbers", {
+          get: function () {
+              // Classes extending MDCFoundation should implement this method to return an object which exports all
+              // of its semantic numbers as constants. e.g. {ANIMATION_DELAY_MS: 350}
+              return {};
+          },
+          enumerable: false,
+          configurable: true
+      });
+      Object.defineProperty(MDCFoundation, "defaultAdapter", {
+          get: function () {
+              // Classes extending MDCFoundation may choose to implement this getter in order to provide a convenient
+              // way of viewing the necessary methods of an adapter. In the future, this could also be used for adapter
+              // validation.
+              return {};
+          },
+          enumerable: false,
+          configurable: true
+      });
+      MDCFoundation.prototype.init = function () {
+          // Subclasses should override this method to perform initialization routines (registering events, etc.)
+      };
+      MDCFoundation.prototype.destroy = function () {
+          // Subclasses should override this method to perform de-initialization routines (de-registering events, etc.)
+      };
+      return MDCFoundation;
+  }());
+
+  /**
+   * @license
+   * Copyright 2016 Google Inc.
+   *
+   * Permission is hereby granted, free of charge, to any person obtaining a copy
+   * of this software and associated documentation files (the "Software"), to deal
+   * in the Software without restriction, including without limitation the rights
+   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   * copies of the Software, and to permit persons to whom the Software is
+   * furnished to do so, subject to the following conditions:
+   *
+   * The above copyright notice and this permission notice shall be included in
+   * all copies or substantial portions of the Software.
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+   * THE SOFTWARE.
+   */
+  var MDCComponent = /** @class */ (function () {
+      function MDCComponent(root, foundation) {
+          var args = [];
+          for (var _i = 2; _i < arguments.length; _i++) {
+              args[_i - 2] = arguments[_i];
+          }
+          this.root = root;
+          this.initialize.apply(this, __spreadArray([], __read(args)));
+          // Note that we initialize foundation here and not within the constructor's
+          // default param so that this.root is defined and can be used within the
+          // foundation class.
+          this.foundation =
+              foundation === undefined ? this.getDefaultFoundation() : foundation;
+          this.foundation.init();
+          this.initialSyncWithDOM();
+      }
+      MDCComponent.attachTo = function (root) {
+          // Subclasses which extend MDCBase should provide an attachTo() method that takes a root element and
+          // returns an instantiated component with its root set to that element. Also note that in the cases of
+          // subclasses, an explicit foundation class will not have to be passed in; it will simply be initialized
+          // from getDefaultFoundation().
+          return new MDCComponent(root, new MDCFoundation({}));
+      };
+      /* istanbul ignore next: method param only exists for typing purposes; it does not need to be unit tested */
+      MDCComponent.prototype.initialize = function () {
+          // Subclasses can override this to do any additional setup work that would be considered part of a
+          // "constructor". Essentially, it is a hook into the parent constructor before the foundation is
+          // initialized. Any additional arguments besides root and foundation will be passed in here.
+      };
+      MDCComponent.prototype.getDefaultFoundation = function () {
+          // Subclasses must override this method to return a properly configured foundation class for the
+          // component.
+          throw new Error('Subclasses must override getDefaultFoundation to return a properly configured ' +
+              'foundation class');
+      };
+      MDCComponent.prototype.initialSyncWithDOM = function () {
+          // Subclasses should override this method if they need to perform work to synchronize with a host DOM
+          // object. An example of this would be a form control wrapper that needs to synchronize its internal state
+          // to some property or attribute of the host DOM. Please note: this is *not* the place to perform DOM
+          // reads/writes that would cause layout / paint, as this is called synchronously from within the constructor.
+      };
+      MDCComponent.prototype.destroy = function () {
+          // Subclasses may implement this method to release any resources / deregister any listeners they have
+          // attached. An example of this might be deregistering a resize event from the window object.
+          this.foundation.destroy();
+      };
+      MDCComponent.prototype.listen = function (evtType, handler, options) {
+          this.root.addEventListener(evtType, handler, options);
+      };
+      MDCComponent.prototype.unlisten = function (evtType, handler, options) {
+          this.root.removeEventListener(evtType, handler, options);
+      };
+      /**
+       * Fires a cross-browser-compatible custom event from the component root of the given type, with the given data.
+       */
+      MDCComponent.prototype.emit = function (evtType, evtData, shouldBubble) {
+          if (shouldBubble === void 0) { shouldBubble = false; }
+          var evt;
+          if (typeof CustomEvent === 'function') {
+              evt = new CustomEvent(evtType, {
+                  bubbles: shouldBubble,
+                  detail: evtData,
+              });
+          }
+          else {
+              evt = document.createEvent('CustomEvent');
+              evt.initCustomEvent(evtType, shouldBubble, false, evtData);
+          }
+          this.root.dispatchEvent(evt);
+      };
+      return MDCComponent;
+  }());
+
+  /**
+   * @license
+   * Copyright 2019 Google Inc.
+   *
+   * Permission is hereby granted, free of charge, to any person obtaining a copy
+   * of this software and associated documentation files (the "Software"), to deal
+   * in the Software without restriction, including without limitation the rights
+   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   * copies of the Software, and to permit persons to whom the Software is
+   * furnished to do so, subject to the following conditions:
+   *
+   * The above copyright notice and this permission notice shall be included in
+   * all copies or substantial portions of the Software.
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+   * THE SOFTWARE.
+   */
+  /**
+   * Determine whether the current browser supports passive event listeners, and
+   * if so, use them.
+   */
+  function applyPassive(globalObj) {
+      if (globalObj === void 0) { globalObj = window; }
+      return supportsPassiveOption(globalObj) ?
+          { passive: true } :
+          false;
+  }
+  function supportsPassiveOption(globalObj) {
+      if (globalObj === void 0) { globalObj = window; }
+      // See
+      // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+      var passiveSupported = false;
+      try {
+          var options = {
+              // This function will be called when the browser
+              // attempts to access the passive property.
+              get passive() {
+                  passiveSupported = true;
+                  return false;
+              }
+          };
+          var handler = function () { };
+          globalObj.document.addEventListener('test', handler, options);
+          globalObj.document.removeEventListener('test', handler, options);
+      }
+      catch (err) {
+          passiveSupported = false;
+      }
+      return passiveSupported;
+  }
+
+  /**
+   * @license
+   * Copyright 2018 Google Inc.
+   *
+   * Permission is hereby granted, free of charge, to any person obtaining a copy
+   * of this software and associated documentation files (the "Software"), to deal
+   * in the Software without restriction, including without limitation the rights
+   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   * copies of the Software, and to permit persons to whom the Software is
+   * furnished to do so, subject to the following conditions:
+   *
+   * The above copyright notice and this permission notice shall be included in
+   * all copies or substantial portions of the Software.
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+   * THE SOFTWARE.
+   */
+  /**
+   * @fileoverview A "ponyfill" is a polyfill that doesn't modify the global prototype chain.
+   * This makes ponyfills safer than traditional polyfills, especially for libraries like MDC.
+   */
+  function matches(element, selector) {
+      var nativeMatches = element.matches
+          || element.webkitMatchesSelector
+          || element.msMatchesSelector;
+      return nativeMatches.call(element, selector);
+  }
+
+  /**
+   * @license
+   * Copyright 2016 Google Inc.
+   *
+   * Permission is hereby granted, free of charge, to any person obtaining a copy
+   * of this software and associated documentation files (the "Software"), to deal
+   * in the Software without restriction, including without limitation the rights
+   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   * copies of the Software, and to permit persons to whom the Software is
+   * furnished to do so, subject to the following conditions:
+   *
+   * The above copyright notice and this permission notice shall be included in
+   * all copies or substantial portions of the Software.
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+   * THE SOFTWARE.
+   */
+  var cssClasses = {
+      // Ripple is a special case where the "root" component is really a "mixin" of sorts,
+      // given that it's an 'upgrade' to an existing component. That being said it is the root
+      // CSS class that all other CSS classes derive from.
+      BG_FOCUSED: 'mdc-ripple-upgraded--background-focused',
+      FG_ACTIVATION: 'mdc-ripple-upgraded--foreground-activation',
+      FG_DEACTIVATION: 'mdc-ripple-upgraded--foreground-deactivation',
+      ROOT: 'mdc-ripple-upgraded',
+      UNBOUNDED: 'mdc-ripple-upgraded--unbounded',
+  };
+  var strings = {
+      VAR_FG_SCALE: '--mdc-ripple-fg-scale',
+      VAR_FG_SIZE: '--mdc-ripple-fg-size',
+      VAR_FG_TRANSLATE_END: '--mdc-ripple-fg-translate-end',
+      VAR_FG_TRANSLATE_START: '--mdc-ripple-fg-translate-start',
+      VAR_LEFT: '--mdc-ripple-left',
+      VAR_TOP: '--mdc-ripple-top',
+  };
+  var numbers = {
+      DEACTIVATION_TIMEOUT_MS: 225,
+      FG_DEACTIVATION_MS: 150,
+      INITIAL_ORIGIN_SCALE: 0.6,
+      PADDING: 10,
+      TAP_DELAY_MS: 300, // Delay between touch and simulated mouse events on touch devices
+  };
+
+  /**
+   * @license
+   * Copyright 2016 Google Inc.
+   *
+   * Permission is hereby granted, free of charge, to any person obtaining a copy
+   * of this software and associated documentation files (the "Software"), to deal
+   * in the Software without restriction, including without limitation the rights
+   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   * copies of the Software, and to permit persons to whom the Software is
+   * furnished to do so, subject to the following conditions:
+   *
+   * The above copyright notice and this permission notice shall be included in
+   * all copies or substantial portions of the Software.
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+   * THE SOFTWARE.
+   */
+  // Activation events registered on the root element of each instance for activation
+  var ACTIVATION_EVENT_TYPES = [
+      'touchstart', 'pointerdown', 'mousedown', 'keydown',
+  ];
+  // Deactivation events registered on documentElement when a pointer-related down event occurs
+  var POINTER_DEACTIVATION_EVENT_TYPES = [
+      'touchend', 'pointerup', 'mouseup', 'contextmenu',
+  ];
+  // simultaneous nested activations
+  var activatedTargets = [];
+  var MDCRippleFoundation = /** @class */ (function (_super) {
+      __extends(MDCRippleFoundation, _super);
+      function MDCRippleFoundation(adapter) {
+          var _this = _super.call(this, __assign(__assign({}, MDCRippleFoundation.defaultAdapter), adapter)) || this;
+          _this.activationAnimationHasEnded = false;
+          _this.activationTimer = 0;
+          _this.fgDeactivationRemovalTimer = 0;
+          _this.fgScale = '0';
+          _this.frame = { width: 0, height: 0 };
+          _this.initialSize = 0;
+          _this.layoutFrame = 0;
+          _this.maxRadius = 0;
+          _this.unboundedCoords = { left: 0, top: 0 };
+          _this.activationState = _this.defaultActivationState();
+          _this.activationTimerCallback = function () {
+              _this.activationAnimationHasEnded = true;
+              _this.runDeactivationUXLogicIfReady();
+          };
+          _this.activateHandler = function (e) {
+              _this.activateImpl(e);
+          };
+          _this.deactivateHandler = function () {
+              _this.deactivateImpl();
+          };
+          _this.focusHandler = function () {
+              _this.handleFocus();
+          };
+          _this.blurHandler = function () {
+              _this.handleBlur();
+          };
+          _this.resizeHandler = function () {
+              _this.layout();
+          };
+          return _this;
+      }
+      Object.defineProperty(MDCRippleFoundation, "cssClasses", {
+          get: function () {
+              return cssClasses;
+          },
+          enumerable: false,
+          configurable: true
+      });
+      Object.defineProperty(MDCRippleFoundation, "strings", {
+          get: function () {
+              return strings;
+          },
+          enumerable: false,
+          configurable: true
+      });
+      Object.defineProperty(MDCRippleFoundation, "numbers", {
+          get: function () {
+              return numbers;
+          },
+          enumerable: false,
+          configurable: true
+      });
+      Object.defineProperty(MDCRippleFoundation, "defaultAdapter", {
+          get: function () {
+              return {
+                  addClass: function () { return undefined; },
+                  browserSupportsCssVars: function () { return true; },
+                  computeBoundingRect: function () {
+                      return ({ top: 0, right: 0, bottom: 0, left: 0, width: 0, height: 0 });
+                  },
+                  containsEventTarget: function () { return true; },
+                  deregisterDocumentInteractionHandler: function () { return undefined; },
+                  deregisterInteractionHandler: function () { return undefined; },
+                  deregisterResizeHandler: function () { return undefined; },
+                  getWindowPageOffset: function () { return ({ x: 0, y: 0 }); },
+                  isSurfaceActive: function () { return true; },
+                  isSurfaceDisabled: function () { return true; },
+                  isUnbounded: function () { return true; },
+                  registerDocumentInteractionHandler: function () { return undefined; },
+                  registerInteractionHandler: function () { return undefined; },
+                  registerResizeHandler: function () { return undefined; },
+                  removeClass: function () { return undefined; },
+                  updateCssVariable: function () { return undefined; },
+              };
+          },
+          enumerable: false,
+          configurable: true
+      });
+      MDCRippleFoundation.prototype.init = function () {
+          var _this = this;
+          var supportsPressRipple = this.supportsPressRipple();
+          this.registerRootHandlers(supportsPressRipple);
+          if (supportsPressRipple) {
+              var _a = MDCRippleFoundation.cssClasses, ROOT_1 = _a.ROOT, UNBOUNDED_1 = _a.UNBOUNDED;
+              requestAnimationFrame(function () {
+                  _this.adapter.addClass(ROOT_1);
+                  if (_this.adapter.isUnbounded()) {
+                      _this.adapter.addClass(UNBOUNDED_1);
+                      // Unbounded ripples need layout logic applied immediately to set coordinates for both shade and ripple
+                      _this.layoutInternal();
+                  }
+              });
+          }
+      };
+      MDCRippleFoundation.prototype.destroy = function () {
+          var _this = this;
+          if (this.supportsPressRipple()) {
+              if (this.activationTimer) {
+                  clearTimeout(this.activationTimer);
+                  this.activationTimer = 0;
+                  this.adapter.removeClass(MDCRippleFoundation.cssClasses.FG_ACTIVATION);
+              }
+              if (this.fgDeactivationRemovalTimer) {
+                  clearTimeout(this.fgDeactivationRemovalTimer);
+                  this.fgDeactivationRemovalTimer = 0;
+                  this.adapter.removeClass(MDCRippleFoundation.cssClasses.FG_DEACTIVATION);
+              }
+              var _a = MDCRippleFoundation.cssClasses, ROOT_2 = _a.ROOT, UNBOUNDED_2 = _a.UNBOUNDED;
+              requestAnimationFrame(function () {
+                  _this.adapter.removeClass(ROOT_2);
+                  _this.adapter.removeClass(UNBOUNDED_2);
+                  _this.removeCssVars();
+              });
+          }
+          this.deregisterRootHandlers();
+          this.deregisterDeactivationHandlers();
+      };
+      /**
+       * @param evt Optional event containing position information.
+       */
+      MDCRippleFoundation.prototype.activate = function (evt) {
+          this.activateImpl(evt);
+      };
+      MDCRippleFoundation.prototype.deactivate = function () {
+          this.deactivateImpl();
+      };
+      MDCRippleFoundation.prototype.layout = function () {
+          var _this = this;
+          if (this.layoutFrame) {
+              cancelAnimationFrame(this.layoutFrame);
+          }
+          this.layoutFrame = requestAnimationFrame(function () {
+              _this.layoutInternal();
+              _this.layoutFrame = 0;
+          });
+      };
+      MDCRippleFoundation.prototype.setUnbounded = function (unbounded) {
+          var UNBOUNDED = MDCRippleFoundation.cssClasses.UNBOUNDED;
+          if (unbounded) {
+              this.adapter.addClass(UNBOUNDED);
+          }
+          else {
+              this.adapter.removeClass(UNBOUNDED);
+          }
+      };
+      MDCRippleFoundation.prototype.handleFocus = function () {
+          var _this = this;
+          requestAnimationFrame(function () { return _this.adapter.addClass(MDCRippleFoundation.cssClasses.BG_FOCUSED); });
+      };
+      MDCRippleFoundation.prototype.handleBlur = function () {
+          var _this = this;
+          requestAnimationFrame(function () { return _this.adapter.removeClass(MDCRippleFoundation.cssClasses.BG_FOCUSED); });
+      };
+      /**
+       * We compute this property so that we are not querying information about the client
+       * until the point in time where the foundation requests it. This prevents scenarios where
+       * client-side feature-detection may happen too early, such as when components are rendered on the server
+       * and then initialized at mount time on the client.
+       */
+      MDCRippleFoundation.prototype.supportsPressRipple = function () {
+          return this.adapter.browserSupportsCssVars();
+      };
+      MDCRippleFoundation.prototype.defaultActivationState = function () {
+          return {
+              activationEvent: undefined,
+              hasDeactivationUXRun: false,
+              isActivated: false,
+              isProgrammatic: false,
+              wasActivatedByPointer: false,
+              wasElementMadeActive: false,
+          };
+      };
+      /**
+       * supportsPressRipple Passed from init to save a redundant function call
+       */
+      MDCRippleFoundation.prototype.registerRootHandlers = function (supportsPressRipple) {
+          var e_1, _a;
+          if (supportsPressRipple) {
+              try {
+                  for (var ACTIVATION_EVENT_TYPES_1 = __values(ACTIVATION_EVENT_TYPES), ACTIVATION_EVENT_TYPES_1_1 = ACTIVATION_EVENT_TYPES_1.next(); !ACTIVATION_EVENT_TYPES_1_1.done; ACTIVATION_EVENT_TYPES_1_1 = ACTIVATION_EVENT_TYPES_1.next()) {
+                      var evtType = ACTIVATION_EVENT_TYPES_1_1.value;
+                      this.adapter.registerInteractionHandler(evtType, this.activateHandler);
+                  }
+              }
+              catch (e_1_1) { e_1 = { error: e_1_1 }; }
+              finally {
+                  try {
+                      if (ACTIVATION_EVENT_TYPES_1_1 && !ACTIVATION_EVENT_TYPES_1_1.done && (_a = ACTIVATION_EVENT_TYPES_1.return)) _a.call(ACTIVATION_EVENT_TYPES_1);
+                  }
+                  finally { if (e_1) throw e_1.error; }
+              }
+              if (this.adapter.isUnbounded()) {
+                  this.adapter.registerResizeHandler(this.resizeHandler);
+              }
+          }
+          this.adapter.registerInteractionHandler('focus', this.focusHandler);
+          this.adapter.registerInteractionHandler('blur', this.blurHandler);
+      };
+      MDCRippleFoundation.prototype.registerDeactivationHandlers = function (evt) {
+          var e_2, _a;
+          if (evt.type === 'keydown') {
+              this.adapter.registerInteractionHandler('keyup', this.deactivateHandler);
+          }
+          else {
+              try {
+                  for (var POINTER_DEACTIVATION_EVENT_TYPES_1 = __values(POINTER_DEACTIVATION_EVENT_TYPES), POINTER_DEACTIVATION_EVENT_TYPES_1_1 = POINTER_DEACTIVATION_EVENT_TYPES_1.next(); !POINTER_DEACTIVATION_EVENT_TYPES_1_1.done; POINTER_DEACTIVATION_EVENT_TYPES_1_1 = POINTER_DEACTIVATION_EVENT_TYPES_1.next()) {
+                      var evtType = POINTER_DEACTIVATION_EVENT_TYPES_1_1.value;
+                      this.adapter.registerDocumentInteractionHandler(evtType, this.deactivateHandler);
+                  }
+              }
+              catch (e_2_1) { e_2 = { error: e_2_1 }; }
+              finally {
+                  try {
+                      if (POINTER_DEACTIVATION_EVENT_TYPES_1_1 && !POINTER_DEACTIVATION_EVENT_TYPES_1_1.done && (_a = POINTER_DEACTIVATION_EVENT_TYPES_1.return)) _a.call(POINTER_DEACTIVATION_EVENT_TYPES_1);
+                  }
+                  finally { if (e_2) throw e_2.error; }
+              }
+          }
+      };
+      MDCRippleFoundation.prototype.deregisterRootHandlers = function () {
+          var e_3, _a;
+          try {
+              for (var ACTIVATION_EVENT_TYPES_2 = __values(ACTIVATION_EVENT_TYPES), ACTIVATION_EVENT_TYPES_2_1 = ACTIVATION_EVENT_TYPES_2.next(); !ACTIVATION_EVENT_TYPES_2_1.done; ACTIVATION_EVENT_TYPES_2_1 = ACTIVATION_EVENT_TYPES_2.next()) {
+                  var evtType = ACTIVATION_EVENT_TYPES_2_1.value;
+                  this.adapter.deregisterInteractionHandler(evtType, this.activateHandler);
+              }
+          }
+          catch (e_3_1) { e_3 = { error: e_3_1 }; }
+          finally {
+              try {
+                  if (ACTIVATION_EVENT_TYPES_2_1 && !ACTIVATION_EVENT_TYPES_2_1.done && (_a = ACTIVATION_EVENT_TYPES_2.return)) _a.call(ACTIVATION_EVENT_TYPES_2);
+              }
+              finally { if (e_3) throw e_3.error; }
+          }
+          this.adapter.deregisterInteractionHandler('focus', this.focusHandler);
+          this.adapter.deregisterInteractionHandler('blur', this.blurHandler);
+          if (this.adapter.isUnbounded()) {
+              this.adapter.deregisterResizeHandler(this.resizeHandler);
+          }
+      };
+      MDCRippleFoundation.prototype.deregisterDeactivationHandlers = function () {
+          var e_4, _a;
+          this.adapter.deregisterInteractionHandler('keyup', this.deactivateHandler);
+          try {
+              for (var POINTER_DEACTIVATION_EVENT_TYPES_2 = __values(POINTER_DEACTIVATION_EVENT_TYPES), POINTER_DEACTIVATION_EVENT_TYPES_2_1 = POINTER_DEACTIVATION_EVENT_TYPES_2.next(); !POINTER_DEACTIVATION_EVENT_TYPES_2_1.done; POINTER_DEACTIVATION_EVENT_TYPES_2_1 = POINTER_DEACTIVATION_EVENT_TYPES_2.next()) {
+                  var evtType = POINTER_DEACTIVATION_EVENT_TYPES_2_1.value;
+                  this.adapter.deregisterDocumentInteractionHandler(evtType, this.deactivateHandler);
+              }
+          }
+          catch (e_4_1) { e_4 = { error: e_4_1 }; }
+          finally {
+              try {
+                  if (POINTER_DEACTIVATION_EVENT_TYPES_2_1 && !POINTER_DEACTIVATION_EVENT_TYPES_2_1.done && (_a = POINTER_DEACTIVATION_EVENT_TYPES_2.return)) _a.call(POINTER_DEACTIVATION_EVENT_TYPES_2);
+              }
+              finally { if (e_4) throw e_4.error; }
+          }
+      };
+      MDCRippleFoundation.prototype.removeCssVars = function () {
+          var _this = this;
+          var rippleStrings = MDCRippleFoundation.strings;
+          var keys = Object.keys(rippleStrings);
+          keys.forEach(function (key) {
+              if (key.indexOf('VAR_') === 0) {
+                  _this.adapter.updateCssVariable(rippleStrings[key], null);
+              }
+          });
+      };
+      MDCRippleFoundation.prototype.activateImpl = function (evt) {
+          var _this = this;
+          if (this.adapter.isSurfaceDisabled()) {
+              return;
+          }
+          var activationState = this.activationState;
+          if (activationState.isActivated) {
+              return;
+          }
+          // Avoid reacting to follow-on events fired by touch device after an already-processed user interaction
+          var previousActivationEvent = this.previousActivationEvent;
+          var isSameInteraction = previousActivationEvent && evt !== undefined && previousActivationEvent.type !== evt.type;
+          if (isSameInteraction) {
+              return;
+          }
+          activationState.isActivated = true;
+          activationState.isProgrammatic = evt === undefined;
+          activationState.activationEvent = evt;
+          activationState.wasActivatedByPointer = activationState.isProgrammatic ? false : evt !== undefined && (evt.type === 'mousedown' || evt.type === 'touchstart' || evt.type === 'pointerdown');
+          var hasActivatedChild = evt !== undefined &&
+              activatedTargets.length > 0 &&
+              activatedTargets.some(function (target) { return _this.adapter.containsEventTarget(target); });
+          if (hasActivatedChild) {
+              // Immediately reset activation state, while preserving logic that prevents touch follow-on events
+              this.resetActivationState();
+              return;
+          }
+          if (evt !== undefined) {
+              activatedTargets.push(evt.target);
+              this.registerDeactivationHandlers(evt);
+          }
+          activationState.wasElementMadeActive = this.checkElementMadeActive(evt);
+          if (activationState.wasElementMadeActive) {
+              this.animateActivation();
+          }
+          requestAnimationFrame(function () {
+              // Reset array on next frame after the current event has had a chance to bubble to prevent ancestor ripples
+              activatedTargets = [];
+              if (!activationState.wasElementMadeActive
+                  && evt !== undefined
+                  && (evt.key === ' ' || evt.keyCode === 32)) {
+                  // If space was pressed, try again within an rAF call to detect :active, because different UAs report
+                  // active states inconsistently when they're called within event handling code:
+                  // - https://bugs.chromium.org/p/chromium/issues/detail?id=635971
+                  // - https://bugzilla.mozilla.org/show_bug.cgi?id=1293741
+                  // We try first outside rAF to support Edge, which does not exhibit this problem, but will crash if a CSS
+                  // variable is set within a rAF callback for a submit button interaction (#2241).
+                  activationState.wasElementMadeActive = _this.checkElementMadeActive(evt);
+                  if (activationState.wasElementMadeActive) {
+                      _this.animateActivation();
+                  }
+              }
+              if (!activationState.wasElementMadeActive) {
+                  // Reset activation state immediately if element was not made active.
+                  _this.activationState = _this.defaultActivationState();
+              }
+          });
+      };
+      MDCRippleFoundation.prototype.checkElementMadeActive = function (evt) {
+          return (evt !== undefined && evt.type === 'keydown') ?
+              this.adapter.isSurfaceActive() :
+              true;
+      };
+      MDCRippleFoundation.prototype.animateActivation = function () {
+          var _this = this;
+          var _a = MDCRippleFoundation.strings, VAR_FG_TRANSLATE_START = _a.VAR_FG_TRANSLATE_START, VAR_FG_TRANSLATE_END = _a.VAR_FG_TRANSLATE_END;
+          var _b = MDCRippleFoundation.cssClasses, FG_DEACTIVATION = _b.FG_DEACTIVATION, FG_ACTIVATION = _b.FG_ACTIVATION;
+          var DEACTIVATION_TIMEOUT_MS = MDCRippleFoundation.numbers.DEACTIVATION_TIMEOUT_MS;
+          this.layoutInternal();
+          var translateStart = '';
+          var translateEnd = '';
+          if (!this.adapter.isUnbounded()) {
+              var _c = this.getFgTranslationCoordinates(), startPoint = _c.startPoint, endPoint = _c.endPoint;
+              translateStart = startPoint.x + "px, " + startPoint.y + "px";
+              translateEnd = endPoint.x + "px, " + endPoint.y + "px";
+          }
+          this.adapter.updateCssVariable(VAR_FG_TRANSLATE_START, translateStart);
+          this.adapter.updateCssVariable(VAR_FG_TRANSLATE_END, translateEnd);
+          // Cancel any ongoing activation/deactivation animations
+          clearTimeout(this.activationTimer);
+          clearTimeout(this.fgDeactivationRemovalTimer);
+          this.rmBoundedActivationClasses();
+          this.adapter.removeClass(FG_DEACTIVATION);
+          // Force layout in order to re-trigger the animation.
+          this.adapter.computeBoundingRect();
+          this.adapter.addClass(FG_ACTIVATION);
+          this.activationTimer = setTimeout(function () {
+              _this.activationTimerCallback();
+          }, DEACTIVATION_TIMEOUT_MS);
+      };
+      MDCRippleFoundation.prototype.getFgTranslationCoordinates = function () {
+          var _a = this.activationState, activationEvent = _a.activationEvent, wasActivatedByPointer = _a.wasActivatedByPointer;
+          var startPoint;
+          if (wasActivatedByPointer) {
+              startPoint = getNormalizedEventCoords(activationEvent, this.adapter.getWindowPageOffset(), this.adapter.computeBoundingRect());
+          }
+          else {
+              startPoint = {
+                  x: this.frame.width / 2,
+                  y: this.frame.height / 2,
+              };
+          }
+          // Center the element around the start point.
+          startPoint = {
+              x: startPoint.x - (this.initialSize / 2),
+              y: startPoint.y - (this.initialSize / 2),
+          };
+          var endPoint = {
+              x: (this.frame.width / 2) - (this.initialSize / 2),
+              y: (this.frame.height / 2) - (this.initialSize / 2),
+          };
+          return { startPoint: startPoint, endPoint: endPoint };
+      };
+      MDCRippleFoundation.prototype.runDeactivationUXLogicIfReady = function () {
+          var _this = this;
+          // This method is called both when a pointing device is released, and when the activation animation ends.
+          // The deactivation animation should only run after both of those occur.
+          var FG_DEACTIVATION = MDCRippleFoundation.cssClasses.FG_DEACTIVATION;
+          var _a = this.activationState, hasDeactivationUXRun = _a.hasDeactivationUXRun, isActivated = _a.isActivated;
+          var activationHasEnded = hasDeactivationUXRun || !isActivated;
+          if (activationHasEnded && this.activationAnimationHasEnded) {
+              this.rmBoundedActivationClasses();
+              this.adapter.addClass(FG_DEACTIVATION);
+              this.fgDeactivationRemovalTimer = setTimeout(function () {
+                  _this.adapter.removeClass(FG_DEACTIVATION);
+              }, numbers.FG_DEACTIVATION_MS);
+          }
+      };
+      MDCRippleFoundation.prototype.rmBoundedActivationClasses = function () {
+          var FG_ACTIVATION = MDCRippleFoundation.cssClasses.FG_ACTIVATION;
+          this.adapter.removeClass(FG_ACTIVATION);
+          this.activationAnimationHasEnded = false;
+          this.adapter.computeBoundingRect();
+      };
+      MDCRippleFoundation.prototype.resetActivationState = function () {
+          var _this = this;
+          this.previousActivationEvent = this.activationState.activationEvent;
+          this.activationState = this.defaultActivationState();
+          // Touch devices may fire additional events for the same interaction within a short time.
+          // Store the previous event until it's safe to assume that subsequent events are for new interactions.
+          setTimeout(function () { return _this.previousActivationEvent = undefined; }, MDCRippleFoundation.numbers.TAP_DELAY_MS);
+      };
+      MDCRippleFoundation.prototype.deactivateImpl = function () {
+          var _this = this;
+          var activationState = this.activationState;
+          // This can happen in scenarios such as when you have a keyup event that blurs the element.
+          if (!activationState.isActivated) {
+              return;
+          }
+          var state = __assign({}, activationState);
+          if (activationState.isProgrammatic) {
+              requestAnimationFrame(function () {
+                  _this.animateDeactivation(state);
+              });
+              this.resetActivationState();
+          }
+          else {
+              this.deregisterDeactivationHandlers();
+              requestAnimationFrame(function () {
+                  _this.activationState.hasDeactivationUXRun = true;
+                  _this.animateDeactivation(state);
+                  _this.resetActivationState();
+              });
+          }
+      };
+      MDCRippleFoundation.prototype.animateDeactivation = function (_a) {
+          var wasActivatedByPointer = _a.wasActivatedByPointer, wasElementMadeActive = _a.wasElementMadeActive;
+          if (wasActivatedByPointer || wasElementMadeActive) {
+              this.runDeactivationUXLogicIfReady();
+          }
+      };
+      MDCRippleFoundation.prototype.layoutInternal = function () {
+          var _this = this;
+          this.frame = this.adapter.computeBoundingRect();
+          var maxDim = Math.max(this.frame.height, this.frame.width);
+          // Surface diameter is treated differently for unbounded vs. bounded ripples.
+          // Unbounded ripple diameter is calculated smaller since the surface is expected to already be padded appropriately
+          // to extend the hitbox, and the ripple is expected to meet the edges of the padded hitbox (which is typically
+          // square). Bounded ripples, on the other hand, are fully expected to expand beyond the surface's longest diameter
+          // (calculated based on the diagonal plus a constant padding), and are clipped at the surface's border via
+          // `overflow: hidden`.
+          var getBoundedRadius = function () {
+              var hypotenuse = Math.sqrt(Math.pow(_this.frame.width, 2) + Math.pow(_this.frame.height, 2));
+              return hypotenuse + MDCRippleFoundation.numbers.PADDING;
+          };
+          this.maxRadius = this.adapter.isUnbounded() ? maxDim : getBoundedRadius();
+          // Ripple is sized as a fraction of the largest dimension of the surface, then scales up using a CSS scale transform
+          var initialSize = Math.floor(maxDim * MDCRippleFoundation.numbers.INITIAL_ORIGIN_SCALE);
+          // Unbounded ripple size should always be even number to equally center align.
+          if (this.adapter.isUnbounded() && initialSize % 2 !== 0) {
+              this.initialSize = initialSize - 1;
+          }
+          else {
+              this.initialSize = initialSize;
+          }
+          this.fgScale = "" + this.maxRadius / this.initialSize;
+          this.updateLayoutCssVars();
+      };
+      MDCRippleFoundation.prototype.updateLayoutCssVars = function () {
+          var _a = MDCRippleFoundation.strings, VAR_FG_SIZE = _a.VAR_FG_SIZE, VAR_LEFT = _a.VAR_LEFT, VAR_TOP = _a.VAR_TOP, VAR_FG_SCALE = _a.VAR_FG_SCALE;
+          this.adapter.updateCssVariable(VAR_FG_SIZE, this.initialSize + "px");
+          this.adapter.updateCssVariable(VAR_FG_SCALE, this.fgScale);
+          if (this.adapter.isUnbounded()) {
+              this.unboundedCoords = {
+                  left: Math.round((this.frame.width / 2) - (this.initialSize / 2)),
+                  top: Math.round((this.frame.height / 2) - (this.initialSize / 2)),
+              };
+              this.adapter.updateCssVariable(VAR_LEFT, this.unboundedCoords.left + "px");
+              this.adapter.updateCssVariable(VAR_TOP, this.unboundedCoords.top + "px");
+          }
+      };
+      return MDCRippleFoundation;
+  }(MDCFoundation));
+
+  /**
+   * @license
+   * Copyright 2016 Google Inc.
+   *
+   * Permission is hereby granted, free of charge, to any person obtaining a copy
+   * of this software and associated documentation files (the "Software"), to deal
+   * in the Software without restriction, including without limitation the rights
+   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   * copies of the Software, and to permit persons to whom the Software is
+   * furnished to do so, subject to the following conditions:
+   *
+   * The above copyright notice and this permission notice shall be included in
+   * all copies or substantial portions of the Software.
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+   * THE SOFTWARE.
+   */
+  var MDCRipple = /** @class */ (function (_super) {
+      __extends(MDCRipple, _super);
+      function MDCRipple() {
+          var _this = _super !== null && _super.apply(this, arguments) || this;
+          _this.disabled = false;
+          return _this;
+      }
+      MDCRipple.attachTo = function (root, opts) {
+          if (opts === void 0) { opts = {
+              isUnbounded: undefined
+          }; }
+          var ripple = new MDCRipple(root);
+          // Only override unbounded behavior if option is explicitly specified
+          if (opts.isUnbounded !== undefined) {
+              ripple.unbounded = opts.isUnbounded;
+          }
+          return ripple;
+      };
+      MDCRipple.createAdapter = function (instance) {
+          return {
+              addClass: function (className) { return instance.root.classList.add(className); },
+              browserSupportsCssVars: function () { return supportsCssVariables(window); },
+              computeBoundingRect: function () { return instance.root.getBoundingClientRect(); },
+              containsEventTarget: function (target) { return instance.root.contains(target); },
+              deregisterDocumentInteractionHandler: function (evtType, handler) {
+                  return document.documentElement.removeEventListener(evtType, handler, applyPassive());
+              },
+              deregisterInteractionHandler: function (evtType, handler) {
+                  return instance.root
+                      .removeEventListener(evtType, handler, applyPassive());
+              },
+              deregisterResizeHandler: function (handler) {
+                  return window.removeEventListener('resize', handler);
+              },
+              getWindowPageOffset: function () {
+                  return ({ x: window.pageXOffset, y: window.pageYOffset });
+              },
+              isSurfaceActive: function () { return matches(instance.root, ':active'); },
+              isSurfaceDisabled: function () { return Boolean(instance.disabled); },
+              isUnbounded: function () { return Boolean(instance.unbounded); },
+              registerDocumentInteractionHandler: function (evtType, handler) {
+                  return document.documentElement.addEventListener(evtType, handler, applyPassive());
+              },
+              registerInteractionHandler: function (evtType, handler) {
+                  return instance.root
+                      .addEventListener(evtType, handler, applyPassive());
+              },
+              registerResizeHandler: function (handler) {
+                  return window.addEventListener('resize', handler);
+              },
+              removeClass: function (className) { return instance.root.classList.remove(className); },
+              updateCssVariable: function (varName, value) {
+                  return instance.root.style.setProperty(varName, value);
+              },
+          };
+      };
+      Object.defineProperty(MDCRipple.prototype, "unbounded", {
+          get: function () {
+              return Boolean(this.isUnbounded);
+          },
+          set: function (unbounded) {
+              this.isUnbounded = Boolean(unbounded);
+              this.setUnbounded();
+          },
+          enumerable: false,
+          configurable: true
+      });
+      MDCRipple.prototype.activate = function () {
+          this.foundation.activate();
+      };
+      MDCRipple.prototype.deactivate = function () {
+          this.foundation.deactivate();
+      };
+      MDCRipple.prototype.layout = function () {
+          this.foundation.layout();
+      };
+      MDCRipple.prototype.getDefaultFoundation = function () {
+          return new MDCRippleFoundation(MDCRipple.createAdapter(this));
+      };
+      MDCRipple.prototype.initialSyncWithDOM = function () {
+          var root = this.root;
+          this.isUnbounded = 'mdcRippleIsUnbounded' in root.dataset;
+      };
+      /**
+       * Closure Compiler throws an access control error when directly accessing a
+       * protected or private property inside a getter/setter, like unbounded above.
+       * By accessing the protected property inside a method, we solve that problem.
+       * That's why this function exists.
+       */
+      MDCRipple.prototype.setUnbounded = function () {
+          this.foundation.setUnbounded(Boolean(this.isUnbounded));
+      };
+      return MDCRipple;
+  }(MDCComponent));
+
+  /**
    * --------------------------------------------------------------------------
-   * Bootstrap util/backdrop.js
+   * Bootstrap material ripple.js
+   * --------------------------------------------------------------------------
+   */
+  const NAME$a = 'ripple';
+  const DATA_KEY$6 = 'bs.ripple';
+  const EVENT_KEY$6 = `.${DATA_KEY$6}`;
+  const DATA_API_KEY$3 = '.data-api';
+  const CLASS_NAME_RIPPLE = 'ripple-surface';
+  const SELECTOR_COMPONENT = '.btn, .accordion-button, a.list-group-item, a.dropdown-item';
+  const SELECTOR_COMPONENT_UNBOUNDED = '.btn-close, .btn-icon, .navbar-toggler';
+  const SELECTOR_DATA_TIP = '.btn:not([data-bs-toggle="tooltip"])';
+  const SELECTOR_DATA_TOGGLE$3 = '[data-bs-toggle="dropdown"]';
+  const SELECTOR_COMPONENTS = `${SELECTOR_COMPONENT}, ${SELECTOR_DATA_TIP}, ${SELECTOR_DATA_TOGGLE$3}, ${SELECTOR_COMPONENT_UNBOUNDED}`;
+  const EVENT_LOAD_DATA_API$3 = `load${EVENT_KEY$6}${DATA_API_KEY$3}`;
+
+  /**
+   * Class definition
+   */
+  class MaterialRipple extends BaseComponent {
+    constructor(element) {
+      super(element);
+      this._element = element;
+      this._ripple = null;
+      this._init();
+    }
+
+    // Getters
+    static get NAME() {
+      return NAME$a;
+    }
+    _init() {
+      if (!this._element || this._element.tagName.toLowerCase() === 'input') {
+        return;
+      }
+      this._activate(this._element);
+    }
+    dispose() {
+      if (this._ripple) {
+        this._ripple.destroy();
+        this._ripple = null;
+      }
+      super.dispose();
+    }
+    _checkInstance(element) {
+      const instance = MaterialRipple.getInstance(element);
+      if (instance) {
+        instance.dispose();
+      }
+    }
+    _activate(element) {
+      this._checkInstance(element);
+      const rippleContainer = document.createElement('div');
+      rippleContainer.classList.add(CLASS_NAME_RIPPLE);
+      element.appendChild(rippleContainer);
+      this._setRipple(element, rippleContainer);
+    }
+    _setRipple(element, rippleContainer) {
+      this._ripple = new MDCRipple(rippleContainer);
+      this._isUnbounded(element);
+    }
+    _isUnbounded(element) {
+      const isUnbound = element.matches(SELECTOR_COMPONENT_UNBOUNDED);
+      if (isUnbound) {
+        this._ripple.unbounded = true;
+      }
+    }
+
+    // Static
+    static jQueryInterface(config) {
+      return this.each(function () {
+        const data = MaterialRipple.getOrCreateInstance(this);
+        if (typeof config !== 'string') {
+          return;
+        }
+        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+          throw new TypeError(`No method named "${config}"`);
+        }
+        data[config]();
+      });
+    }
+  }
+
+  /**
+   * Data API implementation
+   */
+  EventHandler.on(window, EVENT_LOAD_DATA_API$3, () => {
+    const rippleSurfaces = SelectorEngine.find(SELECTOR_COMPONENTS);
+    for (const surface of rippleSurfaces) {
+      MaterialRipple.getOrCreateInstance(surface);
+    }
+  });
+  /**
+   * jQuery
+   */
+  defineJQueryPlugin(MaterialRipple);
+
+  // import {MDCRipple} from '@material/ripple';
+  // import {MDCRippleFoundation} from '@material/ripple/foundation';
+  // import {onDOMContentLoaded} from './util/index';
+  //
+  // class MaterialRipple extends MDCRipple {
+  //   constructor(element) {
+  //     super(element, new MDCRippleFoundation({adapter: {}}));
+  //   }
+  // }
+  //
+  // onDOMContentLoaded(() => {
+  //   const classText = ['btn']
+  //   const btnIconClassList = ['btn-close', 'btn-icon', 'btn-edit', 'btn-clipboard', 'navbar-toggler']
+  //   const dropClassList = ['dropdown-toggle']
+  //
+  //   const dropSelectors = dropClassList.map(dropClass => {
+  //     return `:not(.${dropClass}), :not(.${dropClass}), :not(div[class*="${classText}-"])`
+  //   })
+  //
+  //   const primarySelector = document.querySelectorAll(`[class*="${classText}"]${dropSelectors.join('')}`)
+  //   const dropClassListElements = document.querySelectorAll(`.${dropClassList.join('.')}`)
+  //
+  //   for (const elementSelector of primarySelector) {
+  //     if ((elementSelector.classList.contains(classText) || btnIconClassList.some(cls => elementSelector.classList.contains(cls))) && !dropClassList.some(cls => elementSelector.classList.contains(cls))) {
+  //       elementSelector.classList.add('mdc-ripple-surface')
+  //       MDCRipple.attachTo(elementSelector);
+  //     }
+  //   }
+  //   for (const dropElement of dropClassListElements) {
+  //     if (dropElement.classList.contains(classText) && dropClassList.some(cls => dropElement.classList.contains(cls))) {
+  //       const childElementDrop = document.createElement('div')
+  //       childElementDrop.classList.add('mdc-ripple-surface')
+  //       dropElement.append(childElementDrop)
+  //     }
+  //   }
+  //   for (const btnWithIconMDC of btnIconClassList) {
+  //     const elBtnIconMDC = document.querySelectorAll(`.${btnWithIconMDC}`)
+  //     for (const btnIconMDC of elBtnIconMDC) {
+  //       btnIconMDC.style.borderRadius = '50%'
+  //       MDCRipple.attachTo(btnIconMDC);
+  //       btnIconMDC.classList.add('mdc-ripple-surface')
+  //     }
+  //   }
+  // })
+  // export default MaterialRipple
+  //
+  // // const toggleBtns = document.querySelectorAll('.dropdown-toggle');
+  // // const iconBtns = document.querySelectorAll('.btn-icon, .btn-close, .btn-edit');
+  // // const iconBtnClasses = Array.from(iconBtns).map(btn => btn.classList);
+  // // const iconBtnSelectors = iconBtnClasses.map(clsList => `[class*="${clsList}"]`).join(',');
+  // // const defButtons = document.querySelectorAll(`[class*="btn"]:not(${iconBtnSelectors}):not(.dropdown-toggle)`);
+  // // const defButtonClasses = Array.from(defButtons).map(btn => btn.classList);
+  // //
+  // // for (const button of defButtons) {
+  // //   const classList = Array.from(button.classList);
+  // //   if (classList.some(cls => defButtonClasses.some(clsList => clsList.contains(cls))) && !Array.from(toggleBtns).some(cls => button.classList.contains(cls))) {
+  // //     button.classList.add('mdc-ripple-surface');
+  // //     MDCRipple.attachTo(button);
+  // //   }
+  // // }
+  // //
+  // // for (const dropdownBtn of toggleBtns) {
+  // //   const mdcEl = document.createElement('span')
+  // //   mdcEl.classList.add('mdc-ripple-surface')
+  // //   dropdownBtn.append(mdcEl)
+  // //   MDCRipple.attachTo(dropdownBtn);
+  // // }
+  // //
+  // // for (const iconBtn of iconBtns) {
+  // //   const mdcEl = document.createElement('span')
+  // //   mdcEl.classList.add('mdc-ripple-surface')
+  // //   iconBtn.append(mdcEl)
+  // //   MDCRipple.attachTo(iconBtn);
+  // // }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.3.0-alpha1): util/scrollBar.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
+
+  /**
+   * Constants
+   */
+
+  const SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top';
+  const SELECTOR_STICKY_CONTENT = '.sticky-top';
+  const PROPERTY_PADDING = 'padding-right';
+  const PROPERTY_MARGIN = 'margin-right';
+
+  /**
+   * Class definition
+   */
+
+  class ScrollBarHelper {
+    constructor() {
+      this._element = document.body;
+    }
+
+    // Public
+    getWidth() {
+      // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
+      const documentWidth = document.documentElement.clientWidth;
+      return Math.abs(window.innerWidth - documentWidth);
+    }
+    hide() {
+      const width = this.getWidth();
+      this._disableOverFlow();
+      // give padding to element to balance the hidden scrollbar width
+      this._setElementAttributes(this._element, PROPERTY_PADDING, calculatedValue => calculatedValue + width);
+      // trick: We adjust positive paddingRight and negative marginRight to sticky-top elements to keep showing fullwidth
+      this._setElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING, calculatedValue => calculatedValue + width);
+      this._setElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN, calculatedValue => calculatedValue - width);
+    }
+    reset() {
+      this._resetElementAttributes(this._element, 'overflow');
+      this._resetElementAttributes(this._element, PROPERTY_PADDING);
+      this._resetElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING);
+      this._resetElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN);
+    }
+    isOverflowing() {
+      return this.getWidth() > 0;
+    }
+
+    // Private
+    _disableOverFlow() {
+      this._saveInitialAttribute(this._element, 'overflow');
+      this._element.style.overflow = 'hidden';
+    }
+    _setElementAttributes(selector, styleProperty, callback) {
+      const scrollbarWidth = this.getWidth();
+      const manipulationCallBack = element => {
+        if (element !== this._element && window.innerWidth > element.clientWidth + scrollbarWidth) {
+          return;
+        }
+        this._saveInitialAttribute(element, styleProperty);
+        const calculatedValue = window.getComputedStyle(element).getPropertyValue(styleProperty);
+        element.style.setProperty(styleProperty, `${callback(Number.parseFloat(calculatedValue))}px`);
+      };
+      this._applyManipulationCallback(selector, manipulationCallBack);
+    }
+    _saveInitialAttribute(element, styleProperty) {
+      const actualValue = element.style.getPropertyValue(styleProperty);
+      if (actualValue) {
+        Manipulator.setDataAttribute(element, styleProperty, actualValue);
+      }
+    }
+    _resetElementAttributes(selector, styleProperty) {
+      const manipulationCallBack = element => {
+        const value = Manipulator.getDataAttribute(element, styleProperty);
+        // We only want to remove the property if the value is `null`; the value can also be zero
+        if (value === null) {
+          element.style.removeProperty(styleProperty);
+          return;
+        }
+        Manipulator.removeDataAttribute(element, styleProperty);
+        element.style.setProperty(styleProperty, value);
+      };
+      this._applyManipulationCallback(selector, manipulationCallBack);
+    }
+    _applyManipulationCallback(selector, callBack) {
+      if (isElement$1(selector)) {
+        callBack(selector);
+        return;
+      }
+      for (const sel of SelectorEngine.find(selector, this._element)) {
+        callBack(sel);
+      }
+    }
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.3.0-alpha1): util/backdrop.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -3916,7 +5285,6 @@
     // if false, we use the backdrop helper without adding any element to the dom
     rootElement: 'body' // give the choice to place backdrop under different elements
   };
-
   const DefaultType$8 = {
     className: 'string',
     clickCallback: '(function|null)',
@@ -4019,7 +5387,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap util/focustrap.js
+   * Bootstrap (v5.3.0-alpha1): util/focustrap.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4041,7 +5409,6 @@
     autofocus: true,
     trapElement: null // The element to trap focus inside of
   };
-
   const DefaultType$7 = {
     autofocus: 'boolean',
     trapElement: 'element'
@@ -4118,105 +5485,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap util/scrollBar.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-
-
-  /**
-   * Constants
-   */
-
-  const SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top';
-  const SELECTOR_STICKY_CONTENT = '.sticky-top';
-  const PROPERTY_PADDING = 'padding-right';
-  const PROPERTY_MARGIN = 'margin-right';
-
-  /**
-   * Class definition
-   */
-
-  class ScrollBarHelper {
-    constructor() {
-      this._element = document.body;
-    }
-
-    // Public
-    getWidth() {
-      // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
-      const documentWidth = document.documentElement.clientWidth;
-      return Math.abs(window.innerWidth - documentWidth);
-    }
-    hide() {
-      const width = this.getWidth();
-      this._disableOverFlow();
-      // give padding to element to balance the hidden scrollbar width
-      this._setElementAttributes(this._element, PROPERTY_PADDING, calculatedValue => calculatedValue + width);
-      // trick: We adjust positive paddingRight and negative marginRight to sticky-top elements to keep showing fullwidth
-      this._setElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING, calculatedValue => calculatedValue + width);
-      this._setElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN, calculatedValue => calculatedValue - width);
-    }
-    reset() {
-      this._resetElementAttributes(this._element, 'overflow');
-      this._resetElementAttributes(this._element, PROPERTY_PADDING);
-      this._resetElementAttributes(SELECTOR_FIXED_CONTENT, PROPERTY_PADDING);
-      this._resetElementAttributes(SELECTOR_STICKY_CONTENT, PROPERTY_MARGIN);
-    }
-    isOverflowing() {
-      return this.getWidth() > 0;
-    }
-
-    // Private
-    _disableOverFlow() {
-      this._saveInitialAttribute(this._element, 'overflow');
-      this._element.style.overflow = 'hidden';
-    }
-    _setElementAttributes(selector, styleProperty, callback) {
-      const scrollbarWidth = this.getWidth();
-      const manipulationCallBack = element => {
-        if (element !== this._element && window.innerWidth > element.clientWidth + scrollbarWidth) {
-          return;
-        }
-        this._saveInitialAttribute(element, styleProperty);
-        const calculatedValue = window.getComputedStyle(element).getPropertyValue(styleProperty);
-        element.style.setProperty(styleProperty, `${callback(Number.parseFloat(calculatedValue))}px`);
-      };
-      this._applyManipulationCallback(selector, manipulationCallBack);
-    }
-    _saveInitialAttribute(element, styleProperty) {
-      const actualValue = element.style.getPropertyValue(styleProperty);
-      if (actualValue) {
-        Manipulator.setDataAttribute(element, styleProperty, actualValue);
-      }
-    }
-    _resetElementAttributes(selector, styleProperty) {
-      const manipulationCallBack = element => {
-        const value = Manipulator.getDataAttribute(element, styleProperty);
-        // We only want to remove the property if the value is `null`; the value can also be zero
-        if (value === null) {
-          element.style.removeProperty(styleProperty);
-          return;
-        }
-        Manipulator.removeDataAttribute(element, styleProperty);
-        element.style.setProperty(styleProperty, value);
-      };
-      this._applyManipulationCallback(selector, manipulationCallBack);
-    }
-    _applyManipulationCallback(selector, callBack) {
-      if (isElement$1(selector)) {
-        callBack(selector);
-        return;
-      }
-      for (const sel of SelectorEngine.find(selector, this._element)) {
-        callBack(sel);
-      }
-    }
-  }
-
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap modal.js
+   * Bootstrap (v5.3.0-alpha1): modal.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4323,8 +5592,9 @@
       this._queueCallback(() => this._hideModal(), this._element, this._isAnimated());
     }
     dispose() {
-      EventHandler.off(window, EVENT_KEY$4);
-      EventHandler.off(this._dialog, EVENT_KEY$4);
+      for (const htmlElement of [window, this._dialog]) {
+        EventHandler.off(htmlElement, EVENT_KEY$4);
+      }
       this._backdrop.dispose();
       this._focustrap.deactivate();
       super.dispose();
@@ -4379,6 +5649,7 @@
           return;
         }
         if (this._config.keyboard) {
+          event.preventDefault();
           this.hide();
           return;
         }
@@ -4521,7 +5792,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap offcanvas.js
+   * Bootstrap (v5.3.0-alpha1): offcanvas.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4680,11 +5951,11 @@
         if (event.key !== ESCAPE_KEY) {
           return;
         }
-        if (this._config.keyboard) {
-          this.hide();
+        if (!this._config.keyboard) {
+          EventHandler.trigger(this._element, EVENT_HIDE_PREVENTED);
           return;
         }
-        EventHandler.trigger(this._element, EVENT_HIDE_PREVENTED);
+        this.hide();
       });
     }
 
@@ -4752,13 +6023,39 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap util/sanitizer.js
+   * Bootstrap (v5.3.0-alpha1): util/sanitizer.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
 
-  // js-docs-start allow-list
+  const uriAttributes = new Set(['background', 'cite', 'href', 'itemtype', 'longdesc', 'poster', 'src', 'xlink:href']);
   const ARIA_ATTRIBUTE_PATTERN = /^aria-[\w-]*$/i;
+
+  /**
+   * A pattern that recognizes a commonly useful subset of URLs that are safe.
+   *
+   * Shout-out to Angular https://github.com/angular/angular/blob/12.2.x/packages/core/src/sanitization/url_sanitizer.ts
+   */
+  const SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file|sms):|[^#&/:?]*(?:[#/?]|$))/i;
+
+  /**
+   * A pattern that matches safe data URLs. Only matches image, video and audio types.
+   *
+   * Shout-out to Angular https://github.com/angular/angular/blob/12.2.x/packages/core/src/sanitization/url_sanitizer.ts
+   */
+  const DATA_URL_PATTERN = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[\d+/a-z]+=*$/i;
+  const allowedAttribute = (attribute, allowedAttributeList) => {
+    const attributeName = attribute.nodeName.toLowerCase();
+    if (allowedAttributeList.includes(attributeName)) {
+      if (uriAttributes.has(attributeName)) {
+        return Boolean(SAFE_URL_PATTERN.test(attribute.nodeValue) || DATA_URL_PATTERN.test(attribute.nodeValue));
+      }
+      return true;
+    }
+
+    // Check if a regular expression validates the attribute.
+    return allowedAttributeList.filter(attributeRegex => attributeRegex instanceof RegExp).some(regex => regex.test(attributeName));
+  };
   const DefaultAllowlist = {
     // Global attributes allowed on any supplied element below.
     '*': ['class', 'dir', 'id', 'lang', 'role', ARIA_ATTRIBUTE_PATTERN],
@@ -4792,30 +6089,6 @@
     u: [],
     ul: []
   };
-  // js-docs-end allow-list
-
-  const uriAttributes = new Set(['background', 'cite', 'href', 'itemtype', 'longdesc', 'poster', 'src', 'xlink:href']);
-
-  /**
-   * A pattern that recognizes URLs that are safe wrt. XSS in URL navigation
-   * contexts.
-   *
-   * Shout-out to Angular https://github.com/angular/angular/blob/15.2.8/packages/core/src/sanitization/url_sanitizer.ts#L38
-   */
-  // eslint-disable-next-line unicorn/better-regex
-  const SAFE_URL_PATTERN = /^(?!javascript:)(?:[a-z0-9+.-]+:|[^&:/?#]*(?:[/?#]|$))/i;
-  const allowedAttribute = (attribute, allowedAttributeList) => {
-    const attributeName = attribute.nodeName.toLowerCase();
-    if (allowedAttributeList.includes(attributeName)) {
-      if (uriAttributes.has(attributeName)) {
-        return Boolean(SAFE_URL_PATTERN.test(attribute.nodeValue));
-      }
-      return true;
-    }
-
-    // Check if a regular expression validates the attribute.
-    return allowedAttributeList.filter(attributeRegex => attributeRegex instanceof RegExp).some(regex => regex.test(attributeName));
-  };
   function sanitizeHtml(unsafeHtml, allowList, sanitizeFunction) {
     if (!unsafeHtml.length) {
       return unsafeHtml;
@@ -4845,7 +6118,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap util/template-factory.js
+   * Bootstrap (v5.3.0-alpha1): util/template-factory.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4981,7 +6254,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap tooltip.js
+   * Bootstrap (v5.3.0-alpha1): tooltip.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -5029,7 +6302,7 @@
     delay: 0,
     fallbackPlacements: ['top', 'right', 'bottom', 'left'],
     html: false,
-    offset: [0, 6],
+    offset: [0, 0],
     placement: 'top',
     popperConfig: null,
     sanitize: true,
@@ -5142,7 +6415,7 @@
         return;
       }
 
-      // TODO: v6 remove this or make it optional
+      // todo v6 remove this OR make it optional
       this._disposePopper();
       const tip = this._getTipElement();
       this._element.setAttribute('aria-describedby', tip.getAttribute('id'));
@@ -5228,12 +6501,12 @@
     _createTipElement(content) {
       const tip = this._getTemplateFactory(content).toHtml();
 
-      // TODO: remove this check in v6
+      // todo: remove this check on v6
       if (!tip) {
         return null;
       }
       tip.classList.remove(CLASS_NAME_FADE$2, CLASS_NAME_SHOW$2);
-      // TODO: v6 the following can be achieved with CSS only
+      // todo: on v6 the following can be achieved with CSS only
       tip.classList.add(`bs-${this.constructor.NAME}-auto`);
       const tipId = getUID(this.constructor.NAME).toString();
       tip.setAttribute('id', tipId);
@@ -5493,7 +6766,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap popover.js
+   * Bootstrap (v5.3.0-alpha1): popover.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -5574,7 +6847,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap scrollspy.js
+   * Bootstrap (v5.3.0-alpha1): scrollspy.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -5758,11 +7031,11 @@
         if (!anchor.hash || isDisabled(anchor)) {
           continue;
         }
-        const observableSection = SelectorEngine.findOne(decodeURI(anchor.hash), this._element);
+        const observableSection = SelectorEngine.findOne(anchor.hash, this._element);
 
         // ensure that the observableSection exists & is visible
         if (isVisible(observableSection)) {
-          this._targetLinks.set(decodeURI(anchor.hash), anchor);
+          this._targetLinks.set(anchor.hash, anchor);
           this._observableSections.set(anchor.hash, observableSection);
         }
       }
@@ -5834,7 +7107,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap tab.js
+   * Bootstrap (v5.3.0-alpha1): tab.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -5858,19 +7131,17 @@
   const ARROW_RIGHT_KEY = 'ArrowRight';
   const ARROW_UP_KEY = 'ArrowUp';
   const ARROW_DOWN_KEY = 'ArrowDown';
-  const HOME_KEY = 'Home';
-  const END_KEY = 'End';
   const CLASS_NAME_ACTIVE = 'active';
   const CLASS_NAME_FADE$1 = 'fade';
   const CLASS_NAME_SHOW$1 = 'show';
   const CLASS_DROPDOWN = 'dropdown';
   const SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
   const SELECTOR_DROPDOWN_MENU = '.dropdown-menu';
-  const NOT_SELECTOR_DROPDOWN_TOGGLE = `:not(${SELECTOR_DROPDOWN_TOGGLE})`;
+  const NOT_SELECTOR_DROPDOWN_TOGGLE = ':not(.dropdown-toggle)';
   const SELECTOR_TAB_PANEL = '.list-group, .nav, [role="tablist"]';
   const SELECTOR_OUTER = '.nav-item, .list-group-item';
   const SELECTOR_INNER = `.nav-link${NOT_SELECTOR_DROPDOWN_TOGGLE}, .list-group-item${NOT_SELECTOR_DROPDOWN_TOGGLE}, [role="tab"]${NOT_SELECTOR_DROPDOWN_TOGGLE}`;
-  const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]'; // TODO: could only be `tab` in v6
+  const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]'; // todo:v6: could be only `tab`
   const SELECTOR_INNER_ELEM = `${SELECTOR_INNER}, ${SELECTOR_DATA_TOGGLE}`;
   const SELECTOR_DATA_TOGGLE_ACTIVE = `.${CLASS_NAME_ACTIVE}[data-bs-toggle="tab"], .${CLASS_NAME_ACTIVE}[data-bs-toggle="pill"], .${CLASS_NAME_ACTIVE}[data-bs-toggle="list"]`;
 
@@ -5884,7 +7155,7 @@
       this._parent = this._element.closest(SELECTOR_TAB_PANEL);
       if (!this._parent) {
         return;
-        // TODO: should throw exception in v6
+        // todo: should Throw exception on v6
         // throw new TypeError(`${element.outerHTML} has not a valid parent ${SELECTOR_INNER_ELEM}`)
       }
 
@@ -5966,19 +7237,13 @@
       this._queueCallback(complete, element, element.classList.contains(CLASS_NAME_FADE$1));
     }
     _keydown(event) {
-      if (![ARROW_LEFT_KEY, ARROW_RIGHT_KEY, ARROW_UP_KEY, ARROW_DOWN_KEY, HOME_KEY, END_KEY].includes(event.key)) {
+      if (![ARROW_LEFT_KEY, ARROW_RIGHT_KEY, ARROW_UP_KEY, ARROW_DOWN_KEY].includes(event.key)) {
         return;
       }
       event.stopPropagation(); // stopPropagation/preventDefault both added to support up/down keys without scrolling the page
       event.preventDefault();
-      const children = this._getChildren().filter(element => !isDisabled(element));
-      let nextActiveElement;
-      if ([HOME_KEY, END_KEY].includes(event.key)) {
-        nextActiveElement = children[event.key === HOME_KEY ? 0 : children.length - 1];
-      } else {
-        const isNext = [ARROW_RIGHT_KEY, ARROW_DOWN_KEY].includes(event.key);
-        nextActiveElement = getNextActiveElement(children, event.target, isNext, true);
-      }
+      const isNext = [ARROW_RIGHT_KEY, ARROW_DOWN_KEY].includes(event.key);
+      const nextActiveElement = getNextActiveElement(this._getChildren().filter(element => !isDisabled(element)), event.target, isNext, true);
       if (nextActiveElement) {
         nextActiveElement.focus({
           preventScroll: true
@@ -6022,7 +7287,7 @@
       }
       this._setAttributeIfNotExists(target, 'role', 'tabpanel');
       if (child.id) {
-        this._setAttributeIfNotExists(target, 'aria-labelledby', `${child.id}`);
+        this._setAttributeIfNotExists(target, 'aria-labelledby', `#${child.id}`);
       }
     }
     _toggleDropDown(element, open) {
@@ -6104,7 +7369,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap toast.js
+   * Bootstrap (v5.3.0-alpha1): toast.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -6288,10 +7553,12 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap index.umd.js
+   * Bootstrap (v5.3.0-alpha1): index.umd.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
+
+  // import Ripple from './src/ripple.js'
 
   const index_umd = {
     Alert,
@@ -6299,6 +7566,7 @@
     Carousel,
     Collapse,
     Dropdown,
+    MaterialRipple,
     Modal,
     Offcanvas,
     Popover,
@@ -6306,6 +7574,7 @@
     Tab,
     Toast,
     Tooltip
+    // Ripple
   };
 
   return index_umd;

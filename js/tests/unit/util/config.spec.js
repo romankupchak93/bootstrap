@@ -1,5 +1,5 @@
-import Config from '../../../src/util/config.js'
-import { clearFixture, getFixture } from '../../helpers/fixture.js'
+import Config from '../../../src/util/config'
+import { clearFixture, getFixture } from '../../helpers/fixture'
 
 class DummyConfigClass extends Config {
   static get NAME() {

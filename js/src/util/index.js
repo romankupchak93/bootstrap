@@ -1,6 +1,6 @@
 /**
  * --------------------------------------------------------------------------
- * Bootstrap util/index.js
+ * Bootstrap (v5.3.0-alpha1): util/index.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -70,7 +70,9 @@ const getTransitionDurationFromElement = element => {
 const triggerTransitionEnd = element => {
   element.dispatchEvent(new Event(TRANSITION_END))
 }
-
+const element = (tag) => {
+  return document.createElement(tag)
+}
 const isElement = object => {
   if (!object || typeof object !== 'object') {
     return false
@@ -82,6 +84,21 @@ const isElement = object => {
 
   return typeof object.nodeType !== 'undefined'
 }
+const typeCheckConfig = (componentName, config, configTypes) => {
+  Object.keys(configTypes).forEach((property) => {
+    const expectedTypes = configTypes[property];
+    const value = config[property];
+    const valueType = value && isElement(value) ? 'element' : toType(value);
+
+    if (!new RegExp(expectedTypes).test(valueType)) {
+      throw new Error(
+        `${componentName.toUpperCase()}: ` +
+        `Option "${property}" provided type "${valueType}" ` +
+        `but expected type "${expectedTypes}".`
+      );
+    }
+  });
+};
 
 const getElement = object => {
   // it's a jQuery object or a node element
@@ -162,7 +179,8 @@ const findShadowRoot = element => {
   return findShadowRoot(element.parentNode)
 }
 
-const noop = () => {}
+const noop = () => {
+}
 
 /**
  * Trick to restart an element's animation
@@ -296,8 +314,10 @@ export {
   isDisabled,
   isElement,
   isRTL,
+  typeCheckConfig,
   isVisible,
   noop,
+  element,
   onDOMContentLoaded,
   parseSelector,
   reflow,

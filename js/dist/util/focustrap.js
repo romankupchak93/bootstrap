@@ -1,5 +1,5 @@
 /*!
-  * Bootstrap focustrap.js v5.3.2 (https://getbootstrap.com/)
+  * Bootstrap focustrap.js v5.3.0-alpha1 (https://getbootstrap.com/)
   * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -11,7 +11,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap util/focustrap.js
+   * Bootstrap (v5.3.0-alpha1): util/focustrap.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -33,7 +33,6 @@
     autofocus: true,
     trapElement: null // The element to trap focus inside of
   };
-
   const DefaultType = {
     autofocus: 'boolean',
     trapElement: 'element'

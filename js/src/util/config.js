@@ -1,12 +1,12 @@
 /**
  * --------------------------------------------------------------------------
- * Bootstrap util/config.js
+ * Bootstrap (v5.3.0-alpha1): util/config.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
 
-import Manipulator from '../dom/manipulator.js'
 import { isElement, toType } from './index.js'
+import Manipulator from '../dom/manipulator.js'
 
 /**
  * Class definition

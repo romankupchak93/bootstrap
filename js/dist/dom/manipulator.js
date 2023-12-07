@@ -1,5 +1,5 @@
 /*!
-  * Bootstrap manipulator.js v5.3.2 (https://getbootstrap.com/)
+  * Bootstrap manipulator.js v5.3.0-alpha1 (https://getbootstrap.com/)
   * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -11,7 +11,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap dom/manipulator.js
+   * Bootstrap (v5.3.0-alpha1): dom/manipulator.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -59,6 +59,20 @@
         pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length);
         attributes[pureKey] = normalizeData(element.dataset[key]);
       }
+      return attributes;
+    },
+    getDataClassAttributes(element) {
+      if (!element) {
+        return {};
+      }
+      const attributes = {
+        ...element.dataset
+      };
+      Object.keys(attributes).filter(key => key.startsWith('bs')).forEach(key => {
+        let pureKey = key.replace(/^bs/, '');
+        pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length);
+        attributes[pureKey] = normalizeData(attributes[key]);
+      });
       return attributes;
     },
     getDataAttribute(element, key) {

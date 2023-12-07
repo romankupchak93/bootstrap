@@ -39,9 +39,9 @@ With table cells:
 </table>
 {{< /example >}}
 
-## CSS
+## Sass
 
-### Sass utilities API
+### Utilities API
 
 Vertical align utilities are declared in our utilities API in `scss/_utilities.scss`. [Learn how to use the utilities API.]({{< docsref "/utilities/api#using-the-api" >}})
 

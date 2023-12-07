@@ -28,8 +28,6 @@
   font-weight: var(--#{$prefix}nav-link-font-weight);
   color: var(--#{$prefix}nav-link-color);
   text-decoration: if($link-decoration == none, null, none);
-  background: none;
-  border: 0;
   @include transition($nav-link-transition);
 
   &:hover,
@@ -38,20 +36,32 @@
     text-decoration: if($link-hover-decoration == underline, none, null);
   }
 
-  &:focus-visible {
-    outline: 0;
-    box-shadow: $nav-link-focus-box-shadow;
-  }
-
   // Disabled state lightens text
-  &.disabled,
-  &:disabled {
+  &.disabled {
     color: var(--#{$prefix}nav-link-disabled-color);
     pointer-events: none;
     cursor: default;
   }
 }
+.link-profile {
+  cursor: pointer;
+  border: 0;
 
+  &:hover,
+  &:focus {
+    border-color: transparent;
+    background:   $primary-bg-subtle;
+  }
+
+  &:active {
+    border-color: #f1f3f4;
+    background: #f1f3f4;
+    //box-shadow: var(--devsite-header-link-box-shadow-active,none);
+  }
+  > img {
+    padding: .125rem;
+  }
+}
 //
 // Tabs
 //
@@ -71,6 +81,7 @@
 
   .nav-link {
     margin-bottom: calc(-1 * var(--#{$prefix}nav-tabs-border-width)); // stylelint-disable-line function-disallowed-list
+    background: none;
     border: var(--#{$prefix}nav-tabs-border-width) solid transparent;
     @include border-top-radius(var(--#{$prefix}nav-tabs-border-radius));
 
@@ -79,6 +90,13 @@
       // Prevents active .nav-link tab overlapping focus outline of previous/next .nav-link
       isolation: isolate;
       border-color: var(--#{$prefix}nav-tabs-link-hover-border-color);
+    }
+
+    &.disabled,
+    &:disabled {
+      color: var(--#{$prefix}nav-link-disabled-color);
+      background-color: transparent;
+      border-color: transparent;
     }
   }
 
@@ -110,7 +128,15 @@
   // scss-docs-end nav-pills-css-vars
 
   .nav-link {
+    background: none;
+    border: 0;
     @include border-radius(var(--#{$prefix}nav-pills-border-radius));
+
+    &:disabled {
+      color: var(--#{$prefix}nav-link-disabled-color);
+      background-color: transparent;
+      border-color: transparent;
+    }
   }
 
   .nav-link.active,
@@ -119,7 +145,6 @@
     @include gradient-bg(var(--#{$prefix}nav-pills-link-active-bg));
   }
 }
-
 
 //
 // Underline

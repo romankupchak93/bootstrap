@@ -28,9 +28,9 @@ Apply `.visible` or `.invisible` as needed.
 }
 ```
 
-## CSS
+## Sass
 
-### Sass utilities API
+### Utilities API
 
 Visibility utilities are declared in our utilities API in `scss/_utilities.scss`. [Learn how to use the utilities API.]({{< docsref "/utilities/api#using-the-api" >}})
 

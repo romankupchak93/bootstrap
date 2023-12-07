@@ -54,9 +54,9 @@ If you are using the `<picture>` element to specify multiple `<source>` elements
 </picture>
 ```
 
-## CSS
+## Sass
 
-### Sass variables
+### Variables
 
 Variables are available for image thumbnails.
 

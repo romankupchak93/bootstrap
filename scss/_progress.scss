@@ -8,6 +8,53 @@
 }
 // scss-docs-end progress-keyframes
 
+@keyframes m-progress {
+  0% {
+    right: 100%;
+    left: -35%;
+  }
+  60% {
+    right: -90%;
+    left: 100%;
+  }
+  100% {
+    right: -90%;
+    left: 100%;
+  }
+}
+
+@keyframes m-progress-short {
+  0% {
+    right: 100%;
+    left: -200%;
+  }
+  60% {
+    right: -8%;
+    left: 107%;
+  }
+  100% {
+    right: -8%;
+    left: 107%;
+  }
+}
+
+@keyframes m-rainbow {
+  from {
+    left: 50%;
+    z-index: 100;
+    width: 0;
+  }
+  50% {
+    left: 0;
+    z-index: 10;
+    width: 100%;
+  }
+  to {
+    left: 0;
+    width: 100%;
+  }
+}
+
 .progress,
 .progress-stacked {
   // scss-docs-start progress-css-vars
@@ -21,6 +68,7 @@
   --#{$prefix}progress-bar-transition: #{$progress-bar-transition};
   // scss-docs-end progress-css-vars
 
+  position: relative;
   display: flex;
   height: var(--#{$prefix}progress-height);
   overflow: hidden; // force rounded corners by cropping it
@@ -28,6 +76,38 @@
   background-color: var(--#{$prefix}progress-bg);
   @include border-radius(var(--#{$prefix}progress-border-radius));
   @include box-shadow(var(--#{$prefix}progress-box-shadow));
+
+  .progress-bar-indeterminate {
+    &::before,
+    &::after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      content: "";
+      background-color: inherit;
+    }
+
+    &::before {
+      animation: m-progress 2.1s cubic-bezier(.65, .815, .735, .395) infinite;
+      will-change: left, right;
+    }
+    &::after {
+      animation: m-progress-short 2.1s cubic-bezier(.165, .84, .44, 1) infinite;
+      animation-delay: 1.15s;
+      will-change: left, right;
+    }
+  }
+
+  .color-bar {
+    position: absolute;
+    left: 50%;
+    display: inline;
+    width: 0;
+    height: 100%;
+    text-align: center;
+    content: "";
+  }
 }
 
 .progress-bar {

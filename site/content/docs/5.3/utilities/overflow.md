@@ -90,9 +90,9 @@ Adjust the `overflow-y` property to affect the overflow of content vertically.
 
 Using Sass variables, you may customize the overflow utilities by changing the `$overflows` variable in `_variables.scss`.
 
-## CSS
+## Sass
 
-### Sass utilities API
+### Utilities API
 
 Overflow utilities are declared in our utilities API in `scss/_utilities.scss`. [Learn how to use the utilities API.]({{< docsref "/utilities/api#using-the-api" >}})
 

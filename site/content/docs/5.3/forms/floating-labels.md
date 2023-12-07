@@ -8,6 +8,42 @@ toc: true
 
 ## Example
 
+Classic outline `<input class="form-control">` and `<label>` elements in `.floating-field` to enable floating labels with Bootstrap's textual form fields.
+
+{{< example >}}
+<div class="floating-field mb-4">
+  <input type="email" class="form-control" id="textfieldEmail" placeholder="name@example.com">
+  <label for="textfieldEmail">Email address</label>
+</div>
+<div class="floating-field mb-4">
+  <select class="form-select" id="fieldSelect" aria-label="Floating label select example">
+    <option selected>Open this select menu</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+  </select>
+  <label for="fieldSelect">Works with selects</label>
+</div>
+<div class="floating-field mb-4">
+  <textarea class="form-control" placeholder="Leave a comment here" id="fieldTextarea"></textarea>
+  <label for="fieldTextarea">Comments</label>
+</div>
+{{< /example >}}
+
+
+Classic outline `<input class="form-control">` and `<label>` elements in `.floating-label` to enable floating labels with Bootstrap's textual form fields.
+
+{{< example >}}
+<div class="floating-label mb-3">
+  <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+  <label for="floatingEmail">Email address</label>
+</div>
+<div class="floating-label">
+  <input type="password" class="form-control" id="floatingPassw" placeholder="Password">
+  <label for="floatingPassw">Password</label>
+</div>
+{{< /example >}}
+
 Wrap a pair of `<input class="form-control">` and `<label>` elements in `.form-floating` to enable floating labels with Bootstrap's textual form fields. A `placeholder` is required on each `<input>` as our method of CSS-only floating labels uses the `:placeholder-shown` pseudo-element. Also note that the `<input>` must come first so we can utilize a sibling selector (e.g., `~`).
 
 {{< example >}}
@@ -89,7 +125,7 @@ Add the `disabled` boolean attribute on an input, a textarea or a select to give
   <label for="floatingTextareaDisabled">Comments</label>
 </div>
 <div class="form-floating mb-3">
-  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2Disabled" style="height: 100px" disabled>Disabled textarea with some text inside</textarea>
+  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2Disabled" style="height: 100px" disabled></textarea>
   <label for="floatingTextarea2Disabled">Comments</label>
 </div>
 <div class="form-floating">
@@ -173,8 +209,8 @@ When working with the Bootstrap grid system, be sure to place form elements with
 </div>
 {{< /example >}}
 
-## CSS
+## Sass
 
-### Sass variables
+### Variables
 
 {{< scss-docs name="form-floating-variables" file="scss/_variables.scss" >}}

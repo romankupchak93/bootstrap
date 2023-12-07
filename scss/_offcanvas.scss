@@ -8,7 +8,7 @@
   --#{$prefix}offcanvas-padding-x: #{$offcanvas-padding-x};
   --#{$prefix}offcanvas-padding-y: #{$offcanvas-padding-y};
   --#{$prefix}offcanvas-color: #{$offcanvas-color};
-  --#{$prefix}offcanvas-bg: #{$offcanvas-bg-color};
+  //--#{$prefix}offcanvas-bg: #{$offcanvas-bg-color};
   --#{$prefix}offcanvas-border-width: #{$offcanvas-border-width};
   --#{$prefix}offcanvas-border-color: #{$offcanvas-border-color};
   --#{$prefix}offcanvas-box-shadow: #{$offcanvas-box-shadow};
@@ -16,7 +16,6 @@
   --#{$prefix}offcanvas-title-line-height: #{$offcanvas-title-line-height};
   // scss-docs-end offcanvas-css-vars
 }
-
 @each $breakpoint in map-keys($grid-breakpoints) {
   $next: breakpoint-next($breakpoint, $grid-breakpoints);
   $infix: breakpoint-infix($next, $grid-breakpoints);
@@ -29,7 +28,6 @@
 @each $breakpoint in map-keys($grid-breakpoints) {
   $next: breakpoint-next($breakpoint, $grid-breakpoints);
   $infix: breakpoint-infix($next, $grid-breakpoints);
-
   .offcanvas#{$infix} {
     @include media-breakpoint-down($next) {
       position: fixed;
@@ -50,7 +48,7 @@
         top: 0;
         left: 0;
         width: var(--#{$prefix}offcanvas-width);
-        border-right: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
+        border-right: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-bg);
         transform: translateX(-100%);
       }
 
@@ -58,7 +56,7 @@
         top: 0;
         right: 0;
         width: var(--#{$prefix}offcanvas-width);
-        border-left: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
+        border-left: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-bg);
         transform: translateX(100%);
       }
 
@@ -68,7 +66,7 @@
         left: 0;
         height: var(--#{$prefix}offcanvas-height);
         max-height: 100%;
-        border-bottom: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
+        border-bottom: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-bg);
         transform: translateY(-100%);
       }
 
@@ -77,7 +75,7 @@
         left: 0;
         height: var(--#{$prefix}offcanvas-height);
         max-height: 100%;
-        border-top: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
+        border-top: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-bg);
         transform: translateY(100%);
       }
 
@@ -123,11 +121,14 @@
 .offcanvas-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: var(--#{$prefix}offcanvas-padding-y) var(--#{$prefix}offcanvas-padding-x);
 
   .btn-close {
     padding: calc(var(--#{$prefix}offcanvas-padding-y) * .5) calc(var(--#{$prefix}offcanvas-padding-x) * .5);
-    margin: calc(-.5 * var(--#{$prefix}offcanvas-padding-y)) calc(-.5 * var(--#{$prefix}offcanvas-padding-x)) calc(-.5 * var(--#{$prefix}offcanvas-padding-y)) auto;
+    margin-top: calc(-.5 * var(--#{$prefix}offcanvas-padding-y));
+    margin-right: calc(-.5 * var(--#{$prefix}offcanvas-padding-x));
+    margin-bottom: calc(-.5 * var(--#{$prefix}offcanvas-padding-y));
   }
 }
 

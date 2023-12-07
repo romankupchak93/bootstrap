@@ -18,6 +18,7 @@
   $disabled-border: $border,
   $disabled-color: color-contrast($disabled-background)
 ) {
+  --mdc-ripple-color: #{$color};
   --#{$prefix}btn-color: #{$color};
   --#{$prefix}btn-bg: #{$background};
   --#{$prefix}btn-border-color: #{$border};
@@ -43,6 +44,7 @@
   $active-border: $color,
   $active-color: color-contrast($active-background)
 ) {
+  --mdc-ripple-color: #{$color};
   --#{$prefix}btn-color: #{$color};
   --#{$prefix}btn-border-color: #{$color};
   --#{$prefix}btn-hover-color: #{$color-hover};
@@ -60,6 +62,32 @@
 }
 // scss-docs-end btn-outline-variant-mixin
 
+@mixin button-text-variant(
+  $color,
+  $hover-background: rgba($color, .15),
+  $active-background: rgba($color, .2),
+  //$color-hover: color-contrast($color),
+  //$active-background: $color,
+  //$active-border: $color,
+  //$active-color: color-contrast($active-background)
+) {
+  --mdc-ripple-color: #{$color};
+  --#{$prefix}btn-color: #{$color};
+  --#{$prefix}btn-border-color: transparent;
+  --#{$prefix}btn-hover-color: #{$color};
+  --#{$prefix}btn-hover-bg: #{$active-background};
+  --#{$prefix}btn-hover-border-color: transparent;
+  --#{$prefix}btn-focus-shadow-rgb: #{to-rgb($color)};
+  --#{$prefix}btn-active-color: #{$color};
+  --#{$prefix}btn-active-bg: #{$active-background};
+  --#{$prefix}btn-active-border-color: transparent;
+  --#{$prefix}btn-active-shadow: #{$btn-active-box-shadow};
+  --#{$prefix}btn-disabled-color: #{$color};
+  --#{$prefix}btn-disabled-bg: transparent;
+  --#{$prefix}btn-disabled-border-color: #{$color};
+  --#{$prefix}gradient: none;
+}
+
 // scss-docs-start btn-size-mixin
 @mixin button-size($padding-y, $padding-x, $font-size, $border-radius) {
   --#{$prefix}btn-padding-y: #{$padding-y};
@@ -68,3 +96,9 @@
   --#{$prefix}btn-border-radius: #{$border-radius};
 }
 // scss-docs-end btn-size-mixin
+@mixin btn-icon($btn-icon-width, $btn-icon-height, $font-size) {
+  --#{$prefix}btn-icon-width: #{$btn-icon-width};
+  --#{$prefix}btn-icon-height: #{$btn-icon-height};
+  @include rfs($font-size, --#{$prefix}btn-font-size);
+  --#{$prefix}btn-border-radius: #{$border-radius};
+}

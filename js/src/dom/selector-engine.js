@@ -1,6 +1,6 @@
 /**
  * --------------------------------------------------------------------------
- * Bootstrap dom/selector-engine.js
+ * Bootstrap (v5.3.0-alpha1): dom/selector-engine.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -26,10 +26,10 @@ const getSelector = element => {
       hrefAttribute = `#${hrefAttribute.split('#')[1]}`
     }
 
-    selector = hrefAttribute && hrefAttribute !== '#' ? parseSelector(hrefAttribute.trim()) : null
+    selector = hrefAttribute && hrefAttribute !== '#' ? hrefAttribute.trim() : null
   }
 
-  return selector
+  return parseSelector(selector)
 }
 
 const SelectorEngine = {

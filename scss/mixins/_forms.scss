@@ -21,7 +21,8 @@
   $icon,
   $tooltip-color: color-contrast($color),
   $tooltip-bg-color: rgba($color, $form-feedback-tooltip-opacity),
-  $focus-box-shadow: 0 0 $input-btn-focus-blur $input-focus-width rgba($color, $input-btn-focus-color-opacity),
+  $focus-box-shadow:       0 0 $input-btn-focus-blur $input-focus-width rgba($color, $input-btn-focus-color-opacity),
+  $focus-box-shadow-check: 0 0 $input-btn-focus-blur $input-focus-width rgba($color, $input-btn-focus-color-opacity),
   $border-color: $color
 ) {
   .#{$state}-feedback {
@@ -57,8 +58,8 @@
 
   .form-control {
     @include form-validation-state-selector($state) {
+      color: $color;
       border-color: $border-color;
-
       @if $enable-validation-icons {
         padding-right: $input-height-inner;
         background-image: escape-svg($icon);
@@ -70,6 +71,9 @@
       &:focus {
         border-color: $border-color;
         box-shadow: $focus-box-shadow;
+      }
+      ~ label {
+        color: $color;
       }
     }
   }
@@ -86,8 +90,8 @@
 
   .form-select {
     @include form-validation-state-selector($state) {
+      color: $color;
       border-color: $border-color;
-
       @if $enable-validation-icons {
         &:not([multiple]):not([size]),
         &:not([multiple])[size="1"] {
@@ -101,6 +105,9 @@
       &:focus {
         border-color: $border-color;
         box-shadow: $focus-box-shadow;
+      }
+      ~ label {
+        color: $color;
       }
     }
   }
@@ -122,7 +129,7 @@
       }
 
       &:focus {
-        box-shadow: $focus-box-shadow;
+        box-shadow: $focus-box-shadow-check;
       }
 
       ~ .form-check-label {
@@ -147,6 +154,25 @@
           z-index: 4;
         }
       }
+    }
+  }
+}
+.form-control:disabled,
+.form-select:disabled {
+  cursor : not-allowed;
+}
+
+@mixin input-filled-label() {
+  &:focus+label, &:not(:placeholder-shown)+label {
+    @content
+  }
+}
+
+@if $enable-dark-mode {
+  @include color-mode(dark) {
+    .form-control, .form-select {
+      border: $input-border-width solid var(--#{$prefix}border-color);
+      //border-color: var(--#{$prefix}border-color);
     }
   }
 }

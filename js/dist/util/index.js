@@ -1,5 +1,5 @@
 /*!
-  * Bootstrap index.js v5.3.2 (https://getbootstrap.com/)
+  * Bootstrap index.js v5.3.0-alpha1 (https://getbootstrap.com/)
   * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -11,7 +11,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap util/index.js
+   * Bootstrap (v5.3.0-alpha1): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -77,6 +77,9 @@
   const triggerTransitionEnd = element => {
     element.dispatchEvent(new Event(TRANSITION_END));
   };
+  const element = tag => {
+    return document.createElement(tag);
+  };
   const isElement = object => {
     if (!object || typeof object !== 'object') {
       return false;
@@ -85,6 +88,16 @@
       object = object[0];
     }
     return typeof object.nodeType !== 'undefined';
+  };
+  const typeCheckConfig = (componentName, config, configTypes) => {
+    Object.keys(configTypes).forEach(property => {
+      const expectedTypes = configTypes[property];
+      const value = config[property];
+      const valueType = value && isElement(value) ? 'element' : toType(value);
+      if (!new RegExp(expectedTypes).test(valueType)) {
+        throw new Error(`${componentName.toUpperCase()}: ` + `Option "${property}" provided type "${valueType}" ` + `but expected type "${expectedTypes}".`);
+      }
+    });
   };
   const getElement = object => {
     // it's a jQuery object or a node element
@@ -162,7 +175,6 @@
   const reflow = element => {
     element.offsetHeight; // eslint-disable-line no-unused-expressions
   };
-
   const getjQuery = () => {
     if (window.jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
       return window.jQuery;
@@ -257,6 +269,7 @@
   };
 
   exports.defineJQueryPlugin = defineJQueryPlugin;
+  exports.element = element;
   exports.execute = execute;
   exports.executeAfterTransition = executeAfterTransition;
   exports.findShadowRoot = findShadowRoot;
@@ -275,6 +288,7 @@
   exports.reflow = reflow;
   exports.toType = toType;
   exports.triggerTransitionEnd = triggerTransitionEnd;
+  exports.typeCheckConfig = typeCheckConfig;
 
   Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 

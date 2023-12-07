@@ -10,7 +10,6 @@
   // stylelint-enable
 
   h1 {
-    --bs-heading-color: var(--bs-emphasis-color);
     @include font-size(4rem);
   }
 
@@ -22,8 +21,6 @@
 
   .bd-code-snippet {
     margin: 0;
-    border-color: var(--bs-border-color-translucent);
-    border-width: 1px;
     @include border-radius(.5rem);
   }
 
@@ -34,21 +31,15 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     background-color: rgba(var(--bs-body-color-rgb), .075);
-    @include border-radius(calc(.5rem - 1px));
+    @include border-radius(.5rem);
 
     @include media-breakpoint-up(lg) {
       padding-right: 4rem;
     }
-
-    pre {
-      padding: 0;
-      margin: .625rem 0;
-      overflow: hidden;
-    }
   }
   .btn-clipboard {
     position: absolute;
-    top: -.625rem;
+    top: -.125rem;
     right: 0;
     background-color: transparent;
   }
@@ -65,14 +56,12 @@
 }
 
 .masthead-followup {
-  h2,
-  h3,
-  h4 {
-    --bs-heading-color: var(--bs-emphasis-color);
-  }
-
   .lead {
     @include font-size(1rem);
+  }
+
+  .highlight {
+    @include border-radius(.5rem);
   }
 
   @include media-breakpoint-up(md) {
@@ -80,6 +69,10 @@
       @include font-size(1.25rem);
     }
   }
+}
+
+.bd-btn-lg {
+  padding: .8rem 2rem;
 }
 
 .masthead-followup-icon {
@@ -102,7 +95,7 @@
 
 .animate-img {
   > img {
-    @include transition(transform .2s ease-in-out);
+    transition: .2s ease-in-out transform; // stylelint-disable-line property-disallowed-list
   }
 
   &:hover > img {

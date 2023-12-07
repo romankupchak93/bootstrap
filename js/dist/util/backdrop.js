@@ -1,17 +1,17 @@
 /*!
-  * Bootstrap backdrop.js v5.3.2 (https://getbootstrap.com/)
+  * Bootstrap backdrop.js v5.3.0-alpha1 (https://getbootstrap.com/)
   * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('../dom/event-handler.js'), require('./config.js'), require('./index.js')) :
-  typeof define === 'function' && define.amd ? define(['../dom/event-handler', './config', './index'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Backdrop = factory(global.EventHandler, global.Config, global.Index));
-})(this, (function (EventHandler, Config, index_js) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('../dom/event-handler.js'), require('./index.js'), require('./config.js')) :
+  typeof define === 'function' && define.amd ? define(['../dom/event-handler', './index', './config'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Backdrop = factory(global.EventHandler, global.Index, global.Config));
+})(this, (function (EventHandler, index_js, Config) { 'use strict';
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap util/backdrop.js
+   * Bootstrap (v5.3.0-alpha1): util/backdrop.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -33,7 +33,6 @@
     // if false, we use the backdrop helper without adding any element to the dom
     rootElement: 'body' // give the choice to place backdrop under different elements
   };
-
   const DefaultType = {
     className: 'string',
     clickCallback: '(function|null)',

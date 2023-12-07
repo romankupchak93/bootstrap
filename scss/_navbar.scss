@@ -6,7 +6,8 @@
 .navbar {
   // scss-docs-start navbar-css-vars
   --#{$prefix}navbar-padding-x: #{if($navbar-padding-x == null, 0, $navbar-padding-x)};
-  --#{$prefix}navbar-padding-y: #{$navbar-padding-y};
+  --#{$prefix}navbar-padding-y: 0;
+  //--#{$prefix}navbar-padding-y: #{$navbar-padding-y};
   --#{$prefix}navbar-color: #{$navbar-light-color};
   --#{$prefix}navbar-hover-color: #{$navbar-light-hover-color};
   --#{$prefix}navbar-disabled-color: #{$navbar-light-disabled-color};
@@ -26,7 +27,7 @@
   --#{$prefix}navbar-toggler-focus-width: #{$navbar-toggler-focus-width};
   --#{$prefix}navbar-toggler-transition: #{$navbar-toggler-transition};
   // scss-docs-end navbar-css-vars
-
+ &:not(.main-navbar) { background-color: var(--#{$prefix}navbar-bg); }
   position: relative;
   display: flex;
   flex-wrap: wrap; // allow us to do the line break for collapsing content
@@ -100,10 +101,16 @@
   margin-bottom: 0;
   list-style: none;
 
-  .nav-link {
-    &.active,
-    &.show {
-      color: var(--#{$prefix}navbar-active-color);
+  .nav-link > span {
+    font-weight: #{$nav-link-font-weight};
+  }
+
+  .show > .nav-link,
+  .nav-link.active {
+    font-weight: #{$nav-link-font-weight-active};
+    color: var(--#{$prefix}navbar-active-color);
+    & span {
+      font-weight: #{$nav-link-font-weight-active};
     }
   }
 
@@ -124,7 +131,7 @@
 
   a,
   a:hover,
-  a:focus  {
+  a:focus {
     color: var(--#{$prefix}navbar-active-color);
   }
 }
@@ -256,6 +263,7 @@
     }
   }
 }
+
 // scss-docs-end navbar-expand-loop
 
 // Navbar themes
@@ -266,8 +274,19 @@
   @include deprecate("`.navbar-light`", "v5.2.0", "v6.0.0", true);
 }
 
-.navbar-dark,
-.navbar[data-bs-theme="dark"] {
+.navbar.bg-transparent {
+  position: absolute;
+
+  & .nav-link, span {
+    color: rgba($white, .75);
+
+    &:hover, span {
+      color: rgba($white, .85);
+    }
+  }
+}
+
+.navbar-dark {
   // scss-docs-start navbar-dark-css-vars
   --#{$prefix}navbar-color: #{$navbar-dark-color};
   --#{$prefix}navbar-hover-color: #{$navbar-dark-hover-color};
@@ -282,7 +301,10 @@
 
 @if $enable-dark-mode {
   @include color-mode(dark) {
-    .navbar-toggler-icon {
+    .navbar.main-navbar {
+      background-color: $navbar-main-bg-dark;
+    }
+    .navbar {
       --#{$prefix}navbar-toggler-icon-bg: #{escape-svg($navbar-dark-toggler-icon-bg)};
     }
   }

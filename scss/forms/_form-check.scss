@@ -29,18 +29,17 @@
 .form-check-input {
   --#{$prefix}form-check-bg: #{$form-check-input-bg};
 
-  flex-shrink: 0;
   width: $form-check-input-width;
   height: $form-check-input-width;
   margin-top: ($line-height-base - $form-check-input-width) * .5; // line-height minus check height
   vertical-align: top;
-  appearance: none;
   background-color: var(--#{$prefix}form-check-bg);
   background-image: var(--#{$prefix}form-check-bg-image);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   border: $form-check-input-border;
+  appearance: none;
   print-color-adjust: exact; // Keep themed appearance for print
   @include transition($form-check-transition);
 
@@ -49,8 +48,7 @@
   }
 
   &[type="radio"] {
-    // stylelint-disable-next-line property-disallowed-list
-    border-radius: $form-check-radio-border-radius;
+    @include border-radius($form-check-radio-border-radius);
   }
 
   &:active {
@@ -76,6 +74,7 @@
     }
 
     &[type="radio"] {
+      background-color: $form-check-radio-checked-bg-color;
       @if $enable-gradients {
         --#{$prefix}form-check-bg-image: #{escape-svg($form-check-radio-checked-bg-image)}, var(--#{$prefix}gradient);
       } @else {
@@ -131,7 +130,7 @@
     margin-left: $form-switch-padding-start * -1;
     background-image: var(--#{$prefix}form-switch-bg);
     background-position: left center;
-    @include border-radius($form-switch-border-radius, 0);
+    @include border-radius($form-switch-border-radius);
     @include transition($form-switch-transition);
 
     &:focus {
@@ -158,6 +157,45 @@
       margin-left: 0;
     }
   }
+
+  &.form-switch-material {
+    .form-check-input {
+      position: relative;
+      height: .8em;
+      margin-top: .35em;
+      background-image: none;
+      box-shadow: none;
+
+      &::before {
+        position: absolute;
+        top: -.35em;
+        left: -.15em;
+        width: 1.25em;
+        height: 1.25em;
+        content: "";
+        background-color: #dfdfdf;
+        @include border-radius(50%);
+        @include transition(left 90ms cubic-bezier(.4, 0, .2, 1), background-color 90ms cubic-bezier(.4, 0, .2, 1), border-color 90ms cubic-bezier(.4, 0, .2, 1));
+      }
+
+      &:focus {
+        &::before {
+          background-color: $form-switch-focus-color;
+          box-shadow: 0 0 0 .3em $input-btn-focus-color;
+        }
+      }
+
+      &:checked {
+        background-color: $form-switch-focus-color;
+        border-color: $form-switch-focus-color;
+
+        &::before {
+          left: .65em;
+          background-color: $form-check-input-checked-bg-color;
+        }
+      }
+    }
+  }
 }
 
 .form-check-inline {
@@ -178,6 +216,38 @@
       opacity: $form-check-btn-check-disabled-opacity;
     }
   }
+}
+
+.boxes input:not(:checked):disabled + label {
+  opacity: 0.75;
+  /*border-bottom: 2px solid #0D47A1;*/
+  /*color        : #0D47A1;*/
+}
+
+
+.boxes input:checked + label {
+  border-bottom: 2px solid $link-color;
+  color: $link-color;
+}
+
+
+.boxes input {
+  display: none;
+}
+
+.boxes label:first-child,
+.boxes label:last-child {
+  margin-right: 0;
+}
+
+.boxes label {
+  padding: 5px 0;
+  margin-right: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 @if $enable-dark-mode {

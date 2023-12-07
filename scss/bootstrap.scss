@@ -5,6 +5,7 @@
 // scss-docs-start import-stack
 // Configuration
 @import "functions";
+@import "customize/theme";
 @import "variables";
 @import "variables-dark";
 @import "maps";
@@ -43,6 +44,7 @@
 @import "spinners";
 @import "offcanvas";
 @import "placeholders";
+@import "customize/props";
 
 // Helpers
 @import "helpers";

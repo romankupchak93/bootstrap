@@ -1,16 +1,16 @@
 /**
  * --------------------------------------------------------------------------
- * Bootstrap tooltip.js
+ * Bootstrap (v5.3.0-alpha1): tooltip.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
 
 import * as Popper from '@popperjs/core'
-import BaseComponent from './base-component.js'
-import EventHandler from './dom/event-handler.js'
-import Manipulator from './dom/manipulator.js'
 import { defineJQueryPlugin, execute, findShadowRoot, getElement, getUID, isRTL, noop } from './util/index.js'
 import { DefaultAllowlist } from './util/sanitizer.js'
+import EventHandler from './dom/event-handler.js'
+import Manipulator from './dom/manipulator.js'
+import BaseComponent from './base-component.js'
 import TemplateFactory from './util/template-factory.js'
 
 /**
@@ -62,7 +62,7 @@ const Default = {
   delay: 0,
   fallbackPlacements: ['top', 'right', 'bottom', 'left'],
   html: false,
-  offset: [0, 6],
+  offset: [0, 0],
   placement: 'top',
   popperConfig: null,
   sanitize: true,
@@ -197,7 +197,7 @@ class Tooltip extends BaseComponent {
       return
     }
 
-    // TODO: v6 remove this or make it optional
+    // todo v6 remove this OR make it optional
     this._disposePopper()
 
     const tip = this._getTipElement()
@@ -302,13 +302,13 @@ class Tooltip extends BaseComponent {
   _createTipElement(content) {
     const tip = this._getTemplateFactory(content).toHtml()
 
-    // TODO: remove this check in v6
+    // todo: remove this check on v6
     if (!tip) {
       return null
     }
 
     tip.classList.remove(CLASS_NAME_FADE, CLASS_NAME_SHOW)
-    // TODO: v6 the following can be achieved with CSS only
+    // todo: on v6 the following can be achieved with CSS only
     tip.classList.add(`bs-${this.constructor.NAME}-auto`)
 
     const tipId = getUID(this.constructor.NAME).toString()
