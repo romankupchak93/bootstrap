@@ -22,6 +22,7 @@
 }
 
 .nav-link {
+  position: relative;
   display: block;
   padding: var(--#{$prefix}nav-link-padding-y) var(--#{$prefix}nav-link-padding-x);
   @include font-size(var(--#{$prefix}nav-link-font-size));
@@ -60,19 +61,33 @@
   // scss-docs-start nav-tabs-css-vars
   --#{$prefix}nav-tabs-border-width: #{$nav-tabs-border-width};
   --#{$prefix}nav-tabs-border-color: #{$nav-tabs-border-color};
+  --#{$prefix}nav-tabs-link-color: #{$nav-tabs-link-color};
   --#{$prefix}nav-tabs-border-radius: #{$nav-tabs-border-radius};
   --#{$prefix}nav-tabs-link-hover-border-color: #{$nav-tabs-link-hover-border-color};
   --#{$prefix}nav-tabs-link-active-color: #{$nav-tabs-link-active-color};
   --#{$prefix}nav-tabs-link-active-bg: #{$nav-tabs-link-active-bg};
   --#{$prefix}nav-tabs-link-active-border-color: #{$nav-tabs-link-active-border-color};
+  --mdc-ripple-hover-opacity: 0;
+  --mdc-ripple-focus-opacity: 0;
+  --mdc-ripple-press-opacity: .2;
+  --mdc-ripple-color: var(--#{$prefix}nav-tabs-link-color);
   // scss-docs-end nav-tabs-css-vars
 
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   border-bottom: var(--#{$prefix}nav-tabs-border-width) solid var(--#{$prefix}nav-tabs-border-color);
 
   .nav-link {
+    position: relative;
     margin-bottom: calc(-1 * var(--#{$prefix}nav-tabs-border-width)); // stylelint-disable-line function-disallowed-list
     border: var(--#{$prefix}nav-tabs-border-width) solid transparent;
     @include border-top-radius(var(--#{$prefix}nav-tabs-border-radius));
+
+    &.active {
+      --mdc-ripple-color: var(--#{$prefix}nav-tabs-link-active-color);
+    }
 
     &:hover,
     &:focus {
@@ -191,6 +206,7 @@
   > .tab-pane {
     display: none;
   }
+
   > .active {
     display: block;
   }

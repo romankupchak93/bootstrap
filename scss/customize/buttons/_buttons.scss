@@ -1,0 +1,18 @@
+.btn,
+.btn-icon,
+.btn-close,
+.navbar-toggler {
+  // MDC Ripple variables
+  --mdc-ripple-hover-opacity: 0;
+  --mdc-ripple-focus-opacity: 0;
+  --mdc-ripple-press-opacity: .2;
+
+  position: relative;
+}
+
+.btn:not([class*='btn-']):active,
+.btn:not([class*='btn-']).active,
+.btn:not([class*='btn-']).show,
+.btn:not([class*='btn-']) {
+  border-color: transparent;
+}

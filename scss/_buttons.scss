@@ -2,7 +2,12 @@
 // Base styles
 //
 
+//button, [class*='btn-']:not(input, label) {
+//  position: relative;
+//}
+
 .btn {
+
   // scss-docs-start btn-css-vars
   --#{$prefix}btn-padding-x: #{$btn-padding-x};
   --#{$prefix}btn-padding-y: #{$btn-padding-y};
@@ -14,14 +19,17 @@
   --#{$prefix}btn-bg: transparent;
   --#{$prefix}btn-border-width: #{$btn-border-width};
   --#{$prefix}btn-border-color: transparent;
-  --#{$prefix}btn-border-radius: #{$btn-border-radius};
+  --#{$prefix}btn-border-radius: #{$btn-border-radius-sm};
   --#{$prefix}btn-hover-border-color: transparent;
   --#{$prefix}btn-box-shadow: #{$btn-box-shadow};
   --#{$prefix}btn-disabled-opacity: #{$btn-disabled-opacity};
   --#{$prefix}btn-focus-box-shadow: 0 0 0 #{$btn-focus-width} rgba(var(--#{$prefix}btn-focus-shadow-rgb), .5);
   // scss-docs-end btn-css-vars
 
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
   padding: var(--#{$prefix}btn-padding-y) var(--#{$prefix}btn-padding-x);
   font-family: var(--#{$prefix}btn-font-family);
   @include font-size(var(--#{$prefix}btn-font-size));
@@ -119,35 +127,60 @@
 //
 
 // scss-docs-start btn-variant-loops
-@each $color, $value in $theme-colors {
-  .btn-#{$color} {
-    @if $color == "light" {
-      @include button-variant(
-        $value,
-        $value,
-        $hover-background: shade-color($value, $btn-hover-bg-shade-amount),
-        $hover-border: shade-color($value, $btn-hover-border-shade-amount),
-        $active-background: shade-color($value, $btn-active-bg-shade-amount),
-        $active-border: shade-color($value, $btn-active-border-shade-amount)
-      );
-    } @else if $color == "dark" {
-      @include button-variant(
-        $value,
-        $value,
-        $hover-background: tint-color($value, $btn-hover-bg-tint-amount),
-        $hover-border: tint-color($value, $btn-hover-border-tint-amount),
-        $active-background: tint-color($value, $btn-active-bg-tint-amount),
-        $active-border: tint-color($value, $btn-active-border-tint-amount)
-      );
-    } @else {
-      @include button-variant($value, $value);
+@each $state in map-keys($theme-colors) {
+  @include color-mode(dark) {
+    .btn-#{$state} {
+      --mdc-ripple-color: var(--#{$prefix}text-on-#{$state});
+      --#{$prefix}btn-color: var(--#{$prefix}text-on-#{$state});
+      --#{$prefix}btn-hover-color: var(--#{$prefix}#{$state}-subtle);
+      --#{$prefix}btn-active-color: var(--#{$prefix}#{$state}-subtle);
+      --#{$prefix}btn-disabled-color: var(--#{$prefix}#{$state}-subtle);
+      --#{$prefix}btn-border-width: 0;
     }
   }
-}
-
-@each $color, $value in $theme-colors {
-  .btn-outline-#{$color} {
-    @include button-outline-variant($value);
+  .btn-#{$state} {
+    --mdc-ripple-color: var(--#{$prefix}text-on-#{$state});
+    --#{$prefix}btn-color: var(--#{$prefix}text-on-#{$state});
+    --#{$prefix}btn-bg: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-border-width: 0;
+    --#{$prefix}btn-border-color: transparent;
+    --#{$prefix}btn-hover-color: var(--#{$prefix}text-on-#{$state});
+    --#{$prefix}btn-hover-bg: var(--#{$prefix}#{$state}-hover);
+    --#{$prefix}btn-hover-border-color: transparent;
+    --#{$prefix}btn-active-color: var(--#{$prefix}text-on-#{$state});
+    --#{$prefix}btn-active-bg: var(--#{$prefix}#{$state}-active);
+    --#{$prefix}btn-active-border-color: transparent;
+    --#{$prefix}btn-disabled-color: var(--#{$prefix}text-on-#{$state});
+    --#{$prefix}btn-disabled-bg: var(--#{$prefix}#{$state});
+  }
+  .btn-outline-#{$state} {
+    --mdc-ripple-color: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-color: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-border-width: #{$border-width};
+    --#{$prefix}btn-border-color: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-hover-color: var(--#{$prefix}#{$state}-emphasis);
+    --#{$prefix}btn-hover-bg: var(--#{$prefix}#{$state}-subtle);
+    --#{$prefix}btn-hover-border-color: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-active-color: var(--#{$prefix}#{$state}-emphasis-hover);
+    --#{$prefix}btn-active-bg: var(--#{$prefix}#{$state}-subtle-hover);
+    --#{$prefix}btn-active-border-color: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-disabled-color: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-disabled-bg: transparent;
+    --#{$prefix}btn-disabled-border-color: var(--#{$prefix}#{$state});
+  }
+  .btn-text-#{$state} {
+    --mdc-ripple-color: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-color: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-border-color: transparent;
+    --#{$prefix}btn-hover-color: var(--#{$prefix}#{$state}-emphasis);
+    --#{$prefix}btn-hover-bg: var(--#{$prefix}#{$state}-subtle);
+    --#{$prefix}btn-hover-border-color: transparent;
+    --#{$prefix}btn-active-color: var(--#{$prefix}#{$state}-emphasis-hover);
+    --#{$prefix}btn-active-bg: var(--#{$prefix}#{$state}-subtle-hover);
+    --#{$prefix}btn-active-border-color: transparent;
+    --#{$prefix}btn-disabled-color: var(--#{$prefix}#{$state});
+    --#{$prefix}btn-disabled-bg: transparent;
+    --#{$prefix}btn-disabled-border-color: var(--#{$prefix}#{$state});
   }
 }
 // scss-docs-end btn-variant-loops
@@ -199,7 +232,7 @@
 //
 
 .btn-lg {
-  @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-border-radius-lg);
+  @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-border-radius-sm);
 }
 
 .btn-sm {

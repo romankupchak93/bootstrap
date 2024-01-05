@@ -169,8 +169,8 @@
   [data-bs-target] {
     box-sizing: content-box;
     flex: 0 1 auto;
-    width: $carousel-indicator-width;
-    height: $carousel-indicator-height;
+    width: $carousel-indicator-hit-area-height;
+    height: $carousel-indicator-hit-area-height;
     padding: 0;
     margin-right: $carousel-indicator-spacer;
     margin-left: $carousel-indicator-spacer;
@@ -179,16 +179,21 @@
     background-color: $carousel-indicator-active-bg;
     background-clip: padding-box;
     border: 0;
+    border-radius: $border-radius-lg;
     // Use transparent borders to increase the hit area by 10px on top and bottom.
-    border-top: $carousel-indicator-hit-area-height solid transparent;
-    border-bottom: $carousel-indicator-hit-area-height solid transparent;
+    //border-top: $carousel-indicator-hit-area-height solid transparent;
+    //border-bottom: $carousel-indicator-hit-area-height solid transparent;
     opacity: $carousel-indicator-opacity;
     @include transition($carousel-indicator-transition);
   }
 
   .active {
+    width: $carousel-indicator-width;
     opacity: $carousel-indicator-active-opacity;
+    //border-radius: 10px;
   }
+  //.active {
+  //}
 }
 
 

@@ -56,6 +56,9 @@ $code-color-dark:                   tint-color($code-color, 40%) !default;
 $mark-color-dark:                   $body-color-dark !default;
 $mark-bg-dark:                      $yellow-800 !default;
 
+$surface-bg-dark:                   $gray-800 !default;
+$surface-bg-dark-hover:             tint-color($surface-bg-dark, 2%) !default;
+$surface-color-dark:                $gray-300 !default;
 
 //
 // Forms
@@ -66,6 +69,8 @@ $form-select-indicator-dark:        url("data:image/svg+xml,<svg xmlns='http://w
 
 $form-switch-color-dark:            rgba($white, .25) !default;
 $form-switch-bg-image-dark:         url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$form-switch-color-dark}'/></svg>") !default;
+
+$form-check-radio-checked-bg-image-dark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='none' stroke='#{$body-bg-dark}' stroke-width='1.5'/></svg>") !default;
 
 // scss-docs-start form-validation-colors-dark
 $form-valid-color-dark:             $green-300 !default;

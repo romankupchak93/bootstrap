@@ -36,6 +36,50 @@ Custom feedback styles apply custom colors, borders, focus styles, and backgroun
 
 {{< example >}}
 <form class="row g-3 needs-validation" novalidate>
+
+  <div class="col-md-6">
+    <div class="floating-label">
+      <input type="text" class="form-control" id="validationCustom001" placeholder=" " value="Mark" required />
+      <label for="validationCustom01" class="form-label">First name</label>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="floating-label">
+      <select class="form-select" id="validationCustom04" required>
+        <option selected disabled value="">Choose...</option>
+        <option>...</option>
+      </select>
+      <label for="validationCustom04" class="form-label">State</label>
+    <div class="invalid-feedback">
+      Please select a valid state.
+    </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="floating-label">
+      <input type="text" class="form-control" id="validationCustom003" placeholder=" " required />
+      <label for="validationCustom003" class="form-label">City</label>
+      <div class="invalid-feedback">Please provide a valid city.</div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="input-group">
+      <div class="floating-label">
+        <input type="text" class="form-control" id="validationCustom004" placeholder="Username" required>
+        <label for="validationCustom004">Username</label>
+      <div class="invalid-feedback">Please choose a username.</div>
+      </div>
+      <span class="input-group-text">@</span>
+    </div>
+</div>
+ <div class="col-md-12">
+    <div class="floating-label">
+      <textarea class="form-control" id="validationCustom005" placeholder="Required example textarea" required></textarea>
+      <label for="validationCustom005">Text</label>
+      <div class="invalid-feedback">Please choose a Text.</div>
+    </div>
+</div>
   <div class="col-md-4">
     <label for="validationCustom01" class="form-label">First name</label>
     <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
@@ -67,17 +111,8 @@ Custom feedback styles apply custom colors, borders, focus styles, and backgroun
       Please provide a valid city.
     </div>
   </div>
-  <div class="col-md-3">
-    <label for="validationCustom04" class="form-label">State</label>
-    <select class="form-select" id="validationCustom04" required>
-      <option selected disabled value="">Choose...</option>
-      <option>...</option>
-    </select>
-    <div class="invalid-feedback">
-      Please select a valid state.
-    </div>
-  </div>
-  <div class="col-md-3">
+
+  <div class="col-md-6">
     <label for="validationCustom05" class="form-label">Zip</label>
     <input type="text" class="form-control" id="validationCustom05" required>
     <div class="invalid-feedback">

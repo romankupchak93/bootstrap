@@ -124,7 +124,7 @@
 
   a,
   a:hover,
-  a:focus  {
+  a:focus {
     color: var(--#{$prefix}navbar-active-color);
   }
 }
@@ -147,8 +147,11 @@
 }
 
 // Button for toggling the navbar when in its collapsed state
+//padding: var(--#{$prefix}navbar-toggler-padding-y) var(--#{$prefix}navbar-toggler-padding-x);
 .navbar-toggler {
-  padding: var(--#{$prefix}navbar-toggler-padding-y) var(--#{$prefix}navbar-toggler-padding-x);
+  --mdc-ripple-color: var(--#{$prefix}navbar-color);
+  padding: var(--#{$prefix}btn-padding-y);
+  //padding: var(--#{$prefix}navbar-toggler-padding-x);
   @include font-size(var(--#{$prefix}navbar-toggler-font-size));
   line-height: 1;
   color: var(--#{$prefix}navbar-color);
@@ -256,6 +259,7 @@
     }
   }
 }
+
 // scss-docs-end navbar-expand-loop
 
 // Navbar themes

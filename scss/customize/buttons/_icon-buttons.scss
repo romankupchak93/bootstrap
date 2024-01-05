@@ -1,0 +1,196 @@
+// Icon button
+.btn-icon {
+  $btn-icon-size: ($btn-font-size * $btn-line-height) + ($btn-padding-y * 2);
+  $btn-icon-size-lg: ($btn-font-size-lg * $btn-line-height-lg) + ($btn-padding-y-lg * 2);
+  $btn-icon-size-sm: ($btn-font-size-sm * $btn-line-height-sm) + ($btn-padding-y-sm * 2);
+  $borders-width: calc(#{$btn-border-width} * 2);
+  // scss-docs-start btn-css-vars
+  --#{$prefix}btn-padding: #{$btn-padding-y-sm};
+  --#{$prefix}btn-font-family: #{$btn-font-family};
+  @include rfs($btn-font-size, --#{$prefix}btn-font-size);
+  --#{$prefix}btn-color: #{$btn-color};
+  --#{$prefix}btn-bg: transparent;
+  --#{$prefix}btn-border-width: 0;
+  --#{$prefix}btn-border-color: transparent;
+  --#{$prefix}btn-hover-border-color: transparent;
+  --#{$prefix}btn-box-shadow: #{$btn-box-shadow};
+  --#{$prefix}btn-disabled-opacity: #{$btn-disabled-opacity};
+  --#{$prefix}btn-focus-box-shadow: 0 0 0 #{$btn-focus-width} rgba(var(--#{$prefix}btn-focus-shadow-rgb), .5);
+  // scss-docs-end btn-css-vars
+  --mdc-ripple-color: var(--#{$prefix}btn-color);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  fill: currentColor;
+  color: inherit;
+  text-decoration: none;
+  user-select: none;
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: #{$btn-padding-y-sm};
+  @include font-size(var(--#{$prefix}btn-font-size));
+  font-weight: var(--#{$prefix}btn-font-weight);
+  line-height: var(--#{$prefix}btn-line-height);
+  text-align: center;
+  text-decoration: if($link-decoration == none, null, none);
+  white-space: $btn-white-space;
+  vertical-align: middle;
+  cursor: if($enable-button-pointers, pointer, null);
+  @include border-radius(100%);
+
+  &.btn-lg {
+    width: calc(#{$btn-icon-size-lg} + #{$borders-width});
+    height: calc(#{$btn-icon-size-lg} + #{$borders-width});
+    > svg,
+    > span,
+    > i {
+      font-size: $btn-icon-size-lg;
+    }
+  }
+
+  &.btn-sm {
+    width: calc(#{$btn-icon-size-sm} + #{$borders-width});
+    height: calc(#{$btn-icon-size-sm} + #{$borders-width});
+    > svg,
+    > span,
+    > i {
+      font-size: $btn-icon-size-sm;
+    }
+  }
+}
+
+////$btn-icon-size-xl: ($btn-font-size-xl * $btn-line-height-xl) + ($btn-padding-y-xl * 2);
+////$btn-icon-size-xs: ($btn-font-size-xs * $btn-line-height-xs) + ($btn-padding-y-xs * 2);
+//$borders-width: calc(#{$btn-border-width} * 2);
+//--#{$prefix}btn-active-border-color: transparent;
+//
+//padding: 0;
+//width: calc(#{$btn-icon-size} + #{$borders-width});
+//height: calc(#{$btn-icon-size} + #{$borders-width});
+//display: inline-flex;
+//flex-shrink: 0;
+//justify-content: center;
+//align-items: center;
+
+//&.btn-xl {
+//  width: calc(#{$btn-icon-size-xl} + #{$borders-width});
+//  height: calc(#{$btn-icon-size-xl} + #{$borders-width});
+//  > span {
+//    font-size: $btn-font-size-xl;
+//  }
+//}
+
+//&.btn-lg {
+//  width: calc(#{$btn-icon-size-lg} + #{$borders-width});
+//  height: calc(#{$btn-icon-size-lg} + #{$borders-width});
+//  font-size: $btn-font-size-lg;
+//}
+//
+//&.btn-sm {
+//  width: calc(#{$btn-icon-size-sm} + #{$borders-width});
+//  height: calc(#{$btn-icon-size-sm} + #{$borders-width});
+//  font-size: $btn-font-size-sm;
+//}
+
+//&.btn-xs {
+//  width: calc(#{$btn-icon-size-xs} + #{$borders-width});
+//  height: calc(#{$btn-icon-size-xs} + #{$borders-width});
+//  font-size: $btn-font-size-xs;
+//}
+//}
+
+//$btn-icon-size: ($btn-font-size * $line-height-base) + ($btn-padding-y * 2);
+//$btn-icon-size-lg: ($btn-font-size-lg * $line-height-lg) + ($btn-padding-y-lg * 2);
+//$btn-icon-size-sm: ($btn-font-size-sm * $line-height-sm) + ($btn-padding-y-sm * 2);
+//$borders-width: calc(#{$btn-border-width} * 2);
+//
+//.btn-icon {
+//  --mdc-ripple-color: var(--#{$prefix}body-color);
+//  --#{$prefix}btn-active-border-color: transparent;
+//  --#{$prefix}btn-bg: transparent;
+//  -#{$prefix}btn-border-color: transparent;
+//  --#{$prefix}btn-border-width: #{$btn-border-width};
+//  --#{$prefix}btn-border-radius: 50%;
+//  padding: 0;
+//  width: calc(#{$btn-icon-size} + #{$borders-width});
+//  height: calc(#{$btn-icon-size} + #{$borders-width});
+//  display: inline-flex;
+//  flex-shrink: 0;
+//  justify-content: center;
+//  align-items: center;
+//  background-color: var(--#{$prefix}btn-bg);
+//  border: var(--#{$prefix}btn-border-width) solid var(--#{$prefix}btn-border-color);
+//  @include border-radius(var(--#{$prefix}btn-border-radius));
+//
+//  &.btn-lg {
+//    width: calc(#{$btn-icon-size-lg} + #{$borders-width});
+//    height: calc(#{$btn-icon-size-lg} + #{$borders-width});
+//
+//    > span {
+//      font-size: $btn-font-size-lg;
+//    }
+//  }
+//
+//  &.btn-sm {
+//    width: calc(#{$btn-icon-size-sm} + #{$borders-width});
+//    height: calc(#{$btn-icon-size-sm} + #{$borders-width});
+//    font-size: $btn-font-size-sm;
+//    //line-height: $line-height-sm;
+//    > span {
+//      font-size: $btn-font-size-sm;
+//    }
+//  }
+//}
+
+//// Icon button
+//$btn-icon-width:               3rem !default;
+//$btn-icon-width-sm:            2.25rem !default;
+//$btn-icon-width-xs:            1.75rem !default;
+//
+//.btn-icon {
+//  // MDC Ripple variables
+//  --mdc-ripple-color: var(--#{$prefix}body-color);
+//
+//  //$btn-icon-size: ($btn-font-size * $btn-line-height) + ($btn-padding-y * 2);
+//  //$btn-icon-size-lg: ($btn-font-size-lg * $line-height-lg) + ($btn-padding-y-lg * 2);
+//  //$btn-icon-size-sm: ($btn-font-size-sm * $line-height-sm) + ($btn-padding-y-sm * 2);
+//  //$borders-width: calc(#{$btn-border-width} * 2);
+//  background-color: transparent;
+//  border: none;
+//  line-height: var(--#{$prefix}btn-line-height);
+//  padding: 0;
+//  width: $btn-icon-width; //calc(#{$btn-icon-size} + #{$borders-width});
+//  height: $btn-icon-width; //calc(#{$btn-icon-size} + #{$borders-width});
+//  position: relative;
+//  display: inline-flex;
+//  flex-shrink: 0;
+//  justify-content: center;
+//  align-items: center;
+//  font-size: $btn-font-size;
+//}
+//.btn-lg {
+//  @include button-size($btn-font-size-lg);
+//}
+//
+//.btn-sm {
+//  @include button-size($btn-font-size-sm);
+//}
+//  //
+//  //&.btn-sm {
+//  //  width: calc(#{$btn-icon-size-sm} + #{$borders-width});
+//  //  height: calc(#{$btn-icon-size-sm} + #{$borders-width});
+//  //  font-size: $btn-font-size-sm;
+//  //}
+////}
+////@each $state in map-keys($theme-colors) {
+////  @include color-mode(dark) {
+////    .btn-icon {
+////      --mdc-ripple-color: var(--#{$prefix}#{$state}-subtle);
+////    }
+////  }
+////}

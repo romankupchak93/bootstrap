@@ -2,6 +2,7 @@
 @include bsBanner(Reboot);
 
 @import "functions";
+@import "customize/utils";
 @import "variables";
 @import "variables-dark";
 @import "maps";

@@ -14,11 +14,11 @@
   --#{$prefix}btn-close-disabled-opacity: #{$btn-close-disabled-opacity};
   --#{$prefix}btn-close-white-filter: #{$btn-close-white-filter};
   // scss-docs-end close-css-vars
-
+  --mdc-ripple-color: var(--#{$prefix}btn-close-color);
   box-sizing: content-box;
   width: $btn-close-width;
   height: $btn-close-height;
-  padding: $btn-close-padding-y $btn-close-padding-x;
+  padding: calc($btn-close-padding-y * .5) calc($btn-close-padding-x * .5);
   color: var(--#{$prefix}btn-close-color);
   background: transparent var(--#{$prefix}btn-close-bg) center / $btn-close-width auto no-repeat; // include transparent for button elements
   border: 0; // for button elements
@@ -34,7 +34,6 @@
 
   &:focus {
     outline: 0;
-    box-shadow: var(--#{$prefix}btn-close-focus-shadow);
     opacity: var(--#{$prefix}btn-close-focus-opacity);
   }
 
