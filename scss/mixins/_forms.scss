@@ -53,28 +53,29 @@
     ~ .#{$state}-tooltip {
       display: block;
     }
+    ~ .#{$state}-feedback {
+      @if $enable-validation-icons {
+        padding-left: 1.5rem;
+        background-image: escape-svg($icon);
+        background-repeat: no-repeat;
+        background-position-y: center;
+        background-size: $input-height-inner-half $input-height-inner-half;
+      }
+    }
   }
 
   .form-control {
     @include form-validation-state-selector($state) {
       border-color: $border-color;
-
-      @if $enable-validation-icons {
-        padding-right: $input-height-inner;
-        background-image: escape-svg($icon);
-        background-repeat: no-repeat;
-        background-position: right $input-height-inner-quarter center;
-        background-size: $input-height-inner-half $input-height-inner-half;
-      }
-
       &:focus {
         border-color: $border-color;
-        @if $enable-shadows {
-          @include box-shadow($input-box-shadow, $focus-box-shadow);
-        } @else {
-          // Avoid using mixin so we can pass custom focus shadow properly
-          box-shadow: $focus-box-shadow;
-        }
+        box-shadow: inset 0 0 0 1px $color;
+        //@if $enable-shadows {
+        //  @include box-shadow($input-box-shadow, $focus-box-shadow);
+        //} @else {
+        //  // Avoid using mixin so we can pass custom focus shadow properly
+        //  box-shadow: $focus-box-shadow;
+        //}
       }
     }
   }
@@ -93,28 +94,61 @@
     @include form-validation-state-selector($state) {
       border-color: $border-color;
 
-      @if $enable-validation-icons {
-        &:not([multiple]):not([size]),
-        &:not([multiple])[size="1"] {
-          --#{$prefix}form-select-bg-icon: #{escape-svg($icon)};
-          padding-right: $form-select-feedback-icon-padding-end;
-          background-position: $form-select-bg-position, $form-select-feedback-icon-position;
-          background-size: $form-select-bg-size, $form-select-feedback-icon-size;
-        }
-      }
+      //@if $enable-validation-icons {
+      //  &:not([multiple]):not([size]),
+      //  &:not([multiple])[size="1"] {
+      //    --#{$prefix}form-select-bg-icon: #{escape-svg($icon)};
+      //    padding-right: $form-select-feedback-icon-padding-end;
+      //    background-position: $form-select-bg-position, $form-select-feedback-icon-position;
+      //    background-size: $form-select-bg-size, $form-select-feedback-icon-size;
+      //  }
+      //}
 
       &:focus {
         border-color: $border-color;
-        @if $enable-shadows {
-          @include box-shadow($form-select-box-shadow, $focus-box-shadow);
-        } @else {
-          // Avoid using mixin so we can pass custom focus shadow properly
-          box-shadow: $focus-box-shadow;
+        box-shadow: inset 0 1px $color;
+        //@if $enable-shadows {
+        //  @include box-shadow($form-select-box-shadow, $focus-box-shadow);
+        //} @else {
+        //  // Avoid using mixin so we can pass custom focus shadow properly
+        //  box-shadow: $focus-box-shadow;
+        //}
+      }
+    }
+  }
+  .floating-label {
+    .form-control,
+    .form-select {
+      @include form-validation-state-selector($state) {
+        border-top-color: transparent;
+        ~ label {
+          color: $color;
+
+          &::before,
+          &::after {
+            border-top-color: $color;
+          }
+        }
+
+        &:focus {
+          box-shadow: inset 1px 0 $color, inset -1px 0 $color, inset 0 -1px $color;
+
+          + label {
+            color: $color;
+
+            &::before,
+            &::after {
+              border-top-color: $color;
+              box-shadow: inset 0 1px $color;
+            }
+          }
+        }
+        &:not(:focus):placeholder-shown {
+          border-top-color: $color
         }
       }
     }
   }
-
   .form-control-color {
     @include form-validation-state-selector($state) {
       @if $enable-validation-icons {
@@ -160,4 +194,5 @@
     }
   }
 }
+
 // scss-docs-end form-validation-mixins

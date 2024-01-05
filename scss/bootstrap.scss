@@ -10,6 +10,7 @@
 @import "maps";
 @import "mixins";
 @import "utilities";
+@import "customize/utils";
 
 // Layout & components
 @import "root";
@@ -43,6 +44,7 @@
 @import "spinners";
 @import "offcanvas";
 @import "placeholders";
+@import "customize/props";
 
 // Helpers
 @import "helpers";

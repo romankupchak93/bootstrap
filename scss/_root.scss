@@ -13,9 +13,17 @@
   @each $color, $value in $grays {
     --#{$prefix}gray-#{$color}: #{$value};
   }
-
   @each $color, $value in $theme-colors {
     --#{$prefix}#{$color}: #{$value};
+    --#{$prefix}#{$color}-hover: #{if(color-contrast($value) == $color-contrast-light, shade-color($value, $theme-hover-shade-amount), tint-color($value, $theme-hover-tint-amount))};
+    --#{$prefix}#{$color}-active: #{if(color-contrast($value) == $color-contrast-light, shade-color($value, $theme-active-shade-amount), tint-color($value, $theme-active-tint-amount))};
+    --#{$prefix}#{$color}-subtle: #{tint-color($value, $theme-subtle-tint-amount)};
+    --#{$prefix}#{$color}-subtle-hover: #{tint-color($value, $theme-subtle-hover-tint-amount)};
+    --#{$prefix}#{$color}-subtle-active: #{tint-color($value, $theme-subtle-active-tint-amount)};
+    --#{$prefix}#{$color}-emphasis: #{shade-color($value, $theme-emphasis-shade-amount)};
+    --#{$prefix}#{$color}-emphasis-hover: #{shade-color($value, $theme-emphasis-hover-shade-amount)};
+    --#{$prefix}text-on-#{$color}: #{color-contrast($value)};
+    --#{$prefix}#{$color}-border-subtle: #{tint-color($value, $theme-border-subtle-tint-amount)};
   }
 
   @each $color, $value in $theme-colors-rgb {
@@ -33,7 +41,6 @@
   @each $color, $value in $theme-colors-border-subtle {
     --#{$prefix}#{$color}-border-subtle: #{$value};
   }
-
   --#{$prefix}white-rgb: #{to-rgb($white)};
   --#{$prefix}black-rgb: #{to-rgb($black)};
 
@@ -62,6 +69,12 @@
   --#{$prefix}body-color-rgb: #{to-rgb($body-color)};
   --#{$prefix}body-bg: #{$body-bg};
   --#{$prefix}body-bg-rgb: #{to-rgb($body-bg)};
+
+  --#{$prefix}surface-color: #{$surface-color};
+  --#{$prefix}surface-color-rgb: #{to-rgb($surface-color)};
+  --#{$prefix}surface-bg: #{$surface-bg};
+  --#{$prefix}surface-bg-rgb: #{to-rgb($surface-bg)};
+  --#{$prefix}surface-bg-hover: #{$surface-bg-hover};
 
   --#{$prefix}emphasis-color: #{$body-emphasis-color};
   --#{$prefix}emphasis-color-rgb: #{to-rgb($body-emphasis-color)};
@@ -98,6 +111,7 @@
   --#{$prefix}border-width: #{$border-width};
   --#{$prefix}border-style: #{$border-style};
   --#{$prefix}border-color: #{$border-color};
+  --#{$prefix}input-border-color: #{$border-color-mdc};
   --#{$prefix}border-color-translucent: #{$border-color-translucent};
 
   --#{$prefix}border-radius: #{$border-radius};
@@ -133,11 +147,33 @@
   @include color-mode(dark, true) {
     color-scheme: dark;
 
+    @each $color, $value in $theme-colors {
+      $theme: tint-color($value, $theme-dark-tint-amount);
+
+      --#{$prefix}#{$color}: #{$theme};
+      --#{$prefix}#{$color}-rgb: #{to-rgb($theme)};
+      --#{$prefix}#{$color}-hover: #{if(color-contrast($theme) == $color-contrast-light, shade-color($theme, $theme-dark-hover-shade-amount), tint-color($theme, $theme-dark-hover-tint-amount))};
+      --#{$prefix}#{$color}-active: #{if(color-contrast($theme) == $color-contrast-light, shade-color($theme, $theme-dark-active-shade-amount), tint-color($theme, $theme-dark-active-tint-amount))};
+      --#{$prefix}#{$color}-subtle: #{shade-color($value, $theme-dark-subtle-shade-amount)};
+      --#{$prefix}#{$color}-subtle-hover: #{shade-color($value, $theme-dark-subtle-hover-shade-amount)};
+      --#{$prefix}#{$color}-subtle-active: #{shade-color($value, $theme-dark-subtle-active-shade-amount)};
+      --#{$prefix}#{$color}-emphasis: #{tint-color($value, $theme-dark-emphasis-tint-amount)};
+      --#{$prefix}#{$color}-emphasis-hover: #{tint-color($value, $theme-dark-emphasis-hover-tint-amount)};
+      --#{$prefix}text-on-#{$color}: #{color-contrast($theme)};
+      --#{$prefix}#{$color}-border-subtle: #{shade-color($value, $theme-dark-border-subtle-shade-amount)};
+    }
+
     // scss-docs-start root-dark-mode-vars
     --#{$prefix}body-color: #{$body-color-dark};
     --#{$prefix}body-color-rgb: #{to-rgb($body-color-dark)};
     --#{$prefix}body-bg: #{$body-bg-dark};
     --#{$prefix}body-bg-rgb: #{to-rgb($body-bg-dark)};
+
+    --#{$prefix}surface-color: #{$surface-color-dark};
+    --#{$prefix}surface-color-rgb: #{to-rgb($surface-color-dark)};
+    --#{$prefix}surface-bg: #{$surface-bg-dark};
+    --#{$prefix}surface-bg-rgb: #{to-rgb($surface-bg-dark)};
+    --#{$prefix}surface-bg-hover: #{$surface-bg-dark-hover};
 
     --#{$prefix}emphasis-color: #{$body-emphasis-color-dark};
     --#{$prefix}emphasis-color-rgb: #{to-rgb($body-emphasis-color-dark)};
@@ -177,6 +213,7 @@
 
     --#{$prefix}border-color: #{$border-color-dark};
     --#{$prefix}border-color-translucent: #{$border-color-translucent-dark};
+    --#{$prefix}input-border-color: #{$border-color-dark};
 
     --#{$prefix}form-valid-color: #{$form-valid-color-dark};
     --#{$prefix}form-valid-border-color: #{$form-valid-border-color-dark};

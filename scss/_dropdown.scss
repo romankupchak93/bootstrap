@@ -9,6 +9,7 @@
 }
 
 .dropdown-toggle {
+  --#{$prefix}dropdown-color: #{$dropdown-color};
   white-space: nowrap;
 
   // Generate the caret automatically

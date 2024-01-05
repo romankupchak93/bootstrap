@@ -42,6 +42,22 @@ Bootstrap includes several button variants, each serving its own semantic purpos
 
 If you don't want the button text to wrap, you can add the `.text-nowrap` class to the button. In Sass, you can set `$btn-white-space: nowrap` to disable text wrapping for each button.
 
+## Icon Button
+
+The `.btn-icon` classes are designed to be used with the `<button>` element.
+{{< example >}}
+<button type="button" class="btn-icon">
+  <span class="material-symbols-outlined">person</span>
+</button>
+<button type="button" class="btn-icon btn-sm">
+<span class="material-symbols-outlined">person</span>
+</button>
+<button type="button" class="btn-icon btn-lg">
+  <span class="material-symbols-outlined">person</span>
+</button>
+{{< /example >}}
+
+
 ## Button tags
 
 The `.btn` classes are designed to be used with the `<button>` element. However, you can also use these classes on `<a>` or `<input>` elements (though some browsers may apply a slightly different rendering).
