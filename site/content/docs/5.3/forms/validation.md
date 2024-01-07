@@ -57,7 +57,7 @@ Custom feedback styles apply custom colors, borders, focus styles, and backgroun
     </div>
   </div>
   <div class="col-md-6">
-    <div class="floating-label">
+    <div class="floating-label filled">
       <input type="text" class="form-control" id="validationCustom003" placeholder=" " required />
       <label for="validationCustom003" class="form-label">City</label>
       <div class="invalid-feedback">Please provide a valid city.</div>
@@ -65,12 +65,14 @@ Custom feedback styles apply custom colors, borders, focus styles, and backgroun
   </div>
   <div class="col-md-6">
     <div class="input-group">
-      <div class="floating-label">
-        <input type="text" class="form-control" id="validationCustom004" placeholder="Username" required>
-        <label for="validationCustom004">Username</label>
-      <div class="invalid-feedback">Please choose a username.</div>
+      <div class="floating-label filled">
+        <input type="text" class="form-control" id="floatingInputGroup2" placeholder="Username" required>
+        <label for="floatingInputGroup2">Username</label>
       </div>
       <span class="input-group-text">@</span>
+      <div class="invalid-feedback">
+        Please choose a username.
+      </div>
     </div>
 </div>
  <div class="col-md-12">
@@ -80,6 +82,7 @@ Custom feedback styles apply custom colors, borders, focus styles, and backgroun
       <div class="invalid-feedback">Please choose a Text.</div>
     </div>
 </div>
+
   <div class="col-md-4">
     <label for="validationCustom01" class="form-label">First name</label>
     <input type="text" class="form-control" id="validationCustom01" value="Mark" required>

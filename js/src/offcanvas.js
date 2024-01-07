@@ -33,6 +33,7 @@ const CLASS_NAME_SHOW = 'show'
 const CLASS_NAME_SHOWING = 'showing'
 const CLASS_NAME_HIDING = 'hiding'
 const CLASS_NAME_BACKDROP = 'offcanvas-backdrop'
+const CLASS_NAME_BODY_PUSH = 'offcanvas-content-'
 const OPEN_SELECTOR = '.offcanvas.show'
 
 const EVENT_SHOW = `show${EVENT_KEY}`
@@ -65,7 +66,7 @@ const DefaultType = {
 class Offcanvas extends BaseComponent {
   constructor(element, config) {
     super(element, config)
-
+    this._toggleElement = null
     this._isShown = false
     this._backdrop = this._initializeBackDrop()
     this._focustrap = this._initializeFocusTrap()
@@ -87,6 +88,7 @@ class Offcanvas extends BaseComponent {
 
   // Public
   toggle(relatedTarget) {
+    this._toggleElement = relatedTarget
     return this._isShown ? this.hide() : this.show(relatedTarget)
   }
 
@@ -110,7 +112,18 @@ class Offcanvas extends BaseComponent {
 
     this._element.setAttribute('aria-modal', true)
     this._element.setAttribute('role', 'dialog')
-    this._element.classList.add(CLASS_NAME_SHOWING)
+
+    if (this._toggleElement === relatedTarget) {
+      if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'end') {
+        document.body.classList.add(`${CLASS_NAME_BODY_PUSH}end`)
+        this._element.setAttribute('data-bs-ride', 'end')
+      }
+
+      if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'start') {
+        document.body.classList.add(`${CLASS_NAME_BODY_PUSH}start`)
+        this._element.setAttribute('data-bs-ride', 'start')
+      }
+    }
 
     const completeCallBack = () => {
       if (!this._config.scroll || this._config.backdrop) {
@@ -141,11 +154,18 @@ class Offcanvas extends BaseComponent {
     this._isShown = false
     this._element.classList.add(CLASS_NAME_HIDING)
     this._backdrop.hide()
-
     const completeCallback = () => {
       this._element.classList.remove(CLASS_NAME_SHOW, CLASS_NAME_HIDING)
       this._element.removeAttribute('aria-modal')
       this._element.removeAttribute('role')
+
+      if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'end') {
+        document.body.classList.remove(`${CLASS_NAME_BODY_PUSH}end`)
+        this._element.removeAttribute('data-bs-ride')
+      } else if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'start') {
+        document.body.classList.remove(`${CLASS_NAME_BODY_PUSH}start`)
+        this._element.removeAttribute('data-bs-ride')
+      }
 
       if (!this._config.scroll) {
         new ScrollBarHelper().reset()
@@ -246,7 +266,6 @@ EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (
       this.focus()
     }
   })
-
   // avoid conflict when clicking a toggler of an offcanvas, while another is open
   const alreadyOpen = SelectorEngine.findOne(OPEN_SELECTOR)
   if (alreadyOpen && alreadyOpen !== target) {

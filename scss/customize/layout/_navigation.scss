@@ -1,0 +1,17 @@
+.navbar.bg-transparent {
+  position: absolute;
+
+  & .nav-link {
+    color: rgba($white, .75);
+
+    &.active,
+    &.show {
+      color: rgba($white, .85);
+    }
+  }
+
+  & .vr {
+    align-self: center;
+    min-height: 1.5em;
+  }
+}

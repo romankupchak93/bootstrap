@@ -1,6 +1,7 @@
 .input-group {
   &.input-group:is(:has(.floating-label)) {
-    align-items: baseline;
+    //align-items: baseline;
+    align-items: normal;
   }
 
   //}
