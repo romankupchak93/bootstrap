@@ -17,7 +17,10 @@ Place one add-on or button on either side of an input. You may also place one on
 </div>
 
 <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <div class="floating-label">
+    <input type="text" id="username1" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <label for="username1">username</label>
+  </div>
   <span class="input-group-text" id="basic-addon2">@example.com</span>
 </div>
 

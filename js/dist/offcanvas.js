@@ -31,6 +31,7 @@
   const CLASS_NAME_SHOWING = 'showing';
   const CLASS_NAME_HIDING = 'hiding';
   const CLASS_NAME_BACKDROP = 'offcanvas-backdrop';
+  const CLASS_NAME_BODY_PUSH = 'offcanvas-content-';
   const OPEN_SELECTOR = '.offcanvas.show';
   const EVENT_SHOW = `show${EVENT_KEY}`;
   const EVENT_SHOWN = `shown${EVENT_KEY}`;
@@ -59,6 +60,7 @@
   class Offcanvas extends BaseComponent {
     constructor(element, config) {
       super(element, config);
+      this._toggleElement = null;
       this._isShown = false;
       this._backdrop = this._initializeBackDrop();
       this._focustrap = this._initializeFocusTrap();
@@ -78,7 +80,27 @@
 
     // Public
     toggle(relatedTarget) {
+      this._toggleElement = relatedTarget;
       return this._isShown ? this.hide() : this.show(relatedTarget);
+    }
+    whichTransitionEvent() {
+      const el = document.createElement('event');
+      const transitionEvents = {
+        WebkitTransition: 'webkitTransitionEnd',
+        MozTransition: 'transitionend',
+        transition: 'transitionend'
+      };
+      for (const t in transitionEvents) {
+        if (el.style[t] !== undefined) {
+          return transitionEvents[t];
+        }
+      }
+    }
+    handleTransition() {
+      const transitionEvent = this.whichTransitionEvent();
+      this._element.addEventListener(transitionEvent, () => {
+        /// fix scss for correct animate
+      });
     }
     show(relatedTarget) {
       if (this._isShown) {
@@ -98,6 +120,18 @@
       this._element.setAttribute('aria-modal', true);
       this._element.setAttribute('role', 'dialog');
       this._element.classList.add(CLASS_NAME_SHOWING);
+      if (this._toggleElement === relatedTarget) {
+        if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'end') {
+          document.body.classList.add(`${CLASS_NAME_BODY_PUSH}end`);
+          this._element.setAttribute('data-bs-ride', 'end');
+          this.handleTransition();
+        }
+        if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'start') {
+          document.body.classList.add(`${CLASS_NAME_BODY_PUSH}start`);
+          this._element.setAttribute('data-bs-ride', 'start');
+          this.handleTransition();
+        }
+      }
       const completeCallBack = () => {
         if (!this._config.scroll || this._config.backdrop) {
           this._focustrap.activate();
@@ -127,6 +161,13 @@
         this._element.classList.remove(CLASS_NAME_SHOW, CLASS_NAME_HIDING);
         this._element.removeAttribute('aria-modal');
         this._element.removeAttribute('role');
+        if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'end') {
+          document.body.classList.remove(`${CLASS_NAME_BODY_PUSH}end`);
+          this._element.removeAttribute('data-bs-ride');
+        } else if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'start') {
+          document.body.classList.remove(`${CLASS_NAME_BODY_PUSH}start`);
+          this._element.removeAttribute('data-bs-ride');
+        }
         if (!this._config.scroll) {
           new ScrollBarHelper().reset();
         }

@@ -14,7 +14,7 @@
   --#{$prefix}btn-close-disabled-opacity: #{$btn-close-disabled-opacity};
   --#{$prefix}btn-close-white-filter: #{$btn-close-white-filter};
   // scss-docs-end close-css-vars
-
+  --mdc-ripple-color: var(--#{$prefix}btn-close-color);
   box-sizing: content-box;
   width: $btn-close-width;
   height: $btn-close-height;
@@ -22,7 +22,7 @@
   color: var(--#{$prefix}btn-close-color);
   background: transparent var(--#{$prefix}btn-close-bg) center / $btn-close-width auto no-repeat; // include transparent for button elements
   border: 0; // for button elements
-  @include border-radius();
+  @include border-radius(100%);
   opacity: var(--#{$prefix}btn-close-opacity);
 
   // Override <a>'s hover style
@@ -34,7 +34,7 @@
 
   &:focus {
     outline: 0;
-    box-shadow: var(--#{$prefix}btn-close-focus-shadow);
+    //box-shadow: var(--#{$prefix}btn-close-focus-shadow);
     opacity: var(--#{$prefix}btn-close-focus-opacity);
   }
 

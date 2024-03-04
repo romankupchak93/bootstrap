@@ -19,6 +19,75 @@
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   }
 
+  const themeTransition = () => {
+    const x = performance.now()
+    for (let i = 0; i++ < 1e7; i << 9 & 9 % 9 * 9 + 9) {}
+    if (performance.now() - x > 10) {
+      return
+    }
+
+    const el = document.querySelector('body')
+    const children = el.querySelectorAll('*')
+    children.forEach(el => {
+      if (hasScrollbar(el)) {
+        el.dataset.scrollX = String(el.scrollLeft)
+        el.dataset.scrollY = String(el.scrollTop)
+      }
+    })
+
+    const copy = el.cloneNode(true)
+    copy.classList.add('app-copy')
+    const rect = el.getBoundingClientRect()
+    copy.style.top = `${rect.top}px`
+    copy.style.left = `${rect.left}px`
+    copy.style.width = `${rect.width}px`
+    copy.style.height = `${rect.height}px`
+
+    const targetEl = document.activeElement
+    const targetRect = targetEl.getBoundingClientRect()
+    const left = targetRect.left + targetRect.width / 2 + window.scrollX
+    const top = targetRect.top + targetRect.height / 2 + window.scrollY
+    el.style.setProperty('--clip-pos', `${left}px ${top}px`)
+    el.style.removeProperty('--clip-size')
+
+    el.classList.add('app-transition')
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        el.style.setProperty('--clip-size', `${Math.hypot(window.innerWidth, window.innerHeight)}px`)
+      })
+    })
+
+    document.body.append(copy)
+    const copyChildren = copy.querySelectorAll('[data-scroll-x], [data-scroll-y]')
+    copyChildren.forEach(child => {
+      child.scrollLeft = Number(child.dataset.scrollX) || 0
+      child.scrollTop = Number(child.dataset.scrollY) || 0
+    })
+
+    const onTransitionend = e => {
+      if (e.target === e.currentTarget) {
+        copy.remove()
+        el.removeEventListener('transitionend', onTransitionend)
+        el.removeEventListener('transitioncancel', onTransitionend)
+        el.classList.remove('app-transition')
+        el.style.removeProperty('--clip-size')
+        el.style.removeProperty('--clip-pos')
+      }
+    }
+
+    el.addEventListener('transitionend', onTransitionend)
+    el.addEventListener('transitioncancel', onTransitionend)
+  }
+
+  const hasScrollbar = el => {
+    if (!el || el.nodeType !== Node.ELEMENT_NODE) {
+      return
+    }
+
+    const style = window.getComputedStyle(el)
+    return style.overflowY === 'scroll' || (style.overflowY === 'auto' && el.scrollHeight > el.clientHeight)
+  }
+
   const setTheme = theme => {
     if (theme === 'auto') {
       document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
@@ -72,6 +141,7 @@
         toggle.addEventListener('click', () => {
           const theme = toggle.getAttribute('data-bs-theme-value')
           setStoredTheme(theme)
+          themeTransition()
           setTheme(theme)
           showActiveTheme(theme, true)
         })

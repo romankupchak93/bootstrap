@@ -1,0 +1,108 @@
+.floating-label {
+  position: relative;
+  padding-top: .375em;
+  margin-top: -.375em;
+
+  > input,
+  > select,
+  > textarea {
+    box-sizing: border-box;
+    margin: 0;
+    width: 100%;
+    border-style: solid;
+    border-width: 1px;
+    //border-color: $input-border-color;
+    box-shadow: inset 1px 0 transparent, inset -1px 0 transparent, inset 0 -1px transparent;
+    caret-color: $component-active-bg;
+    transition: border 0.2s, box-shadow 0.2s;
+    @include border-radius($input-border-radius-sm);
+
+    &::placeholder {
+      color: transparent;
+      transition: color 0.2s
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: inset 1px 0 $component-active-bg, inset -1px 0 $component-active-bg, inset 0 -1px $component-active-bg;
+      border-top-color: transparent;
+
+      &::placeholder {
+        color: $input-placeholder-color;
+      }
+
+      @include label-above-input-focus();
+    }
+
+    &:-webkit-autofill {
+      @include label-above-input();
+    }
+
+    &:not([placeholder]):not([value]),
+    &:not(:placeholder-shown) {
+      @include label-above-input();
+    }
+  }
+
+  > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    cursor: text;
+    user-select: none;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    @include label-inside();
+    transition: color 0.2s, font-size 0.2s, line-height 0.2s;
+
+    &::before {
+      margin-right: .25rem;
+      border-left: solid 1px transparent;
+      border-radius: .25rem 0;
+    }
+
+    &::after {
+      flex-grow: 1;
+      margin-left: .25rem;
+      border-right: solid 1px transparent;
+      border-radius: 0 .25rem;
+    }
+  }
+
+  &:not(.is-filled) {
+    > label {
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        box-sizing: border-box;
+        margin-top: 6px;
+        border-top: solid 1px transparent;
+        min-width: 10px;
+        height: 8px;
+        pointer-events: none;
+        box-shadow: inset 0 1px transparent;
+        transition: border 0.2s, box-shadow 0.2s;
+      }
+    }
+  }
+
+  &.is-filled {
+    > input,
+    > select,
+    > textarea {
+      @include filled-type-input();
+
+      &:focus {
+        @include filled-type-input-focus();
+      }
+    }
+
+    > label {
+      @include filled-type-label();
+    }
+  }
+}

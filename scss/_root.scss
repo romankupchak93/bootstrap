@@ -18,6 +18,20 @@
     --#{$prefix}#{$color}: #{$value};
   }
 
+  @each $color, $value in $theme-colors {
+    --#{$prefix}#{$color}: #{$value};
+    --#{$prefix}#{$color}-hover: #{if(color-contrast($value) == $color-contrast-light, shade-color($value, $theme-hover-shade-amount), tint-color($value, $theme-hover-tint-amount))};
+    --#{$prefix}#{$color}-active: #{if(color-contrast($value) == $color-contrast-light, shade-color($value, $theme-active-shade-amount), tint-color($value, $theme-active-tint-amount))};
+    --#{$prefix}#{$color}-subtle: #{tint-color($value, $theme-subtle-tint-amount)};
+    --#{$prefix}#{$color}-subtle-hover: #{tint-color($value, $theme-subtle-hover-tint-amount)};
+    --#{$prefix}#{$color}-subtle-active: #{tint-color($value, $theme-subtle-active-tint-amount)};
+    --#{$prefix}#{$color}-emphasis: #{shade-color($value, $theme-emphasis-shade-amount)};
+    --#{$prefix}#{$color}-emphasis-hover: #{shade-color($value, $theme-emphasis-hover-shade-amount)};
+    --#{$prefix}text-on-#{$color}: #{color-contrast($value)};
+    --#{$prefix}#{$color}-border-subtle: #{tint-color($value, $theme-border-subtle-tint-amount)};
+  }
+
+
   @each $color, $value in $theme-colors-rgb {
     --#{$prefix}#{$color}-rgb: #{$value};
   }
@@ -127,6 +141,7 @@
   --#{$prefix}form-invalid-color: #{$form-invalid-color};
   --#{$prefix}form-invalid-border-color: #{$form-invalid-border-color};
   // scss-docs-end root-form-validation-variables
+  --#{$prefix}input-border-color: #{$mdc-border-color};
 }
 
 @if $enable-dark-mode {
@@ -152,6 +167,21 @@
     --#{$prefix}tertiary-bg: #{$body-tertiary-bg-dark};
     --#{$prefix}tertiary-bg-rgb: #{to-rgb($body-tertiary-bg-dark)};
 
+    @each $color, $value in $theme-colors {
+      $theme: tint-color($value, $theme-dark-tint-amount);
+
+      --#{$prefix}#{$color}: #{$theme};
+      --#{$prefix}#{$color}-rgb: #{to-rgb($theme)};
+      --#{$prefix}#{$color}-hover: #{if(color-contrast($theme) == $color-contrast-light, shade-color($theme, $theme-dark-hover-shade-amount), tint-color($theme, $theme-dark-hover-tint-amount))};
+      --#{$prefix}#{$color}-active: #{if(color-contrast($theme) == $color-contrast-light, shade-color($theme, $theme-dark-active-shade-amount), tint-color($theme, $theme-dark-active-tint-amount))};
+      --#{$prefix}#{$color}-subtle: #{shade-color($value, $theme-dark-subtle-shade-amount)};
+      --#{$prefix}#{$color}-subtle-hover: #{shade-color($value, $theme-dark-subtle-hover-shade-amount)};
+      --#{$prefix}#{$color}-subtle-active: #{shade-color($value, $theme-dark-subtle-active-shade-amount)};
+      --#{$prefix}#{$color}-emphasis: #{tint-color($value, $theme-dark-emphasis-tint-amount)};
+      --#{$prefix}#{$color}-emphasis-hover: #{tint-color($value, $theme-dark-emphasis-hover-tint-amount)};
+      --#{$prefix}text-on-#{$color}: #{color-contrast($theme)};
+      --#{$prefix}#{$color}-border-subtle: #{shade-color($value, $theme-dark-border-subtle-shade-amount)};
+    }
     @each $color, $value in $theme-colors-text-dark {
       --#{$prefix}#{$color}-text-emphasis: #{$value};
     }
@@ -177,6 +207,7 @@
 
     --#{$prefix}border-color: #{$border-color-dark};
     --#{$prefix}border-color-translucent: #{$border-color-translucent-dark};
+    --#{$prefix}input-border-color: #{$border-color-dark};
 
     --#{$prefix}form-valid-color: #{$form-valid-color-dark};
     --#{$prefix}form-valid-border-color: #{$form-valid-border-color-dark};

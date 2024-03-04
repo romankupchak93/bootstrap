@@ -36,7 +36,7 @@ $grays: (
 // fusv-enable
 
 // scss-docs-start color-variables
-$blue:    #0d6efd !default;
+$blue:    #0057B8 !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #d63384 !default;
@@ -451,7 +451,7 @@ $body-emphasis-color:       $black !default;
 // Style anchor elements.
 
 $link-color:                              $primary !default;
-$link-decoration:                         underline !default;
+$link-decoration:                         none !default;
 $link-shade-percentage:                   20% !default;
 $link-hover-color:                        shift-color($link-color, $link-shade-percentage) !default;
 $link-hover-decoration:                   null !default;
@@ -556,14 +556,19 @@ $border-radius-2xl:           $border-radius-xxl !default; // Deprecated in v5.3
 // fusv-enable
 
 // scss-docs-start box-shadow-variables
-$box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
-$box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
-$box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
+$box-shadow:                  var(--#{$prefix}shadow-8dp) !default;
+$box-shadow-sm:               var(--#{$prefix}shadow-1dp) !default;
+$box-shadow-lg:               var(--#{$prefix}shadow-18dp) !default;
 $box-shadow-inset:            inset 0 1px 2px rgba($black, .075) !default;
+//$box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
+//$box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
+//$box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
+//$box-shadow-inset:            inset 0 1px 2px rgba($black, .075) !default;
 // scss-docs-end box-shadow-variables
 
 $component-active-color:      $white !default;
-$component-active-bg:         $primary !default;
+//$component-active-bg:         $primary !default;
+$component-active-bg:         var(--#{$prefix}primary) !default;
 
 // scss-docs-start focus-ring-variables
 $focus-ring-width:      .25rem !default;
@@ -574,9 +579,13 @@ $focus-ring-box-shadow: 0 0 $focus-ring-blur $focus-ring-width $focus-ring-color
 // scss-docs-end focus-ring-variables
 
 // scss-docs-start caret-variables
-$caret-width:                 .3em !default;
-$caret-vertical-align:        $caret-width * .85 !default;
-$caret-spacing:               $caret-width * .85 !default;
+$caret-width: 0.42em !default;
+$caret-vertical-align: middle !default;
+$caret-spacing: 0.5em !default;
+//$caret-width:                 .5em !default;
+//$caret-border-width:          .15em !default;
+//$caret-vertical-align:        $caret-width * .85 !default;
+//$caret-spacing:               $caret-width * .85 !default;
 // scss-docs-end caret-variables
 
 $transition-base:             all .2s ease-in-out !default;
@@ -834,11 +843,16 @@ $btn-font-size-lg:            $input-btn-font-size-lg !default;
 $btn-border-width:            $input-btn-border-width !default;
 
 $btn-font-weight:             $font-weight-normal !default;
-$btn-box-shadow:              inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
+//$btn-box-shadow:              inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
+$btn-box-shadow:              none !default;
+$btn-hover-box-shadow:        var(--#{$prefix}shadow-4dp) !default;
+$btn-focus-box-shadow:        $btn-hover-box-shadow !default;
+$btn-active-box-shadow:       var(--#{$prefix}shadow-8dp) !default;
+
 $btn-focus-width:             $input-btn-focus-width !default;
-$btn-focus-box-shadow:        $input-btn-focus-box-shadow !default;
+//$btn-focus-box-shadow:        $input-btn-focus-box-shadow !default;
 $btn-disabled-opacity:        .65 !default;
-$btn-active-box-shadow:       inset 0 3px 5px rgba($black, .125) !default;
+//$btn-active-box-shadow:       inset 0 3px 5px rgba($black, .125) !default;
 
 $btn-link-color:              var(--#{$prefix}link-color) !default;
 $btn-link-hover-color:        var(--#{$prefix}link-hover-color) !default;
@@ -846,9 +860,9 @@ $btn-link-disabled-color:     $gray-600 !default;
 $btn-link-focus-shadow-rgb:   to-rgb(mix(color-contrast($link-color), $link-color, 15%)) !default;
 
 // Allows for customizing button radius independently from global border radius
-$btn-border-radius:           var(--#{$prefix}border-radius) !default;
+$btn-border-radius:           var(--#{$prefix}border-radius-sm) !default;
 $btn-border-radius-sm:        var(--#{$prefix}border-radius-sm) !default;
-$btn-border-radius-lg:        var(--#{$prefix}border-radius-lg) !default;
+$btn-border-radius-lg:        var(--#{$prefix}border-radius-sm) !default;
 
 $btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
@@ -903,19 +917,22 @@ $input-disabled-bg:                     var(--#{$prefix}secondary-bg) !default;
 $input-disabled-border-color:           null !default;
 
 $input-color:                           var(--#{$prefix}body-color) !default;
-$input-border-color:                    var(--#{$prefix}border-color) !default;
+//$input-border-color:                    rgba($black, .38) !default;
+$mdc-border-color:                      rgba($black, .38) !default;
+$input-border-color:                    var(--#{$prefix}input-border-color) !default;
 $input-border-width:                    $input-btn-border-width !default;
-$input-box-shadow:                      var(--#{$prefix}box-shadow-inset) !default;
-
-$input-border-radius:                   var(--#{$prefix}border-radius) !default;
+$input-box-shadow:                      inset 0 0 0 .063em !default;
+$input-border-radius:                   var(--#{$prefix}border-radius-sm) !default;
 $input-border-radius-sm:                var(--#{$prefix}border-radius-sm) !default;
-$input-border-radius-lg:                var(--#{$prefix}border-radius-lg) !default;
+$input-border-radius-lg:                var(--#{$prefix}border-radius-sm) !default;
 
 $input-focus-bg:                        $input-bg !default;
-$input-focus-border-color:              tint-color($component-active-bg, 50%) !default;
+$input-focus-border-color:              var(--#{$prefix}primary) !default;
+//$form-switch-focus-border-color:        tint-color($component-active-bg, 50%) !default;
 $input-focus-color:                     $input-color !default;
 $input-focus-width:                     $input-btn-focus-width !default;
-$input-focus-box-shadow:                $input-btn-focus-box-shadow !default;
+//$input-focus-box-shadow:                $input-btn-focus-box-shadow !default;
+$input-focus-box-shadow:                $input-box-shadow  $input-focus-border-color !default;
 
 $input-placeholder-color:               var(--#{$prefix}secondary-color) !default;
 $input-plaintext-color:                 var(--#{$prefix}body-color) !default;
@@ -936,7 +953,7 @@ $form-color-width:                      3rem !default;
 // scss-docs-end form-input-variables
 
 // scss-docs-start form-check-variables
-$form-check-input-width:                  1em !default;
+$form-check-input-width:                  1.125em !default;
 $form-check-min-height:                   $font-size-base * $line-height-base !default;
 $form-check-padding-start:                $form-check-input-width + .5em !default;
 $form-check-margin-bottom:                .125rem !default;
@@ -947,8 +964,9 @@ $form-check-transition:                   null !default;
 $form-check-input-active-filter:          brightness(90%) !default;
 
 $form-check-input-bg:                     $input-bg !default;
-$form-check-input-border:                 var(--#{$prefix}border-width) solid var(--#{$prefix}border-color) !default;
-$form-check-input-border-radius:          .25em !default;
+$form-check-input-border:                 var(--#{$prefix}border-width) solid var(--#{$prefix}input-border-color) !default;
+//$form-check-input-border:                 var(--#{$prefix}border-width) solid var(--#{$prefix}border-color) !default;
+$form-check-input-border-radius:          .125em !default;
 $form-check-radio-border-radius:          50% !default;
 $form-check-input-focus-border:           $input-focus-border-color !default;
 $form-check-input-focus-box-shadow:       $focus-ring-box-shadow !default;
@@ -957,8 +975,8 @@ $form-check-input-checked-color:          $component-active-color !default;
 $form-check-input-checked-bg-color:       $component-active-bg !default;
 $form-check-input-checked-border-color:   $form-check-input-checked-bg-color !default;
 $form-check-input-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-checked-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/></svg>") !default;
-$form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$form-check-input-checked-color}'/></svg>") !default;
-
+$form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='none' stroke='#{$body-bg}' stroke-width='1.5'/></svg>") !default;
+//$form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$component-active-bg}'/></svg>") !default;
 $form-check-input-indeterminate-color:          $component-active-color !default;
 $form-check-input-indeterminate-bg-color:       $component-active-bg !default;
 $form-check-input-indeterminate-border-color:   $form-check-input-indeterminate-bg-color !default;
@@ -979,7 +997,7 @@ $form-switch-bg-image:            url("data:image/svg+xml,<svg xmlns='http://www
 $form-switch-border-radius:       $form-switch-width !default;
 $form-switch-transition:          background-position .15s ease-in-out !default;
 
-$form-switch-focus-color:         $input-focus-border-color !default;
+$form-switch-focus-color:         rgba($primary, .50) !default;//$input-focus-border-color !default;
 $form-switch-focus-bg-image:      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$form-switch-focus-color}'/></svg>") !default;
 
 $form-switch-checked-color:       $component-active-color !default;
@@ -1021,11 +1039,13 @@ $form-select-feedback-icon-size:        $input-height-inner-half $input-height-i
 $form-select-border-width:        $input-border-width !default;
 $form-select-border-color:        $input-border-color !default;
 $form-select-border-radius:       $input-border-radius !default;
-$form-select-box-shadow:          var(--#{$prefix}box-shadow-inset) !default;
+$form-select-box-shadow:          $input-box-shadow !default;
+//$form-select-box-shadow:          var(--#{$prefix}box-shadow-inset) !default;
 
 $form-select-focus-border-color:  $input-focus-border-color !default;
 $form-select-focus-width:         $input-focus-width !default;
-$form-select-focus-box-shadow:    0 0 0 $form-select-focus-width $input-btn-focus-color !default;
+$form-select-focus-box-shadow:    $input-focus-box-shadow !default;
+//$form-select-focus-box-shadow:    0 0 0 $form-select-focus-width $input-btn-focus-color !default;
 
 $form-select-padding-y-sm:        $input-padding-y-sm !default;
 $form-select-padding-x-sm:        $input-padding-x-sm !default;
@@ -1056,7 +1076,8 @@ $form-range-thumb-border-radius:           1rem !default;
 $form-range-thumb-box-shadow:              0 .1rem .25rem rgba($black, .1) !default;
 $form-range-thumb-focus-box-shadow:        0 0 0 1px $body-bg, $input-focus-box-shadow !default;
 $form-range-thumb-focus-box-shadow-width:  $input-focus-width !default; // For focus box shadow issue in Edge
-$form-range-thumb-active-bg:               tint-color($component-active-bg, 70%) !default;
+$form-range-thumb-active-bg:               var(--#{$prefix}primary-border-subtle) !default;
+//$form-range-thumb-active-bg:               tint-color($component-active-bg, 70%) !default;
 $form-range-thumb-disabled-bg:             var(--#{$prefix}secondary-color) !default;
 $form-range-thumb-transition:              background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 // scss-docs-end form-range-variables
@@ -1169,6 +1190,7 @@ $nav-link-focus-box-shadow:         $focus-ring-box-shadow !default;
 $nav-tabs-border-color:             var(--#{$prefix}border-color) !default;
 $nav-tabs-border-width:             var(--#{$prefix}border-width) !default;
 $nav-tabs-border-radius:            var(--#{$prefix}border-radius) !default;
+$nav-tabs-link-color:               var(--#{$prefix}body-color) !default;
 $nav-tabs-link-hover-border-color:  var(--#{$prefix}secondary-bg) var(--#{$prefix}secondary-bg) $nav-tabs-border-color !default;
 $nav-tabs-link-active-color:        var(--#{$prefix}emphasis-color) !default;
 $nav-tabs-link-active-bg:           var(--#{$prefix}body-bg) !default;
@@ -1180,7 +1202,7 @@ $nav-pills-link-active-bg:          $component-active-bg !default;
 
 $nav-underline-gap:                 1rem !default;
 $nav-underline-border-width:        .125rem !default;
-$nav-underline-link-active-color:   var(--#{$prefix}emphasis-color) !default;
+$nav-underline-link-active-color:   var(--#{$prefix}primary) !default; //var(--#{$prefix}emphasis-color) !default;
 // scss-docs-end nav-variables
 
 

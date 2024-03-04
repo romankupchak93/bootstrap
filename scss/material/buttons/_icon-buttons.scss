@@ -1,0 +1,60 @@
+.btn-icon {
+  --#{$prefix}btn-color: #{$btn-color};
+  --mdc-ripple-color: var(--#{$prefix}btn-color);
+  position: relative;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  fill: currentColor;
+  color: var(--#{$prefix}btn-color);
+  @include border-radius(100%);
+
+  //svg,
+  //span,
+  //i {
+  //  fill: currentColor;
+  //  font-size: 1.5rem;
+  //  vertical-align: middle;
+  //}
+
+  //
+  // Floating Action Buttons
+  //
+
+  //&.btn-fab {
+  //  width: 56px;
+  //  height: 56px;
+  //  @include border-radius(100%);
+  //}
+
+  &.btn-sm {
+    width: 35px;
+    height: 35px;
+    padding: .25rem;
+  }
+
+  &.leaf {
+    @include border-radius(0);
+    @include border-top-start-radius(50%);
+    @include border-bottom-end-radius(50%);
+  }
+
+  &.leaf-inverted {
+    @include border-radius(0);
+    @include border-top-end-radius(50%);
+    @include border-bottom-start-radius(50%);
+  }
+
+  svg,
+  span,
+  i {
+    fill: currentColor;
+    vertical-align: middle;
+  }
+}

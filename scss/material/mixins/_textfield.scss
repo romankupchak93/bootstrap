@@ -1,0 +1,63 @@
+@mixin label-inside() {
+  font-size: inherit;
+  line-height: 3;
+}
+
+@mixin label-above() {
+  font-size: 75%;
+  line-height: 1;
+}
+
+@mixin label-above-input() {
+  &:not(:focus) {
+    border-top-color: transparent;
+
+    + label {
+      &::before,
+      &::after {
+        border-top: solid 1px;
+        border-top-color: $input-border-color;
+        box-shadow: inset 0 1px transparent;
+      }
+
+      @include label-above();
+    }
+  }
+}
+
+@mixin label-above-input-focus() {
+  border-top-color: transparent;
+  + label {
+    color: $component-active-bg;
+
+    &::before,
+    &::after {
+      border-top-color: $component-active-bg;
+      box-shadow: inset 0 1px $component-active-bg;
+    }
+
+    @include label-above();
+  }
+}
+
+@mixin filled-type-input() {
+  border: none;
+  background: linear-gradient(var(--#{$prefix}primary), var(--#{$prefix}primary)) bottom/0 calc(var(--#{$prefix}border-width, 1px) + 1px) no-repeat border-box,
+  linear-gradient(var(--#{$prefix}input-border-color), var(--#{$prefix}input-border-color)) bottom/100% var(--#{$prefix}border-width, 1px) no-repeat border-box transparent;
+  @include transition(.3s cubic-bezier(.4, 0, .2, 1));
+  padding-left: 0;
+  @include border-radius(0);
+}
+
+@mixin filled-type-input-focus() {
+  border: none;
+  box-shadow: none;
+  background-size: 100% calc(var(--#{$prefix}border-width, 1px) + 1px), 100% var(--#{$prefix}border-width, 1px);
+}
+
+@mixin filled-type-label() {
+  &::after {
+    content: '';
+    position: absolute;
+  }
+}

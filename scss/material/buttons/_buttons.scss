@@ -1,0 +1,32 @@
+.btn-icon,
+.btn-close,
+.btn-clipboard,
+.btn-edit,
+.navbar-toggler {
+  position: relative;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  padding: .5em;
+}
+
+.btn-clipboard,
+.btn-edit {
+  --#{$prefix}btn-color: #{$btn-color};
+  --mdc-ripple-color: var(--#{$prefix}btn-color);
+  color: var(--#{$prefix}btn-color);
+}
+
+a[class*="underline"] {
+  text-decoration: underline;
+}
+
+[data-bs-toggle="pill"],
+[data-bs-toggle="tab"] {
+  --#{$prefix}nav-pills-link-active-bg: #{$nav-pills-link-active-bg};
+  --mdc-ripple-color: var(--#{$prefix}nav-pills-link-active-bg);
+
+  &:not([data-bs-toggle="tab"]) {
+    margin: .25em;
+  }
+}

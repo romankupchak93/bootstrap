@@ -61,10 +61,12 @@
   --#{$prefix}nav-tabs-border-width: #{$nav-tabs-border-width};
   --#{$prefix}nav-tabs-border-color: #{$nav-tabs-border-color};
   --#{$prefix}nav-tabs-border-radius: #{$nav-tabs-border-radius};
+  --#{$prefix}nav-tabs-link-color:    #{$nav-tabs-link-color};
   --#{$prefix}nav-tabs-link-hover-border-color: #{$nav-tabs-link-hover-border-color};
   --#{$prefix}nav-tabs-link-active-color: #{$nav-tabs-link-active-color};
   --#{$prefix}nav-tabs-link-active-bg: #{$nav-tabs-link-active-bg};
   --#{$prefix}nav-tabs-link-active-border-color: #{$nav-tabs-link-active-border-color};
+  --mdc-ripple-color: var(--#{$prefix}nav-tabs-link-color);
   // scss-docs-end nav-tabs-css-vars
 
   border-bottom: var(--#{$prefix}nav-tabs-border-width) solid var(--#{$prefix}nav-tabs-border-color);
@@ -147,7 +149,7 @@
 
   .nav-link.active,
   .show > .nav-link {
-    font-weight: $font-weight-bold;
+    //font-weight: $font-weight-bold;
     color: var(--#{$prefix}nav-underline-link-active-color);
     border-bottom-color: currentcolor;
   }
