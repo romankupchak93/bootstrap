@@ -1,0 +1,85 @@
+// Animate * app
+
+@keyframes circle-in-top-right {
+  from {
+    clip-path: circle(0%);
+  }
+  to {
+    clip-path: circle(150% at top right);
+  }
+}
+
+// Animate Navbar toggler
+@keyframes line1 {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dashoffset: 50px;
+  }
+  100% {
+    stroke-dashoffset: 50px;
+  }
+}
+
+@keyframes line2 {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  25% {
+    stroke-dashoffset: 0;
+  }
+  75% {
+    stroke-dashoffset: 50px;
+  }
+  100% {
+    stroke-dashoffset: 50px;
+  }
+}
+
+@keyframes line3 {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 50px;
+  }
+}
+
+// Animate Switcher like https://fonts.google.com
+@keyframes pulseToLight {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  10% {
+    transform: scale(1);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseToDark {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  10% {
+    transform: scale(1);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,54 @@
+.navbar.bg-transparent {
+  position: absolute;
+
+  &.preferences-nav, .customer-nav {
+    > .btn-icon {
+      color: rgba($white, .75);
+    }
+  }
+
+  & .btn > span, .nav-link, span {
+    color: rgba($white, .75);
+
+    &:hover, span {
+      color: rgba($white, .85);
+    }
+  }
+}
+
+.navbar {
+  --#{$prefix}gradient-navbar: #{$gradient};
+  @each $state in map-keys($theme-colors) {
+    @include color-mode(dark) {
+      .gradient-#{$state} {
+        background: linear-gradient(180deg, rgba(var(--#{$prefix}#{$state}), .15), rgba(var(--#{$prefix}#{$state}), 0));
+      }
+    }
+    .gradient-#{$state} {
+      background: linear-gradient(180deg, rgba(var(--#{$prefix}#{$state}), .15), rgba(var(--#{$prefix}#{$state}), 0));
+    }
+  }
+}
+
+
+@include media-breakpoint-down(md) {
+  ul {
+    > li {
+      > a.dropdown-item {
+        white-space: unset;
+      }
+    }
+  }
+}
+
+.offcanvas {
+  &.show {
+    .dropdown-menu.show {
+      .dropdown-item {
+        white-space: unset;
+      }
+    }
+  }
+}
+
+

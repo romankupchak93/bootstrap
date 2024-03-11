@@ -1,0 +1,9 @@
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  z-index: 1;
+  margin: 0 0.5em;
+  padding: 0.25em;
+}

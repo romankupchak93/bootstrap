@@ -1,12 +1,15 @@
 @import "mixins/caret";
 @import "mixins/textfield";
+
 @import "layout/app";
+@import "layout/navigation";
 @import "layout/nav";
 @import "layout/offcanvas";
 
 @import "utilities/ripple-surface";
-@import "utilities/nav";
 @import "utilities/dropdown-toggle";
+@import "utilities/carousel";
+@import "utilities/keyframes";
 
 @import "buttons/buttons";
 @import "buttons/icon-buttons";

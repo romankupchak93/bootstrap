@@ -92,27 +92,6 @@ class Offcanvas extends BaseComponent {
     return this._isShown ? this.hide() : this.show(relatedTarget)
   }
 
-  whichTransitionEvent() {
-    const el = document.createElement('event')
-    const transitionEvents = {
-      WebkitTransition: 'webkitTransitionEnd',
-      MozTransition: 'transitionend',
-      transition: 'transitionend'
-    }
-    for (const t in transitionEvents) {
-      if (el.style[t] !== undefined) {
-        return transitionEvents[t]
-      }
-    }
-  }
-
-  handleTransition() {
-    const transitionEvent = this.whichTransitionEvent()
-    this._element.addEventListener(transitionEvent, () => {
-      /// fix scss for correct animate
-    })
-  }
-
   show(relatedTarget) {
     if (this._isShown) {
       return
@@ -139,13 +118,11 @@ class Offcanvas extends BaseComponent {
       if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'end') {
         document.body.classList.add(`${CLASS_NAME_BODY_PUSH}end`)
         this._element.setAttribute('data-bs-ride', 'end')
-        this.handleTransition()
       }
 
       if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'start') {
         document.body.classList.add(`${CLASS_NAME_BODY_PUSH}start`)
         this._element.setAttribute('data-bs-ride', 'start')
-        this.handleTransition()
       }
     }
     const completeCallBack = () => {
