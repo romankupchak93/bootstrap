@@ -2778,6 +2778,7 @@ textarea.form-control-lg {
   height: 100%;
   padding: 1rem 0.75rem;
   overflow: hidden;
+  color: rgba(var(--bs-body-color-rgb), 0.65);
   text-align: start;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2822,14 +2823,12 @@ textarea.form-control-lg {
   padding-bottom: 0.625rem;
 }
 .form-floating > .form-control:not(:-moz-placeholder-shown) ~ label {
-  color: rgba(var(--bs-body-color-rgb), 0.65);
   transform: scale(0.85) translateY(-0.5rem) translateX(-0.15rem);
 }
 .form-floating > .form-control:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
 .form-floating > .form-control-plaintext ~ label,
 .form-floating > .form-select ~ label {
-  color: rgba(var(--bs-body-color-rgb), 0.65);
   transform: scale(0.85) translateY(-0.5rem) translateX(-0.15rem);
 }
 .form-floating > .form-control:not(:-moz-placeholder-shown) ~ label::after {
@@ -2854,7 +2853,6 @@ textarea.form-control-lg {
   border-radius: var(--bs-border-radius-sm);
 }
 .form-floating > .form-control:-webkit-autofill ~ label {
-  color: rgba(var(--bs-body-color-rgb), 0.65);
   transform: scale(0.85) translateY(-0.5rem) translateX(-0.15rem);
 }
 .form-floating > .form-control-plaintext ~ label {
@@ -7374,22 +7372,36 @@ textarea.form-control-lg {
   position: relative;
 }
 
-.offcanvas.show [data-bs-ride=start],
-.offcanvas.show [data-bs-ride=end] {
-  transform: translateX(0);
-}
-
-.offcanvas {
+.offcanvas, .offcanvas-xxl, .offcanvas-xl, .offcanvas-lg, .offcanvas-md, .offcanvas-sm {
   transition: transform 0.3s ease;
   transform: translateX(-100%);
 }
 
+body.offcanvas-content-start {
+  margin-right: 320px;
+  transition: margin-right 0.3s ease;
+}
+
+body.offcanvas-content-end {
+  margin-left: 320px;
+  right: auto !important;
+  transition: margin-left 0.3s ease;
+}
+
 body.offcanvas-content-start,
 body.offcanvas-content-end {
+  padding-left: 0 !important;
   overflow: hidden;
-  position: fixed;
-  width: calc(100% - 320px);
-  transition: width 0.3s ease;
+}
+body.offcanvas-content-start [data-bs-ride=start].offcanvas-start, body.offcanvas-content-start [data-bs-ride=start].offcanvas-end,
+body.offcanvas-content-start [data-bs-ride=end].offcanvas-start,
+body.offcanvas-content-start [data-bs-ride=end].offcanvas-end,
+body.offcanvas-content-end [data-bs-ride=start].offcanvas-start,
+body.offcanvas-content-end [data-bs-ride=start].offcanvas-end,
+body.offcanvas-content-end [data-bs-ride=end].offcanvas-start,
+body.offcanvas-content-end [data-bs-ride=end].offcanvas-end {
+  width: 320px;
+  transform: translateX(0);
 }
 
 @keyframes mdc-ripple-fg-radius-in {

@@ -165,4 +165,75 @@ export default () => {
       }, false)
     })
   }
+
+  // -------------------------------
+  // MCRipple
+  // -------------------------------
+  const MCRipple = (() => {
+    const rippleCls = 'mdc-ripple-surface'
+    const iconButtonEls = ['btn-icon', 'btn-close', 'navbar-toggler', 'btn-clipboard', 'btn-edit']
+    const listItemEls = ['list-group-item', 'dropdown-item']
+    const roleEls = ['[data-bs-toggle="tab"]', '[data-bs-toggle="collapse"]', '[data-bs-toggle="pill"]', '[data-bs-slide="prev"]', '[data-bs-slide="next"]']
+
+    const getElements = selectors => document.querySelectorAll(selectors)
+    const addRippleToElement = (element, unbounded) => {
+      const rippleElement = document.createElement('div')
+      rippleElement.classList.add(rippleCls)
+      element.append(rippleElement)
+      applyRippleEffect(element, rippleElement, unbounded)
+    }
+
+    const addRippleSpanElement = (element, unbounded) => {
+      const rippleElement = document.createElement('span')
+      rippleElement.classList.add(rippleCls)
+      element.parentNode.insertBefore(rippleElement, element)
+      rippleElement.append(element)
+      applyRippleEffect(element, rippleElement, unbounded)
+    }
+
+    const applyRippleEffect = (element, rippleElement, unbounded) => {
+      const mdcRipple = new mdc.ripple.MDCRipple(rippleElement)
+      if (unbounded) {
+        mdcRipple.unbounded = unbounded
+      }
+    }
+
+    const initializeRipples = (elements, unbounded) => {
+      elements.forEach(el => addRippleToElement(el, unbounded))
+    }
+
+    const hasLabelSibling = elements => {
+      const previousSibling = elements.previousElementSibling
+      const nextSibling = elements.nextElementSibling
+      return (previousSibling && previousSibling.tagName.toLowerCase() === 'label') ||
+        (nextSibling && nextSibling.tagName.toLowerCase() === 'label')
+    }
+
+    const rippleSurface = () => {
+      const excludedSelectors = [...listItemEls, ...iconButtonEls].map(cls => `.${cls}`).join(', ')
+      const inputButtons = getElements('input[class^="btn"]')
+      const labelInputs = getElements('label[class^="btn"]')
+      const buttonUnbounds = getElements(iconButtonEls.map(cls => `.${cls}`).join(', '))
+      const listItems = getElements(`button.${listItemEls.join(', ')}, a.${listItemEls.join(', ')}`)
+      const roleItems = getElements(`${roleEls.join(', ')}`)
+      const buttonDefaults = getElements(`.btn:not(label):not(input):not(div):not(${excludedSelectors})`)
+
+      initializeRipples(buttonDefaults, false)
+      initializeRipples(buttonUnbounds, true)
+      initializeRipples(labelInputs, false)
+      initializeRipples(listItems, false)
+      initializeRipples(roleItems, false)
+      inputButtons.forEach(el => {
+        if (!hasLabelSibling(el)) {
+          addRippleSpanElement(el, false)
+        }
+      })
+    }
+
+    return {
+      rippleSurface
+    }
+  })()
+
+  MCRipple.rippleSurface()
 }

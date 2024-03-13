@@ -1,32 +1,81 @@
 $offcanvas-width: 320px;
 
-.offcanvas.show {
-  [data-bs-ride="start"],
-  [data-bs-ride="end"] {
-    transform: translateX(0);
-  }
-}
-
-.offcanvas {
+.offcanvas, .offcanvas-xxl, .offcanvas-xl, .offcanvas-lg, .offcanvas-md, .offcanvas-sm {
   transition: transform 0.3s ease;
   transform: translateX(100%);
 }
-body.offcanvas-content-start {
-  right: -300px;
-}
 
+body.offcanvas-content-start {
+  margin-left: $offcanvas-width;
+  transition: margin-left 0.3s ease;
+}
 body.offcanvas-content-end {
-  right: 300px;
-  transition: width, right 0.3s ease;
+  margin-right: $offcanvas-width;
+  left: auto !important;
+  transition: margin-right 0.3s ease;
 }
 body.offcanvas-content-start,
 body.offcanvas-content-end {
+  padding-right: 0 !important;
   overflow: hidden;
-  position: fixed;
-  width: calc(100% - $offcanvas-width);
-  //transition: width 0.3s ease;
+
+  [data-bs-ride="start"],
+  [data-bs-ride="end"] {
+    &.offcanvas-start,
+    &.offcanvas-end {
+      width: $offcanvas-width;
+      transform: translateX(0);
+    }
+  }
 }
 
+//right: $offcanvas-width;
+
+//left: $offcanvas-width;
+//transition: width 0.3s ease;
+
+//$offcanvas-width: 320px;
+//
+//.offcanvas.show {
+//    &.offcanvas-start,
+//    &.offcanvas-end {
+//      width: $offcanvas-width;
+//      transform: translateX(0);
+//  }
+//}
+//
+//.offcanvas, .offcanvas-xxl, .offcanvas-xl, .offcanvas-lg, .offcanvas-md, .offcanvas-sm {
+//  transition: transform 0.3s ease;
+//  transform: translateX(100%);
+//}
+//
+//body.offcanvas-content-start {
+//  right: -$offcanvas-width;
+//  transition: width 0.3s ease;
+//}
+//
+//body.offcanvas-content-end {
+//  padding-right: 0 !important;
+//  right: $offcanvas-width;
+//  transition: width 0.3s ease;
+//}
+//body.offcanvas-content-start,
+//body.offcanvas-content-end {
+//  overflow: hidden;
+//  position: fixed;
+//
+//  [data-bs-ride="start"],
+//  [data-bs-ride="end"] {
+//    &.offcanvas-start,
+//    &.offcanvas-end {
+//      width: $offcanvas-width;
+//    }
+//  }
+//}
+
+//width: $offcanvas-width;
+//calc(100% - $offcanvas-width);
+//transition: width 0.3s ease;
 //body.offcanvas-content-start,
 //body.offcanvas-content-end {
 //  position: relative;
@@ -37,7 +86,7 @@ body.offcanvas-content-end {
 //    &.offcanvas-start,
 //    &.offcanvas-end {
 //      width: $offcanvas-width;
-//
+
 //      &.show {
 //        > .offcanvas-body {
 //          > .navbar-nav {
