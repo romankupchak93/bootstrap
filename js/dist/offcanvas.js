@@ -102,11 +102,11 @@
       this._element.setAttribute('role', 'dialog');
       this._element.classList.add(CLASS_NAME_SHOWING);
       if (this._toggleElement === relatedTarget) {
-        if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'end') {
+        if (this._toggleElement.hasAttribute('data-bs-direction') && this._toggleElement.getAttribute('data-bs-direction') === 'end') {
           document.body.classList.add(`${CLASS_NAME_BODY_PUSH}end`);
           this._element.setAttribute('data-bs-ride', 'end');
         }
-        if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'start') {
+        if (this._toggleElement.hasAttribute('data-bs-direction') && this._toggleElement.getAttribute('data-bs-direction') === 'start') {
           document.body.classList.add(`${CLASS_NAME_BODY_PUSH}start`);
           this._element.setAttribute('data-bs-ride', 'start');
         }
@@ -140,10 +140,10 @@
         this._element.classList.remove(CLASS_NAME_SHOW, CLASS_NAME_HIDING);
         this._element.removeAttribute('aria-modal');
         this._element.removeAttribute('role');
-        if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'end') {
+        if (this._toggleElement.hasAttribute('data-bs-direction') && this._toggleElement.getAttribute('data-bs-direction') === 'end') {
           document.body.classList.remove(`${CLASS_NAME_BODY_PUSH}end`);
           this._element.removeAttribute('data-bs-ride');
-        } else if (this._toggleElement.hasAttribute('data-bs-side') && this._toggleElement.getAttribute('data-bs-side') === 'start') {
+        } else if (this._toggleElement.hasAttribute('data-bs-direction') && this._toggleElement.getAttribute('data-bs-direction') === 'start') {
           document.body.classList.remove(`${CLASS_NAME_BODY_PUSH}start`);
           this._element.removeAttribute('data-bs-ride');
         }

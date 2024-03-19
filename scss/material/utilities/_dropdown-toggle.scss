@@ -8,23 +8,23 @@ $caret-align: middle !default;
 @if $enable-caret {
   // Dropdown arrow
   .dropdown-toggle::after {
-    @include caret-down($caret-width);
+    @include _caret-down($caret-width);
   }
   // Dropend arrow
   .dropend .dropdown-toggle::after {
-    @include caret-right($caret-width);
+    @include _caret-right($caret-width);
   }
   // Dropstart arrow
   .dropstart .dropdown-toggle::before {
-    @include caret-left($caret-width);
+    @include _caret-left($caret-width);
   }
   // Dropup arrow
   .dropup .dropdown-toggle::after {
-    @include caret-up($caret-width);
+    @include _caret-up($caret-width);
   }
 
   .dropstart .dropdown-toggle::before,
   .dropend .dropdown-toggle::after {
-    vertical-align: $caret-align  ;
+    vertical-align: $caret-align;
   }
 }

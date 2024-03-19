@@ -23,10 +23,9 @@ a[class*="underline"] {
 
 [data-bs-toggle="pill"],
 [data-bs-toggle="tab"] {
-  --#{$prefix}nav-pills-link-active-bg: #{$nav-pills-link-active-bg};
-  --mdc-ripple-color: var(--#{$prefix}nav-pills-link-active-bg);
+  --mdc-ripple-color: #{$nav-pills-link-active-bg};
 
-  &:not([data-bs-toggle="tab"]) {
-    margin: .25em;
-  }
+  //&:not([data-bs-toggle="tab"]) {
+  margin: .25em;
+  //}
 }

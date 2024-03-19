@@ -102,7 +102,7 @@ Select group
 
 .form-selectgroup-input:focus + .form-selectgroup-label {
   z-index: 2;
-  color: var(--#{$prefix}primary);
+  color: $component-active-bg;//var(--#{$prefix}primary);
   border-color: var(--#{$prefix}primary);
   box-shadow: $input-btn-focus-box-shadow;
 }

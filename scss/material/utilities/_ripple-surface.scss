@@ -5,7 +5,6 @@
   @include ripple.surface();
   @include ripple.radius-bounded();
   @include ripple.states-base-color(#FFF);
-  //@include ripple.states-base-color(var(--#{$prefix}btn-color));
   @include ripple.states-opacities((hover: .1, focus: .15, press: .2));
   position: absolute;
   top: 0;

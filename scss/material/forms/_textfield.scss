@@ -55,8 +55,10 @@
     text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
-    @include label-inside();
+    pointer-events: all;
+    will-change: auto;
     transition: color 0.2s, font-size 0.2s, line-height 0.2s;
+    @include label-inside();
 
     &::before {
       margin-right: .25rem;

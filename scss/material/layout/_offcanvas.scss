@@ -1,99 +1,132 @@
-.offcanvas-content-start {
-  position: relative;
-  overflow: hidden;
-  left: $offcanvas-horizontal-width;
-  right: auto;
-  padding-right: 0 !important;
+$offcanvas-width: 320px;
 
-  [data-bs-ride="start"] {
-    &.offcanvas-start {
-      @include transition(var(--#{$prefix}offcanvas-transition));
-      width: $offcanvas-horizontal-width;
-
-      &.show {
-        > .offcanvas-body {
-          > .navbar-nav {
-            > .nav-item > .nav-link {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-
-
-              &.dropdown-toggle {
-                &::after {
-                  transform: rotate(135deg);
-                  transition: transform .35s ease;
-                  transform-origin: 0.25em 50%;
-                }
-
-                &.show {
-                  &::after {
-                    transform: rotate(45deg);
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.offcanvas-content-end {
-  position: relative;
-  overflow: hidden;
-  right: $offcanvas-horizontal-width;
-  left: auto;
-  padding-right: 0 !important;
-
+.offcanvas.show {
+  [data-bs-ride="start"],
   [data-bs-ride="end"] {
-    &.offcanvas-end {
-      @include transition(var(--#{$prefix}offcanvas-transition));
-      width: $offcanvas-horizontal-width;
-      transition-duration: 0.3s;
-      transition-property: transform, width, padding, margin;
-      transition-timing-function: linear;
-
-      &.show {
-        > .offcanvas-body {
-          > .navbar-nav {
-            > .nav-item > .nav-link {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-
-
-              &.dropdown-toggle {
-                &::after {
-                  transform: rotate(135deg);
-                  transition: transform .35s ease;
-                  transform-origin: 0.25em 50%;
-                }
-
-                &.show {
-                  &::after {
-                    transform: rotate(45deg);
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+    transform: translateX(0);
   }
 }
 
-//.offcanvas-content-start {
+.offcanvas {
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+}
+body.offcanvas-content-start {
+  right: -300px;
+}
+
+body.offcanvas-content-end {
+  right: 300px;
+  transition: width, right 0.3s ease;
+}
+body.offcanvas-content-start,
+body.offcanvas-content-end {
+  overflow: hidden;
+  position: fixed;
+  width: calc(100% - $offcanvas-width);
+  //transition: width 0.3s ease;
+}
+
+//body.offcanvas-content-start,
+//body.offcanvas-content-end {
 //  position: relative;
 //  overflow: hidden;
-//  left: $offcanvas-horizontal-width;
+//
+//  [data-bs-ride="start"],
+//  [data-bs-ride="end"] {
+//    &.offcanvas-start,
+//    &.offcanvas-end {
+//      width: $offcanvas-width;
+//
+//      &.show {
+//        > .offcanvas-body {
+//          > .navbar-nav {
+//            > .nav-item > .nav-link {
+//              &.dropdown-toggle {
+//                display: flex;
+//                justify-content: space-between;
+//                align-items: center;
+//
+//                &::after {
+//                  transform: rotate(135deg);
+//                  transition: transform .35s ease;
+//                  transform-origin: 0.25em 50%;
+//                }
+//
+//                &.show {
+//                  &::after {
+//                    transform: rotate(45deg);
+//                  }
+//                }
+//              }
+//            }
+//          }
+//        }
+//      }
+//    }
+//  }
+//}
+//
+//body.offcanvas-content-start {
+//  left: $offcanvas-width;
+//  transition: left .3s ease-out;
 //  right: auto;
+//  padding-right: 0 !important;
 //
 //  [data-bs-ride="start"] {
 //    &.offcanvas-start {
-//      transition: right .3s ease-out;
+//      transition: width .3s ease-out;
+//    }
+//  }
+//
+//}
+//
+//body.offcanvas-content-end {
+//  right: $offcanvas-width;
+//  left: auto;
+//  padding-right: 0 !important;
+//}
+
+//$offcanvas-width: 320px;
+//
+//.offcanvas-content-start {
+//  position: relative;
+//  overflow: hidden;
+//  left: $offcanvas-width;
+//  right: auto;
+//  padding-right: 0 !important;
+//
+//  [data-bs-ride="start"] {
+//    &.offcanvas-start {
+//      @include transition(var(--#{$prefix}offcanvas-transition));
+//      width: $offcanvas-width;
+//
+//      &.show {
+//
+//        > .offcanvas-body {
+//          > .navbar-nav {
+//            > .nav-item > .nav-link {
+//              &.dropdown-toggle {
+//                display: flex;
+//                justify-content: space-between;
+//                align-items: center;
+//
+//                &::after {
+//                  transform: rotate(135deg);
+//                  transition: transform .35s ease;
+//                  transform-origin: 0.25em 50%;
+//                }
+//
+//                &.show {
+//                  &::after {
+//                    transform: rotate(45deg);
+//                  }
+//                }
+//              }
+//            }
+//          }
+//        }
+//      }
 //    }
 //  }
 //}
@@ -101,36 +134,47 @@
 //.offcanvas-content-end {
 //  position: relative;
 //  overflow: hidden;
-//  left: -$offcanvas-horizontal-width;
+//  right: $offcanvas-width;
+//  left: auto;
+//  padding-right: 0 !important;
 //
 //  [data-bs-ride="end"] {
 //    &.offcanvas-end {
-//      transition-property: right;
-//      transition: left .3s ease-out;
+//      @include transition(var(--#{$prefix}offcanvas-transition));
+//      transition-duration: 0.3s;
+//      transition-property: transform, width, padding, margin;
+//      transition-timing-function: linear;
+//      width: $offcanvas-width;
+//
+//      &.show {
+//
+//        > .offcanvas-body {
+//          > .navbar-nav {
+//            > .nav-item > .nav-link {
+//              &.dropdown-toggle {
+//                display: flex;
+//                justify-content: space-between;
+//                align-items: center;
+//
+//                &::after {
+//                  transform: rotate(135deg);
+//                  transition: transform .35s ease;
+//                  transform-origin: 0.25em 50%;
+//                }
+//
+//                &.show {
+//                  &::after {
+//                    transform: rotate(45deg);
+//                  }
+//                }
+//              }
+//            }
+//          }
+//        }
+//      }
 //    }
 //  }
 //}
-//
-////> div,
-////> header,
-////> main,
-////> footer {
-////  position: relative;
-////  overflow: hidden;
-////  left: $offcanvas-horizontal-width;
-////  right: auto;
-////  transition: right .3s ease-out;
-////}
-//
-////> div,
-////> header,
-////> main,
-////> footer {
-////  position: relative;
-////  overflow: hidden;
-////  left: -$offcanvas-horizontal-width;
-////  transition: left .3s ease-out;
-////}
 //
 ////.offcanvas-content-start {
 ////  position: relative;
@@ -140,122 +184,169 @@
 ////
 ////  [data-bs-ride="start"] {
 ////    &.offcanvas-start {
-////      //@include transition(var(--#{$prefix}offcanvas-transition));
+////      transition: right .3s ease-out;
 ////    }
 ////  }
 ////}
 ////
 ////.offcanvas-content-end {
-////  > div,
-////  > header,
-////  > main,
-////  > footer {
+////  position: relative;
+////  overflow: hidden;
+////  left: -$offcanvas-horizontal-width;
 ////
-////    position: relative;
-////    overflow: hidden;
-////    right: $offcanvas-horizontal-width;
-////    left: auto;
-////    @include transition(var(--#{$prefix}offcanvas-transition));
-////
-////    [data-bs-ride="end"] {
-////      &.offcanvas-end {
-////
-////        //transition-duration: 195ms;
-////        //transition-property: right;
-////        //transition-timing-function: cubic-bezier(.4,0,.6,1);
-////        //@include transition(var(--#{$prefix}offcanvas-transition));
-////      }
+////  [data-bs-ride="end"] {
+////    &.offcanvas-end {
+////      transition-property: right;
+////      transition: left .3s ease-out;
 ////    }
 ////  }
 ////}
-//
-////.offcanvas {
-////  --#{$prefix}main-horizontal-width: 320px;
 ////
-////  .offcanvas-content-start {
-////    position: relative;
-////    overflow: hidden;
-////    left: var(--#{$prefix}main-horizontal-width);
-////    right: auto;
-////    padding-right: 0 !important;
+//////> div,
+//////> header,
+//////> main,
+//////> footer {
+//////  position: relative;
+//////  overflow: hidden;
+//////  left: $offcanvas-horizontal-width;
+//////  right: auto;
+//////  transition: right .3s ease-out;
+//////}
 ////
-////    [data-bs-ride="start"] {
-////      &.offcanvas-start {
-////        @include transition(var(--#{$prefix}offcanvas-transition));
-////        width: var(--#{$prefix}main-horizontal-width);
+//////> div,
+//////> header,
+//////> main,
+//////> footer {
+//////  position: relative;
+//////  overflow: hidden;
+//////  left: -$offcanvas-horizontal-width;
+//////  transition: left .3s ease-out;
+//////}
 ////
-////        &.show {
-////          > .offcanvas-body {
-////            > .navbar-nav {
-////              > .nav-item > .nav-link {
-////                display: flex;
-////                justify-content: space-between;
-////                align-items: center;
+//////.offcanvas-content-start {
+//////  position: relative;
+//////  overflow: hidden;
+//////  left: $offcanvas-horizontal-width;
+//////  right: auto;
+//////
+//////  [data-bs-ride="start"] {
+//////    &.offcanvas-start {
+//////      //@include transition(var(--#{$prefix}offcanvas-transition));
+//////    }
+//////  }
+//////}
+//////
+//////.offcanvas-content-end {
+//////  > div,
+//////  > header,
+//////  > main,
+//////  > footer {
+//////
+//////    position: relative;
+//////    overflow: hidden;
+//////    right: $offcanvas-horizontal-width;
+//////    left: auto;
+//////    @include transition(var(--#{$prefix}offcanvas-transition));
+//////
+//////    [data-bs-ride="end"] {
+//////      &.offcanvas-end {
+//////
+//////        //transition-duration: 195ms;
+//////        //transition-property: right;
+//////        //transition-timing-function: cubic-bezier(.4,0,.6,1);
+//////        //@include transition(var(--#{$prefix}offcanvas-transition));
+//////      }
+//////    }
+//////  }
+//////}
 ////
-////
-////                &.dropdown-toggle {
-////                  &::after {
-////                    transform: rotate(135deg);
-////                    transition: transform .35s ease;
-////                    transform-origin: 0.25em 50%;
-////                  }
-////
-////                  &.show {
-////                    &::after {
-////                      transform: rotate(45deg);
-////                    }
-////                  }
-////                }
-////              }
-////            }
-////          }
-////        }
-////      }
-////    }
-////  }
-////
-////  .offcanvas-content-end {
-////    position: relative;
-////    overflow: hidden;
-////    right: var(--#{$prefix}main-horizontal-width);
-////    left: auto;
-////    padding-right: 0 !important;
-////
-////    [data-bs-ride="end"] {
-////      &.offcanvas-end {
-////        @include transition(var(--#{$prefix}offcanvas-transition));
-////        width: var(--#{$prefix}main-horizontal-width);
-////        transition-duration: 0.3s;
-////        transition-property: transform, width, padding, margin;
-////        transition-timing-function: linear;
-////
-////        &.show {
-////          > .offcanvas-body {
-////            > .navbar-nav {
-////              > .nav-item > .nav-link {
-////                display: flex;
-////                justify-content: space-between;
-////                align-items: center;
-////
-////
-////                &.dropdown-toggle {
-////                  &::after {
-////                    transform: rotate(135deg);
-////                    transition: transform .35s ease;
-////                    transform-origin: 0.25em 50%;
-////                  }
-////
-////                  &.show {
-////                    &::after {
-////                      transform: rotate(45deg);
-////                    }
-////                  }
-////                }
-////              }
-////            }
-////          }
-////        }
-////      }
-////    }
-////  }
-////}
+//////.offcanvas {
+//////  --#{$prefix}main-horizontal-width: 320px;
+//////
+//////  .offcanvas-content-start {
+//////    position: relative;
+//////    overflow: hidden;
+//////    left: var(--#{$prefix}main-horizontal-width);
+//////    right: auto;
+//////    padding-right: 0 !important;
+//////
+//////    [data-bs-ride="start"] {
+//////      &.offcanvas-start {
+//////        @include transition(var(--#{$prefix}offcanvas-transition));
+//////        width: var(--#{$prefix}main-horizontal-width);
+//////
+//////        &.show {
+//////          > .offcanvas-body {
+//////            > .navbar-nav {
+//////              > .nav-item > .nav-link {
+//////                display: flex;
+//////                justify-content: space-between;
+//////                align-items: center;
+//////
+//////
+//////                &.dropdown-toggle {
+//////                  &::after {
+//////                    transform: rotate(135deg);
+//////                    transition: transform .35s ease;
+//////                    transform-origin: 0.25em 50%;
+//////                  }
+//////
+//////                  &.show {
+//////                    &::after {
+//////                      transform: rotate(45deg);
+//////                    }
+//////                  }
+//////                }
+//////              }
+//////            }
+//////          }
+//////        }
+//////      }
+//////    }
+//////  }
+//////
+//////  .offcanvas-content-end {
+//////    position: relative;
+//////    overflow: hidden;
+//////    right: var(--#{$prefix}main-horizontal-width);
+//////    left: auto;
+//////    padding-right: 0 !important;
+//////
+//////    [data-bs-ride="end"] {
+//////      &.offcanvas-end {
+//////        @include transition(var(--#{$prefix}offcanvas-transition));
+//////        width: var(--#{$prefix}main-horizontal-width);
+//////        transition-duration: 0.3s;
+//////        transition-property: transform, width, padding, margin;
+//////        transition-timing-function: linear;
+//////
+//////        &.show {
+//////          > .offcanvas-body {
+//////            > .navbar-nav {
+//////              > .nav-item > .nav-link {
+//////                display: flex;
+//////                justify-content: space-between;
+//////                align-items: center;
+//////
+//////
+//////                &.dropdown-toggle {
+//////                  &::after {
+//////                    transform: rotate(135deg);
+//////                    transition: transform .35s ease;
+//////                    transform-origin: 0.25em 50%;
+//////                  }
+//////
+//////                  &.show {
+//////                    &::after {
+//////                      transform: rotate(45deg);
+//////                    }
+//////                  }
+//////                }
+//////              }
+//////            }
+//////          }
+//////        }
+//////      }
+//////    }
+//////  }
+//////}

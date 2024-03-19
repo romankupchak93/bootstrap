@@ -1,0 +1,61 @@
+.navbar-toggler {
+  position: relative;
+
+  > svg {
+    > path.arrow-left {
+      display: none;
+    }
+
+    > path {
+      animation-duration: 6s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      stroke-dasharray: 40px, 10px;
+      stroke-dashoffset: 0;
+      stroke-width: 2;
+      transition: all 0.2s ease-in-out 0s;
+
+      &:nth-child(1) {
+        animation-name: line1;
+      }
+
+      &:nth-child(2) {
+        animation-name: line2;
+      }
+
+      &:nth-child(3) {
+        display: none;
+      }
+
+      &:nth-child(4) {
+        animation-name: line3;
+      }
+    }
+  }
+
+  &:hover {
+    > svg {
+      > path {
+        animation-direction: reverse;
+      }
+
+      > path.arrow-left {
+        display: block;
+      }
+
+      > path.hover-path {
+        &:nth-child(1) {
+          d: path("M4 7H25");
+        }
+
+        &:nth-child(2) {
+          d: path("M4 15H15");
+        }
+
+        &:nth-child(4) {
+          d: path("M4 23H25");
+        }
+      }
+    }
+  }
+}
