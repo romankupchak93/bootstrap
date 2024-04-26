@@ -31,24 +31,24 @@
 }
 
 
-@include media-breakpoint-down(md) {
-  ul {
-    > li {
-      > a.dropdown-item {
-        white-space: unset;
-      }
-    }
-  }
-}
+//@include media-breakpoint-down(md) {
+//  ul {
+//    > li {
+//      > a.dropdown-item {
+//        white-space: unset;
+//      }
+//    }
+//  }
+//}
 
-.offcanvas {
-  &.show {
-    .dropdown-menu.show {
-      .dropdown-item {
-        white-space: unset;
-      }
-    }
-  }
-}
+//.offcanvas {
+//  &.show {
+//    .dropdown-menu.show {
+//      .dropdown-item {
+//        white-space: unset;
+//      }
+//    }
+//  }
+//}
 
 

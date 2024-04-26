@@ -2,10 +2,11 @@
 @use "@material/ripple/mdc-ripple";
 
 .mdc-ripple-surface {
-  @include ripple.surface();
-  @include ripple.radius-bounded();
-  @include ripple.states-base-color(#FFF);
-  @include ripple.states-opacities((hover: .1, focus: .15, press: .2));
+  @include ripple.surface;
+  @include ripple.radius-bounded;
+  @include ripple.states-base-color($white);
+  @include ripple.states-opacities((hover: .12, focus: .18, press: .24));
+
   position: absolute;
   top: 0;
   right: 0;
@@ -13,6 +14,7 @@
   left: 0;
   z-index: 0;
   box-sizing: content-box;
+  vertical-align: middle;
 
   &:not(span) {
     @include border-radius(inherit);
@@ -24,7 +26,6 @@ span {
     position: relative;
     display: inline-flex;
     overflow: hidden;
-    vertical-align: middle;
   }
 
   > * {

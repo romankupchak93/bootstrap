@@ -49,11 +49,12 @@
     const top = targetRect.top + targetRect.height / 2 + window.scrollY
     el.style.setProperty('--clip-pos', `${left}px ${top}px`)
     el.style.removeProperty('--clip-size')
-
-    el.classList.add('app-transition')
-    requestAnimationFrame(() => {
+    setTimeout(() => {
+      el.classList.add('app-transition')
       requestAnimationFrame(() => {
-        el.style.setProperty('--clip-size', `${Math.hypot(window.innerWidth, window.innerHeight)}px`)
+        requestAnimationFrame(() => {
+          el.style.setProperty('--clip-size', `${Math.hypot(window.innerWidth, window.innerHeight)}px`)
+        })
       })
     })
 
